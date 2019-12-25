@@ -1,0 +1,8 @@
+    <resources xmlns:tools="http://schemas.android.com/tools">
+        Base application theme.
+        <style name="MyDatePickerDialogTheme" parent="android:Theme.Material.Light.Dialog">
+            <item name="android:colorPrimary">@color/color_3a3a3a</item>
+            <item name="android:colorPrimaryDark">@color/color_3a3a3a</item>
+            <item name="android:colorAccent">@color/color_3a3a3a</item>
+        </style>
+    </resources>

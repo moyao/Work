@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@mipmap/pic_distribution">
+
+        <ImageView
+            android:id="@+id/imageViewTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:src="@mipmap/pic_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/imageViewGolden"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="100dp"
+            android:layout_marginRight="20dp"
+            android:background="@mipmap/btn_golden_nor"
+            android:gravity="center"
+            android:text="金卡会员"
+            android:textColor="@color/white"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@id/imageViewOperator"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/imageViewTitle" />
+
+        <CheckBox
+            android:id="@+id/checkGolden"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/background_golden"
+            android:button="@null"
+            android:checked="true"
+            app:layout_constraintBottom_toBottomOf="@id/imageViewGolden"
+            app:layout_constraintStart_toStartOf="@id/imageViewGolden"
+            app:layout_constraintTop_toTopOf="@id/imageViewGolden" />
+
+        <TextView
+            android:id="@+id/imageViewOperator"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@mipmap/btn_operator_nor"
+            android:gravity="center"
+            android:text="运营商"
+            android:textColor="@color/white"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/imageViewGolden"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/imageViewGolden"
+            app:layout_constraintTop_toTopOf="@id/imageViewGolden" />
+
+        <CheckBox
+            android:id="@+id/checkOperator"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/background_golden"
+            android:button="@null"
+            app:layout_constraintBottom_toBottomOf="@id/imageViewGolden"
+            app:layout_constraintStart_toStartOf="@id/imageViewOperator"
+            app:layout_constraintTop_toTopOf="@id/imageViewGolden" />
+
+        <View
+            android:id="@+id/view1"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:background="@drawable/top"
+            app:layout_constraintTop_toBottomOf="@id/imageViewOperator"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            />
+        <View
+            android:id="@+id/view3"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toStartOf="@id/textViewContext"
+            app:layout_constraintTop_toBottomOf="@id/view1"
+            app:layout_constraintEnd_toEndOf="@id/textViewContext"
+            app:layout_constraintBottom_toBottomOf="@id/textViewContext"
+            android:background="@drawable/top2"
+            android:layout_marginRight="18dp"
+            android:layout_marginLeft="18dp"
+            />
+        <TextView
+            android:id="@+id/textViewContext"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/distribution"
+            app:layout_constraintStart_toStartOf="@id/view1"
+            app:layout_constraintTop_toBottomOf="@id/view1"
+            app:layout_constraintEnd_toEndOf="@id/view1"
+            android:textColor="@color/white"
+            android:paddingTop="40dp"
+            android:paddingLeft="55dp"
+            android:paddingRight="50dp"
+            android:paddingBottom="30dp"/>
+        <View
+            android:id="@+id/view4"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toBottomOf="@id/view3"
+            android:background="@drawable/top3"
+            app:layout_constraintStart_toStartOf="@id/view3"
+            app:layout_constraintEnd_toEndOf="@id/view3"
+            app:layout_constraintBottom_toBottomOf="@id/textViewActivity"
+            />
+        <TextView
+            android:id="@+id/textViewActivity"
+            android:layout_width="0dp"
+            android:layout_height="570.5dp"
+            android:text="@string/distribution_activity"
+            app:layout_constraintStart_toStartOf="@id/view4"
+            app:layout_constraintTop_toBottomOf="@id/view3"
+            app:layout_constraintEnd_toEndOf="@id/view4"
+            android:textColor="@color/white"
+            android:paddingTop="50dp"
+            android:paddingLeft="40dp"
+            android:paddingRight="40dp"
+            android:paddingBottom="30dp"
+            android:textSize="13dp"
+            android:textScaleX="1.0"
+            android:lineSpacingExtra="10dp"
+            />
+        <ImageView
+            android:id="@+id/imageViewJoin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/btn_join_nor"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/view4" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

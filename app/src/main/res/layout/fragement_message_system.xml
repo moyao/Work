@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <ImageView
+        android:id="@+id/imageViewPhoto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/ic_launcher"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_margin="10dp"/>
+    <TextView
+        android:id="@+id/textViewContext"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/imageViewPhoto"
+        app:layout_constraintTop_toTopOf="@id/imageViewPhoto"
+        android:text="你发布的：“西安兵马俑有小伙伴一起吗？” 已通过审核。请在个人中心我的发布中查看。"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"/>
+
+    <TextView
+        android:id="@+id/textViewTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="14:39"
+        app:layout_constraintTop_toBottomOf="@id/textViewContext"
+        app:layout_constraintStart_toStartOf="@id/textViewContext"
+        android:layout_marginTop="10dp"/>
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0.3dp"
+        app:layout_constraintStart_toStartOf="@id/textViewContext"
+        app:layout_constraintTop_toBottomOf="@id/textViewTime"
+        android:background="@color/line"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="10dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

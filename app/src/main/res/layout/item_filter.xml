@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheckBox xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/checkBoxFilter"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/selector_check_bg"
+    android:button="@null"
+    android:gravity="center"
+    android:padding="8dp"
+    android:text="高血压患者"
+    android:layout_margin="10dp"
+    android:textColor="@color/selector_tab_text"
+    android:textSize="14dp"
+    app:autoSizeMaxTextSize="14dp"
+    app:autoSizeMinTextSize="12dp"
+    app:autoSizeTextType="uniform" />

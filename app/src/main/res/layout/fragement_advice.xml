@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linear"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="请选择您的问题种类："
+        android:textColor="#000000"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:typeface="normal"
+        android:layout_margin="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <GridLayout
+        android:id="@+id/gridLayoutLevel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:alignmentMode="alignBounds"
+        android:columnCount="4"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/textView1"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/editTextContext"
+        android:layout_width="match_parent"
+        android:layout_height="102dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/shape_edit_in"
+        android:gravity="top"
+        android:hint="在这里描述您遇到的问题或者建议，以便我们改正..."
+        android:padding="12dp"
+        android:textColor="#999999"
+        android:textSize="14sp"
+        app:layout_constraintTop_toBottomOf="@id/gridLayoutLevel" />
+
+    <TextView
+        android:id="@+id/textViewContact"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="您的联系方式："
+        android:textColor="#000000"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:typeface="normal"
+        android:layout_margin="10dp"
+        app:layout_constraintTop_toBottomOf="@id/editTextContext" />
+
+    <EditText
+        android:id="@+id/editTextContact"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="14dp"
+        android:background="@drawable/shape_edit_in"
+        android:gravity="center_vertical"
+        android:hint="微信/qq/邮箱..."
+        android:paddingLeft="12dp"
+        android:textColor="#999999"
+        android:textSize="14sp"
+        app:layout_constraintTop_toBottomOf="@id/textViewContact" />
+
+    <TextView
+        android:id="@+id/textViewExplain"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="13dp"
+        android:layout_marginBottom="15dp"
+        android:gravity="center"
+        android:text="(留下您的联系方式，以便我们更好的反馈)"
+        android:textColor="#999999"
+        android:textSize="12sp"
+        app:layout_constraintTop_toBottomOf="@id/editTextContact" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:lineSpacingExtra="3dp"
+        android:text="我们的成长离不开您的支持和建议，我仅代表观宿APP 对您做出的贡献表示衷心的感谢。"
+        android:textColor="#000000"
+        android:layout_margin="15dp"
+        android:textSize="14sp"
+        app:layout_constraintTop_toBottomOf="@id/textViewExplain" />
+
+    <Button
+        android:id="@+id/butRelease"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@drawable/but_release"
+        android:text="提交"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+

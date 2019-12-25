@@ -1,0 +1,49 @@
+<resources>
+    <string name="app_name">GO 浪</string>
+    <string name="action_settings">Settings</string>
+    <string name="navHome">首页</string>
+    <string name="navStatistics">消息</string>
+    <string name="push">发布</string>
+    <string name="navMessage">足跡</string>
+    <string name="navMe">我的</string>
+    <string name="cancel">取消</string>
+    <string name="confirm">确定</string>
+    <string name="exemption">&#160;&#160;&#160;&#160;&#160;&#160;本声明适用于本网站所提供的各种工具和服务(以下简称"服务"),
+        适用于本网站注册的会员也适用于其他相关用户以及可能与本网站发生联系的第三人。在使用本网站前，请您务必仔细阅读并透彻理解本声明。
+        您可以选择不使用本网站，但如果您使用本网站，您的使用行为将被视为对本声明全部内容的认可。\n
+第一条：\n
+     &#160;&#160;&#160;&#160;&#160;&#160;本网站为第三方信息发布平台（互联网信息服务提供者），其中链接的相关广告、项目信息等，均由广告主、会员、用户等第三方信息发布者自行提供。
+        本网站对此等信息的准确性、完整性、合法性或真实性均不承担任何责任。此外，对任何使用或提供本网站信息的商业活动及其风险不承担任何责任，
+        不保证每一广告、项目中商业机会的收益、每一产品的质量、每一商业模式的营利。您应该对使用本网站的服务结果自行承担风险。
+                            </string>
+
+    <string name="notifyTitle">提示</string>
+    <string name="notifyMsg">当前应用缺少必要权限。\n\n请点击\"设置\"-\"权限\"-打开所需权限。</string>
+    <string name="setting">设置</string>
+    <string name="titlebar_search_hint">请输入身份证或姓名</string>
+    <string name="reported_finish">完成</string>
+    <string name="name">sssss</string>
+    <string name="input">请输入</string>
+    <string name="error_missing_appid_rsa_private">错误: 需要配置 PayDemoActivity 中的 APPID 和 RSA_PRIVATE</string>
+    <string name="pay_success">支付成功:</string>
+    <string name="pay_failed">支付失败:</string>
+    <string name="auth_success">授权成功:</string>
+    <string name="auth_failed">授权失败:</string>
+    <string name="distribution">会员完成连续365天签到，可领取并提现3650元现金;每签到一次领取10元，中间中断则清零从头开始。未到3650元时不能提现</string>
+    <string name="distribution_activity"> 价值1180元美惠欧莱福体验套餐\n
+价值880元西安美格菲健身套餐\n
+价值699元三只熊儿童摄影套餐\n
+价值598元雅致口腔洁牙服务\n
+价值399元GO浪旅游平台永久VIP特权\n
+价值399元美年大健康体检\n
+价值299元乐高教育课程2节\n
+价值198元太白山温泉酒店住宿券\n
+价值162元爱尔眼科健康检查套餐\n
+价值100元恒泰汽车服务\n
+价值90元南观山景区门票一张\n
+价值70元九龙瀑大峡景区门票一张\n
+价值50元茶卡天空景区门票一张
+                            </string>
+    <string name="Operate">运营商资格认证成功，现在您可以点击推广二维码\n使用分销功能了
+                            </string>
+</resources>

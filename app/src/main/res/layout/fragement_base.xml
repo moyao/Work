@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/llBaseLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:clipToPadding="true">
+
+    <com.guansu.management.wigdet.CommonTitleBar
+        android:id="@+id/titlebar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:statusBarMode="dark"
+        app:centerText="GO 浪"
+        app:centerTextColor="@color/black"
+        app:leftType="imageButton"
+        app:rightType="none"
+        android:gravity="center"
+        app:bottomShadowHeight="1dp"
+        app:showBottomLine="true"
+        app:centerType="textView"/>
+
+</LinearLayout>

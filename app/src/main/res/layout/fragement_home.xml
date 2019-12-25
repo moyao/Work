@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <View
+        android:id="@+id/view2"
+        android:layout_width="0dp"
+        android:layout_height="45dp"
+        android:background="#FFE457"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/imageBlack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:padding="15dp"
+        android:drawableRight="@mipmap/gps"
+        android:text="西安"
+        android:drawablePadding="5dp"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="@id/view2"
+        app:layout_constraintTop_toTopOf="@id/view2"
+        tools:ignore="MissingConstraints"
+        android:visibility="gone"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="GO 浪"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="@id/view2"
+        app:layout_constraintEnd_toStartOf="@id/imagePreservation"
+        app:layout_constraintStart_toEndOf="@id/imageBlack"
+        app:layout_constraintTop_toTopOf="@id/view2"
+        android:visibility="gone"/>
+
+    <ImageButton
+        android:id="@+id/imagePreservation"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:background="@null"
+        android:padding="15dp"
+        app:layout_constraintBottom_toBottomOf="@id/view2"
+        app:layout_constraintRight_toRightOf="@id/view2"
+        app:layout_constraintTop_toTopOf="@id/view2"
+        tools:ignore="MissingConstraints"
+        android:visibility="gone"/>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/view2">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.guansu.management.wigdet.banner.ConvenientBanner
+                android:id="@+id/banner"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintDimensionRatio="2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:ignore="MissingConstraints" />
+
+            <RadioGroup
+                android:id="@+id/radioGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@id/banner"
+                tools:ignore="MissingConstraints">
+
+                <RadioButton
+                    android:id="@+id/radioNewest"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:button="@null"
+                    android:drawableTop="@drawable/radiobutton_background_newest"
+                    android:drawablePadding="5dp"
+                    android:padding="10dp"
+                    android:text="最新"
+                    android:clickable="true"
+                    android:textColor="@drawable/radiobutton_textcolor"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:background="@drawable/radiobutton_background_checked"
+                    tools:ignore="MissingConstraints" />
+
+                <RadioButton
+                    android:id="@+id/radioMove"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:button="@null"
+                    android:drawableTop="@drawable/radiobutton_background_move"
+                    android:drawablePadding="5dp"
+                    android:padding="10dp"
+                    android:text="活动"
+                    android:background="@drawable/radiobutton_background_checked"
+                    android:textColor="@drawable/radiobutton_textcolor"
+                    app:layout_constraintStart_toEndOf="@id/radioNewest"
+                    app:layout_constraintTop_toBottomOf="@id/banner"
+                    tools:ignore="MissingConstraints" />
+
+                <RadioButton
+                    android:id="@+id/radioCircle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:button="@null"
+                    android:drawableTop="@drawable/radiobutton_background_circle"
+                    android:drawablePadding="5dp"
+                    android:padding="10dp"
+                    android:text="圈子"
+                    android:background="@drawable/radiobutton_background_checked"
+                    android:textColor="@drawable/radiobutton_textcolor"
+                    app:layout_constraintStart_toEndOf="@id/radioMove"
+                    app:layout_constraintTop_toBottomOf="@id/banner"
+                    tools:ignore="MissingConstraints" />
+            </RadioGroup>
+
+            <View
+                android:id="@+id/view"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:background="#F0F0F0"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/radioGroup" />
+
+            <View
+                android:id="@+id/view1"
+                android:layout_width="3dp"
+                android:layout_height="0dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="#585858"
+                app:layout_constraintBottom_toBottomOf="@id/view"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/view" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:gravity="left|center"
+                android:text="最新动态"
+                android:textSize="15dp"
+                app:layout_constraintBottom_toBottomOf="@id/view"
+                app:layout_constraintStart_toEndOf="@id/view1"
+                app:layout_constraintTop_toTopOf="@id/view"
+                tools:ignore="MissingConstraints" />
+
+            <LinearLayout
+                android:id="@+id/linearLayoutProgress"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:padding="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/view"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

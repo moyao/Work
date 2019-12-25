@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_centerHorizontal="true"
+    android:layout_marginBottom="12dp"
+    android:layout_marginTop="12dp"
+    android:orientation="horizontal">
+
+    <com.lljjcoder.citypickerview.widget.wheel.WheelView
+        android:id="@+id/year"
+        android:layout_width="92dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.2" />
+
+    <TextView
+        android:id="@+id/tv_yearUnit"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:text="年" />
+
+    <View
+        android:layout_width="1px"
+        android:layout_height="fill_parent"
+        android:background="#e8e8e8" />
+
+    <com.lljjcoder.citypickerview.widget.wheel.WheelView
+        android:id="@+id/month"
+        android:layout_width="92dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.2" />
+
+    <TextView
+        android:id="@+id/tv_monthUnit"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:text="月" />
+
+    <View
+        android:id="@+id/v_monthAndDay"
+        android:layout_width="1px"
+        android:layout_height="fill_parent"
+        android:background="#e8e8e8" />
+
+    <com.lljjcoder.citypickerview.widget.wheel.WheelView
+        android:id="@+id/day"
+        android:layout_width="92dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.2" />
+
+    <TextView
+        android:id="@+id/tv_dayUnit"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:text="日" />
+
+    <View
+        android:id="@+id/v_dayAndHour"
+        android:layout_width="1px"
+        android:layout_height="fill_parent"
+        android:background="#e8e8e8" />
+
+
+
+
+</LinearLayout>
+
