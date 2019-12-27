@@ -152,10 +152,16 @@ public class  DetailsNextFragment extends CheckPermissionsActivity implements Pi
             protected void onSingleClick(View v) {
                 if ("".equals(editTextLabel.getText().toString())) {
                     showToast("请输入您要添加的标签");
+                    return;
                 } else {
-                    tage.add(editTextLabel.getText().toString()+",");
-                    layoutFilterItem(gridLayoutLevel, editTextLabel.getText().toString());
-                    editTextLabel.setText("");
+                    if (tage.size()<3){
+                        layoutFilterItem(gridLayoutLevel, editTextLabel.getText().toString());
+                        tage.add(editTextLabel.getText().toString());
+
+                        editTextLabel.setText("");
+                    }else {
+                        showToast("您要超过最大标签数");
+                    }
                 }
             }
         });
@@ -261,9 +267,8 @@ public class  DetailsNextFragment extends CheckPermissionsActivity implements Pi
         }
     }
     private void layoutFilterItem(GridLayout gridLayoutLevel, String toString) {
-        View view = LayoutInflater.from(getContext()).inflate(R.layout.item_filter, gridLayoutLevel, false);
-        CheckBox mCheckBoxFilter = view.findViewById(R.id.checkBoxFilter);
-        mCheckBoxFilter.setChecked(false);
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.item_home_laber, gridLayoutLevel, false);
+        TextView mCheckBoxFilter = view.findViewById(R.id.textViewLaber);
         mCheckBoxFilter.setText(toString);
         gridLayoutLevel.addView(view);
     }
@@ -291,6 +296,7 @@ public class  DetailsNextFragment extends CheckPermissionsActivity implements Pi
         selectedStr = (String) leftValue;
     }
     private void selectAddress() {
+
         CityPicker cityPicker = new CityPicker.Builder(getContext())
                 .textSize(14)
                 .title("地址选择")

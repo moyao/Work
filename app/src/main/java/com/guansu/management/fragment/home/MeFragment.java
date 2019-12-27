@@ -22,8 +22,10 @@ import com.guansu.management.common.UserSharedPreferencesUtils;
 import com.guansu.management.fragment.MainFragment;
 import com.guansu.management.fragment.me.AdviceFragment;
 import com.guansu.management.fragment.me.DistributionFragment;
+import com.guansu.management.fragment.me.DistributionHomepageFragment;
 import com.guansu.management.fragment.me.EditFragment;
-import com.guansu.management.fragment.me.QrCodeFragment;
+import com.guansu.management.fragment.payment.PaymentSuccessFragment;
+
 import java.util.ArrayList;
 
 import butterknife.BindView;
@@ -52,7 +54,8 @@ public class MeFragment extends BaseFragment {
     @BindView(R.id.tv_setting)
     TextView tvSetting;
     @BindView(R.id.textViewExtension)
-    TextView textViewExtension;
+    TextView textViewExtension;   @BindView(R.id.tv_Order)
+    TextView tv_Order;
     private TextView mTvMyTeam;
     private Dialog dia;
     private TextView mTextView;
@@ -110,7 +113,7 @@ public class MeFragment extends BaseFragment {
         textViewExtension.setOnClickListener(new OnClickListenerWrapper() {
             @Override
             protected void onSingleClick(View v) {
-                ((MainFragment) getParentFragment()).start(QrCodeFragment.newInstance());
+                ((MainFragment) getParentFragment()).start(DistributionHomepageFragment.newInstance());
             }
         });
         tvSetting.setOnClickListener(new OnClickListenerWrapper() {
@@ -119,8 +122,13 @@ public class MeFragment extends BaseFragment {
                 ((MainFragment) getParentFragment()).start(DistributionFragment.newInstance());
             }
         });
+        tv_Order.setOnClickListener(new OnClickListenerWrapper() {
+            @Override
+            protected void onSingleClick(View v) {
+                ((MainFragment) getParentFragment()).start(PaymentSuccessFragment.newInstance());
+            }
+        });
     }
-
     private void initDialog() {
         dia = new Dialog(getContext(), R.style.BaseDialogStyle);
         dia.setContentView(R.layout.dialog_share);

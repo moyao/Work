@@ -68,7 +68,8 @@ public class ReleaseFragment extends CheckPermissionsActivity implements
     }
 
     @Override
-    protected void locationResult(String longitude, String latitude, String address, String city, String province, String district) {
+    protected void locationResult(String longitude, String latitude,
+                                  String address, String city, String province, String district) {
         this.lng = longitude;
         this.lat = latitude;
         this.address = address;
@@ -112,6 +113,13 @@ public class ReleaseFragment extends CheckPermissionsActivity implements
         mButRelease.setOnClickListener(new OnClickListenerWrapper() {
             @Override
             protected void onSingleClick(View v) {
+                if (selImageList.size()<1){
+                    showToast("请选择您要发布的图片");
+                    return;
+                }if ("".equals(editTextContext.getText().toString())){
+                    showToast("请输入您要发布的内容");
+                    return;
+                }
                 if (getArguments().getString(Constants.KEY_TITLE).equals(Constant.VIEW_CIRCLE)) {
                     showLoadingDialog("上传中……");
                     //圈子

@@ -52,8 +52,8 @@ public abstract class MyObserve<T> implements Observer<T> {
             ServiceException serviceException = (ServiceException) e;
             if (serviceException.code.equals(HttpConstants.SESSION_TIMEOUT)) {
                 baseInterface.get().toLogin(serviceException.message);
-            }else if(serviceException.code.equals(HttpConstants.NO_DATA)){
-
+            }else if(serviceException.code.equals(HttpConstants.ERROR_SYSTEM)){
+                baseInterface.get().showToast(serviceException.message);
             }else{
                 baseInterface.get().showToast("服务器异常，请稍后再试");
             }

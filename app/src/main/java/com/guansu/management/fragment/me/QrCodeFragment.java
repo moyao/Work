@@ -45,14 +45,6 @@ public class QrCodeFragment extends BaseFragment {
         mTitlebar.showStatusBar(true);
         initApi();
         mTitlebar.setBackgroundResource(drawable.but_release);
-        mTitlebar.setRightType(CommonTitleBar.TYPE_IMAGEBUTTON_SEARCHVIEW);
-        mTitlebar.getRightImageButton().setImageResource(drawable.ic_distribution);
-       mTitlebar.getRightImageButton().setOnClickListener(new OnClickListenerWrapper() {
-           @Override
-           protected void onSingleClick(View v) {
-               start(MyDistributionFragment.newInstance());
-           }
-       });
         setTitle("我的二维码");
     }
     @Override

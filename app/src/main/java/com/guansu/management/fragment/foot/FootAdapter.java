@@ -28,7 +28,6 @@ public class FootAdapter extends RecyclerView.Adapter<FootAdapter.FootViewHolder
         this.mcontext = mcontext;
         this.footBean = footBean;
     }
-
     @NonNull
     @Override
     public FootViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

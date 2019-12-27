@@ -308,7 +308,27 @@
             android:text="我的推广"
             android:textColor="#000000"
             android:textSize="14sp" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="#D4D4D4" />
 
+        <TextView
+            android:id="@+id/tv_Order"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:drawableLeft="@mipmap/my_order"
+            android:drawableRight="@mipmap/next"
+            android:drawablePadding="4dp"
+            android:focusable="true"
+            android:gravity="center_vertical"
+            android:padding="10dp"
+            android:text="我的订单"
+            android:textColor="#000000"
+            android:textSize="14sp" />
         <View
             android:layout_width="match_parent"
             android:layout_height="1px"

@@ -3,10 +3,11 @@ package com.guansu.management.fragment.home.adapter;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Build;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.GridLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RadioButton;
@@ -14,7 +15,6 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,23 +23,17 @@ import com.bumptech.glide.Glide;
 import com.guansu.management.R;
 import com.guansu.management.bean.HomeBean;
 import com.guansu.management.bean.ImagesListBean;
-import com.guansu.management.config.Constant;
-import com.guansu.management.fragment.MainFragment;
-import com.guansu.management.fragment.details.DetailsFragment;
 import com.guansu.management.model.bean.HomeBannerBean;
 import com.guansu.management.wigdet.banner.ConvenientBanner;
 import com.guansu.management.wigdet.banner.holder.CBViewHolderCreator;
 import com.guansu.management.wigdet.banner.holder.Holder;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
+import java.util.Arrays;
 import java.util.List;
-import java.util.ListIterator;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 /**
  * @date:
@@ -53,12 +47,15 @@ public class NewHomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     private ItemClickListener mItemClickListener;
     private int tag;
     private List<HomeBean> list;
+
     public interface ItemClickListener {
         void OnItemClick(String id, int tag);
     }
+
     public void setItemClickListener(ItemClickListener mItemClickListener) {
         this.mItemClickListener = mItemClickListener;
     }
+
     public NewHomeAdapter(List<HomeBean> homeBeans, Context context, int page, int tag) {
         this.mcontext = context;
         this.tag = tag;
@@ -134,26 +131,31 @@ public class NewHomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             ((ContextViewHolder) holder).textViewAge.setText(homeBean.getAge() + "岁");
             ((ContextViewHolder) holder).rButComment.setText(homeBean.getCommentCount() + "");
             ((ContextViewHolder) holder).rButWatch.setText(homeBean.getTraficCount() + "");
+            ((ContextViewHolder) holder).rButJoin.setText(homeBean.getMaxPeopleNumber() + "");
             ((ContextViewHolder) holder).textViewDistance.setText("距离：" + Math.round(homeBean.getDistance() / 100d) / 10d + "km");
-            ((ContextViewHolder) holder).textViewCondition.setText("参加条件：" + homeBean.getSignUpCondition());
+            if (homeBean.getSignUpCondition() != null) {
+                String imglist = homeBean.getSignUpCondition().replace(",,",",");
+                String[] split = imglist.split(",");
+                for (String spit : split) {
+                    if (!spit.equals("")) {
+                        layoutFilterItem(((ContextViewHolder) holder).gridLayoutLevel, spit.replace("[", "").replace("]", ""));
+                    }
+                }
+            }
             switch (tag) {
                 case 0:
                     break;
                 case 1:
                     break;
                 case 2:
-                    ((ContextViewHolder) holder).textViewCondition.setVisibility(View.GONE);
-                    ((ContextViewHolder) holder).view1.setVisibility(View.GONE);
                     ((ContextViewHolder) holder).rButJoin.setVisibility(View.GONE);
                     ((ContextViewHolder) holder).textViewCondition.setVisibility(View.GONE);
-                    ((ContextViewHolder) holder).rButJoin.setVisibility(View.GONE);
                     ((ContextViewHolder) holder).view1.setVisibility(View.GONE);
                     ((ContextViewHolder) holder).textViewSo.setText("来自圈子");
                     ((ContextViewHolder) holder).textViewSo.setCompoundDrawablesWithIntrinsicBounds(null, null,
                             mcontext.getResources().getDrawable(R.mipmap.home_circle, null), null);
                     break;
             }
-
             if ("MALE".equals(homeBean.getSex())) {
                 ((ContextViewHolder) holder).view.setBackground(mcontext.getResources().getDrawable(R.drawable.but_item_distance));
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -171,8 +173,9 @@ public class NewHomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             List<ImagesListBean> img_list = homeBean.getImagesList();
             GridLayoutManager gridLayoutManager = new GridLayoutManager(mcontext, 3);
             ((ContextViewHolder) holder).rvPics.setLayoutManager(gridLayoutManager);
-            ImageAdapter imageAdapter = new ImageAdapter(img_list);
+            ImageAdapter imageAdapter = new ImageAdapter(img_list,mcontext);
             ((ContextViewHolder) holder).rvPics.setAdapter(imageAdapter);
+
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -182,18 +185,26 @@ public class NewHomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         }
     }
 
+    private void layoutFilterItem(GridLayout gridLayoutLevel, String replace) {
+        View view = LayoutInflater.from(mcontext).inflate(R.layout.item_home_laber, gridLayoutLevel, false);
+        TextView mCheckBoxFilter = view.findViewById(R.id.textViewLaber);
+        mCheckBoxFilter.setText(replace);
+        gridLayoutLevel.addView(view);
+    }
+
     @Override
     public int getItemCount() {
         return homeBeanList != null ? homeBeanList.size() : 0;
     }
 
-    public void setmList(List<HomeBean> homeBeans,int page) {
+    public void setmList(List<HomeBean> homeBeans, int page) {
         if (homeBeans != null && page == 1) {
             initData(homeBeans);
         } else {
         }
         notifyDataSetChanged();
     }
+
     public void addmList(List<HomeBean> homeBeans, int page) {
         if (homeBeans != null && page == 1) {
             initData(homeBeans);
@@ -349,6 +360,8 @@ public class NewHomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         RadioButton rButJoin;
         @BindView(R.id.textViewSo)
         TextView textViewSo;
+        @BindView(R.id.gridLayoutLevel)
+        GridLayout gridLayoutLevel;
 
         public ContextViewHolder(View view) {
             super(view);

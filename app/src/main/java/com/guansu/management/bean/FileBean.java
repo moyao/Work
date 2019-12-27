@@ -3,8 +3,6 @@ package com.guansu.management.bean;
 import java.util.List;
 
 public class FileBean {
-
-
     /**
      * code : 0000000
      * data : {"imageList":[{"image":"http://guan-su-oss.oss-cn-beijing.aliyuncs.com/1207114838900215808/d7e6f43743c06b113a8a20a1c31547de_1440×2560.jpg","isCover":true},{"image":"http://guan-su-oss.oss-cn-beijing.aliyuncs.com/1207114838900215808/665a5b1b9f28dec885f453ec821db144_1440×2560.jpg","isCover":false},{"image":"http://guan-su-oss.oss-cn-beijing.aliyuncs.com/1207114838900215808/f20c86460a828c031e40e87e429ac9d4_1440×2560.jpg","isCover":false},{"image":"http://guan-su-oss.oss-cn-beijing.aliyuncs.com/1207114838900215808/d1d59765791039a64afce91cb6295094_1440×2560.jpg","isCover":false}]}

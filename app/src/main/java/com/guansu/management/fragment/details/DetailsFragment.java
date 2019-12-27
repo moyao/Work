@@ -1,23 +1,29 @@
 package com.guansu.management.fragment.details;
+
 import android.annotation.SuppressLint;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+
 import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.bumptech.glide.Glide;
 import com.guansu.management.R;
 import com.guansu.management.api.MyObserve;
 import com.guansu.management.base.BaseFragment;
 import com.guansu.management.bean.ActivityCommentsBeanX;
+import com.guansu.management.bean.ActivityDtoInfo;
 import com.guansu.management.bean.ActivitySignUpsBean;
 import com.guansu.management.bean.ImagesListBean;
 import com.guansu.management.common.OnClickListenerWrapper;
@@ -29,9 +35,13 @@ import com.guansu.management.fragment.home.adapter.ImageAdapter;
 import com.guansu.management.fragment.home.adapter.SignUpsAdapter;
 import com.guansu.management.fragment.me.PersonalFragment;
 import com.guansu.management.model.MessageModellml;
-import com.guansu.management.bean.ActivityDtoInfo;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+
 import butterknife.BindView;
+
 /**
  * @author: dongyaoyao
  */
@@ -84,6 +94,8 @@ public class DetailsFragment extends BaseFragment implements CommentAdapter.Item
     TextView textViewCondition;
     private final int STATUS_UNVERIFIED = 1;
     private final int STATUS_VERIFIED = 2;
+    @BindView(R.id.gridLayoutLevel)
+    GridLayout gridLayoutLevel;
     private int status = STATUS_UNVERIFIED;
     private int SEND = 0;
     ActivityDtoInfo activityDtoInfo;
@@ -91,6 +103,7 @@ public class DetailsFragment extends BaseFragment implements CommentAdapter.Item
     List<ActivitySignUpsBean> signUpsBeans;
     UserSharedPreferencesUtils userSharedPreferencesUtils;
     private String userId, objectId, parentId, targetUserNickname;
+    ImageAdapter imageAdapter;
 
     public static DetailsFragment newInstance(String id, String title) {
         Bundle args = new Bundle();
@@ -186,14 +199,19 @@ public class DetailsFragment extends BaseFragment implements CommentAdapter.Item
                         List<ImagesListBean> imglist = userInfos.getImagesList();
                         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 3);
                         rvPics.setLayoutManager(gridLayoutManager);
-                        ImageAdapter imageAdapter = new ImageAdapter(imglist);
+                        imageAdapter = new ImageAdapter(imglist,getContext());
                         rvPics.setAdapter(imageAdapter);
+
                         textViewContext.setText(userInfos.getContent() + "");
                         rButComment.setText(userInfos.getCommentCount() + "");
                         rButWatch.setText(userInfos.getTraficCount() + "");
                         rButJoin.setText(userInfos.getSignUpPeopleNumber() + "/" + userInfos.getMaxPeopleNumber());
 
-                        textViewCondition.setText("参加条件：" + userInfos.getSignUpCondition());
+                        String imlist = userInfos.getSignUpCondition();
+                        String[] split = imlist.split(",");
+                        for (String spit : split) {
+                            layoutFilterItem(gridLayoutLevel, spit.replace("[", "").replace("]", ""));
+                        }
                         if ("0".equals(userInfos.getVisible())) {
                             textViewSo.setText("活动成员:对外不可见");
                         } else if ("1".equals(userInfos.getVisible())) {
@@ -216,9 +234,18 @@ public class DetailsFragment extends BaseFragment implements CommentAdapter.Item
                                 start(PersonalFragment.newInstance());
                             }
                         });
+
                     }
                 });
     }
+
+    private void layoutFilterItem(GridLayout gridLayoutLevel, String replace) {
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.item_home_laber, gridLayoutLevel, false);
+        TextView mCheckBoxFilter = view.findViewById(R.id.textViewLaber);
+        mCheckBoxFilter.setText(replace);
+        gridLayoutLevel.addView(view);
+    }
+
     /**
      * 发送评论
      */
@@ -236,12 +263,13 @@ public class DetailsFragment extends BaseFragment implements CommentAdapter.Item
                         editTextContext.setVisibility(View.GONE);
                         textVIewSend.setVisibility(View.GONE);
                         showPage();
-                        SEND=0;
+                        SEND = 0;
                         editTextContext.setText("");
                         initDetails();
                     }
                 });
     }
+
     /**
      * 底部控件显示与隐藏
      */

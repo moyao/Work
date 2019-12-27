@@ -10,6 +10,7 @@ import android.os.SystemClock;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.guansu.management.R;
@@ -49,6 +50,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends SupportActiv
         super.onCreate(savedInstanceState);
         setContentView(onSetLayoutId());
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);//设置竖屏
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         //Activity管理
         ActivityPageManager.getInstance().addActivity(this);
         init();
