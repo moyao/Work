@@ -3,6 +3,8 @@ package com.guansu.management.base;
 import android.app.Application;
 import android.content.Context;
 
+import androidx.multidex.MultiDex;
+
 import com.guansu.management.BuildConfig;
 import com.guansu.management.common.ActivityPageManager;
 import com.lzy.imagepicker.ImagePicker;
@@ -43,6 +45,7 @@ public class MainApplication extends Application {
         initFragmentation();
         initImagePicker();
         initCloudChannel(this);
+        MultiDex.install(this);
     }
 
 

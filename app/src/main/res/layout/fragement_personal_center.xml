@@ -167,10 +167,15 @@
             android:id="@+id/radioButMale"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="男"/>
+            android:button="@null"
+            android:drawableLeft="@drawable/check_my_gender"
+            android:text="男"
+            android:layout_marginRight="20dp"/>
         <RadioButton
             android:id="@+id/radioButFemale"
             android:layout_width="wrap_content"
+            android:button="@null"
+            android:drawableLeft="@drawable/check_my_woman"
             android:layout_height="match_parent"
             android:text="女"/>
     </RadioGroup>
@@ -308,12 +313,20 @@
             android:id="@+id/radioButYes"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="是"/>
+            android:text="是"
+            android:drawableLeft="@drawable/check_my_yes"
+            android:button="@null"
+            android:drawablePadding="10dp"
+            android:layout_marginRight="10dp"
+            android:checked="true"/>
         <RadioButton
             android:id="@+id/radioButNo"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="否"/>
+            android:text="否"
+            android:drawableLeft="@drawable/check_my_yes"
+            android:button="@null"
+            android:drawablePadding="10dp"/>
     </RadioGroup>
 
     <View

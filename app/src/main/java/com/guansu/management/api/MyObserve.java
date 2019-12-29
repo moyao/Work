@@ -24,20 +24,17 @@ public abstract class MyObserve<T> implements Observer<T> {
         this.baseInterface = new WeakReference<BaseInterface>(baseInterface);
     }
 
-
     @Override
     public void onSubscribe(Disposable d) {
         if (null != baseInterface.get())
             baseInterface.get().addDisposable(d);
     }
-
     @Override
     public void onNext(T t) {
         if (null != baseInterface.get())
             baseInterface.get().hideLoadingDialog();
         onSuccess(t);
     }
-
     @Override
     public void onError(Throwable e) {
         if (null != baseInterface.get())
@@ -52,7 +49,9 @@ public abstract class MyObserve<T> implements Observer<T> {
             ServiceException serviceException = (ServiceException) e;
             if (serviceException.code.equals(HttpConstants.SESSION_TIMEOUT)) {
                 baseInterface.get().toLogin(serviceException.message);
-            }else if(serviceException.code.equals(HttpConstants.ERROR_SYSTEM)){
+            }else if(serviceException.code.equals(HttpConstants.ERROR_SYSTEM)||
+            serviceException.code.equals(HttpConstants.ERROR_NUMBER)||
+            serviceException.code.equals(HttpConstants.NO_DATA)){
                 baseInterface.get().showToast(serviceException.message);
             }else{
                 baseInterface.get().showToast("服务器异常，请稍后再试");
@@ -61,8 +60,8 @@ public abstract class MyObserve<T> implements Observer<T> {
             baseInterface.get().showToast(e.getMessage());
         } else if (e instanceof HttpException) {
             // 其他各种http错误
+            baseInterface.get().showToast("服务器异常，请稍后再试");
         }
-
     }
 
     @Override

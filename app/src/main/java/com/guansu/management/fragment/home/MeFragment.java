@@ -24,11 +24,15 @@ import com.guansu.management.fragment.me.AdviceFragment;
 import com.guansu.management.fragment.me.DistributionFragment;
 import com.guansu.management.fragment.me.DistributionHomepageFragment;
 import com.guansu.management.fragment.me.EditFragment;
+import com.guansu.management.fragment.me.InstallFragment;
+import com.guansu.management.fragment.me.MyActivityFragment;
 import com.guansu.management.fragment.payment.PaymentSuccessFragment;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
+import cn.sharesdk.onekeyshare.OnekeyShare;
+
 /**
  * @author: dongyaoyao
  */
@@ -54,8 +58,10 @@ public class MeFragment extends BaseFragment {
     @BindView(R.id.tv_setting)
     TextView tvSetting;
     @BindView(R.id.textViewExtension)
-    TextView textViewExtension;   @BindView(R.id.tv_Order)
-    TextView tv_Order;
+    TextView textViewExtension;
+    @BindView(R.id.tv_Order)
+    TextView tv_Order;    @BindView(R.id.tv_order)
+    TextView tv_order;
     private TextView mTvMyTeam;
     private Dialog dia;
     private TextView mTextView;
@@ -91,7 +97,12 @@ public class MeFragment extends BaseFragment {
         tvName.setText(userSharedPreferencesUtils.getNickname());
         Glide.with(getContext()).load(userSharedPreferencesUtils.getProfileImageUrl()) .apply(RequestOptions.bitmapTransform(new CircleCrop())).into(ivHead);
         textViewGrade.setText(userSharedPreferencesUtils.getLevelName());
-
+        ivHead.setOnClickListener(new OnClickListenerWrapper() {
+            @Override
+            protected void onSingleClick(View v) {
+                ((MainFragment) getParentFragment()).start(EditFragment.newInstance());
+            }
+        });
         tvUserinfo.setOnClickListener(new OnClickListenerWrapper() {
             @Override
             protected void onSingleClick(View v) {
@@ -107,7 +118,7 @@ public class MeFragment extends BaseFragment {
         tvShare.setOnClickListener(new OnClickListenerWrapper() {
             @Override
             protected void onSingleClick(View v) {
-                dia.show();
+                showShare();
             }
         });
         textViewExtension.setOnClickListener(new OnClickListenerWrapper() {
@@ -119,13 +130,25 @@ public class MeFragment extends BaseFragment {
         tvSetting.setOnClickListener(new OnClickListenerWrapper() {
             @Override
             protected void onSingleClick(View v) {
-                ((MainFragment) getParentFragment()).start(DistributionFragment.newInstance());
+                ((MainFragment) getParentFragment()).start(InstallFragment.newInstance());
             }
         });
         tv_Order.setOnClickListener(new OnClickListenerWrapper() {
             @Override
             protected void onSingleClick(View v) {
                 ((MainFragment) getParentFragment()).start(PaymentSuccessFragment.newInstance());
+            }
+        });
+        tvWallet.setOnClickListener(new OnClickListenerWrapper() {
+            @Override
+            protected void onSingleClick(View v) {
+                ((MainFragment) getParentFragment()).start(MyActivityFragment.newInstance());
+            }
+        });
+        tv_order.setOnClickListener(new OnClickListenerWrapper() {
+            @Override
+            protected void onSingleClick(View v) {
+                showToast("开发中，敬请期待。。。");
             }
         });
     }
@@ -158,5 +181,20 @@ public class MeFragment extends BaseFragment {
     public boolean canSwipeBack() {
         return false;
     }
-
+    //java
+    private void showShare() {
+        OnekeyShare oks = new OnekeyShare();
+        // title标题，微信、QQ和QQ空间等平台使用
+        oks.setTitle(getString(R.string.app_name));
+        // titleUrl QQ和QQ空间跳转链接
+        oks.setTitleUrl("http://sharesdk.cn");
+        // text是分享文本，所有平台都需要这个字段
+        oks.setText("我是分享文本");
+        // imagePath是图片的本地路径，确保SDcard下面存在此张图片
+        oks.setImagePath("/sdcard/test.jpg");
+        // url在微信、Facebook等平台中使用
+        oks.setUrl("http://sharesdk.cn");
+        // 启动分享GUI
+        oks.show(getContext());
+    }
 }

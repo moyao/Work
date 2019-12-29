@@ -12,9 +12,9 @@ import android.widget.TextView;
 import com.guansu.management.R;
 import com.guansu.management.base.BaseFragment;
 import com.guansu.management.common.OnClickListenerWrapper;
+import com.guansu.management.wigdet.CommonTitleBar;
 import com.guansu.management.wigdet.datepicker.CustomDatePicker;
 import com.guansu.management.wigdet.datepicker.DateFormatUtils;
-import com.guansu.management.wigdet.datepicker.MyNumberPicker;
 import com.guansu.management.wigdet.datepicker.PickValueView;
 import com.lljjcoder.citypickerview.widget.CityPicker;
 
@@ -65,6 +65,8 @@ public class EditFragment extends BaseFragment implements PickValueView.onSelect
         setTitle("我的主页");
         mTitlebar.showStatusBar(true);
         mTitlebar.setBackgroundResource(R.drawable.but_release);
+        mTitlebar.setRightType(CommonTitleBar.TYPE_IMAGEBUTTON_SEARCHVIEW);
+        mTitlebar.getRightImageButton().setImageResource(R.mipmap.icon_my_preservation);
         simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         date = new Date(System.currentTimeMillis());
         initDatePicker();

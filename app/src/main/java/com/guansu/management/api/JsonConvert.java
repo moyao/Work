@@ -44,11 +44,13 @@ public class JsonConvert<T> implements Converter<T> {
             throw new ServiceException(HttpConstants.SESSION_TIMEOUT, commonResponse.msg);
         } else if (code.equals(HttpConstants.ERROR_SYSTEM)){
             throw new ServiceException(code, commonResponse.msg);
-        }else if (HttpConstants.BUSSINESS_CODE_MIN.compareTo(code) <= 0 && HttpConstants.BUSSINESS_CODE_MAX.compareTo(code) >= 0) {
+        }else if (HttpConstants.BUSSINESS_CODE_MIN.compareTo(code) <= 0 &&
+                HttpConstants.BUSSINESS_CODE_MAX.compareTo(code) >= 0) {
             throw new ServiceException(code, commonResponse.msg);
         } else if (code.equals(HttpConstants.ERROR_SYSTEM)) {
             throw new APIException("服务器异常，请稍后再试");
-        } else if (HttpConstants.WARNING_MESSAGE_MIN.compareTo(code) <= 0 && HttpConstants.WARNING_MESSAGE_MAX.compareTo(code) >= 0) {
+        } else if (HttpConstants.WARNING_MESSAGE_MIN.compareTo(code) <= 0
+                && HttpConstants.WARNING_MESSAGE_MAX.compareTo(code) >= 0) {
             throw new APIException(commonResponse.msg);
         } else {
             throw new ServiceException(code, commonResponse.msg);

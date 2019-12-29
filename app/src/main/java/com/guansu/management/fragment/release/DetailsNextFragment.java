@@ -1,4 +1,5 @@
 package com.guansu.management.fragment.release;
+
 import android.app.Dialog;
 import android.graphics.Color;
 import android.os.Build;
@@ -15,7 +16,9 @@ import android.widget.EditText;
 import android.widget.GridLayout;
 import android.widget.ImageButton;
 import android.widget.TextView;
+
 import androidx.annotation.RequiresApi;
+
 import com.google.gson.Gson;
 import com.guansu.management.R;
 import com.guansu.management.activity.CheckPermissionsActivity;
@@ -35,16 +38,20 @@ import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.HttpParams;
 import com.lzy.okgo.model.Response;
+
 import org.json.JSONArray;
 import org.json.JSONException;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
 import butterknife.BindView;
+
 /**
  * @author: dongyaoyao
  */
-public class  DetailsNextFragment extends CheckPermissionsActivity implements PickValueView.onSelectedChangeListener {
+public class DetailsNextFragment extends CheckPermissionsActivity implements PickValueView.onSelectedChangeListener {
     @BindView(R.id.tvTime)
     TextView tvTime;
     @BindView(R.id.imageBlack)
@@ -83,12 +90,15 @@ public class  DetailsNextFragment extends CheckPermissionsActivity implements Pi
     TextView textViewNumber;
     @BindView(R.id.tvSetAddress)
     TextView tvSetAddress;
-    private Dialog dialog;
+    private Dialog dialog, ExemptionDialog;
     private CalendarList calendarList;
     private String selectedStr;
-    String userId,visible,startTime,endTime;
-    List<String> tage=new ArrayList<>();
-    private String lat, lng, province,city,district;
+    String userId, visible, startTime, endTime;
+    List<String> tage = new ArrayList<>();
+    private String lat, lng, province, city, district;
+    private CheckBox checkbox;
+    private Button butDetermine, butCancel;
+
     public static DetailsNextFragment newInstance(ArrayList<ImageItem> selImageList, String context) {
         Bundle args = new Bundle();
         DetailsNextFragment fragment = new DetailsNextFragment();
@@ -97,6 +107,7 @@ public class  DetailsNextFragment extends CheckPermissionsActivity implements Pi
         fragment.setArguments(args);
         return fragment;
     }
+
     @Override
     protected void locationResult(String longitude, String latitude, String address
             , String city, String province, String district) {
@@ -111,6 +122,7 @@ public class  DetailsNextFragment extends CheckPermissionsActivity implements Pi
     public int onSetLayoutId() {
         return R.layout.fragement_details;
     }
+
     @Override
     public void initView(View view) {
         hideTitle();
@@ -126,8 +138,10 @@ public class  DetailsNextFragment extends CheckPermissionsActivity implements Pi
             }
         });
         showDialogTwo();
+        showDialogExemption();
         startLocation();
-}
+    }
+
     @Override
     public void bindEvent() {
         UserSharedPreferencesUtils userSharedPreferencesUtils = new UserSharedPreferencesUtils(getContext());
@@ -154,12 +168,12 @@ public class  DetailsNextFragment extends CheckPermissionsActivity implements Pi
                     showToast("请输入您要添加的标签");
                     return;
                 } else {
-                    if (tage.size()<3){
+                    if (tage.size() < 3) {
                         layoutFilterItem(gridLayoutLevel, editTextLabel.getText().toString());
                         tage.add(editTextLabel.getText().toString());
 
                         editTextLabel.setText("");
-                    }else {
+                    } else {
                         showToast("您要超过最大标签数");
                     }
                 }
@@ -168,8 +182,8 @@ public class  DetailsNextFragment extends CheckPermissionsActivity implements Pi
         calendarList.setOnDateSelected(new CalendarList.OnDateSelected() {
             @Override
             public void selected(String startDate, String endDate) {
-                startTime=startDate;
-                endTime=endDate;
+                startTime = startDate;
+                endTime = endDate;
                 textViewStartEndTime.setText(startDate + "-" + endDate);
                 dialog.dismiss();
             }
@@ -181,78 +195,84 @@ public class  DetailsNextFragment extends CheckPermissionsActivity implements Pi
             }
         });
 
-        checkBoxSo.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
+        checkBoxSo.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView,
                                          boolean isChecked) {
                 // TODO Auto-generated method stub
-                if(isChecked){
-                    textViewSo.setText(buttonView.getText()+"可见");
-                }else{
-                    textViewSo.setText(buttonView.getText()+"隐藏");
+                if (isChecked) {
+                    textViewSo.setText(buttonView.getText() + "可见");
+                } else {
+                    textViewSo.setText(buttonView.getText() + "隐藏");
                 }
             }
         });
         butRelease.setOnClickListener(new OnClickListenerWrapper() {
             @Override
             protected void onSingleClick(View v) {
-                if ("".equals(textViewStartEndTime.getText().toString())){
+                if ("".equals(textViewStartEndTime.getText().toString())) {
                     showToast("请选择活动的开始/结束时间");
                     return;
                 }
-                if ("".equals(textViewSetAddress.getText().toString())){
+                if ("".equals(textViewSetAddress.getText().toString())) {
                     showToast("请填写活动的详细地址");
                     return;
                 }
-                if ("".equals(textViewNumber.getText().toString())){
+                if ("".equals(textViewNumber.getText().toString())) {
                     showToast("请选择参加活动的人数");
                     return;
                 }
-                if ("".equals(tage.toString())){
+                if ("".equals(tage.toString())) {
                     showToast("请增加活动标签");
                     return;
                 }
-                showLoadingDialog("上传中……");
-                ArrayList<ImageItem> imageItems = getArguments().getParcelableArrayList(Constants.KEY_URL);
-                //圈子
-                final List<File> list = new ArrayList();
-                for (ImageItem imageItem : imageItems) {
-                    if (!imageItem.path.startsWith("http"))
-                        list.add(new File(imageItem.path));
-                }
-                HttpParams params = new HttpParams();
-                params.put("uid", userId);
-                OkGo.<String>post(HttpConstants.BASE_URL + HomeModellml.IMAGEUPLOADLIST)
-                        .tag(this)
-                        .isMultipart(true)
-                        .params(params)
-                        .addFileParams("file", list)
-                        .execute(new StringCallback() {
-                            @Override
-                            public void onSuccess(Response<String> response) {
-                                String body = response.body();
-                                Gson gson = new Gson();
-                                FileBean user = gson.fromJson(body, FileBean.class);
-                                getDataRelease(user.getData().getImageList());
-                            }
-                        });
+                ExemptionDialog.show();
             }
         });
     }
+
+    private void getRelease() {
+        showLoadingDialog("上传中……");
+        ArrayList<ImageItem> imageItems = getArguments().getParcelableArrayList(Constants.KEY_URL);
+        //圈子
+        final List<File> list = new ArrayList();
+        for (ImageItem imageItem : imageItems) {
+            if (!imageItem.path.startsWith("http"))
+                list.add(new File(imageItem.path));
+        }
+        HttpParams params = new HttpParams();
+        params.put("uid", userId);
+        OkGo.<String>post(HttpConstants.BASE_URL + HomeModellml.IMAGEUPLOADLIST)
+                .tag(this)
+                .isMultipart(true)
+                .params(params)
+                .addFileParams("file", list)
+                .execute(new StringCallback() {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+                        String body = response.body();
+                        Gson gson = new Gson();
+                        FileBean user = gson.fromJson(body, FileBean.class);
+                        getDataRelease(user.getData().getImageList());
+                    }
+                });
+    }
+
+
     private void getDataRelease(List<FileBean.DataBean.ImageListBean> imageList) {
         Gson gson = new Gson();
         String s = gson.toJson(imageList);
-        if (checkBoxSo.isChecked()){
-             visible="1";
-        }else {
-             visible="0";
+        if (checkBoxSo.isChecked()) {
+            visible = "1";
+        } else {
+            visible = "0";
         }
         try {
             JSONArray jsonObject = new JSONArray(s);
             new ReleaseModellml().user_activity_infosave(userId, getArguments().getString(Constants.KEY_TITLE),
-                    startTime,endTime
-                    ,textViewAddress.getText().toString(), textViewSetAddress.getText().toString(),
-                    textViewNumber.getText().toString(),visible,tage.toString(),lat,lng, jsonObject)
+                    startTime, endTime
+                    , textViewAddress.getText().toString(), textViewSetAddress.getText().toString(),
+                    textViewNumber.getText().toString(), visible, tage.toString(), lat, lng, jsonObject)
                     .subscribe(new MyObserve<String>(this) {
                         @Override
                         protected void onSuccess(String activityDtoInfo) {
@@ -266,12 +286,14 @@ public class  DetailsNextFragment extends CheckPermissionsActivity implements Pi
             e.printStackTrace();
         }
     }
+
     private void layoutFilterItem(GridLayout gridLayoutLevel, String toString) {
         View view = LayoutInflater.from(getContext()).inflate(R.layout.item_home_laber, gridLayoutLevel, false);
         TextView mCheckBoxFilter = view.findViewById(R.id.textViewLaber);
         mCheckBoxFilter.setText(toString);
         gridLayoutLevel.addView(view);
     }
+
     private void showDialogTwo() {
         dialog = new Dialog(getContext(), R.style.BaseDialogStyle);
         dialog.setContentView(R.layout.dialog_date);
@@ -295,6 +317,7 @@ public class  DetailsNextFragment extends CheckPermissionsActivity implements Pi
     public void onSelected(PickValueView view, Object leftValue, Object middleValue, Object rightValue) {
         selectedStr = (String) leftValue;
     }
+
     private void selectAddress() {
 
         CityPicker cityPicker = new CityPicker.Builder(getContext())
@@ -329,6 +352,39 @@ public class  DetailsNextFragment extends CheckPermissionsActivity implements Pi
                 String code = citySelected[3];
                 //为TextView赋值
                 textViewAddress.setText(province.trim() + "-" + city.trim() + "-" + district.trim());
+            }
+        });
+    }
+
+    private void showDialogExemption() {
+        ExemptionDialog = new Dialog(getContext(), R.style.BaseDialogStyle);
+        ExemptionDialog.setContentView(R.layout.dialog_release_exemption);
+        checkbox = ExemptionDialog.findViewById(R.id.checkbox);
+        butCancel = ExemptionDialog.findViewById(R.id.butCancel);
+        butDetermine = ExemptionDialog.findViewById(R.id.butDetermine);
+        checkbox.setChecked(false);
+        ExemptionDialog.setCanceledOnTouchOutside(false);
+        ExemptionDialog.getWindow().setGravity(Gravity.CENTER);
+        Window w = ExemptionDialog.getWindow();
+        WindowManager.LayoutParams lp = w.getAttributes();
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+        lp.height = WindowManager.LayoutParams.MATCH_PARENT;
+        ExemptionDialog.onWindowAttributesChanged(lp);
+        butCancel.setOnClickListener(new OnClickListenerWrapper() {
+            @Override
+            protected void onSingleClick(View v) {
+                ExemptionDialog.dismiss();
+            }
+        });
+        butDetermine.setOnClickListener(new OnClickListenerWrapper() {
+            @Override
+            protected void onSingleClick(View v) {
+                if (checkbox.isChecked()) {
+                    getRelease();
+                    dialog.dismiss();
+                } else {
+                    showToast("同意遵守本声明，以后每次默认都同意");
+                }
             }
         });
     }

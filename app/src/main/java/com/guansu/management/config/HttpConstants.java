@@ -12,6 +12,7 @@ public class HttpConstants {
     public static final String SESSION_TIMEOUT = "010000";
     public static final String NO_DATA = "1000001";
     public static final String ERROR_SYSTEM = "030000";
+    public static final String ERROR_NUMBER = "120006";
     public static final String WARNING_MESSAGE_MIN = "1000001";
     public static final String WARNING_MESSAGE_MAX = "040999";
     public static final String BUSSINESS_CODE_MIN= "050100";

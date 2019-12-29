@@ -1,6 +1,7 @@
 package com.guansu.management.fragment.details;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -35,6 +36,8 @@ import com.guansu.management.fragment.home.adapter.ImageAdapter;
 import com.guansu.management.fragment.home.adapter.SignUpsAdapter;
 import com.guansu.management.fragment.me.PersonalFragment;
 import com.guansu.management.model.MessageModellml;
+import com.guansu.management.utils.KeyboardStateObserver;
+import com.guansu.management.wigdet.CommonTitleBar;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -125,6 +128,8 @@ public class DetailsFragment extends BaseFragment implements CommentAdapter.Item
         initApi();
         mTitlebar.showStatusBar(true);
         mTitlebar.setBackgroundResource(R.drawable.but_release);
+        mTitlebar.setRightType(CommonTitleBar.TYPE_IMAGEBUTTON_SEARCHVIEW);
+        mTitlebar.getRightImageButton().setImageResource(R.mipmap.icon_add_friends);
         userSharedPreferencesUtils = new UserSharedPreferencesUtils(getContext());
     }
 
@@ -173,8 +178,20 @@ public class DetailsFragment extends BaseFragment implements CommentAdapter.Item
                 }
             }
         });
+        KeyboardStateObserver.getKeyboardStateObserver((Activity) getContext()).
+                setKeyboardVisibilityListener(new KeyboardStateObserver.OnKeyboardVisibilityListener() {
+                    @Override
+                    public void onKeyboardShow() {
+                    }
+                    @Override
+                    public void onKeyboardHide() {
+                        butComment.setVisibility(View.VISIBLE);
+                        butActivity.setVisibility(View.VISIBLE);
+                        editTextContext.setVisibility(View.GONE);
+                        textVIewSend.setVisibility(View.GONE);
+                    }
+                });
     }
-
     @SuppressLint("NewApi")
     private void initDetails() {
         if (getArguments().getString(Constants.KEY_TITLE).equals(Constant.VIEW_CIRCLE)) {
@@ -187,10 +204,12 @@ public class DetailsFragment extends BaseFragment implements CommentAdapter.Item
             textViewSo.setCompoundDrawablesWithIntrinsicBounds(null, null,
                     getResources().getDrawable(R.mipmap.home_circle, null), null);
         }
+        showLoadingDialog("加载中...");
         new MessageModellml().find_activity_dtoinfo(userSharedPreferencesUtils.getUserid(),
                 getArguments().getString(Constants.KEY_TYPE), getArguments().getString(Constants.KEY_TITLE))
                 .safeSubscribe(new MyObserve<ActivityDtoInfo>(this) {
                     protected void onSuccess(ActivityDtoInfo userInfos) {
+                        showPage();
                         activityDtoInfo = userInfos;
                         Glide.with(getContext()).load(userInfos.getProfileImage()).into(imageViewPhoto);
                         textViewName.setText(userInfos.getNickName());

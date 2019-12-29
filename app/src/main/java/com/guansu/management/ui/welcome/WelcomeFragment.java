@@ -1,10 +1,13 @@
 package com.guansu.management.ui.welcome;
 import android.annotation.SuppressLint;
 import android.os.CountDownTimer;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.widget.Button;
 import com.guansu.management.R;
 import com.guansu.management.base.BaseFragment;
+import com.guansu.management.common.OnClickListenerWrapper;
 import com.guansu.management.common.UserSharedPreferencesUtils;
 import com.guansu.management.fragment.LoginFragment;
 import com.guansu.management.fragment.MainFragment;
@@ -19,7 +22,20 @@ public class WelcomeFragment extends BaseFragment<WelcomeContract.Presenter>
         implements WelcomeContract.WelcomeInterface {
     @BindView(R.id.butNext)
     Button butNext;
-    UserSharedPreferencesUtils userSharedPreferencesUtils;
+    private int time=3;
+    private Handler handler=new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            time--;
+            butNext.setText(time+"s");
+            if (time==0){
+
+                handler.removeMessages(0);
+            }
+            handler.sendEmptyMessageDelayed(0,1000);
+        }
+    };
     public static WelcomeFragment newInstance() {
         WelcomeFragment fragment = new WelcomeFragment();
         return fragment;
@@ -38,23 +54,20 @@ public class WelcomeFragment extends BaseFragment<WelcomeContract.Presenter>
 
         @Override
     public void bindEvent() {
-            userSharedPreferencesUtils = new UserSharedPreferencesUtils(getContext());
-        createPresenter(new WelcomePresenter(this, 3 * 1000));
-        timer.start();
+            createPresenter(new WelcomePresenter(this, 3 * 1000));
+            handler.sendEmptyMessageDelayed(0,1000);
+            butNext.setOnClickListener(new OnClickListenerWrapper() {
+                @Override
+                protected void onSingleClick(View v) {
+                    EndTime();
+
+                }
+            });
     }
 
-    CountDownTimer timer = new CountDownTimer(3 * 1000, 1000) {
-        @Override
-        public void onTick(long millisUntilFinished) {
-            butNext.setText(millisUntilFinished / 1000 + "S");
-        }
-
-        @Override
-        public void onFinish() {
-            butNext.setClickable(true);
-        }
-    };
-
+    private void EndTime() {
+        createPresenter(new WelcomePresenter(this, 0));
+    }
     @Override
     public boolean canSwipeBack() {
         return false;

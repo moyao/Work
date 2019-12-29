@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.mob.sdk'
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
@@ -8,6 +9,7 @@ android {
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
         buildTypes {
             release {
                 minifyEnabled false
@@ -30,8 +32,6 @@ android {
                 flatDir {
                     dirs 'libs'
                 }
-
-                // ... jcenter() 等其他仓库
             }
         }
     }
@@ -67,5 +67,35 @@ android {
             exclude group: 'com.android.support'
         }
         implementation files('libs/AMap_Location_V3.3.0_20170118.jar')
+        implementation 'com.android.support:multidex:1.0.3'
+    }
+}
+MobSDK {
+    appKey "2da098d9c8146"
+    appSecret "3b959fc4790ada5808d07a6564563893"
+    ShareSDK {
+            //平台配置信息
+            devInfo {
+                Wechat {
+                    appId "wx4868b35061f87885"
+                    appSecret "64020361b8ec4c99936c0e3999a9f249"
+                }
+                QQ {
+                    appId "100371282"
+                    appKey "aed9b0303e3ed1e27bae87c33761161d"
+                    shareByAppClient true
+                }
+                Facebook {
+                    appKey "1412473428822331"
+                    appSecret "a42f4f3f867dc947b9ed6020c2e93558"
+                    callbackUri "https://mob.com"
+                }
+                SinaWeibo {
+                    appKey "568898243"
+                    appSecret "38a4f8204cc784f81f9f0daaf31e02e3"
+                    callbackUri "http://www.sharesdk.cn"
+                    shareByAppClient true
+                }
+            }
     }
 }

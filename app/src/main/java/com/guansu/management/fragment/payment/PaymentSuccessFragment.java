@@ -25,7 +25,10 @@ public class PaymentSuccessFragment extends BaseFragment {
 
     @Override
     public void initView(View view) {
-
+        mTitlebar.showStatusBar(true);
+        initApi();
+        mTitlebar.setBackgroundResource(R.drawable.but_release);
+        setTitle("支付订单");
     }
 
     @Override

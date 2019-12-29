@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -222,6 +223,7 @@ public class CalendarList extends FrameLayout {
 
                 //设置item状态
                 if (dateBean.getItemState() == DateBean.ITEM_STATE_BEGIN_DATE || dateBean.getItemState() == DateBean.ITEM_STATE_END_DATE) {
+
                     //开始日期或结束日期
                     vh.itemView.setBackgroundColor(Color.parseColor("#ff6600"));
                     vh.tv_day.setTextColor(Color.WHITE);
@@ -285,8 +287,15 @@ public class CalendarList extends FrameLayout {
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
             SimpleDateFormat formatYYYYMM = new SimpleDateFormat("yyyy-MM");
 
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");// HH:mm:ss
+            //获取当前时间
+            Date date = new Date(System.currentTimeMillis());
+
+            /*time1.setText("Date获取当前日期时间"+simpleDateFormat.format(date));
+            if (!(startDate > simpleDateFormat.format(date))) {
+            }*/
             //起始日期
-            Date startDate = new Date();
+            Date startDate = new Date(System.currentTimeMillis());
             calendar.setTime(startDate);
 
             //结束日期
