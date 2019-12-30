@@ -22,6 +22,7 @@ import androidx.core.app.NotificationManagerCompat;
 import com.guansu.management.R;
 import com.guansu.management.base.BaseFragment;
 import com.guansu.management.common.OnClickListenerWrapper;
+import com.guansu.management.config.Constants;
 import com.guansu.management.ui.accont.AccountContract;
 import com.guansu.management.ui.accont.AccountPresenter;
 import com.guansu.management.wigdet.utils.PhoneNumberValid;
@@ -47,9 +48,10 @@ public class LoginFragment extends BaseFragment<AccountPresenter> implements Acc
     private Dialog dia,dialog;
     private Button butRelease;
 
-    public static LoginFragment newInstance() {
+    public static LoginFragment newInstance(String tage) {
         Bundle args = new Bundle();
         LoginFragment fragment = new LoginFragment();
+        args.putString(Constants.KEY_TYPE, tage);
         fragment.setArguments(args);
         return fragment;
     }
@@ -68,21 +70,12 @@ public class LoginFragment extends BaseFragment<AccountPresenter> implements Acc
             toOpenNotification();
         }
         time = new TimeCount(60000, 1000);
-
-        dia = new Dialog(getContext(), R.style.BaseDialogStyle);
-        dia.setContentView(R.layout.dialog_register);
-        butLater = dia.findViewById(R.id.butLater);
-        butRegister = dia.findViewById(R.id.butRegister);
-        dia.setCanceledOnTouchOutside(false);
-        dia.getWindow().setGravity(Gravity.CENTER);
-        Window w = dia.getWindow();
-        WindowManager.LayoutParams lp = w.getAttributes();
-        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
-        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
-        dia.onWindowAttributesChanged(lp);
-        dia.show();
         initDialog();
+        initDia();
+
     }
+
+
 
     private void toOpenNotification() {
         new AlertDialog.Builder(getContext()).setMessage("您可能会错过我们的消息，请允许接受通知栏消息").setPositiveButton("设置", new DialogInterface.OnClickListener() {
@@ -145,12 +138,28 @@ public class LoginFragment extends BaseFragment<AccountPresenter> implements Acc
         lp.width = WindowManager.LayoutParams.MATCH_PARENT;
         lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
         dialog.onWindowAttributesChanged(lp);
-
     }
-
+    private void initDia() {
+        dia = new Dialog(getContext(), R.style.BaseDialogStyle);
+        dia.setContentView(R.layout.dialog_register);
+        butLater = dia.findViewById(R.id.butLater);
+        butRegister = dia.findViewById(R.id.butRegister);
+        dia.setCanceledOnTouchOutside(false);
+        dia.getWindow().setGravity(Gravity.CENTER);
+        Window w = dia.getWindow();
+        WindowManager.LayoutParams lp = w.getAttributes();
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        dia.onWindowAttributesChanged(lp);
+    }
     @Override
     public void bindEvent() {
-        includeLogin.setVisibility(View.GONE);
+        if ("1".equals(getArguments().getString(Constants.KEY_TYPE))){
+            includeLogin.setVisibility(View.VISIBLE);
+        }else {
+            includeLogin.setVisibility(View.GONE);
+            dia.show();
+        }
         //验证码
         buttonCode.setOnClickListener(new OnClickListenerWrapper() {
             @Override
@@ -201,14 +210,12 @@ public class LoginFragment extends BaseFragment<AccountPresenter> implements Acc
         public TimeCount(long millisInFuture, long countDownInterval) {
             super(millisInFuture, countDownInterval);
         }
-
         @Override
         public void onTick(long millisUntilFinished) {
             buttonCode.setBackgroundColor(Color.parseColor("#B6B6D8"));
             buttonCode.setClickable(false);
             buttonCode.setText("(" + millisUntilFinished / 1000 + ") 秒后可重新发送");
         }
-
         @Override
         public void onFinish() {
             buttonCode.setText("重新获取验证码");
@@ -216,7 +223,6 @@ public class LoginFragment extends BaseFragment<AccountPresenter> implements Acc
             buttonCode.setBackgroundColor(Color.parseColor("#4EB84A"));
         }
     }
-
     @Override
     public boolean canSwipeBack() {
         return false;
@@ -226,7 +232,6 @@ public class LoginFragment extends BaseFragment<AccountPresenter> implements Acc
     public void loginSuccessed() {
         startWithPop(MainFragment.newInstance());
     }
-
     @Override
     public void resetPWDSuccessed() {
 

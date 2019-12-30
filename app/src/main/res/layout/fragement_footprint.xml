@@ -16,7 +16,7 @@
         android:id="@+id/textViewGps"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="西安"
+        android:hint="西安"
         tools:ignore="MissingConstraints"
         android:drawableRight="@mipmap/gps"
         android:textSize="20dp"

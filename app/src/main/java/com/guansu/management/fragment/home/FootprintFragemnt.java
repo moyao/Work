@@ -44,6 +44,8 @@ public class FootprintFragemnt extends CheckPermissionsActivity {
     TextView textView1;
     @BindView(R.id.imageView)
     ImageView imageView;
+    @BindView(R.id.textViewGps)
+    TextView textViewGps;
     private FootAdapter footAdapter;
     private Dialog dialog;
     private ImageView mImageView;
@@ -70,6 +72,7 @@ public class FootprintFragemnt extends CheckPermissionsActivity {
         this.city = city;
         this.district = district;
         mTextViewTitle.setText(province + "," + city);
+        textViewGps.setText(city);
     }
 
     @Override
@@ -140,18 +143,24 @@ public class FootprintFragemnt extends CheckPermissionsActivity {
                 dialog.show();
             }
         });
+        showLoadingDialog("加载中。。。。");
         new FootModellml().getVerify(userSharedPreferencesUtils.getUserid())
                 .safeSubscribe(new MyObserve<List<FootBean>>(this) {
                     @Override
                     protected void onSuccess(List<FootBean> footBean) {
-                        if (null != footBean) {
-                            footAdapter = new FootAdapter(getContext(), footBean);
-                            recyclerFoot.setAdapter(footAdapter);
-                        } else {
-                            view.setVisibility(View.GONE);
+                        showPage();
+                        if (null != footBean && footBean.size() > 0) {
+                            view1.setVisibility(View.GONE);
                             textView.setVisibility(View.GONE);
                             imageView.setVisibility(View.GONE);
                             textView1.setVisibility(View.GONE);
+                            footAdapter = new FootAdapter(getContext(), footBean);
+                            recyclerFoot.setAdapter(footAdapter);
+                        } else {
+                            view1.setVisibility(View.VISIBLE);
+                            textView.setVisibility(View.VISIBLE);
+                            imageView.setVisibility(View.VISIBLE);
+                            textView1.setVisibility(View.VISIBLE);
                         }
                     }
                 });

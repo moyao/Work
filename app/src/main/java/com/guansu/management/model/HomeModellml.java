@@ -25,7 +25,7 @@ public class HomeModellml {
     public static final String IMAGEUPLOADLIST = "/system/imageUploadList";
     ///activity/findActivityDtoInfo
     public  String HTTP_URL;
-    public Observable<List<HomeBean>> queryactivityinfopage(int status) {
+    public Observable<List<HomeBean>> queryactivityinfopage(int currentPage,int status) {
         HttpParams httpParams=new HttpParams();
         if (status==0){
             httpParams.put("type","activity");
@@ -38,7 +38,7 @@ public class HomeModellml {
             HTTP_URL=USERIMGANDTEXTSAVE;
         }
         httpParams.put("pageSize","8");
-        httpParams.put("page","1");
+        httpParams.put("page",currentPage);
         Type type = new TypeToken<List<HomeBean>>() {
         }.getType();
         return ApiWrapper.request(HttpMethod.GET, HTTP_URL, type,httpParams);

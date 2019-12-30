@@ -42,4 +42,6 @@ public class Constant {
     public static String VIEW_CONSTRAINTS="viewConstraints";
     public static String VIEW_BLEND="viewBlend";
 
+    //
+    public static String PARTICIPATE="participate";
 }

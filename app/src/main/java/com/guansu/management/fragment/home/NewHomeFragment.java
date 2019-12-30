@@ -75,7 +75,6 @@ public class NewHomeFragment extends BaseFragment implements NewHomeAdapter.Item
         rvListMessage.setAdapter(newHomeAdapter);
         ReporteNameData(1, tag);
     }
-
     @Override
     public void bindEvent() {
         rgStatus.setVisibility(View.GONE);
@@ -92,12 +91,11 @@ public class NewHomeFragment extends BaseFragment implements NewHomeAdapter.Item
         layoutSwipeRefresh.setOnRefreshListener(this);
         setLoadingContentView(layoutSwipeRefresh);
         inithomeData(status);
-
     }
 
     private void ReporteNameData(int currentPage, int tag) {
         showLoadingPage();
-        new HomeModellml().queryactivityinfopage(tag).subscribe(new MyObserve<List<HomeBean>>(this) {
+        new HomeModellml().queryactivityinfopage(currentPage,tag).subscribe(new MyObserve<List<HomeBean>>(this) {
             @Override
             protected void onSuccess(List<HomeBean> homeBeans) {
                 showPage();
@@ -105,7 +103,7 @@ public class NewHomeFragment extends BaseFragment implements NewHomeAdapter.Item
                     endLessOnScrollListener.refresh();
                     newHomeAdapter.setmList(homeBeans, 1);
                 } else {
-                    newHomeAdapter.addmList(homeBeans, 2);
+                    newHomeAdapter.addmList(homeBeans, currentPage);
                 }
                 initOnclick();
             }

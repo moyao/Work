@@ -33,7 +33,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.SelectedPicV
     }
     @Override
     public void onBindViewHolder(SelectedPicViewHolder holder, final int position) {
-        Glide.with(holder.itemView).load(imagesListBeans.get(position).getImage()).into(holder.iv_img);
+        Glide.with(holder.itemView).load(imagesListBeans.get(position).getImage()).placeholder(R.mipmap.load_icon).into(holder.iv_img);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

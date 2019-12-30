@@ -11,5 +11,4 @@
     android:gravity="center"
     android:textColor="@color/color_6B6B6B"
     android:background="@drawable/item_home_laber">
-
 </TextView>

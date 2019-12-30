@@ -23,6 +23,7 @@ import com.guansu.management.config.Constants;
 import com.guansu.management.config.HttpConstants;
 import com.guansu.management.fragment.release.DetailsNextFragment;
 import com.guansu.management.model.HomeModellml;
+import com.guansu.management.model.MeModellml;
 import com.guansu.management.model.ReleaseModellml;
 import com.guansu.management.servise.LocationService;
 import com.guansu.management.ui.release.ImagePickerAdapter;

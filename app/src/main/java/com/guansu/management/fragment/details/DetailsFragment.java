@@ -20,6 +20,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CircleCrop;
+import com.bumptech.glide.request.RequestOptions;
 import com.guansu.management.R;
 import com.guansu.management.api.MyObserve;
 import com.guansu.management.base.BaseFragment;
@@ -35,6 +37,7 @@ import com.guansu.management.fragment.home.adapter.CommentAdapter;
 import com.guansu.management.fragment.home.adapter.ImageAdapter;
 import com.guansu.management.fragment.home.adapter.SignUpsAdapter;
 import com.guansu.management.fragment.me.PersonalFragment;
+import com.guansu.management.model.FriendModellml;
 import com.guansu.management.model.MessageModellml;
 import com.guansu.management.utils.KeyboardStateObserver;
 import com.guansu.management.wigdet.CommonTitleBar;
@@ -124,13 +127,29 @@ public class DetailsFragment extends BaseFragment implements CommentAdapter.Item
 
     @Override
     public void initView(View view) {
+        userSharedPreferencesUtils = new UserSharedPreferencesUtils(getContext());
         setTitle("详情列表");
         initApi();
         mTitlebar.showStatusBar(true);
         mTitlebar.setBackgroundResource(R.drawable.but_release);
         mTitlebar.setRightType(CommonTitleBar.TYPE_IMAGEBUTTON_SEARCHVIEW);
         mTitlebar.getRightImageButton().setImageResource(R.mipmap.icon_add_friends);
-        userSharedPreferencesUtils = new UserSharedPreferencesUtils(getContext());
+        mTitlebar.getRightImageButton().setOnClickListener(new OnClickListenerWrapper() {
+            @Override
+            protected void onSingleClick(View v) {
+                friendData();
+            }
+        });
+    }
+    private void friendData() {
+        new FriendModellml().add_friend(userSharedPreferencesUtils.getUserid(),
+                activityDtoInfo.getUserId())
+                .safeSubscribe(new MyObserve<String>(this) {
+                    @Override
+                    protected void onSuccess(String s) {
+
+                    }
+                });
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -211,7 +230,8 @@ public class DetailsFragment extends BaseFragment implements CommentAdapter.Item
                     protected void onSuccess(ActivityDtoInfo userInfos) {
                         showPage();
                         activityDtoInfo = userInfos;
-                        Glide.with(getContext()).load(userInfos.getProfileImage()).into(imageViewPhoto);
+                        Glide.with(getContext()).load(userInfos.getProfileImage())
+                                .apply(RequestOptions.bitmapTransform(new CircleCrop())).into(imageViewPhoto);
                         textViewName.setText(userInfos.getNickName());
                         textViewTime.setText(userInfos.getStartTime());
                         textViewAge.setText(userInfos.getAge() + "岁");
@@ -253,7 +273,6 @@ public class DetailsFragment extends BaseFragment implements CommentAdapter.Item
                                 start(PersonalFragment.newInstance());
                             }
                         });
-
                     }
                 });
     }

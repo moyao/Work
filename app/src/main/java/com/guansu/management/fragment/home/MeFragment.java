@@ -1,4 +1,5 @@
 package com.guansu.management.fragment.home;
+
 import android.app.Dialog;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -21,7 +22,6 @@ import com.guansu.management.common.OnClickListenerWrapper;
 import com.guansu.management.common.UserSharedPreferencesUtils;
 import com.guansu.management.fragment.MainFragment;
 import com.guansu.management.fragment.me.AdviceFragment;
-import com.guansu.management.fragment.me.DistributionFragment;
 import com.guansu.management.fragment.me.DistributionHomepageFragment;
 import com.guansu.management.fragment.me.EditFragment;
 import com.guansu.management.fragment.me.InstallFragment;
@@ -43,8 +43,6 @@ public class MeFragment extends BaseFragment {
     TextView textViewGrade;
     @BindView(R.id.iv_head)
     ImageView ivHead;
-    @BindView(R.id.tv_order)
-    TextView tvOrder;
     @BindView(R.id.tv_wallet)
     TextView tvWallet;
     @BindView(R.id.ll_layout)
@@ -60,42 +58,39 @@ public class MeFragment extends BaseFragment {
     @BindView(R.id.textViewExtension)
     TextView textViewExtension;
     @BindView(R.id.tv_Order)
-    TextView tv_Order;    @BindView(R.id.tv_order)
-    TextView tv_order;
+    TextView tv_Order;
+    @BindView(R.id.textView_order)
+    TextView textView_order;
     private TextView mTvMyTeam;
     private Dialog dia;
     private TextView mTextView;
     private ImageView mIvClose;
     private GridLayout mGridLayoutLevel;
-    public static ArrayList<ShareItem> shareItems = new ArrayList<ShareItem>() {{
-        add(new ShareItem("微信", R.mipmap.weixin));
-        add(new ShareItem("朋友圈", R.mipmap.pengyouquan));
-        add(new ShareItem("微博", R.mipmap.weibo));
-        add(new ShareItem("QQ好友", R.mipmap.qq));
-        add(new ShareItem("支付宝", R.mipmap.zhifubao));
-        add(new ShareItem("复制链接", R.mipmap.lianjie));
-        add(new ShareItem("二维码", R.mipmap.erweima));
-    }};
+
     public static MeFragment newInstance() {
         Bundle args = new Bundle();
         MeFragment fragment = new MeFragment();
         fragment.setArguments(args);
         return fragment;
     }
+
     @Override
     public int onSetLayoutId() {
         return R.layout.fragement_me;
     }
+
     @Override
     public void initView(View view) {
         hideTitle();
         initDialog();
     }
+
     @Override
     public void bindEvent() {
         UserSharedPreferencesUtils userSharedPreferencesUtils = new UserSharedPreferencesUtils(getContext());
         tvName.setText(userSharedPreferencesUtils.getNickname());
-        Glide.with(getContext()).load(userSharedPreferencesUtils.getProfileImageUrl()) .apply(RequestOptions.bitmapTransform(new CircleCrop())).into(ivHead);
+        Glide.with(getContext()).load(userSharedPreferencesUtils.getProfileImageUrl())
+                .apply(RequestOptions.bitmapTransform(new CircleCrop())).into(ivHead);
         textViewGrade.setText(userSharedPreferencesUtils.getLevelName());
         ivHead.setOnClickListener(new OnClickListenerWrapper() {
             @Override
@@ -145,13 +140,14 @@ public class MeFragment extends BaseFragment {
                 ((MainFragment) getParentFragment()).start(MyActivityFragment.newInstance());
             }
         });
-        tv_order.setOnClickListener(new OnClickListenerWrapper() {
+        textView_order.setOnClickListener(new OnClickListenerWrapper() {
             @Override
             protected void onSingleClick(View v) {
                 showToast("开发中，敬请期待。。。");
             }
         });
     }
+
     private void initDialog() {
         dia = new Dialog(getContext(), R.style.BaseDialogStyle);
         dia.setContentView(R.layout.dialog_share);
@@ -162,25 +158,16 @@ public class MeFragment extends BaseFragment {
         mGridLayoutLevel = dia.findViewById(R.id.gridLayoutLevel);
         Window w = dia.getWindow();
         WindowManager.LayoutParams lp = w.getAttributes();
-        lp.width= WindowManager.LayoutParams.MATCH_PARENT;
-        lp.height= WindowManager.LayoutParams.WRAP_CONTENT;
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
         dia.onWindowAttributesChanged(lp);
-        for (ShareItem b : shareItems) {
-            layoutFilterItem(mGridLayoutLevel, b);
-        }
     }
-    private void layoutFilterItem(GridLayout mGridLayoutLevel, ShareItem b) {
-        View view = LayoutInflater.from(getContext()).inflate(R.layout.item_gride_share, mGridLayoutLevel, false);
-        ImageView imageView = view.findViewById(R.id.iv_img);
-        TextView iv_title = view.findViewById(R.id.iv_title);
-        imageView.setImageResource(b.id);
-        iv_title.setText(b.titme);
-        mGridLayoutLevel.addView(view);
-    }
+
     @Override
     public boolean canSwipeBack() {
         return false;
     }
+
     //java
     private void showShare() {
         OnekeyShare oks = new OnekeyShare();

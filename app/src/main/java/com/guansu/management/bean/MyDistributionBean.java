@@ -1,124 +1,127 @@
 package com.guansu.management.bean;
 
-import java.util.List;
-
 /**
  * @date:
  * @author: dongyaoyao
  */
 public class MyDistributionBean {
-    /**
-     * realName : null
-     * userLevel : null
-     * mobileNumber : null
-     * sex : null
-     * nickname : 18009262998
-     * disLevel : MERCHANT   运营商   GOLD_MEMBER   创客   PUKA_MEMBER  普通会员
-     * id : 1209404585010008064
-     * accountSalt : null
-     * profileImageUrl : https://jm-test.oss-cn-beijing.aliyuncs.com/20180719184241.png
-     * age : null
-     */
+        /**
+         * createdAt : 2019-12-24
+         * disLevel : {"cuoNum":0,"distributionLevel":"MERCHANT","makerNum":0,"managerNum":0,"position":"CUO","userId":1209404585010008064}
+         * id : 1209404585010008064
+         * nickname : 18009262998
+         * profileImageUrl : http://cdn.kdtonline.cn/faker_avator/piliang/6.jpg
+         */
 
-    private Object realName;
-    private Object userLevel;
-    private Object mobileNumber;
-    private Object sex;
-    private String nickname;
-    private String disLevel;
-    private long id;
-    private Object accountSalt;
-    private String profileImageUrl;
-    private Object age;
+        private String createdAt;
+        private DisLevelBean disLevel;
+        private long id;
+        private String nickname;
+        private String profileImageUrl;
 
-    public String getCreatedAt() {
-        return createdAt;
-    }
+        public String getCreatedAt() {
+            return createdAt;
+        }
 
-    public void setCreatedAt(String createdAt) {
-        this.createdAt = createdAt;
-    }
+        public void setCreatedAt(String createdAt) {
+            this.createdAt = createdAt;
+        }
 
-    private String createdAt;
+        public DisLevelBean getDisLevel() {
+            return disLevel;
+        }
 
+        public void setDisLevel(DisLevelBean disLevel) {
+            this.disLevel = disLevel;
+        }
 
-    public Object getRealName() {
-        return realName;
-    }
+        public long getId() {
+            return id;
+        }
 
-    public void setRealName(Object realName) {
-        this.realName = realName;
-    }
+        public void setId(long id) {
+            this.id = id;
+        }
 
-    public Object getUserLevel() {
-        return userLevel;
-    }
+        public String getNickname() {
+            return nickname;
+        }
 
-    public void setUserLevel(Object userLevel) {
-        this.userLevel = userLevel;
-    }
+        public void setNickname(String nickname) {
+            this.nickname = nickname;
+        }
 
-    public Object getMobileNumber() {
-        return mobileNumber;
-    }
+        public String getProfileImageUrl() {
+            return profileImageUrl;
+        }
 
-    public void setMobileNumber(Object mobileNumber) {
-        this.mobileNumber = mobileNumber;
-    }
+        public void setProfileImageUrl(String profileImageUrl) {
+            this.profileImageUrl = profileImageUrl;
+        }
 
-    public Object getSex() {
-        return sex;
-    }
+        public static class DisLevelBean {
+            /**
+             * cuoNum : 0
+             * distributionLevel : MERCHANT   运营商   GOLD_MEMBER   创客   PUKA_MEMBER  普通会员
+             * makerNum : 0
+             * managerNum : 0
+             * position : CUO 总监  MAKER  创客    COO  总经理   MANAGER 经理
+             * userId : 1209404585010008064
+             */
 
-    public void setSex(Object sex) {
-        this.sex = sex;
-    }
+            private int cuoNum;
+            private String distributionLevel;
+            private int makerNum;
+            private int managerNum;
+            private String position;
+            private long userId;
 
-    public String getNickname() {
-        return nickname;
-    }
+            public int getCuoNum() {
+                return cuoNum;
+            }
 
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
-    }
+            public void setCuoNum(int cuoNum) {
+                this.cuoNum = cuoNum;
+            }
 
-    public String getDisLevel() {
-        return disLevel;
-    }
+            public String getDistributionLevel() {
+                return distributionLevel;
+            }
 
-    public void setDisLevel(String disLevel) {
-        this.disLevel = disLevel;
-    }
+            public void setDistributionLevel(String distributionLevel) {
+                this.distributionLevel = distributionLevel;
+            }
 
-    public long getId() {
-        return id;
-    }
+            public int getMakerNum() {
+                return makerNum;
+            }
 
-    public void setId(long id) {
-        this.id = id;
-    }
+            public void setMakerNum(int makerNum) {
+                this.makerNum = makerNum;
+            }
 
-    public Object getAccountSalt() {
-        return accountSalt;
-    }
+            public int getManagerNum() {
+                return managerNum;
+            }
 
-    public void setAccountSalt(Object accountSalt) {
-        this.accountSalt = accountSalt;
-    }
+            public void setManagerNum(int managerNum) {
+                this.managerNum = managerNum;
+            }
 
-    public String getProfileImageUrl() {
-        return profileImageUrl;
-    }
+            public String getPosition() {
+                return position;
+            }
 
-    public void setProfileImageUrl(String profileImageUrl) {
-        this.profileImageUrl = profileImageUrl;
-    }
+            public void setPosition(String position) {
+                this.position = position;
+            }
 
-    public Object getAge() {
-        return age;
-    }
+            public long getUserId() {
+                return userId;
+            }
 
-    public void setAge(Object age) {
-        this.age = age;
-    }
+            public void setUserId(long userId) {
+                this.userId = userId;
+            }
+        }
 }

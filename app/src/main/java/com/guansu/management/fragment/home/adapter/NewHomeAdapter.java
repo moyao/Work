@@ -20,6 +20,8 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CircleCrop;
+import com.bumptech.glide.request.RequestOptions;
 import com.guansu.management.R;
 import com.guansu.management.bean.HomeBean;
 import com.guansu.management.bean.ImagesListBean;
@@ -124,7 +126,8 @@ public class NewHomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             });
 
         } else if (holder instanceof ContextViewHolder) {
-            Glide.with(mcontext).load(homeBean.getProfileImage()).into(((ContextViewHolder) holder).imageViewPhoto);
+            Glide.with(mcontext).load(homeBean.getProfileImage())
+                    .apply(RequestOptions.bitmapTransform(new CircleCrop())).into(((ContextViewHolder) holder).imageViewPhoto);
             ((ContextViewHolder) holder).textViewName.setText(homeBean.getNickName());
 //            ((ContextViewHolder) holder).textViewAddress.setText(homeBean.getDistance());
             ((ContextViewHolder) holder).textViewTime.setText(homeBean.getStartTime());

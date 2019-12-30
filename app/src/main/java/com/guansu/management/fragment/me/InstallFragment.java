@@ -8,6 +8,8 @@ import com.guansu.management.R;
 import com.guansu.management.base.BaseFragment;
 import com.guansu.management.common.OnClickListenerWrapper;
 import com.guansu.management.common.UserSharedPreferencesUtils;
+import com.guansu.management.fragment.LoginFragment;
+
 import butterknife.BindView;
 
 /**
@@ -51,7 +53,7 @@ public class InstallFragment extends BaseFragment {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 userSharedPreferencesUtils.clearSharedPreferences();
-                                _mActivity.finish();
+                                startWithPop(LoginFragment.newInstance("1"));
                             }
                         }).setNegativeButton("取消", new DialogInterface.OnClickListener() {//添加取消
                             @Override

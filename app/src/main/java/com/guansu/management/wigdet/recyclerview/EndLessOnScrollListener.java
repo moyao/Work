@@ -1,8 +1,6 @@
 package com.guansu.management.wigdet.recyclerview;
-
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 /**
  * Created by dongyaoyao
  */

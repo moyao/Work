@@ -167,7 +167,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends SupportActiv
 
     public void toLogin(String message) {
         new UserSharedPreferencesUtils(this).clearSharedPreferences();
-        start(LoginFragment.newInstance());
+        start(LoginFragment.newInstance("0"));
     }
 
     /**

@@ -82,5 +82,4 @@
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <!-- 3.2.0版本增加-->
     <uses-permission android:name="android.permission.BLUETOOTH" />
-    <!-- 可选权限说明-->
 </manifest>

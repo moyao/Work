@@ -51,7 +51,7 @@ public class MyDistributionFragment extends BaseFragment {
         mTitlebar.showStatusBar(true);
         initApi();
         mTitlebar.setBackgroundResource(R.drawable.but_release);
-        setTitle("我的分销");
+        setTitle("我的顾客");
     }
 
     @Override

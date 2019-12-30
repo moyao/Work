@@ -84,6 +84,6 @@ public class WelcomeFragment extends BaseFragment<WelcomeContract.Presenter>
 
     @Override
     public void toLogin(String message) {
-            startWithPop(LoginFragment.newInstance());
+            startWithPop(LoginFragment.newInstance("0"));
     }
 }
