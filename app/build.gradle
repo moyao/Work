@@ -59,7 +59,7 @@ android {
         implementation 'com.github.XuDaojie:QRCode-Android:v0.4.2'
         // 支付宝 SDK AAR 包所需的配置
         implementation (name: 'alipaySdk-15.6.8-20191021122514', ext: 'aar')
-        compile 'org.greenrobot:eventbus:3.1.1'
+        implementation 'org.greenrobot:eventbus:3.1.1'
         repositories {
             maven { url "http://repo1.maven.org/maven2" }
             maven { url 'https://jitpack.io' }
@@ -75,6 +75,8 @@ android {
 dependencies {
     implementation project(path: ':ocr_ui')
     implementation files('libs/ocr-sdk.jar')
+    implementation project(path: ':faceplatform-ui')
+    implementation project(path: ':faceplatform')
 }
 MobSDK {
     appKey "2da098d9c8146"

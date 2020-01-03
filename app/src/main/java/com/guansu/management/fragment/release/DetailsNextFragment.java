@@ -9,6 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -98,6 +101,7 @@ public class DetailsNextFragment extends CheckPermissionsActivity implements Pic
     private String lat, lng, province, city, district;
     private CheckBox checkbox;
     private Button butDetermine, butCancel;
+    private WebView webView;
 
     public static DetailsNextFragment newInstance(ArrayList<ImageItem> selImageList, String context) {
         Bundle args = new Bundle();
@@ -226,7 +230,13 @@ public class DetailsNextFragment extends CheckPermissionsActivity implements Pic
                     showToast("请增加活动标签");
                     return;
                 }
-                ExemptionDialog.show();
+                UserSharedPreferencesUtils userSharedPreferencesUtils = new UserSharedPreferencesUtils(getContext());
+                if ("true".equals(userSharedPreferencesUtils.getDetails())){
+                    getRelease();
+                }else {
+                    ExemptionDialog.show();
+                }
+
             }
         });
     }
@@ -355,11 +365,11 @@ public class DetailsNextFragment extends CheckPermissionsActivity implements Pic
             }
         });
     }
-
     private void showDialogExemption() {
         ExemptionDialog = new Dialog(getContext(), R.style.BaseDialogStyle);
-        ExemptionDialog.setContentView(R.layout.dialog_release_exemption);
+        ExemptionDialog.setContentView(R.layout.dialog_login_exemption);
         checkbox = ExemptionDialog.findViewById(R.id.checkbox);
+        webView = ExemptionDialog.findViewById(R.id.webView);
         butCancel = ExemptionDialog.findViewById(R.id.butCancel);
         butDetermine = ExemptionDialog.findViewById(R.id.butDetermine);
         checkbox.setChecked(false);
@@ -370,6 +380,11 @@ public class DetailsNextFragment extends CheckPermissionsActivity implements Pic
         lp.width = WindowManager.LayoutParams.MATCH_PARENT;
         lp.height = WindowManager.LayoutParams.MATCH_PARENT;
         ExemptionDialog.onWindowAttributesChanged(lp);
+        webView.getSettings().setJavaScriptEnabled(true);
+        webView.setWebViewClient(new WebViewClient());
+        WebSettings webSettings = webView.getSettings();
+        webSettings.setLoadWithOverviewMode(true); // 缩放至屏幕的大小
+        webView.loadUrl("http://47.104.88.151/Golang/page2.html");
         butCancel.setOnClickListener(new OnClickListenerWrapper() {
             @Override
             protected void onSingleClick(View v) {
@@ -380,6 +395,9 @@ public class DetailsNextFragment extends CheckPermissionsActivity implements Pic
             @Override
             protected void onSingleClick(View v) {
                 if (checkbox.isChecked()) {
+                    UserSharedPreferencesUtils userSharedPreferencesUtils = new UserSharedPreferencesUtils(getContext());
+                    userSharedPreferencesUtils.setDetails("true");
+                    userSharedPreferencesUtils.saveSharedPreferences();
                     getRelease();
                     dialog.dismiss();
                 } else {

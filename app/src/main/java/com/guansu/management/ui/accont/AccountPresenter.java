@@ -2,6 +2,7 @@ package com.guansu.management.ui.accont;//package com.wisdom.regulatory.ui.welco
 
 import android.content.Context;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.guansu.management.api.MyObserve;
 import com.guansu.management.base.BaseCommonPresenter;
@@ -32,15 +33,28 @@ public class AccountPresenter extends BaseCommonPresenter<AccountContract.LoginI
         new AccountModelIml().login(account,pwd).subscribe(new MyObserve<UserInfo>(view) {
             @Override
             protected void onSuccess(UserInfo userInfo) {
-                UserSharedPreferencesUtils userSharedPreferencesUtils = new UserSharedPreferencesUtils(context);
-                userSharedPreferencesUtils.setAccount(account);
-                userSharedPreferencesUtils.setPwd(pwd);
-                userSharedPreferencesUtils.setUserid(userInfo.getUserId());
-                userSharedPreferencesUtils.setNickname(userInfo.getNickname());
-                userSharedPreferencesUtils.setProfileImageUrl(userInfo.getProfileImageUrl());
-                userSharedPreferencesUtils.setLevelName(userInfo.getUserLevel().getLevelName());
-                userSharedPreferencesUtils.saveSharedPreferences();
-                view.loginSuccessed();
+                // identifier 为用户名，userSig 为用户登录凭证
+         /*       TIMManager.getInstance().login(account, pwd, new TIMCallBack() {
+                    @Override
+                    public void onError(int code, String desc) {
+                        //错误码 code 和错误描述 desc，可用于定位请求失败原因
+                        //错误码 code 列表请参见错误码表
+                        view.showToast("login failed. code: " + code + " errmsg: " + desc);
+                    }
+                    @Override
+                    public void onSuccess() {*/
+                        UserSharedPreferencesUtils userSharedPreferencesUtils = new UserSharedPreferencesUtils(context);
+                        userSharedPreferencesUtils.setAccount(account);
+                        userSharedPreferencesUtils.setPwd(pwd);
+                        userSharedPreferencesUtils.setUserid(userInfo.getUserId());
+                        userSharedPreferencesUtils.setNickname(userInfo.getNickname());
+                        userSharedPreferencesUtils.setProfileImageUrl(userInfo.getProfileImageUrl());
+                        userSharedPreferencesUtils.setLevelName(userInfo.getUserLevel().getLevelName());
+                        userSharedPreferencesUtils.saveSharedPreferences();
+                        view.loginSuccessed();
+     /*               }
+                });*/
+
             }
         });
     }

@@ -1,5 +1,4 @@
 package com.guansu.management.fragment.me;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,13 +6,13 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.baidu.ocr.sdk.OCR;
 import com.baidu.ocr.sdk.OnResultListener;
 import com.baidu.ocr.sdk.exception.OCRError;
 import com.baidu.ocr.sdk.model.IDCardParams;
 import com.baidu.ocr.sdk.model.IDCardResult;
 import com.baidu.ocr.ui.camera.CameraActivity;
+import com.baidu.ocr.ui.camera.CameraNativeHelper;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.guansu.management.R;
@@ -21,13 +20,9 @@ import com.guansu.management.base.BaseFragment;
 import com.guansu.management.common.OnClickListenerWrapper;
 import com.guansu.management.config.Constant;
 import com.guansu.management.utils.FileUtils;
-
 import org.apache.commons.lang3.StringUtils;
-
 import java.io.File;
-
 import butterknife.BindView;
-
 import static com.mob.tools.utils.DeviceHelper.getApplication;
 
 /**
@@ -80,7 +75,9 @@ public class CertificationIDCardFragment extends BaseFragment {
 
     @Override
     public void initView(View view) {
-
+        setTitle("实名认证");
+        mTitlebar.showStatusBar(true);
+        mTitlebar.setBackgroundResource(R.drawable.but_release);
     }
 
     @Override
@@ -101,7 +98,15 @@ public class CertificationIDCardFragment extends BaseFragment {
                 }
             }
         });
+        textViewNext.setOnClickListener(new OnClickListenerWrapper() {
+            @Override
+            protected void onSingleClick(View v) {
+                Intent intent = new Intent(getContext(), FaceLivenessExpActivity.class);
+                startActivity(intent);
+            }
+        });
     }
+
 
     // 调用拍摄身份证正面（带本地质量控制）activity
     private void scanFrontWithNativeQuality(int idType) {
@@ -194,10 +199,16 @@ public class CertificationIDCardFragment extends BaseFragment {
     }
 
     @Override
+    public void onDestroy() {
+        // 释放本地质量控制模型
+        CameraNativeHelper.release();
+        super.onDestroy();
+    }
+
+    @Override
     public boolean canSwipeBack() {
         return false;
     }
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

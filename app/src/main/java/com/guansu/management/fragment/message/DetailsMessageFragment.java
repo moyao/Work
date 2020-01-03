@@ -2,6 +2,7 @@ package com.guansu.management.fragment.message;
 
 import android.os.Bundle;
 import android.view.View;
+
 import com.guansu.management.R;
 import com.guansu.management.base.BaseFragment;
 

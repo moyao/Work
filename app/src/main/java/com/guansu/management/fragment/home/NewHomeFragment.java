@@ -111,7 +111,7 @@ public class NewHomeFragment extends BaseFragment implements NewHomeAdapter.Item
             @Override
             public void onError(Throwable e) {
                 super.onError(e);
-                if (e instanceof ServiceException && ((ServiceException) e).code.equals(HttpConstants.NO_DATA)) {
+                if (e instanceof ServiceException && ((ServiceException) e).code.equals(HttpConstants.SUCCESS_CODE)) {
                     showNoData();
                 } else {
                     showError(e);
@@ -150,5 +150,9 @@ public class NewHomeFragment extends BaseFragment implements NewHomeAdapter.Item
     public void onRefresh() {
         inithomeData(status);
         layoutSwipeRefresh.setRefreshing(false);
+    }
+    @Override
+    protected void retryloading() {
+        ReporteNameData(1, tag);
     }
 }

@@ -46,7 +46,7 @@ public class FootAdapter extends RecyclerView.Adapter<FootAdapter.FootViewHolder
 
     @Override
     public int getItemCount() {
-        return footBean.size();
+       return footBean != null ? footBean.size() : 0;
     }
 
     public class FootViewHolder extends RecyclerView.ViewHolder {

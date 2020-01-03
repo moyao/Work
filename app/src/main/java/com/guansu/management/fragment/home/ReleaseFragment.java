@@ -1,9 +1,17 @@
 package com.guansu.management.fragment.home;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -60,6 +68,11 @@ public class ReleaseFragment extends CheckPermissionsActivity implements
     String userId;
     List<String> imageList;
     private String lat, lng, address;
+    private Dialog ExemptionDialog;
+    private CheckBox checkbox;
+    private Button butDetermine, butCancel;
+    private WebView webView;
+    final List<File> list = new ArrayList();
     public static ReleaseFragment newInstance(String title) {
         Bundle args = new Bundle();
         args.putString(Constants.KEY_TITLE, title);
@@ -99,6 +112,7 @@ public class ReleaseFragment extends CheckPermissionsActivity implements
         mRvPics.setNestedScrollingEnabled(false);
         adapter.setOnItemClickListener(this);
         mRvPics.setOnClickListener(this);
+        showDialogExemption();
     }
     @Override
     public void bindEvent() {
@@ -124,27 +138,17 @@ public class ReleaseFragment extends CheckPermissionsActivity implements
                 if (getArguments().getString(Constants.KEY_TITLE).equals(Constant.VIEW_CIRCLE)) {
                     showLoadingDialog("上传中……");
                     //圈子
-                    final List<File> list = new ArrayList();
+
                     for (ImageItem imageItem : selImageList) {
                         if (!imageItem.path.startsWith("http"))
                             list.add(new File(imageItem.path));
                     }
-                    HttpParams params = new HttpParams();
-                    params.put("uid", userId);
-                    OkGo.<String>post(HttpConstants.BASE_URL + HomeModellml.IMAGEUPLOADLIST)
-                            .tag(this)
-                            .isMultipart(true)
-                            .params(params)
-                            .addFileParams("file", list)
-                            .execute(new StringCallback() {
-                                @Override
-                                public void onSuccess(Response<String> response) {
-                                    String body = response.body();
-                                    Gson gson = new Gson();
-                                    FileBean user = gson.fromJson(body, FileBean.class);
-                                    getDataRelease(user.getData().getImageList());
-                                }
-                            });
+                    if ("true".equals(userSharedPreferencesUtils.getDetails())){
+                        DataImage();
+                    }else {
+                        ExemptionDialog.show();
+                    }
+
                 } else {
                     //活动
                     final List<File> list = new ArrayList();
@@ -163,6 +167,25 @@ public class ReleaseFragment extends CheckPermissionsActivity implements
 
             }
         });
+    }
+
+    private void DataImage() {
+        HttpParams params = new HttpParams();
+        params.put("uid", userId);
+        OkGo.<String>post(HttpConstants.BASE_URL + HomeModellml.IMAGEUPLOADLIST)
+                .tag(this)
+                .isMultipart(true)
+                .params(params)
+                .addFileParams("file", list)
+                .execute(new StringCallback() {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+                        String body = response.body();
+                        Gson gson = new Gson();
+                        FileBean user = gson.fromJson(body, FileBean.class);
+                        getDataRelease(user.getData().getImageList());
+                    }
+                });
     }
 
     private void getDataRelease(List<FileBean.DataBean.ImageListBean> jsonArray) {
@@ -252,5 +275,46 @@ public class ReleaseFragment extends CheckPermissionsActivity implements
                 getActivity().onBackPressed();//销毁自己
             }
         }
+    }
+    private void showDialogExemption() {
+        ExemptionDialog = new Dialog(getContext(), R.style.BaseDialogStyle);
+        ExemptionDialog.setContentView(R.layout.dialog_login_exemption);
+        checkbox = ExemptionDialog.findViewById(R.id.checkbox);
+        webView = ExemptionDialog.findViewById(R.id.webView);
+        butCancel = ExemptionDialog.findViewById(R.id.butCancel);
+        butDetermine = ExemptionDialog.findViewById(R.id.butDetermine);
+        checkbox.setChecked(false);
+        ExemptionDialog.setCanceledOnTouchOutside(false);
+        ExemptionDialog.getWindow().setGravity(Gravity.CENTER);
+        Window w = ExemptionDialog.getWindow();
+        WindowManager.LayoutParams lp = w.getAttributes();
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+        lp.height = WindowManager.LayoutParams.MATCH_PARENT;
+        ExemptionDialog.onWindowAttributesChanged(lp);
+        webView.getSettings().setJavaScriptEnabled(true);
+        webView.setWebViewClient(new WebViewClient());
+        WebSettings webSettings = webView.getSettings();
+        webSettings.setLoadWithOverviewMode(true); // 缩放至屏幕的大小
+        webView.loadUrl("http://47.104.88.151/Golang/page2.html");
+        butCancel.setOnClickListener(new OnClickListenerWrapper() {
+            @Override
+            protected void onSingleClick(View v) {
+                ExemptionDialog.dismiss();
+            }
+        });
+        butDetermine.setOnClickListener(new OnClickListenerWrapper() {
+            @Override
+            protected void onSingleClick(View v) {
+                if (checkbox.isChecked()) {
+                    UserSharedPreferencesUtils userSharedPreferencesUtils = new UserSharedPreferencesUtils(getContext());
+                    userSharedPreferencesUtils.setDetails("true");
+                    userSharedPreferencesUtils.saveSharedPreferences();
+                    DataImage();
+                    ExemptionDialog.dismiss();
+                } else {
+                    showToast("同意遵守本声明，以后每次默认都同意");
+                }
+            }
+        });
     }
 }

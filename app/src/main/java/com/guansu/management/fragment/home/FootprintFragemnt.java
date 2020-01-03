@@ -1,5 +1,4 @@
 package com.guansu.management.fragment.home;
-
 import android.app.Dialog;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -9,10 +8,8 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.guansu.management.R;
 import com.guansu.management.activity.CheckPermissionsActivity;
 import com.guansu.management.api.MyObserve;
@@ -21,11 +18,8 @@ import com.guansu.management.common.OnClickListenerWrapper;
 import com.guansu.management.common.UserSharedPreferencesUtils;
 import com.guansu.management.fragment.foot.FootAdapter;
 import com.guansu.management.model.FootModellml;
-
 import java.util.List;
-
 import butterknife.BindView;
-
 /**
  * @author: dongyaoyao
  */

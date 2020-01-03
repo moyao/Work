@@ -1,5 +1,4 @@
 package com.guansu.management.fragment.me.adapter;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,16 +6,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CircleCrop;
+import com.bumptech.glide.request.RequestOptions;
 import com.guansu.management.R;
 import com.guansu.management.bean.MyDistributionBean;
-
 import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -27,12 +24,10 @@ import butterknife.ButterKnife;
 public class MyDistributionAdapter extends RecyclerView.Adapter<MyDistributionAdapter.MyDistributionViewHolder> {
     private Context mcontext;
     private List<MyDistributionBean> myDistributionBeans;
-
     public MyDistributionAdapter(Context mcontext, List<MyDistributionBean> myDistributionBeans) {
         this.mcontext = mcontext;
         this.myDistributionBeans = myDistributionBeans;
     }
-
     @NonNull
     @Override
     public MyDistributionViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -45,7 +40,7 @@ public class MyDistributionAdapter extends RecyclerView.Adapter<MyDistributionAd
     @Override
     public void onBindViewHolder(@NonNull MyDistributionViewHolder holder, int position) {
         MyDistributionBean myDistributionBean = myDistributionBeans.get(position);
-        Glide.with(mcontext).load(myDistributionBean.getProfileImageUrl()).into(holder.imageViewPhoto);
+        Glide.with(mcontext).load(myDistributionBean.getProfileImageUrl()).apply(RequestOptions.bitmapTransform(new CircleCrop())).into(holder.imageViewPhoto);
         holder.textViewName.setText(myDistributionBean.getNickname());
         holder.textViewTime.setText(myDistributionBean.getCreatedAt());
 //        position : CUO 总监  MAKER  创客    COO  总经理   MANAGER 经理
@@ -58,7 +53,6 @@ public class MyDistributionAdapter extends RecyclerView.Adapter<MyDistributionAd
         }else if ("MANAGER".equals(myDistributionBean.getDisLevel().getPosition())) {
             holder.textViewGradeOne.setText("经理");
         }
-
         //MERCHANT   运营商   GOLD_MEMBER   创客   PUKA_MEMBER  普通会员
         if ("MERCHANT".equals(myDistributionBean.getDisLevel().getDistributionLevel())) {
             holder.textViewGrade.setText("运营商");
@@ -76,7 +70,6 @@ public class MyDistributionAdapter extends RecyclerView.Adapter<MyDistributionAd
     public int getItemCount() {
         return myDistributionBeans.size();
     }
-
     public class MyDistributionViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.imageViewPhoto)
         ImageView imageViewPhoto;
@@ -88,7 +81,6 @@ public class MyDistributionAdapter extends RecyclerView.Adapter<MyDistributionAd
         TextView textViewGrade;
         @BindView(R.id.textViewGradeOne)
         TextView textViewGradeOne;
-
         public MyDistributionViewHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);

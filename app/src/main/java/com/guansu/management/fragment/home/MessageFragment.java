@@ -11,10 +11,12 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.guansu.management.R;
 import com.guansu.management.api.MyObserve;
+import com.guansu.management.api.ServiceException;
 import com.guansu.management.base.BaseFragment;
 import com.guansu.management.bean.MessageBean;
 import com.guansu.management.bean.UserInfo;
 import com.guansu.management.common.UserSharedPreferencesUtils;
+import com.guansu.management.config.HttpConstants;
 import com.guansu.management.fragment.MainFragment;
 import com.guansu.management.fragment.me.PersonalFragment;
 import com.guansu.management.fragment.message.DetailsMessageFragment;
@@ -82,6 +84,7 @@ public class MessageFragment extends BaseFragment {
         setLoadingContentView(layoutSwipeRefresh);
         rgStatus.setOnCheckedChangeListener(ChangeRadioGroup);
         rgStatus.check(rbComment.getId());
+
     }
 
     @Override
@@ -95,11 +98,21 @@ public class MessageFragment extends BaseFragment {
                 .safeSubscribe(new MyObserve<List<MessageBean>>(this) {
                     @Override
                     protected void onSuccess(List<MessageBean> messageBeans) {
+                        showPage();
                         messageAdapter = new MessageAdapter(getContext(), messageBeans, status);
                         rvListMessage.setAdapter(messageAdapter);
                     }
+                    @Override
+                    public void onError(Throwable e) {
+                        super.onError(e);
+                        if (e instanceof ServiceException && ((ServiceException) e).code.equals(HttpConstants.SUCCESS_CODE)) {
+                            showNoData();
+                        } else {
+                            showError(e);
+                        }
+                    }
                 });
-        showPage();
+
     }
 
     private class ListOnItemClickListener implements OnItemClickListener {

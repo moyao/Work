@@ -98,7 +98,7 @@ public class NewHomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 }
             }, arrayList)
                     .startTurning(3000)
-                    .setCanLoop(false);
+                    .setCanLoop(true);
         } else if (holder instanceof ItemViewHolder) {
             switch (tag) {
                 case 0:

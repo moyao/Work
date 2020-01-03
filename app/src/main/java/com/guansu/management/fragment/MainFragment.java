@@ -1,20 +1,18 @@
 package com.guansu.management.fragment;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.RadioButton;
 
 import androidx.annotation.Nullable;
-import androidx.fragment.app.FragmentActivity;
 
 import com.guansu.management.R;
 import com.guansu.management.base.BaseFragment;
-import com.guansu.management.bean.updateTextEvent;
 import com.guansu.management.common.OnClickListenerWrapper;
 import com.guansu.management.common.UserSharedPreferencesUtils;
 import com.guansu.management.config.Constant;
@@ -26,12 +24,6 @@ import com.guansu.management.fragment.home.ReleaseFragment;
 import com.guansu.management.utils.StringHandler;
 import com.guansu.management.wigdet.bottombar.BottomBar;
 import com.guansu.management.wigdet.bottombar.BottomBarTab;
-import com.guansu.management.wigdet.dialog.ImageDialog;
-import com.guansu.management.wigdet.dialog.LoginSuccessDialog;
-
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.BindView;
 import me.yokeyword.fragmentation.SupportFragment;
@@ -46,14 +38,16 @@ public class MainFragment extends BaseFragment {
     private SupportFragment[] mFragments = new SupportFragment[5];
     private BottomBar mNavigation;
     private View viewCircle, viewConstraints;
-    private Dialog dia,dialog;
+    private Dialog dia;
     UserSharedPreferencesUtils userSharedPreferencesUtils;
+
     public static MainFragment newInstance() {
         Bundle args = new Bundle();
         MainFragment fragment = new MainFragment();
         fragment.setArguments(args);
         return fragment;
     }
+
     @Override
     public int onSetLayoutId() {
         return R.layout.fragement_mian;
@@ -102,7 +96,6 @@ public class MainFragment extends BaseFragment {
         Window w = dia.getWindow();
         WindowManager.LayoutParams lp = w.getAttributes();
         dia.onWindowAttributesChanged(lp);
-        initDialog();
     }
 
     @Override
@@ -114,12 +107,14 @@ public class MainFragment extends BaseFragment {
                 if (position >= 0 && !StringHandler.hasNull(userSharedPreferencesUtils.getUserid())) {
                     showHideFragment(mFragments[position], mFragments[prePosition]);
                 } else {
-                    dialog.show();
+                    loginDialog((Activity) getContext());
                 }
             }
+
             @Override
             public void onTabUnselected(int position) {
             }
+
             @Override
             public void onTabReselected(int position) {
             }
@@ -127,12 +122,12 @@ public class MainFragment extends BaseFragment {
         radioRelease.setOnClickListener(new OnClickListenerWrapper() {
             @Override
             protected void onSingleClick(View v) {
-                if (!StringHandler.hasNull(userSharedPreferencesUtils.getUserid())){
+                if (!StringHandler.hasNull(userSharedPreferencesUtils.getUserid())) {
                     if (!dia.isShowing()) {
                         dia.show();
                     }
-                }else {
-                    dialog.show();
+                } else {
+                    loginDialog((Activity) getContext());
                 }
             }
         });
@@ -176,32 +171,8 @@ public class MainFragment extends BaseFragment {
     public boolean canSwipeBack() {
         return false;
     }
-    private void initDialog() {
-         Button mButLater;
-         Button mButRegister;
-        dialog = new Dialog(getContext(), R.style.BaseDialogStyle);
-        dialog.setContentView(R.layout.dialog_register);
-        mButLater = dialog.findViewById(R.id.butLater);
-        mButRegister = dialog.findViewById(R.id.butRegister);
-        dialog.setCanceledOnTouchOutside(false);
-        dialog.getWindow().setGravity(Gravity.CENTER);
-        Window w = dialog.getWindow();
-        WindowManager.LayoutParams lp = w.getAttributes();
-        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
-        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
-        dialog.onWindowAttributesChanged(lp);
-        mButLater.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialog.dismiss();
-            }
-        });
-        mButRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                start(LoginFragment.newInstance("1"));
-               dialog.dismiss();
-            }
-        });
+
+    protected void immediatelyLogin() {
+        start(LoginFragment.newInstance("1"));
     }
 }

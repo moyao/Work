@@ -44,7 +44,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.SelectedPicV
     }
     @Override
     public int getItemCount() {
-        return imagesListBeans.size();
+        return imagesListBeans != null ? imagesListBeans.size() : 0;
     }
 
     public class SelectedPicViewHolder extends RecyclerView.ViewHolder {

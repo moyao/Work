@@ -15,9 +15,12 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.baidu.ocr.ui.BuildConfig;
 import com.guansu.management.R;
 import com.guansu.management.common.OnClickListenerWrapper;
 
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -31,7 +34,7 @@ import java.util.List;
 public class CalendarList extends FrameLayout {
     RecyclerView recyclerView;
     CalendarAdapter adapter;
-    TextView textViewFinish,textViewTime;
+    TextView textViewFinish, textViewTime;
     private DateBean startDate;//开始时间
     private DateBean endDate;//结束时间
     OnDateSelected onDateSelected;//选中监听
@@ -97,7 +100,14 @@ public class CalendarList extends FrameLayout {
             return;
         }
         //如果没有选中开始日期则此次操作选中开始日期
-        if (startDate == null) {
+        Calendar calendar = Calendar.getInstance();
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        int month = calendar.get(Calendar.MONTH) + 1;
+        String strhours = dateBean.getMonthStr();
+        String strh = strhours.substring(strhours.length() -2,strhours.length());   //截取
+        if (null != dateBean.getDay() && Integer.parseInt(dateBean.getDay()) < day
+                && Integer.parseInt(strh) == month) {
+        }else if (startDate == null) {
             startDate = dateBean;
             dateBean.setItemState(DateBean.ITEM_STATE_BEGIN_DATE);
         } else if (endDate == null) {
@@ -115,7 +125,7 @@ public class CalendarList extends FrameLayout {
                 endDate = dateBean;
                 endDate.setItemState(DateBean.ITEM_STATE_END_DATE);
                 setState();
-                textViewTime.setText("日期："+simpleDateFormat.format(startDate.getDate())+"-"+simpleDateFormat.format(endDate.getDate()));
+                textViewTime.setText("日期：" + simpleDateFormat.format(startDate.getDate()) + "-" + simpleDateFormat.format(endDate.getDate()));
             }
 
         } else if (startDate != null && endDate != null) {
@@ -129,9 +139,9 @@ public class CalendarList extends FrameLayout {
             endDate.setItemState(DateBean.ITEM_STATE_NORMAL);
             endDate = null;
         }
-
         adapter.notifyDataSetChanged();
     }
+
 
     //选中中间的日期
     private void setState() {
@@ -217,13 +227,20 @@ public class CalendarList extends FrameLayout {
                 ((CalendarAdapter.MonthViewHolder) viewHolder).tv_month.setText(data.get(i).getMonthStr());
             } else {
                 CalendarAdapter.DayViewHolder vh = ((CalendarAdapter.DayViewHolder) viewHolder);
+                Calendar calendar = Calendar.getInstance();
+                int day = calendar.get(Calendar.DAY_OF_MONTH);
+                int month = calendar.get(Calendar.MONTH) + 1;
                 vh.tv_day.setText(data.get(i).getDay());
                 vh.tv_check_in_check_out.setVisibility(View.GONE);
                 DateBean dateBean = data.get(i);
-
-                //设置item状态
-                if (dateBean.getItemState() == DateBean.ITEM_STATE_BEGIN_DATE || dateBean.getItemState() == DateBean.ITEM_STATE_END_DATE) {
-
+                String strhours = dateBean.getMonthStr();
+                String strh = strhours.substring(strhours.length() -2,strhours.length());   //截取
+                if (null != dateBean.getDay() && Integer.parseInt(dateBean.getDay()) < day
+                        && Integer.parseInt(strh) == month) {
+                    vh.itemView.setBackgroundColor(Color.WHITE);
+                    vh.tv_day.setTextColor(Color.parseColor("#a1a1a1"));
+                } else if (dateBean.getItemState() == DateBean.ITEM_STATE_BEGIN_DATE ||
+                        dateBean.getItemState() == DateBean.ITEM_STATE_END_DATE) {
                     //开始日期或结束日期
                     vh.itemView.setBackgroundColor(Color.parseColor("#ff6600"));
                     vh.tv_day.setTextColor(Color.WHITE);
@@ -238,6 +255,7 @@ public class CalendarList extends FrameLayout {
                     //选中状态
                     vh.itemView.setBackgroundColor(Color.parseColor("#ffa500"));
                     vh.tv_day.setTextColor(Color.WHITE);
+
                 } else {
                     //正常状态
                     vh.itemView.setBackgroundColor(Color.WHITE);
@@ -287,13 +305,7 @@ public class CalendarList extends FrameLayout {
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
             SimpleDateFormat formatYYYYMM = new SimpleDateFormat("yyyy-MM");
 
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");// HH:mm:ss
-            //获取当前时间
-            Date date = new Date(System.currentTimeMillis());
 
-            /*time1.setText("Date获取当前日期时间"+simpleDateFormat.format(date));
-            if (!(startDate > simpleDateFormat.format(date))) {
-            }*/
             //起始日期
             Date startDate = new Date(System.currentTimeMillis());
             calendar.setTime(startDate);

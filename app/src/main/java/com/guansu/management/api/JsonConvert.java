@@ -6,11 +6,12 @@ import com.guansu.management.config.HttpConstants;
 import com.lzy.okgo.convert.Converter;
 
 import java.lang.reflect.Type;
+import java.util.List;
 
 import okhttp3.Response;
 import okhttp3.ResponseBody;
+
 /**
- *
  * Created by dongyaoyao
  */
 public class JsonConvert<T> implements Converter<T> {
@@ -34,7 +35,7 @@ public class JsonConvert<T> implements Converter<T> {
 
         if (HttpConstants.SUCCESS_CODE.equals(code)) {
             if (null == commonResponse.data) {
-                return (T)commonResponse;
+                return (T) commonResponse;
             } else {
                 return (T) commonResponse.data;
             }
@@ -42,9 +43,9 @@ public class JsonConvert<T> implements Converter<T> {
             throw new ServiceException(HttpConstants.NO_DATA, commonResponse.msg);
         } else if (code.equals(HttpConstants.SESSION_TIMEOUT)) {
             throw new ServiceException(HttpConstants.SESSION_TIMEOUT, commonResponse.msg);
-        } else if (code.equals(HttpConstants.ERROR_SYSTEM)){
+        } else if (code.equals(HttpConstants.ERROR_SYSTEM)) {
             throw new ServiceException(code, commonResponse.msg);
-        }else if (HttpConstants.BUSSINESS_CODE_MIN.compareTo(code) <= 0 &&
+        } else if (HttpConstants.BUSSINESS_CODE_MIN.compareTo(code) <= 0 &&
                 HttpConstants.BUSSINESS_CODE_MAX.compareTo(code) >= 0) {
             throw new ServiceException(code, commonResponse.msg);
         } else if (code.equals(HttpConstants.ERROR_SYSTEM)) {
@@ -56,6 +57,4 @@ public class JsonConvert<T> implements Converter<T> {
             throw new ServiceException(code, commonResponse.msg);
         }
     }
-//        }
-//    }
 }

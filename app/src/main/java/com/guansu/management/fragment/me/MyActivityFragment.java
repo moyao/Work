@@ -11,12 +11,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.tabs.TabLayout;
 import com.guansu.management.R;
 import com.guansu.management.api.MyObserve;
+import com.guansu.management.api.ServiceException;
 import com.guansu.management.base.BaseFragment;
 import com.guansu.management.bean.HomeBean;
 import com.guansu.management.bean.MyActivityBean;
 import com.guansu.management.common.OnClickListenerWrapper;
 import com.guansu.management.common.UserSharedPreferencesUtils;
 import com.guansu.management.config.Constant;
+import com.guansu.management.config.HttpConstants;
 import com.guansu.management.fragment.me.adapter.MyActivityAdapter;
 import com.guansu.management.model.HomeModellml;
 import com.guansu.management.model.MyActivityModellml;
@@ -93,17 +95,33 @@ public class MyActivityFragment extends BaseFragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         Recycler.setLayoutManager(layoutManager);
-
+        setLoadingContentView(Recycler);
         activityData(0);
     }
 
     private void activityData(int position) {
+        showLoadingPage();
         new MyActivityModellml().query_activity_infopage(userSharedPreferencesUtils.getUserid(), position)
                 .safeSubscribe(new MyObserve<List<MyActivityBean>>(this) {
                     @Override
                     protected void onSuccess(List<MyActivityBean> homeBeans) {
-                        myActivityAdapter = new MyActivityAdapter(homeBeans, getContext(),position);
-                        Recycler.setAdapter(myActivityAdapter);
+                        showPage();
+                        if (0==homeBeans.size()){
+                            showNoData();
+                        }else {
+                            myActivityAdapter = new MyActivityAdapter(homeBeans, getContext(), position);
+                            Recycler.setAdapter(myActivityAdapter);
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        super.onError(e);
+                        if (e instanceof ServiceException && ((ServiceException) e).code.equals(HttpConstants.SUCCESS_CODE)) {
+                            showNoData();
+                        } else {
+                            showError(e);
+                        }
                     }
                 });
     }

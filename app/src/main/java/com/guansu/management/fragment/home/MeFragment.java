@@ -27,6 +27,11 @@ import com.guansu.management.fragment.me.EditFragment;
 import com.guansu.management.fragment.me.InstallFragment;
 import com.guansu.management.fragment.me.MyActivityFragment;
 import com.guansu.management.fragment.payment.PaymentSuccessFragment;
+import com.guansu.management.utils.MessageEvent;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 
@@ -83,6 +88,7 @@ public class MeFragment extends BaseFragment {
     public void initView(View view) {
         hideTitle();
         initDialog();
+        EventBus.getDefault().register(this);
     }
 
     @Override
@@ -91,7 +97,7 @@ public class MeFragment extends BaseFragment {
         tvName.setText(userSharedPreferencesUtils.getNickname());
         Glide.with(getContext()).load(userSharedPreferencesUtils.getProfileImageUrl())
                 .apply(RequestOptions.bitmapTransform(new CircleCrop())).into(ivHead);
-        textViewGrade.setText(userSharedPreferencesUtils.getLevelName());
+        textViewGrade.setText("等级："+userSharedPreferencesUtils.getLevelName());
         ivHead.setOnClickListener(new OnClickListenerWrapper() {
             @Override
             protected void onSingleClick(View v) {
@@ -183,5 +189,22 @@ public class MeFragment extends BaseFragment {
         oks.setUrl("http://sharesdk.cn");
         // 启动分享GUI
         oks.show(getContext());
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void EvenData(MessageEvent messageEvent) {
+        if ("发生改变".equals(messageEvent.getMessage())) {
+            UserSharedPreferencesUtils userSharedPreferencesUtils = new UserSharedPreferencesUtils(getContext());
+            tvName.setText(userSharedPreferencesUtils.getNickname());
+            Glide.with(getContext()).load(userSharedPreferencesUtils.getProfileImageUrl())
+                    .apply(RequestOptions.bitmapTransform(new CircleCrop())).into(ivHead);
+            textViewGrade.setText(userSharedPreferencesUtils.getLevelName());
+        }
     }
 }

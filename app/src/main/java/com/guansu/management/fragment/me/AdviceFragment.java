@@ -26,7 +26,6 @@ import butterknife.BindView;
  * @author: dongyaoyao
  */
 public class AdviceFragment extends BaseFragment {
-
     @BindView(R.id.gridLayoutLevel)
     GridLayout gridLayoutLevel;
     @BindView(R.id.editTextContext)
@@ -72,7 +71,7 @@ public class AdviceFragment extends BaseFragment {
                     return;
                 }
                 if ("".equals(editTextContext.getText().toString())) {
-                    showToast("请选择描述您的问题，建议。。。");
+                    showToast("请选择描述您的问题/建议。。。");
                     return;
                 }
                 if ("".equals(editTextContact.getText().toString())) {

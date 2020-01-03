@@ -1,9 +1,13 @@
 package com.guansu.management.base;
-
+import android.app.Activity;
+import android.app.Dialog;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -12,6 +16,7 @@ import androidx.annotation.Nullable;
 import com.guansu.management.R;
 import com.guansu.management.api.APIException;
 import com.guansu.management.api.ServiceException;
+import com.guansu.management.common.OnClickListenerWrapper;
 import com.guansu.management.common.ReplaceViewHelper;
 import com.guansu.management.wigdet.CommonTitleBar;
 import java.net.ConnectException;
@@ -42,12 +47,12 @@ public abstract class BaseFragment<T extends BasePresenter> extends SwipeBackFra
     public T presenter;
     private View childView;
     private Unbinder unbinder;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setParallaxOffset(0.5f);
         mContext = getBaseActivity();
-
     }
 
     @Nullable
@@ -145,6 +150,42 @@ public abstract class BaseFragment<T extends BasePresenter> extends SwipeBackFra
     public abstract void bindEvent();
 
     public abstract boolean canSwipeBack();
+
+    public void loginDialog(Activity activity) {
+        Dialog dia = new Dialog(activity, R.style.BaseDialogStyle);
+        dia.setContentView(R.layout.dialog_register);
+        Button butLater = dia.findViewById(R.id.butLater);
+        Button butRegister = dia.findViewById(R.id.butRegister);
+        dia.setCanceledOnTouchOutside(false);
+        dia.getWindow().setGravity(Gravity.CENTER);
+        Window w = dia.getWindow();
+        WindowManager.LayoutParams lp = w.getAttributes();
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        dia.onWindowAttributesChanged(lp);
+        dia.show();
+        butLater.setOnClickListener(new OnClickListenerWrapper() {
+            @Override
+            protected void onSingleClick(View v) {
+                LateronLogin();
+                dia.dismiss();
+            }
+        });
+        butRegister.setOnClickListener(new OnClickListenerWrapper() {
+            @Override
+            protected void onSingleClick(View v) {
+                immediatelyLogin();
+                dia.dismiss();
+            }
+        });
+    }
+
+    protected void immediatelyLogin() {
+    }
+
+    protected void LateronLogin() {
+
+    }
 /*
     public <T> Subscriber newMySubscriber(final SimpleMyCallBack onNext) {
         return mContext.newMySubscriber(onNext);
@@ -218,11 +259,11 @@ public abstract class BaseFragment<T extends BasePresenter> extends SwipeBackFra
         } else {
             view = LayoutInflater.from(getContext()).inflate(R.layout.layout_status_error, (ViewGroup) childView, false);
         }
-        ImageView iv_status = (ImageView) view.findViewById(R.id.iv_status);
+        ImageView iv_status = view.findViewById(R.id.iv_status);
         iv_status.setImageResource(R.drawable.fragmentation_help);
-        TextView tv_status = (TextView) view.findViewById(R.id.tv_status);
+        TextView tv_status = view.findViewById(R.id.tv_status);
         tv_status.setText("内容获取失败，请点击按钮重试");
-        Button btn_retry = (Button) view.findViewById(R.id.btn_retry);
+        Button btn_retry = view.findViewById(R.id.btn_retry);
         btn_retry.setVisibility(View.VISIBLE);
         btn_retry.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -240,10 +281,10 @@ public abstract class BaseFragment<T extends BasePresenter> extends SwipeBackFra
         } else {
             view = LayoutInflater.from(getContext()).inflate(R.layout.layout_status_error, (ViewGroup) childView, false);
         }
-        ImageView iv_status = (ImageView) view.findViewById(R.id.iv_status);
-        iv_status.setImageResource(R.drawable.fragmentation_help);
-        TextView tv_status = (TextView) view.findViewById(R.id.tv_status);
-        tv_status.setText("暂无数据");
+        ImageView iv_status = view.findViewById(R.id.iv_status);
+        iv_status.setImageResource(R.mipmap.icon_empty_data);
+        TextView tv_status = view.findViewById(R.id.tv_status);
+        tv_status.setText("这里什么也没有...");
         defaultReplaceViewHelper.toReplaceView(mContentView, view);
     }
 
@@ -266,11 +307,11 @@ public abstract class BaseFragment<T extends BasePresenter> extends SwipeBackFra
         } else {
             view = LayoutInflater.from(getContext()).inflate(R.layout.layout_status_error, (ViewGroup) childView, false);
         }
-        ImageView iv_status = (ImageView) view.findViewById(R.id.iv_status);
-        iv_status.setImageResource(R.drawable.fragmentation_help);
-        TextView tv_status = (TextView) view.findViewById(R.id.tv_status);
+        ImageView iv_status = view.findViewById(R.id.iv_status);
+        iv_status.setImageResource(R.mipmap.icon_out_of_contact);
+        TextView tv_status = view.findViewById(R.id.tv_status);
         tv_status.setText("您的网络失联了");
-        Button btn_retry = (Button) view.findViewById(R.id.btn_retry);
+        Button btn_retry = view.findViewById(R.id.btn_retry);
         btn_retry.setVisibility(View.VISIBLE);
         btn_retry.setOnClickListener(new View.OnClickListener() {
             @Override

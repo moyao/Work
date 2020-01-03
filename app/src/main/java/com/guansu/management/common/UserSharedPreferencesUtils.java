@@ -21,6 +21,7 @@ public class UserSharedPreferencesUtils {
     private final String PROFILEIMAGEURL = "profileImageUrl";
     private final String LEVELNAME = "levelName";
     private final String LOGIN = "Login";
+    private final String DETAILS = "Details";
 
     private UserInfo userInfo;
     private String account;
@@ -29,6 +30,15 @@ public class UserSharedPreferencesUtils {
     private String userid;
     private String nickname;
     private String Login;
+    private String Details;
+
+    public String getDetails() {
+        return Details;
+    }
+
+    public void setDetails(String details) {
+        Details = details;
+    }
 
     public String getLogin() {
         return Login;
@@ -95,6 +105,7 @@ public class UserSharedPreferencesUtils {
         this.setProfileImageUrl(sharedPreferences.getString(PROFILEIMAGEURL, ""));
         this.setLevelName(sharedPreferences.getString(LEVELNAME, ""));
         this.setLogin(sharedPreferences.getString(LOGIN, ""));
+        this.setDetails(sharedPreferences.getString(DETAILS, ""));
     }
 
 
@@ -112,7 +123,8 @@ public class UserSharedPreferencesUtils {
         editor.putString(NICKNAME, getNickname());
         editor.putString(PROFILEIMAGEURL, getProfileImageUrl());
         editor.putString(LEVELNAME, getLevelName());
-        editor.putString(LEVELNAME, getLogin());
+        editor.putString(LOGIN, getLogin());
+        editor.putString(DETAILS, getDetails());
         editor.commit();
     }
 
@@ -146,7 +158,5 @@ public class UserSharedPreferencesUtils {
     public void setPwd(String pwd) {
         this.pwd = pwd;
     }
-
-
 
 }

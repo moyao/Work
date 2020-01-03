@@ -5,6 +5,10 @@ import android.content.Context;
 
 import androidx.multidex.MultiDex;
 
+import com.baidu.ocr.sdk.OCR;
+import com.baidu.ocr.sdk.OnResultListener;
+import com.baidu.ocr.sdk.exception.OCRError;
+import com.baidu.ocr.sdk.model.AccessToken;
 import com.guansu.management.BuildConfig;
 import com.guansu.management.common.ActivityPageManager;
 import com.lzy.imagepicker.ImagePicker;
@@ -15,21 +19,25 @@ import com.lzy.okgo.cookie.CookieJarImpl;
 import com.lzy.okgo.cookie.store.MemoryCookieStore;
 import com.lzy.okgo.https.HttpsUtils;
 import com.lzy.okgo.interceptor.HttpLoggingInterceptor;
+
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
+
 import me.yokeyword.fragmentation.Fragmentation;
 import me.yokeyword.fragmentation.helper.ExceptionHandler;
 import okhttp3.OkHttpClient;
+
 /**
- *
  * Created by dongyaoyao
  */
 public class MainApplication extends Application {
     private static MainApplication context;
     private final int CONNCET_TIMEOUT = 8;
+
     public static MainApplication getInstance() {
         return context;
     }
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -46,8 +54,20 @@ public class MainApplication extends Application {
         initImagePicker();
         initCloudChannel(this);
         MultiDex.install(this);
-    }
+        OCR.getInstance(this).initAccessTokenWithAkSk(new OnResultListener<AccessToken>() {
+            @Override
+            public void onResult(AccessToken result) {
+                // 调用成功，返回AccessToken对象
+                String token = result.getAccessToken();
+            }
 
+            @Override
+            public void onError(OCRError error) {
+                // 调用失败，返回OCRError子类SDKError对象
+
+            }
+        }, getApplicationContext(), "BBrH4G7suL2PRq8DkoWoQEEA", "HWKnzlN2rjTSBU2qYVarwGohYdPNLr4z");
+    }
 
     private void initImagePicker() {
         ImagePicker.getInstance().setImageLoader(new GlideImageLoader());
@@ -98,6 +118,7 @@ public class MainApplication extends Application {
 
     /**
      * 初始化云推送通道
+     *
      * @param applicationContext
      */
     private void initCloudChannel(Context applicationContext) {

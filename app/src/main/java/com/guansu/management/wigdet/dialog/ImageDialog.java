@@ -1,25 +1,19 @@
 package com.guansu.management.wigdet.dialog;
-
 import android.content.Context;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
-
 import androidx.fragment.app.FragmentActivity;
-
 import com.bumptech.glide.Glide;
 import com.guansu.management.R;
 import com.guansu.management.bean.ImagesListBean;
 import com.guansu.management.ui.banner.ConvenientBanner;
 import com.guansu.management.wigdet.banner.holder.CBViewHolderCreator;
 import com.guansu.management.wigdet.banner.holder.Holder;
-
 import java.util.ArrayList;
 import java.util.List;
-
 public final class ImageDialog {
 
 

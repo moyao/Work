@@ -32,6 +32,7 @@ import com.guansu.management.config.HttpConstants;
 import com.guansu.management.model.HomeModellml;
 import com.guansu.management.model.MeModellml;
 import com.guansu.management.model.ReleaseModellml;
+import com.guansu.management.utils.MessageEvent;
 import com.guansu.management.wigdet.CommonTitleBar;
 import com.guansu.management.wigdet.datepicker.CustomDatePicker;
 import com.guansu.management.wigdet.datepicker.DateFormatUtils;
@@ -45,6 +46,7 @@ import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.HttpParams;
 import com.lzy.okgo.model.Response;
 
+import org.greenrobot.eventbus.EventBus;
 import org.json.JSONArray;
 import org.json.JSONException;
 
@@ -285,7 +287,7 @@ public class EditFragment extends BaseFragment implements PickValueView.onSelect
         });
         pickString.setOnSelectedChangeListener(this);
 
-        pickString.setValueData(valueStr, valueStr[1]);
+        pickString.setValueData(valueStr, valueStr[0]);
         dialog.setContentView(contentView);
         ViewGroup.LayoutParams layoutParams = contentView.getLayoutParams();
         layoutParams.width = getResources().getDisplayMetrics().widthPixels;
@@ -355,6 +357,7 @@ public class EditFragment extends BaseFragment implements PickValueView.onSelect
                 userSharedPreferencesUtils.setNickname(nickname);
                 userSharedPreferencesUtils.setProfileImageUrl(imageList);
                 userSharedPreferencesUtils.saveSharedPreferences();
+                EventBus.getDefault().post(new MessageEvent("发生改变"));
                 showPage();
                 getActivity().onBackPressed();//销毁自己
             }

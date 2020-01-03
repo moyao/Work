@@ -55,9 +55,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends SupportActiv
         ActivityPageManager.getInstance().addActivity(this);
         init();
     }
-
     public abstract int onSetLayoutId();
-
     /**
      * 初始化页面
      */

@@ -318,7 +318,7 @@ public class PickValueView extends LinearLayout implements NumberPicker.OnValueC
      * @param mDefaultLeftValue
      */
     public void setValueData(Object[] leftValues, Object mDefaultLeftValue) {
-        this.mViewCount = 1;
+        this.mViewCount = 0;
         this.mLeftValues = leftValues;
         this.mDefaultLeftValue = mDefaultLeftValue;
 
