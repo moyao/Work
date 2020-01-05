@@ -13,17 +13,44 @@ import android.widget.TextView;
 
 import com.alipay.sdk.app.EnvUtils;
 import com.alipay.sdk.app.PayTask;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.guansu.management.R;
+import com.guansu.management.api.ApiWrapper;
+import com.guansu.management.api.MyObserve;
 import com.guansu.management.base.BaseFragment;
+import com.guansu.management.bean.EditBean;
+import com.guansu.management.bean.FileBean;
+import com.guansu.management.bean.PaymentBean;
 import com.guansu.management.common.OnClickListenerWrapper;
+import com.guansu.management.common.UserSharedPreferencesUtils;
+import com.guansu.management.config.HttpConstants;
 import com.guansu.management.config.Payment;
+import com.guansu.management.fragment.payment.PaymentSuccessFragment;
+import com.guansu.management.model.HomeModellml;
+import com.guansu.management.model.MeModellml;
 import com.guansu.management.paymentmoney.AuthResult;
 import com.guansu.management.paymentmoney.PayResult;
 import com.guansu.management.utils.OrderInfoUtil2_0;
+import com.lzy.okgo.OkGo;
+import com.lzy.okgo.callback.Callback;
+import com.lzy.okgo.callback.StringCallback;
+import com.lzy.okgo.model.HttpMethod;
+import com.lzy.okgo.model.HttpParams;
+import com.lzy.okgo.model.Progress;
+import com.lzy.okgo.model.Response;
+import com.lzy.okgo.request.base.BodyRequest;
+import com.lzy.okgo.request.base.Request;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
 import java.util.Map;
 
 import butterknife.BindView;
+import okhttp3.RequestBody;
 
 /**
  * @date:
@@ -46,7 +73,7 @@ public class DistributionFragment extends BaseFragment {
     TextView textViewContext;
     @BindView(R.id.textViewActivity)
     TextView textViewActivity;
-
+    UserSharedPreferencesUtils userSharedPreferencesUtils;
     public static DistributionFragment newInstance() {
         Bundle args = new Bundle();
         DistributionFragment fragment = new DistributionFragment();
@@ -58,48 +85,24 @@ public class DistributionFragment extends BaseFragment {
     private Handler mHandler = new Handler() {
         @SuppressWarnings("unused")
         public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case Payment.SDK_PAY_FLAG: {
-                    @SuppressWarnings("unchecked")
-                    PayResult payResult = new PayResult((Map<String, String>) msg.obj);
-                    /**
-                     * 对于支付结果，请商户依赖服务端的异步通知结果。同步通知结果，仅作为支付结束的通知。
-                     */
-                    String resultInfo = payResult.getResult();// 同步返回需要验证的信息
-                    String resultStatus = payResult.getResultStatus();
-                    // 判断resultStatus 为9000则代表支付成功
-                    if (TextUtils.equals(resultStatus, "9000")) {
-                        // 该笔订单是否真实支付成功，需要依赖服务端的异步通知。
-                        showToast(getString(R.string.pay_success) + payResult);
-                    } else {
-                        // 该笔订单真实的支付结果，需要依赖服务端的异步通知。
-                        showToast(getString(R.string.pay_failed) + payResult);
-                    }
-                    break;
-                }
-                case Payment.SDK_AUTH_FLAG: {
-                    @SuppressWarnings("unchecked")
-                    AuthResult authResult = new AuthResult((Map<String, String>) msg.obj, true);
-                    String resultStatus = authResult.getResultStatus();
-
-                    // 判断resultStatus 为“9000”且result_code
-                    // 为“200”则代表授权成功，具体状态码代表含义可参考授权接口文档
-                    if (TextUtils.equals(resultStatus, "9000") && TextUtils.equals(authResult.getResultCode(), "200")) {
-                        // 获取alipay_open_id，调支付时作为参数extern_token 的value
-                        // 传入，则支付账户为该授权账户
-                        showToast(getString(R.string.auth_success) + authResult);
-                    } else {
-                        // 其他状态值则为授权失败
-                        showToast(getString(R.string.auth_failed) + authResult);
-                    }
-                    break;
-                }
-                default:
-                    break;
+            @SuppressWarnings("unchecked")
+            PayResult payResult = new PayResult((Map<String, String>) msg.obj);
+            /**
+             * 对于支付结果，请商户依赖服务端的异步通知结果。同步通知结果，仅作为支付结束的通知。
+             */
+            String resultInfo = payResult.getResult();// 同步返回需要验证的信息
+            String resultStatus = payResult.getResultStatus();
+            // 判断resultStatus 为9000则代表支付成功
+            if (TextUtils.equals(resultStatus, "9000")) {
+                // 该笔订单是否真实支付成功，需要依赖服务端的异步通知。
+                showToast(getString(R.string.pay_success) + payResult);
+                start(PaymentSuccessFragment.newInstance());
+            } else {
+                // 该笔订单真实的支付结果，需要依赖服务端的异步通知。
+                showToast(getString(R.string.pay_failed) + payResult);
             }
-        }
 
-        ;
+        }
     };
 
     @Override
@@ -117,6 +120,7 @@ public class DistributionFragment extends BaseFragment {
 
     @Override
     public void bindEvent() {
+        userSharedPreferencesUtils = new UserSharedPreferencesUtils(getContext());
         checkGolden.isChecked();
         checkOperator.setChecked(false);
         checkOperator.setOnClickListener(new OnClickListenerWrapper() {
@@ -136,41 +140,52 @@ public class DistributionFragment extends BaseFragment {
         imageViewJoin.setOnClickListener(new OnClickListenerWrapper() {
             @Override
             protected void onSingleClick(View v) {
-                if (TextUtils.isEmpty(Payment.APPID) || (TextUtils.isEmpty(Payment.RSA2_PRIVATE) && TextUtils.isEmpty(Payment.RSA_PRIVATE))) {
-                    showToast(getString(R.string.error_missing_appid_rsa_private));
-                    return;
-                }
-                /*
-                 * 这里只是为了方便直接向商户展示支付宝的整个支付流程；所以Demo中加签过程直接放在客户端完成；
-                 * 真实App里，privateKey等数据严禁放在客户端，加签过程务必要放在服务端完成；
-                 * 防止商户私密数据泄露，造成不必要的资金损失，及面临各种安全风险；
-                 *
-                 * orderInfo 的获取必须来自服务端；
-                 */
-                boolean rsa2 = (Payment.RSA2_PRIVATE.length() > 0);
-                Map<String, String> params = OrderInfoUtil2_0.buildOrderParamMap(Payment.APPID, rsa2);
-                String orderParam = OrderInfoUtil2_0.buildOrderParam(params);
-                String privateKey = rsa2 ? Payment.RSA2_PRIVATE : Payment.RSA_PRIVATE;
-                String sign = OrderInfoUtil2_0.getSign(params, privateKey, rsa2);
-                final String orderInfo = orderParam + "&" + sign;
-                final Runnable payRunnable = new Runnable() {
-                    @Override
-                    public void run() {
-                        EnvUtils.setEnv(EnvUtils.EnvEnum.SANDBOX);
-                        PayTask alipay = new PayTask(getActivity());
-                        Map<String, String> result = alipay.payV2(orderInfo, true);
-                        Log.i("msp", result.toString());
-                        Message msg = new Message();
-                        msg.what = Payment.SDK_PAY_FLAG;
-                        msg.obj = result;
-                        mHandler.sendMessage(msg);
-                    }
-                };
-                // 必须异步调用
-                Thread payThread = new Thread(payRunnable);
-                payThread.start();
+                getData();
             }
         });
+    }
+
+    private void getData() {
+        Map<String, Object> httpParams = new HashMap<>();
+        httpParams.put("body", "金卡会员");
+        httpParams.put("amount", "399");
+        httpParams.put("userId", userSharedPreferencesUtils.getUserid());
+        JSONObject jsonObject = new JSONObject(httpParams);
+        OkGo.<String>post(HttpConstants.BASE_URL + MeModellml.USER_GENERATEORDERINFO)
+                .tag(this)
+                .upJson(jsonObject.toString())
+                .execute(new StringCallback() {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+                        JSONObject jsonObject = null;
+                        try {
+                            jsonObject = new JSONObject(response.body());
+
+                            if ("0000000".equals(jsonObject.getString("code"))) {
+                                String data = jsonObject.getString("data");
+                                final Runnable payRunnable = new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        EnvUtils.setEnv(EnvUtils.EnvEnum.SANDBOX);
+                                        PayTask alipay = new PayTask(getActivity());
+                                        Map<String, String> result = alipay.payV2(data, true);
+                                        Message msg = new Message();
+                                        msg.what = Payment.SDK_PAY_FLAG;
+                                        msg.obj = result;
+                                        mHandler.sendMessage(msg);
+                                    }
+                                };
+                                // 必须异步调用
+                                Thread payThread = new Thread(payRunnable);
+                                payThread.start();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                });
+
     }
 
     @Override

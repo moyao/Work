@@ -25,12 +25,11 @@
         <activity
             android:name="io.github.xudaojie.qrcodelib.CaptureActivity"
             tools:ignore="WrongManifestParent" />
-        <activity android:name=".fragment.me.FaceLivenessExpActivity"
-            />
+        <activity android:name=".activity.FaceLivenessExpActivity" />
 
         <meta-data
             android:name="com.amap.api.v2.apikey"
-            android:value="0fcb93722e1e6f15ddb3299249fbf1bb"></meta-data>
+            android:value="989ab9bf0f85d49affc24ef9c1d8a289"></meta-data>
 
         <service android:name="com.amap.api.location.APSService"></service>
         <service

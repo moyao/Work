@@ -12,9 +12,11 @@ import android.view.View;
 import com.guansu.management.R;
 import com.guansu.management.base.BaseActivity;
 import com.guansu.management.ui.welcome.WelcomeFragment;
+
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
+
 /**
  * Created by dongyaoyao
  */
@@ -58,6 +60,7 @@ public class MainActivity extends BaseActivity {
     }
     @Override
     public void bindEvent() {
+
     }
 
     @Override
@@ -164,7 +167,6 @@ public class MainActivity extends BaseActivity {
         intent.setData(Uri.parse("package:" + this.getPackageName()));
         startActivity(intent);
     }
-
     /**
      * 检测是否所有的权限都已经授权
      *

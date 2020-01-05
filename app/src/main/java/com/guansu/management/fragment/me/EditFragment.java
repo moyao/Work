@@ -287,7 +287,7 @@ public class EditFragment extends BaseFragment implements PickValueView.onSelect
         });
         pickString.setOnSelectedChangeListener(this);
 
-        pickString.setValueData(valueStr, valueStr[0]);
+        pickString.setValueData(valueStr, valueStr[1]);
         dialog.setContentView(contentView);
         ViewGroup.LayoutParams layoutParams = contentView.getLayoutParams();
         layoutParams.width = getResources().getDisplayMetrics().widthPixels;

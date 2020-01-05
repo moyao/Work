@@ -11,6 +11,7 @@ import com.baidu.ocr.sdk.exception.OCRError;
 import com.baidu.ocr.sdk.model.AccessToken;
 import com.guansu.management.BuildConfig;
 import com.guansu.management.common.ActivityPageManager;
+import com.guansu.management.helper.GenerateTestUserSig;
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.cache.CacheEntity;
@@ -19,13 +20,24 @@ import com.lzy.okgo.cookie.CookieJarImpl;
 import com.lzy.okgo.cookie.store.MemoryCookieStore;
 import com.lzy.okgo.https.HttpsUtils;
 import com.lzy.okgo.interceptor.HttpLoggingInterceptor;
+import com.tencent.imsdk.TIMMessage;
+import com.tencent.imsdk.TIMSdkConfig;
+import com.tencent.qcloud.tim.uikit.TUIKit;
+import com.tencent.qcloud.tim.uikit.base.IMEventListener;
+import com.tencent.qcloud.tim.uikit.config.CustomFaceConfig;
+import com.tencent.qcloud.tim.uikit.config.GeneralConfig;
+import com.tencent.qcloud.tim.uikit.config.TUIKitConfigs;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 
 import me.yokeyword.fragmentation.Fragmentation;
 import me.yokeyword.fragmentation.helper.ExceptionHandler;
 import okhttp3.OkHttpClient;
+
+import static com.guansu.management.config.config.apiKey;
+import static com.guansu.management.config.config.secretKey;
 
 /**
  * Created by dongyaoyao
@@ -38,13 +50,19 @@ public class MainApplication extends Application {
         return context;
     }
 
+    private static MainApplication instance;
+
+    public static MainApplication instance() {
+        return instance;
+    }
+
     @Override
     public void onCreate() {
         super.onCreate();
         context = this;
+        instance=this;
         init();
     }
-
     /**
      * 初始化
      */
@@ -64,9 +82,21 @@ public class MainApplication extends Application {
             @Override
             public void onError(OCRError error) {
                 // 调用失败，返回OCRError子类SDKError对象
+            }
+        }, getApplicationContext(), apiKey, secretKey);
+        MultiDex.install(this);
+        TUIKitConfigs configs = TUIKit.getConfigs();
+        configs.setSdkConfig(new TIMSdkConfig(GenerateTestUserSig.SDKAPPID));
+        configs.setCustomFaceConfig(new CustomFaceConfig());
+        configs.setGeneralConfig(new GeneralConfig());
+        TUIKit.init(this, GenerateTestUserSig.SDKAPPID, configs);
+        IMEventListener imEventListener = new IMEventListener() {
+            @Override
+            public void onNewMessages(List<TIMMessage> msgs) {
 
             }
-        }, getApplicationContext(), "BBrH4G7suL2PRq8DkoWoQEEA", "HWKnzlN2rjTSBU2qYVarwGohYdPNLr4z");
+        };
+        TUIKit.addIMEventListener(imEventListener);
     }
 
     private void initImagePicker() {

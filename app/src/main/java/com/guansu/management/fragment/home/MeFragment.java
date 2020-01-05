@@ -22,10 +22,12 @@ import com.guansu.management.common.OnClickListenerWrapper;
 import com.guansu.management.common.UserSharedPreferencesUtils;
 import com.guansu.management.fragment.MainFragment;
 import com.guansu.management.fragment.me.AdviceFragment;
+import com.guansu.management.fragment.me.DistributionFragment;
 import com.guansu.management.fragment.me.DistributionHomepageFragment;
 import com.guansu.management.fragment.me.EditFragment;
 import com.guansu.management.fragment.me.InstallFragment;
 import com.guansu.management.fragment.me.MyActivityFragment;
+import com.guansu.management.fragment.me.MyDistributionFragment;
 import com.guansu.management.fragment.payment.PaymentSuccessFragment;
 import com.guansu.management.utils.MessageEvent;
 

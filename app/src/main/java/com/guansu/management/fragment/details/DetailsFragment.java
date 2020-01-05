@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -41,9 +42,12 @@ import com.guansu.management.model.FriendModellml;
 import com.guansu.management.model.MessageModellml;
 import com.guansu.management.utils.KeyboardStateObserver;
 import com.guansu.management.wigdet.CommonTitleBar;
-
-import java.util.ArrayList;
-import java.util.Arrays;
+import com.tencent.imsdk.TIMFriendshipManager;
+import com.tencent.imsdk.TIMValueCallBack;
+import com.tencent.imsdk.friendship.TIMFriendRequest;
+import com.tencent.imsdk.friendship.TIMFriendResult;
+import com.tencent.imsdk.friendship.TIMFriendStatus;
+import com.tencent.qcloud.tim.uikit.utils.ToastUtil;
 import java.util.List;
 
 import butterknife.BindView;
@@ -142,12 +146,60 @@ public class DetailsFragment extends BaseFragment implements CommentAdapter.Item
         });
     }
     private void friendData() {
+        TIMFriendRequest timFriendRequest = new TIMFriendRequest(userSharedPreferencesUtils.getAccount());
+        timFriendRequest.setAddSource("android");
+        TIMFriendshipManager.getInstance().addFriend(timFriendRequest, new TIMValueCallBack<TIMFriendResult>() {
+            @Override
+            public void onError(int i, String s) {
+                ToastUtil.toastShortMessage("Error code = " + i + ", desc = " + s);
+            }
+            @Override
+            public void onSuccess(TIMFriendResult timFriendResult) {
+                switch (timFriendResult.getResultCode()) {
+                    case TIMFriendStatus.TIM_FRIEND_STATUS_SUCC:
+                        ToastUtil.toastShortMessage("成功");
+                        successData();
+                        break;
+                    case TIMFriendStatus.TIM_FRIEND_PARAM_INVALID:
+                        if (TextUtils.equals(timFriendResult.getResultInfo(), "Err_SNS_FriendAdd_Friend_Exist")) {
+                            ToastUtil.toastShortMessage("对方已是您的好友");
+                            successData();
+                            break;
+                        }
+                    case TIMFriendStatus.TIM_ADD_FRIEND_STATUS_SELF_FRIEND_FULL:
+                        ToastUtil.toastShortMessage("您的好友数已达系统上限");
+                        break;
+                    case TIMFriendStatus.TIM_ADD_FRIEND_STATUS_THEIR_FRIEND_FULL:
+                        ToastUtil.toastShortMessage("对方的好友数已达系统上限");
+                        break;
+                    case TIMFriendStatus.TIM_ADD_FRIEND_STATUS_IN_SELF_BLACK_LIST:
+                        ToastUtil.toastShortMessage("被加好友在自己的黑名单中");
+                        break;
+                    case TIMFriendStatus.TIM_ADD_FRIEND_STATUS_FRIEND_SIDE_FORBID_ADD:
+                        ToastUtil.toastShortMessage("对方已禁止加好友");
+                        break;
+                    case TIMFriendStatus.TIM_ADD_FRIEND_STATUS_IN_OTHER_SIDE_BLACK_LIST:
+                        ToastUtil.toastShortMessage("您已被被对方设置为黑名单");
+                        break;
+                    case TIMFriendStatus.TIM_ADD_FRIEND_STATUS_PENDING:
+                        ToastUtil.toastShortMessage("等待好友审核同意");
+                        break;
+                    default:
+                        ToastUtil.toastLongMessage(timFriendResult.getResultCode() + " " + timFriendResult.getResultInfo());
+                        break;
+                }
+
+            }
+        });
+    }
+
+    private void successData() {
         new FriendModellml().add_friend(userSharedPreferencesUtils.getUserid(),
                 activityDtoInfo.getUserId())
                 .safeSubscribe(new MyObserve<String>(this) {
                     @Override
                     protected void onSuccess(String s) {
-
+                        showToast("添加成功");
                     }
                 });
     }
@@ -270,7 +322,7 @@ public class DetailsFragment extends BaseFragment implements CommentAdapter.Item
                         imageViewPhoto.setOnClickListener(new OnClickListenerWrapper() {
                             @Override
                             protected void onSingleClick(View v) {
-                                start(PersonalFragment.newInstance());
+                                start(PersonalFragment.newInstance(userInfos.getId()+""));
                             }
                         });
                     }

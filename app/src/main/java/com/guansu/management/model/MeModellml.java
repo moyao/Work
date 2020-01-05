@@ -5,6 +5,7 @@ import com.guansu.management.api.ApiWrapper;
 import com.guansu.management.bean.DistributiopnHomepageBean;
 import com.guansu.management.bean.EditBean;
 import com.guansu.management.bean.MyDistributionBean;
+import com.guansu.management.bean.PaymentBean;
 import com.guansu.management.bean.orcode;
 import com.lzy.okgo.model.HttpMethod;
 import com.lzy.okgo.model.HttpParams;
@@ -37,6 +38,11 @@ public class MeModellml {
     public static final String ICON_UPLOAD = "/system/iconUpload";
     //意见反馈
     public static final String USER_SUGGEST = "/user/userSuggest";
+    //个人主页
+    public static final String USER_WEBPAGE = "/user/webPage";
+    //支付宝
+    public static final String USER_GENERATEORDERINFO = "/pay/aliPay/generateOrderInfo";
+    public static final String USER_ALIPAYAUTH = "/pay/aliPay/alipayAuth";
 
     public Observable<orcode> find_activity_byuserid(String userId) {
         HttpParams httpParams = new HttpParams();
@@ -112,5 +118,29 @@ public class MeModellml {
         Type type = new TypeToken<String>() {
         }.getType();
         return ApiWrapper.babyrequest(HttpMethod.POST, USER_SUGGEST, type, httpParams);
+    }
+
+    //我的主页
+    public Observable<EditBean> user_webpage(String userId, String visitorId) {
+        HttpParams httpParams = new HttpParams();
+        httpParams.put("visitorId", visitorId);
+        httpParams.put("userId", userId);
+        Type type = new TypeToken<EditBean>() {
+        }.getType();
+        return ApiWrapper.request(HttpMethod.GET, USER_WEBPAGE, type, httpParams);
+
+    }
+
+    /**
+     * 支付宝
+     */
+    public Observable<String> user_generateorderinfo(String userId, String body,String amount) {
+        Map<String,Object> httpParams = new HashMap<>();
+        httpParams.put("body", body);
+        httpParams.put("amount", amount);
+        httpParams.put("userId", userId);
+        Type type = new TypeToken<String>() {
+        }.getType();
+        return ApiWrapper.babyrequest(HttpMethod.POST, USER_GENERATEORDERINFO, type, httpParams);
     }
 }

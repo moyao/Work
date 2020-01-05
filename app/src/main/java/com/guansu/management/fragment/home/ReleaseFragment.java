@@ -1,6 +1,6 @@
 package com.guansu.management.fragment.home;
+
 import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -18,11 +18,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.google.gson.Gson;
 import com.guansu.management.R;
 import com.guansu.management.activity.CheckPermissionsActivity;
 import com.guansu.management.api.MyObserve;
-import com.guansu.management.base.BaseFragment;
 import com.guansu.management.bean.FileBean;
 import com.guansu.management.common.OnClickListenerWrapper;
 import com.guansu.management.common.UserSharedPreferencesUtils;
@@ -31,9 +31,7 @@ import com.guansu.management.config.Constants;
 import com.guansu.management.config.HttpConstants;
 import com.guansu.management.fragment.release.DetailsNextFragment;
 import com.guansu.management.model.HomeModellml;
-import com.guansu.management.model.MeModellml;
 import com.guansu.management.model.ReleaseModellml;
-import com.guansu.management.servise.LocationService;
 import com.guansu.management.ui.release.ImagePickerAdapter;
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.bean.ImageItem;
@@ -43,12 +41,16 @@ import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.HttpParams;
 import com.lzy.okgo.model.Response;
+
 import org.json.JSONArray;
 import org.json.JSONException;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
 import butterknife.BindView;
+
 /**
  * Created by dongyaoyao
  */
@@ -66,13 +68,13 @@ public class ReleaseFragment extends CheckPermissionsActivity implements
     private ImagePickerAdapter adapter;
     private int maxImgCount = 9;
     String userId;
-    List<String> imageList;
-    private String lat, lng, address;
+    private String lat, lng;
     private Dialog ExemptionDialog;
     private CheckBox checkbox;
     private Button butDetermine, butCancel;
     private WebView webView;
     final List<File> list = new ArrayList();
+
     public static ReleaseFragment newInstance(String title) {
         Bundle args = new Bundle();
         args.putString(Constants.KEY_TITLE, title);
@@ -86,13 +88,13 @@ public class ReleaseFragment extends CheckPermissionsActivity implements
                                   String address, String city, String province, String district) {
         this.lng = longitude;
         this.lat = latitude;
-        this.address = address;
     }
 
     @Override
     public int onSetLayoutId() {
         return R.layout.fragement_release;
     }
+
     @Override
     public void initView(View view) {
         initApi();
@@ -114,6 +116,7 @@ public class ReleaseFragment extends CheckPermissionsActivity implements
         mRvPics.setOnClickListener(this);
         showDialogExemption();
     }
+
     @Override
     public void bindEvent() {
         UserSharedPreferencesUtils userSharedPreferencesUtils = new UserSharedPreferencesUtils(getContext());
@@ -128,10 +131,11 @@ public class ReleaseFragment extends CheckPermissionsActivity implements
         mButRelease.setOnClickListener(new OnClickListenerWrapper() {
             @Override
             protected void onSingleClick(View v) {
-                if (selImageList.size()<1){
+                if (selImageList.size() < 1) {
                     showToast("请选择您要发布的图片");
                     return;
-                }if ("".equals(editTextContext.getText().toString())){
+                }
+                if ("".equals(editTextContext.getText().toString())) {
                     showToast("请输入您要发布的内容");
                     return;
                 }
@@ -143,9 +147,9 @@ public class ReleaseFragment extends CheckPermissionsActivity implements
                         if (!imageItem.path.startsWith("http"))
                             list.add(new File(imageItem.path));
                     }
-                    if ("true".equals(userSharedPreferencesUtils.getDetails())){
+                    if ("true".equals(userSharedPreferencesUtils.getDetails())) {
                         DataImage();
-                    }else {
+                    } else {
                         ExemptionDialog.show();
                     }
 
@@ -156,7 +160,7 @@ public class ReleaseFragment extends CheckPermissionsActivity implements
                         if (!imageItem.path.startsWith("http"))
                             list.add(new File(imageItem.path));
                     }
-                    startForResult(DetailsNextFragment.newInstance(selImageList,editTextContext.getText().toString()),0);
+                    startForResult(DetailsNextFragment.newInstance(selImageList, editTextContext.getText().toString()), 0);
                 }
             }
         });
@@ -192,8 +196,8 @@ public class ReleaseFragment extends CheckPermissionsActivity implements
         Gson gson = new Gson();
         String s = gson.toJson(jsonArray);
         try {
-            JSONArray jsonObject=new JSONArray(s);
-            new ReleaseModellml().user_imgand_textsave(userId, editTextContext.getText().toString(),lat,lng, jsonObject)
+            JSONArray jsonObject = new JSONArray(s);
+            new ReleaseModellml().user_imgand_textsave(userId, editTextContext.getText().toString(), lat, lng, jsonObject)
                     .subscribe(new MyObserve<String>(this) {
                         @Override
                         protected void onSuccess(String activityDtoInfo) {
@@ -256,26 +260,30 @@ public class ReleaseFragment extends CheckPermissionsActivity implements
             }
         }
     }
+
     @Override
     public void onClick(View v) {
 
     }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
+
     @Override
     public void onFragmentResult(int requestCode, int resultCode, Bundle data) {
         super.onFragmentResult(requestCode, resultCode, data);
-        if (requestCode == 0 && resultCode == RESULT_OK ) {
+        if (requestCode == 0 && resultCode == RESULT_OK) {
             // 在此通过Bundle data 获取返回的数据
-            if (data.getString("title").equals(0)){
+            if (data.getString("title").equals(0)) {
 
-            }else {
+            } else {
                 getActivity().onBackPressed();//销毁自己
             }
         }
     }
+
     private void showDialogExemption() {
         ExemptionDialog = new Dialog(getContext(), R.style.BaseDialogStyle);
         ExemptionDialog.setContentView(R.layout.dialog_login_exemption);

@@ -46,4 +46,5 @@
                             </string>
     <string name="Operate">运营商资格认证成功，现在您可以点击推广二维码\n使用分销功能了
                             </string>
+    <string name="error_auth_missing_partner_appid_rsa_private_target_id">错误: 需要配置PARTNER |APP_ID| RSA_PRIVATE| TARGET_ID</string>
 </resources>

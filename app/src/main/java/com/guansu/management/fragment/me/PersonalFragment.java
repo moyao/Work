@@ -9,7 +9,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.guansu.management.R;
+import com.guansu.management.api.MyObserve;
 import com.guansu.management.base.BaseFragment;
+import com.guansu.management.bean.EditBean;
+import com.guansu.management.common.UserSharedPreferencesUtils;
+import com.guansu.management.config.Constants;
+import com.guansu.management.model.MeModellml;
 
 import butterknife.BindView;
 
@@ -45,10 +50,11 @@ public class PersonalFragment extends BaseFragment {
     TextView textViewLocal;
     @BindView(R.id.textViewTime)
     TextView textViewTime;
-
-    public static PersonalFragment newInstance() {
+    UserSharedPreferencesUtils userSharedPreferencesUtils;
+    public static PersonalFragment newInstance(String visitorId) {
         Bundle args = new Bundle();
         PersonalFragment fragment = new PersonalFragment();
+        args.putString(Constants.KEY_TITLE, visitorId);
         fragment.setArguments(args);
         return fragment;
     }
@@ -59,12 +65,21 @@ public class PersonalFragment extends BaseFragment {
 
     @Override
     public void initView(View view) {
+        initApi();
         setTitle("个人主页");
         mTitlebar.showStatusBar(true);
         mTitlebar.setBackgroundResource(R.drawable.but_release);
     }
     @Override
     public void bindEvent() {
+        userSharedPreferencesUtils = new UserSharedPreferencesUtils(getContext());
+        new MeModellml().user_webpage(userSharedPreferencesUtils.getUserid(),
+                getArguments().getString(Constants.KEY_TITLE)).safeSubscribe(new MyObserve<EditBean>(this) {
+            @Override
+            protected void onSuccess(EditBean editBean) {
+
+            }
+        });
         Glide.with(getContext()).load("").into(imageViewPhoto);
         textViewMessage.setText("主人寄语："+"");
         textViewSex.setText("性别："+"");
@@ -76,6 +91,7 @@ public class PersonalFragment extends BaseFragment {
         textViewInterest.setText("兴趣爱好");
         textViewLocal.setText("想去的地方");
         textViewTime.setText("注册时间");
+
     }
 
     @Override

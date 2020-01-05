@@ -295,8 +295,6 @@ public class PickValueView extends LinearLayout implements NumberPicker.OnValueC
         picker.setValue(DATA_SIZE / 2);
         picker.postInvalidate();
     }
-
-
     @Override
     public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
         if (picker == mNpLeft) {
@@ -310,24 +308,19 @@ public class PickValueView extends LinearLayout implements NumberPicker.OnValueC
             mSelectedChangeListener.onSelected(this, mShowingLeft[DATA_SIZE / 2], mShowingMiddle[DATA_SIZE / 2], mShowingRight[DATA_SIZE / 2]);
         }
     }
-
     /**
      * 设置数据--单列数据
-     *
      * @param leftValues
      * @param mDefaultLeftValue
      */
     public void setValueData(Object[] leftValues, Object mDefaultLeftValue) {
-        this.mViewCount = 0;
+        this.mViewCount = 1;
         this.mLeftValues = leftValues;
         this.mDefaultLeftValue = mDefaultLeftValue;
-
         initViewAndPicker();
     }
-
     /**
      * 设置数据--两列数据
-     *
      * @param leftValues
      * @param mDefaultLeftValue
      * @param middleValues
@@ -337,10 +330,8 @@ public class PickValueView extends LinearLayout implements NumberPicker.OnValueC
         this.mViewCount = 2;
         this.mLeftValues = leftValues;
         this.mDefaultLeftValue = mDefaultLeftValue;
-
         this.mMiddleValues = middleValues;
         this.mDefaultMiddleValue = defaultMiddleValue;
-
         initViewAndPicker();
     }
 

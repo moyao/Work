@@ -1,42 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-    <TextView
-        android:id="@+id/textViewMessageLeft"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="张三你好，请问我们的活动几点集合？"
-        android:background="@drawable/text_message_item"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_margin="10dp"
-        android:padding="20dp"/>
-    <TextView
-        android:id="@+id/textViewTimeLeft"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="2019年11月29日"
-        app:layout_constraintTop_toBottomOf="@id/textViewMessageLeft"
-        app:layout_constraintStart_toStartOf="@id/textViewMessageLeft"
-        android:layout_marginTop="10dp"/>
-    <TextView
-        android:id="@+id/textViewMessageRight"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="12月15号在小寨赛格旁必胜客^_^"
-        android:background="@drawable/text_message_item_right"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textViewTimeLeft"
-        android:layout_margin="10dp"
-        android:padding="20dp"/>
-    <TextView
-        android:id="@+id/textViewTimeRight"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="2019年11月29日"
-        app:layout_constraintTop_toBottomOf="@id/textViewMessageRight"
-        app:layout_constraintRight_toRightOf="@id/textViewMessageRight"
-        android:layout_marginTop="10dp"/>
-</androidx.constraintlayout.widget.ConstraintLayout>
+    android:layout_height="match_parent">
+
+    <com.tencent.qcloud.tim.uikit.modules.chat.ChatLayout
+        android:id="@+id/chat_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</LinearLayout>

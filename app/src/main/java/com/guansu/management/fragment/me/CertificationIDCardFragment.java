@@ -16,6 +16,7 @@ import com.baidu.ocr.ui.camera.CameraNativeHelper;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.guansu.management.R;
+import com.guansu.management.activity.FaceLivenessExpActivity;
 import com.guansu.management.base.BaseFragment;
 import com.guansu.management.common.OnClickListenerWrapper;
 import com.guansu.management.config.Constant;
@@ -24,7 +25,6 @@ import org.apache.commons.lang3.StringUtils;
 import java.io.File;
 import butterknife.BindView;
 import static com.mob.tools.utils.DeviceHelper.getApplication;
-
 /**
  * @date:
  * @author: dongyaoyao

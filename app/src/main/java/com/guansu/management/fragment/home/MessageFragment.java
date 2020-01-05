@@ -25,6 +25,8 @@ import com.guansu.management.model.FriendModellml;
 import com.guansu.management.wigdet.recyclerview.EndLessOnScrollListener;
 import com.guansu.management.wigdet.recyclerview.OnItemClickListener;
 import com.guansu.management.wigdet.recyclerview.RecyclerItemClickListener;
+import com.tencent.imsdk.TIMConversationType;
+import com.tencent.qcloud.tim.uikit.modules.chat.base.ChatInfo;
 
 import java.util.List;
 
@@ -54,7 +56,7 @@ public class MessageFragment extends BaseFragment {
     private EndLessOnScrollListener endLessOnScrollListener;
     private List<UserInfo> userInfos;
     UserSharedPreferencesUtils userSharedPreferencesUtils;
-
+    List<MessageBean> ListmessageBeans;
     public static MessageFragment newInstance() {
         Bundle args = new Bundle();
         MessageFragment fragment = new MessageFragment();
@@ -99,8 +101,13 @@ public class MessageFragment extends BaseFragment {
                     @Override
                     protected void onSuccess(List<MessageBean> messageBeans) {
                         showPage();
-                        messageAdapter = new MessageAdapter(getContext(), messageBeans, status);
-                        rvListMessage.setAdapter(messageAdapter);
+                        if (0==messageBeans.size()){
+                            showNoData();
+                        }else {
+                            ListmessageBeans=messageBeans;
+                            messageAdapter = new MessageAdapter(getContext(), messageBeans, status);
+                            rvListMessage.setAdapter(messageAdapter);
+                        }
                     }
                     @Override
                     public void onError(Throwable e) {
@@ -112,7 +119,6 @@ public class MessageFragment extends BaseFragment {
                         }
                     }
                 });
-
     }
 
     private class ListOnItemClickListener implements OnItemClickListener {
@@ -120,10 +126,14 @@ public class MessageFragment extends BaseFragment {
         public void onItemClick(View view, int position) {
             switch (status) {
                 case 1:
-                    ((MainFragment) getParentFragment()).start(PersonalFragment.newInstance());
+                    ((MainFragment) getParentFragment()).start(PersonalFragment.newInstance(""));
                     break;
                 case 2:
-                    ((MainFragment) getParentFragment()).start(DetailsMessageFragment.newInstance());
+                    ChatInfo chatInfo = new ChatInfo();
+                    chatInfo.setType(TIMConversationType.C2C);
+                    chatInfo.setId(ListmessageBeans.get(position).getMobileNumber()+"");
+                    chatInfo.setChatName(ListmessageBeans.get(position).getMobileNumber()+"");
+                    ((MainFragment) getParentFragment()).start(DetailsMessageFragment.newInstance(chatInfo));
                     break;
             }
         }
@@ -148,4 +158,8 @@ public class MessageFragment extends BaseFragment {
             Data();
         }
     };
+    @Override
+    protected void retryloading() {
+        Data();
+    }
 }

@@ -1,11 +1,6 @@
+/*
 package com.guansu.management.fragment.me;
 import android.os.Bundle;
-import com.baidu.idl.face.platform.FaceConfig;
-import com.baidu.idl.face.platform.FaceEnvironment;
-import com.baidu.idl.face.platform.FaceSDKManager;
-import com.baidu.idl.face.platform.FaceStatusEnum;
-import com.baidu.idl.face.platform.LivenessTypeEnum;
-import com.baidu.idl.face.platform.ui.FaceLivenessActivity;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -13,7 +8,7 @@ import java.util.List;
 public class FaceLivenessExpActivity extends FaceLivenessActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        FaceSDKManager.getInstance().initialize(this, "wisdom-face-android", "idl-license.face-android-debug");
+        FaceSDKManager.getInstance().initialize(this, "Golang-face-android", "idl-license.face-android");
         setFaceConfig();
         super.onCreate(savedInstanceState);
     }
@@ -52,7 +47,8 @@ public class FaceLivenessExpActivity extends FaceLivenessActivity {
     }
 
     private void upload(final String bestImage) {
-       /* UserSharedPreferencesUtils userSharedPreferencesUtils = new UserSharedPreferencesUtils(this);
+       */
+/* UserSharedPreferencesUtils userSharedPreferencesUtils = new UserSharedPreferencesUtils(this);
         final HttpParams params = new HttpParams();
         params.put("token", Base64.encode(userSharedPreferencesUtils.getToken()));
         params.put("appFlag", Base64.encode("1"));
@@ -75,10 +71,12 @@ public class FaceLivenessExpActivity extends FaceLivenessActivity {
                         certification(path, getIntent().getStringExtra("url"));
                     }
                 });
-*/
+*//*
+
     }
 
- /*   private void certification(String path, String url) {
+ */
+/*   private void certification(String path, String url) {
         UserSharedPreferencesUtils userSharedPreferencesUtils = new UserSharedPreferencesUtils(this);
         final HttpParams params = new HttpParams();
         params.put("token", Base64.encode(userSharedPreferencesUtils.getToken()));
@@ -113,5 +111,7 @@ public class FaceLivenessExpActivity extends FaceLivenessActivity {
                         finish();
                     }
                 });
-    }*/
+    }*//*
+
 }
+*/

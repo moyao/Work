@@ -16,12 +16,12 @@ public class Payment {
     /**
      * 用于支付宝账户登录授权业务的入参 pid。
      */
-    public static final String PID = "";
+    public static final String PID = "2088102179897877";
 
     /**
      * 用于支付宝账户登录授权业务的入参 target_id。
      */
-    public static final String TARGET_ID = "";
+    public static final String TARGET_ID = "dsddd";
 
     /**
      * pkcs8 格式的商户私钥。

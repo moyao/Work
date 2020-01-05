@@ -1,7 +1,5 @@
 package com.guansu.management.bean;
 
-import java.util.List;
-
 /**
  * @date:
  * @author: dongyaoyao
