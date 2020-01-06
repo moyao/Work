@@ -71,6 +71,7 @@ public class NewHomeFragment extends BaseFragment implements NewHomeAdapter.Item
         } else if (status == Constant.VIEW_CIRCLE) {
             tag = 2;
         }
+        page=1;
         newHomeAdapter = new NewHomeAdapter(homeBeanList, getContext(), page, tag);
         rvListMessage.setAdapter(newHomeAdapter);
         ReporteNameData(1, tag);
@@ -84,7 +85,9 @@ public class NewHomeFragment extends BaseFragment implements NewHomeAdapter.Item
         endLessOnScrollListener = new EndLessOnScrollListener(layoutManager) {
             @Override
             public void onLoadMore(int currentPage) {
-                ReporteNameData(++page, tag);
+                page=page+1;
+                ReporteNameData(page, tag);
+
             }
         };
         rvListMessage.addOnScrollListener(endLessOnScrollListener);
@@ -94,12 +97,14 @@ public class NewHomeFragment extends BaseFragment implements NewHomeAdapter.Item
     }
 
     private void ReporteNameData(int currentPage, int tag) {
-        showLoadingPage();
+        if (1 == currentPage) {
+            showLoadingPage();
+        }
         new HomeModellml().queryactivityinfopage(currentPage,tag).subscribe(new MyObserve<List<HomeBean>>(this) {
             @Override
             protected void onSuccess(List<HomeBean> homeBeans) {
-                showPage();
                 if (1 == currentPage) {
+                    showPage();
                     endLessOnScrollListener.refresh();
                     newHomeAdapter.setmList(homeBeans, 1);
                 } else {
@@ -153,6 +158,7 @@ public class NewHomeFragment extends BaseFragment implements NewHomeAdapter.Item
     }
     @Override
     protected void retryloading() {
+        page=1;
         ReporteNameData(1, tag);
     }
 }

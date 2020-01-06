@@ -2,7 +2,10 @@ package com.guansu.management.helper;
 
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.InsetDrawable;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +17,10 @@ import androidx.annotation.Nullable;
 import com.google.gson.Gson;
 import com.guansu.management.R;
 import com.tencent.imsdk.TIMCustomElem;
+import com.tencent.imsdk.TIMFriendshipManager;
+import com.tencent.imsdk.TIMManager;
+import com.tencent.imsdk.TIMUserProfile;
+import com.tencent.openqq.protocol.imsdk.msg;
 import com.tencent.qcloud.tim.uikit.modules.chat.ChatLayout;
 import com.tencent.qcloud.tim.uikit.modules.chat.base.BaseInputFragment;
 import com.tencent.qcloud.tim.uikit.modules.chat.layout.input.InputLayout;
@@ -23,6 +30,10 @@ import com.tencent.qcloud.tim.uikit.modules.chat.layout.message.holder.ICustomMe
 import com.tencent.qcloud.tim.uikit.modules.chat.layout.message.holder.IOnCustomMessageDrawListener;
 import com.tencent.qcloud.tim.uikit.modules.message.MessageInfo;
 import com.tencent.qcloud.tim.uikit.modules.message.MessageInfoUtil;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import static com.guansu.management.helper.CustomMessage.JSON_VERSION_1_HELLOTIM;
 import static com.guansu.management.helper.CustomMessage.JSON_VERSION_3_ANDROID_IOS_TRTC;
 
@@ -58,11 +69,11 @@ public class ChatLayoutHelper {
 //        messageLayout.setBackground(new ColorDrawable(0xFFEFE5D4));
 //        ////// 设置头像 //////
 //        // 设置默认头像，默认与朋友与自己的头像相同
-//        messageLayout.setAvatar(R.drawable.ic_more_file);
+        messageLayout.setAvatar(R.drawable.ic_more_file);
 //        // 设置头像圆角
 //        messageLayout.setAvatarRadius(50);
 //        // 设置头像大小
-//        messageLayout.setAvatarSize(new int[]{48, 48});
+        messageLayout.setAvatarSize(new int[]{0, 0});
 //
 //        ////// 设置昵称样式（对方与自己的样式保持一致）//////
 //        messageLayout.setNameFontSize(12);
@@ -70,10 +81,12 @@ public class ChatLayoutHelper {
 //
 //        ////// 设置气泡 ///////
 //        // 设置自己聊天气泡的背景
-//        messageLayout.setRightBubble(new ColorDrawable(0xFFCCE4FC));
+//        messageLayout.setRightBubble(new ColorDrawable(0xFFF2B3));
 //        // 设置朋友聊天气泡的背景
 //        messageLayout.setLeftBubble(new ColorDrawable(0xFFE4E7EB));
-//
+        messageLayout.setRightBubble(mContext.getResources().getDrawable(R.drawable.text_message_item_right));
+// 设置朋友聊天气泡的背景
+        messageLayout.setLeftBubble(mContext.getResources().getDrawable(R.drawable.text_message_item));
 //        ////// 设置聊天内容 //////
 //        // 设置聊天内容字体字体大小，朋友和自己用一种字体大小
 //        messageLayout.setChatContextFontSize(15);
@@ -168,7 +181,7 @@ public class ChatLayoutHelper {
 //        inputLayout.addAction(videoCall);
 
         // 增加一个欢迎提示富文本
-        InputMoreActionUnit unit = new InputMoreActionUnit();
+       /* InputMoreActionUnit unit = new InputMoreActionUnit();
         unit.setIconResId(R.drawable.ssdk_country_search_icon);
         unit.setTitleId(R.string.accept);
         unit.setOnClickListener(new View.OnClickListener() {
@@ -181,7 +194,7 @@ public class ChatLayoutHelper {
                 layout.sendMessage(info, false);
             }
         });
-        inputLayout.addAction(unit);
+        inputLayout.addAction(unit);*/
     }
 
 /*    public static class CustomInputFragment extends BaseInputFragment {

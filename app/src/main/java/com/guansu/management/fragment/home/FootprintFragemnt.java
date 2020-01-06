@@ -1,4 +1,5 @@
 package com.guansu.management.fragment.home;
+
 import android.app.Dialog;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -8,8 +9,10 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.guansu.management.R;
 import com.guansu.management.activity.CheckPermissionsActivity;
 import com.guansu.management.api.MyObserve;
@@ -18,8 +21,11 @@ import com.guansu.management.common.OnClickListenerWrapper;
 import com.guansu.management.common.UserSharedPreferencesUtils;
 import com.guansu.management.fragment.foot.FootAdapter;
 import com.guansu.management.model.FootModellml;
+
 import java.util.List;
+
 import butterknife.BindView;
+
 /**
  * @author: dongyaoyao
  */
@@ -37,7 +43,7 @@ public class FootprintFragemnt extends CheckPermissionsActivity {
     @BindView(R.id.textView1)
     TextView textView1;
     @BindView(R.id.imageView)
-    ImageView imageView;
+    ImageView BgimageView;
     @BindView(R.id.textViewGps)
     TextView textViewGps;
     private FootAdapter footAdapter;
@@ -137,6 +143,7 @@ public class FootprintFragemnt extends CheckPermissionsActivity {
                 dialog.show();
             }
         });
+
         showLoadingDialog("加载中。。。。");
         new FootModellml().getVerify(userSharedPreferencesUtils.getUserid())
                 .safeSubscribe(new MyObserve<List<FootBean>>(this) {
@@ -146,18 +153,24 @@ public class FootprintFragemnt extends CheckPermissionsActivity {
                         if (null != footBean && footBean.size() > 0) {
                             view1.setVisibility(View.GONE);
                             textView.setVisibility(View.GONE);
-                            imageView.setVisibility(View.GONE);
+                            BgimageView.setVisibility(View.GONE);
                             textView1.setVisibility(View.GONE);
                             footAdapter = new FootAdapter(getContext(), footBean);
                             recyclerFoot.setAdapter(footAdapter);
                         } else {
                             view1.setVisibility(View.VISIBLE);
                             textView.setVisibility(View.VISIBLE);
-                            imageView.setVisibility(View.VISIBLE);
+                            BgimageView.setVisibility(View.VISIBLE);
                             textView1.setVisibility(View.VISIBLE);
                         }
                     }
                 });
+        BgimageView.setOnClickListener(new OnClickListenerWrapper() {
+            @Override
+            protected void onSingleClick(View v) {
+                dialog.show();
+            }
+        });
     }
 
     @Override

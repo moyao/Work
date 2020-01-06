@@ -127,7 +127,11 @@ public class MeFragment extends BaseFragment {
         textViewExtension.setOnClickListener(new OnClickListenerWrapper() {
             @Override
             protected void onSingleClick(View v) {
-                ((MainFragment) getParentFragment()).start(DistributionHomepageFragment.newInstance());
+                if ("普通用户".equals(userSharedPreferencesUtils.getLevelName())){
+                    ((MainFragment) getParentFragment()).start(DistributionFragment.newInstance());
+                }else {
+                    ((MainFragment) getParentFragment()).start(DistributionHomepageFragment.newInstance());
+                }
             }
         });
         tvSetting.setOnClickListener(new OnClickListenerWrapper() {

@@ -12,6 +12,7 @@ import com.guansu.management.R;
 import com.guansu.management.api.MyObserve;
 import com.guansu.management.base.BaseFragment;
 import com.guansu.management.bean.EditBean;
+import com.guansu.management.bean.PersonalBean;
 import com.guansu.management.common.UserSharedPreferencesUtils;
 import com.guansu.management.config.Constants;
 import com.guansu.management.model.MeModellml;
@@ -51,6 +52,7 @@ public class PersonalFragment extends BaseFragment {
     @BindView(R.id.textViewTime)
     TextView textViewTime;
     UserSharedPreferencesUtils userSharedPreferencesUtils;
+
     public static PersonalFragment newInstance(String visitorId) {
         Bundle args = new Bundle();
         PersonalFragment fragment = new PersonalFragment();
@@ -58,6 +60,7 @@ public class PersonalFragment extends BaseFragment {
         fragment.setArguments(args);
         return fragment;
     }
+
     @Override
     public int onSetLayoutId() {
         return R.layout.fragement_personal_homepage;
@@ -70,28 +73,40 @@ public class PersonalFragment extends BaseFragment {
         mTitlebar.showStatusBar(true);
         mTitlebar.setBackgroundResource(R.drawable.but_release);
     }
+
     @Override
     public void bindEvent() {
         userSharedPreferencesUtils = new UserSharedPreferencesUtils(getContext());
         new MeModellml().user_webpage(userSharedPreferencesUtils.getUserid(),
-                getArguments().getString(Constants.KEY_TITLE)).safeSubscribe(new MyObserve<EditBean>(this) {
+                getArguments().getString(Constants.KEY_TITLE)).safeSubscribe(new MyObserve<PersonalBean>(this) {
             @Override
-            protected void onSuccess(EditBean editBean) {
+            protected void onSuccess(PersonalBean personalBean) {
+                Glide.with(getContext()).load(personalBean.getProfileImageUrl()).into(imageViewPhoto);
+                textViewMessage.setText("主人寄语：" + personalBean.getMessage());
+                if ("Auth_".equals(personalBean.getAuth())) {
+                    textViewRealName.setText("已认证");
+                } else {
+                    textViewRealName.setText("未认证");
+                }
+                if ("MALE".equals(personalBean.getSex())) {
+                    textViewSex.setText("性别：" + "男");
+                } else {
+                    textViewSex.setText("性别：" + "女");
+                }
 
+                textViewAge.setText("年龄：" + "");
+                textViewNumber.setText("" + "人看过");
+                textViewEducation.setText(personalBean.getEducation());
+                if ("SINGLE".equals(personalBean.getSingle())) {
+                    textViewSingle.setText("是");
+                } else {
+                    textViewSingle.setText("否");
+                }
+                textViewInterest.setText(personalBean.getHobby());
+                textViewLocal.setText(personalBean.getWantToGo());
+                textViewTime.setText("注册时间");
             }
         });
-        Glide.with(getContext()).load("").into(imageViewPhoto);
-        textViewMessage.setText("主人寄语："+"");
-        textViewSex.setText("性别："+"");
-        textViewAge.setText("年龄："+"");
-        textViewNumber.setText(""+"人看过");
-        textViewRealName.setText("认证");
-        textViewEducation.setText("教育");
-        textViewSingle.setText("是否单身");
-        textViewInterest.setText("兴趣爱好");
-        textViewLocal.setText("想去的地方");
-        textViewTime.setText("注册时间");
-
     }
 
     @Override

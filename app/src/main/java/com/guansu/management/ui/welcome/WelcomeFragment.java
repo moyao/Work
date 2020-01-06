@@ -1,5 +1,7 @@
 package com.guansu.management.ui.welcome;
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Message;
@@ -9,8 +11,14 @@ import com.guansu.management.R;
 import com.guansu.management.base.BaseFragment;
 import com.guansu.management.common.OnClickListenerWrapper;
 import com.guansu.management.common.UserSharedPreferencesUtils;
+import com.guansu.management.config.Constants;
 import com.guansu.management.fragment.LoginFragment;
 import com.guansu.management.fragment.MainFragment;
+import com.guansu.management.helper.GenerateTestUserSig;
+import com.guansu.management.utils.StringHandler;
+import com.tencent.qcloud.tim.uikit.TUIKit;
+import com.tencent.qcloud.tim.uikit.base.IUIKitCallBack;
+
 import butterknife.BindView;
 
 /**
@@ -60,9 +68,24 @@ public class WelcomeFragment extends BaseFragment<WelcomeContract.Presenter>
                 @Override
                 protected void onSingleClick(View v) {
                     EndTime();
-
                 }
             });
+            UserSharedPreferencesUtils userSharedPreferencesUtils = new UserSharedPreferencesUtils(getContext());
+            if (!StringHandler.hasNull(userSharedPreferencesUtils.getUserid())) {
+                String userSig = GenerateTestUserSig.genTestUserSig(userSharedPreferencesUtils.getAccount());
+                // identifier 为用户名，userSig 为用户登录凭证
+                TUIKit.login(userSharedPreferencesUtils.getAccount(), userSig, new IUIKitCallBack() {
+                    @Override
+                    public void onSuccess(Object data) {
+                        showToast("login failed. code: ");
+                    }
+
+                    @Override
+                    public void onError(String module, int errCode, String errMsg) {
+                        showToast("login failed. code: " + errCode + " errmsg: " + errMsg);
+                    }
+                });
+            }
     }
 
     private void EndTime() {

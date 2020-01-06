@@ -22,9 +22,10 @@ public class DetailsMessageFragment extends BaseFragment {
     ChatLayout mChatLayout;
     private TitleBarLayout mTitleBar;
     private ChatInfo mChatInfo;
-    public static DetailsMessageFragment newInstance(ChatInfo chatInfo) {
+    public static DetailsMessageFragment newInstance(ChatInfo chatInfo,String NickName) {
         Bundle args = new Bundle();
         args.putSerializable(Constants.CHAT_INFO, chatInfo);
+        args.putString(Constants.KEY_TITLE,NickName);
         DetailsMessageFragment fragment = new DetailsMessageFragment();
         fragment.setArguments(args);
         return fragment;
@@ -36,7 +37,7 @@ public class DetailsMessageFragment extends BaseFragment {
 
     @Override
     public void initView(View view) {
-        setTitle("消息详情");
+        setTitle(getArguments().getString(Constants.KEY_TITLE));
         mTitlebar.showStatusBar(true);
         mTitlebar.setBackgroundResource(R.drawable.but_release);
     }

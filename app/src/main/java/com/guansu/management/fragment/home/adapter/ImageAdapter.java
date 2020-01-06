@@ -37,7 +37,6 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.SelectedPicV
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 new ImageDialog.Builder((FragmentActivity) mcontext,imagesListBeans,position).show();
             }
         });

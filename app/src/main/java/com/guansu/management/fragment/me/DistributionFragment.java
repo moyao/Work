@@ -80,7 +80,6 @@ public class DistributionFragment extends BaseFragment {
         fragment.setArguments(args);
         return fragment;
     }
-
     @SuppressLint("HandlerLeak")
     private Handler mHandler = new Handler() {
         @SuppressWarnings("unused")
@@ -97,11 +96,11 @@ public class DistributionFragment extends BaseFragment {
                 // 该笔订单是否真实支付成功，需要依赖服务端的异步通知。
                 showToast(getString(R.string.pay_success) + payResult);
                 start(PaymentSuccessFragment.newInstance());
+                getActivity().onBackPressed();//销毁自己
             } else {
                 // 该笔订单真实的支付结果，需要依赖服务端的异步通知。
                 showToast(getString(R.string.pay_failed) + payResult);
             }
-
         }
     };
 
@@ -146,9 +145,17 @@ public class DistributionFragment extends BaseFragment {
     }
 
     private void getData() {
+        String body,amount;
+        if (checkGolden.isChecked()){
+            body="金卡会员";
+            amount="399";
+        }else {
+            body="运营商";
+            amount="19999";
+        }
         Map<String, Object> httpParams = new HashMap<>();
-        httpParams.put("body", "金卡会员");
-        httpParams.put("amount", "399");
+        httpParams.put("body", body);
+        httpParams.put("amount", amount);
         httpParams.put("userId", userSharedPreferencesUtils.getUserid());
         JSONObject jsonObject = new JSONObject(httpParams);
         OkGo.<String>post(HttpConstants.BASE_URL + MeModellml.USER_GENERATEORDERINFO)
@@ -178,16 +185,21 @@ public class DistributionFragment extends BaseFragment {
                                 // 必须异步调用
                                 Thread payThread = new Thread(payRunnable);
                                 payThread.start();
+                            }else {
+                                showToast(jsonObject.getString("code"));
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
+                    }
 
+                    @Override
+                    public void onError(Response<String> response) {
+                        super.onError(response);
+                        showToast("服务器异常，请稍后重试！！！！");
                     }
                 });
-
     }
-
     @Override
     public boolean canSwipeBack() {
         return false;

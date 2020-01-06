@@ -14,7 +14,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
-
 import com.alipay.sdk.app.AuthTask;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
@@ -31,13 +30,11 @@ import com.guansu.management.paymentmoney.AuthResult;
 import com.guansu.management.wigdet.CommonTitleBar;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
+import com.lzy.okgo.model.HttpParams;
 import com.lzy.okgo.model.Response;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.Map;
-
 import butterknife.BindView;
 
 /**
@@ -92,11 +89,11 @@ public class DistributionHomepageFragment extends BaseFragment {
         fragment.setArguments(args);
         return fragment;
     }
-
     @Override
     public int onSetLayoutId() {
         return R.layout.fragement_my_distribution;
     }
+
     @Override
     public void initView(View view) {
         initApi();
@@ -112,15 +109,14 @@ public class DistributionHomepageFragment extends BaseFragment {
             }
         });
     }
-
     private void getData() {
-        OkGo.<String>get(HttpConstants.BASE_URL+MeModellml.USER_ALIPAYAUTH)
+        OkGo.<String>get(HttpConstants.BASE_URL + MeModellml.USER_ALIPAYAUTH)
                 .tag(this).execute(new StringCallback() {
             @Override
             public void onSuccess(Response<String> response) {
                 JSONObject jsonObject = null;
                 try {
-                    jsonObject=new JSONObject(response.body());
+                    jsonObject = new JSONObject(response.body());
                     if ("0000000".equals(jsonObject.getString("code"))) {
                         String data = jsonObject.getString("data");
                         Runnable authRunnable = new Runnable() {
@@ -173,8 +169,29 @@ public class DistributionHomepageFragment extends BaseFragment {
                 start(MyDistributionFragment.newInstance());
             }
         });
-    }
 
+        HttpParams httpParams = new HttpParams();
+        httpParams.put("userId", userSharedPreferencesUtils.getUserid());
+        OkGo.<String>get(HttpConstants.BASE_URL + MeModellml.USER_ALIPAYAUTH)
+                .tag(this)
+                .params(httpParams)
+                .execute(new StringCallback() {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+
+                        JSONObject jsonObject = null;
+                        try {
+                            jsonObject = new JSONObject(response.body());
+                            if ("0000000".equals(jsonObject.getString("code"))) {
+                            }else {
+                                showToast("请先绑定支付信息");
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+    }
     @Override
     public boolean canSwipeBack() {
         return false;
@@ -209,7 +226,8 @@ public class DistributionHomepageFragment extends BaseFragment {
         lp.alpha = bgAlpha;
         (getActivity()).getWindow().setAttributes(lp);
     }
-    class poponDismissListener implements PopupWindow.OnDismissListener{
+
+    class poponDismissListener implements PopupWindow.OnDismissListener {
         @Override
         public void onDismiss() {
             setBackgroundAlpha(1f);

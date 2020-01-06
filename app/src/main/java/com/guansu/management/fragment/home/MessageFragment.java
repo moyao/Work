@@ -35,7 +35,7 @@ import butterknife.BindView;
 /**
  * @author: dongyaoyao
  */
-public class MessageFragment extends BaseFragment {
+public class MessageFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener {
     @BindView(R.id.rbComment)
     RadioButton rbComment;
     @BindView(R.id.rbFriend)
@@ -57,16 +57,19 @@ public class MessageFragment extends BaseFragment {
     private List<UserInfo> userInfos;
     UserSharedPreferencesUtils userSharedPreferencesUtils;
     List<MessageBean> ListmessageBeans;
+
     public static MessageFragment newInstance() {
         Bundle args = new Bundle();
         MessageFragment fragment = new MessageFragment();
         fragment.setArguments(args);
         return fragment;
     }
+
     @Override
     public int onSetLayoutId() {
         return R.layout.fragement_message;
     }
+
     @Override
     public void initView(View view) {
         initApi();
@@ -84,9 +87,9 @@ public class MessageFragment extends BaseFragment {
         rvListMessage.addOnItemTouchListener(new RecyclerItemClickListener(
                 new ListOnItemClickListener()));
         setLoadingContentView(layoutSwipeRefresh);
+        layoutSwipeRefresh.setOnRefreshListener(this);
         rgStatus.setOnCheckedChangeListener(ChangeRadioGroup);
         rgStatus.check(rbComment.getId());
-
     }
 
     @Override
@@ -101,14 +104,15 @@ public class MessageFragment extends BaseFragment {
                     @Override
                     protected void onSuccess(List<MessageBean> messageBeans) {
                         showPage();
-                        if (0==messageBeans.size()){
+                        if (0 == messageBeans.size()) {
                             showNoData();
-                        }else {
-                            ListmessageBeans=messageBeans;
+                        } else {
+                            ListmessageBeans = messageBeans;
                             messageAdapter = new MessageAdapter(getContext(), messageBeans, status);
                             rvListMessage.setAdapter(messageAdapter);
                         }
                     }
+
                     @Override
                     public void onError(Throwable e) {
                         super.onError(e);
@@ -131,9 +135,9 @@ public class MessageFragment extends BaseFragment {
                 case 2:
                     ChatInfo chatInfo = new ChatInfo();
                     chatInfo.setType(TIMConversationType.C2C);
-                    chatInfo.setId(ListmessageBeans.get(position).getMobileNumber()+"");
-                    chatInfo.setChatName(ListmessageBeans.get(position).getMobileNumber()+"");
-                    ((MainFragment) getParentFragment()).start(DetailsMessageFragment.newInstance(chatInfo));
+                    chatInfo.setId(ListmessageBeans.get(position).getMobileNumber() + "");
+                    chatInfo.setChatName(ListmessageBeans.get(position).getMobileNumber() + "");
+                    ((MainFragment) getParentFragment()).start(DetailsMessageFragment.newInstance(chatInfo, ListmessageBeans.get(position).getNickname()));
                     break;
             }
         }
@@ -158,8 +162,15 @@ public class MessageFragment extends BaseFragment {
             Data();
         }
     };
+
     @Override
     protected void retryloading() {
+        Data();
+    }
+
+    @Override
+    public void onRefresh() {
+        layoutSwipeRefresh.setRefreshing(false);
         Data();
     }
 }

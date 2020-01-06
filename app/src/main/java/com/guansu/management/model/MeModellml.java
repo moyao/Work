@@ -5,13 +5,10 @@ import com.guansu.management.api.ApiWrapper;
 import com.guansu.management.bean.DistributiopnHomepageBean;
 import com.guansu.management.bean.EditBean;
 import com.guansu.management.bean.MyDistributionBean;
-import com.guansu.management.bean.PaymentBean;
+import com.guansu.management.bean.PersonalBean;
 import com.guansu.management.bean.orcode;
 import com.lzy.okgo.model.HttpMethod;
 import com.lzy.okgo.model.HttpParams;
-
-import org.json.JSONArray;
-
 import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.List;
@@ -42,7 +39,10 @@ public class MeModellml {
     public static final String USER_WEBPAGE = "/user/webPage";
     //支付宝
     public static final String USER_GENERATEORDERINFO = "/pay/aliPay/generateOrderInfo";
+    //支付宝拉取授权
     public static final String USER_ALIPAYAUTH = "/pay/aliPay/alipayAuth";
+    //检验是否授权
+    public static final String USER_VALIDATEAUTH = "/user/validateAuth";
 
     public Observable<orcode> find_activity_byuserid(String userId) {
         HttpParams httpParams = new HttpParams();
@@ -121,11 +121,11 @@ public class MeModellml {
     }
 
     //我的主页
-    public Observable<EditBean> user_webpage(String userId, String visitorId) {
+    public Observable<PersonalBean> user_webpage(String userId, String visitorId) {
         HttpParams httpParams = new HttpParams();
-        httpParams.put("visitorId", visitorId);
-        httpParams.put("userId", userId);
-        Type type = new TypeToken<EditBean>() {
+        httpParams.put("visitorId", userId);
+        httpParams.put("userId", visitorId);
+        Type type = new TypeToken<PersonalBean>() {
         }.getType();
         return ApiWrapper.request(HttpMethod.GET, USER_WEBPAGE, type, httpParams);
 
@@ -142,5 +142,15 @@ public class MeModellml {
         Type type = new TypeToken<String>() {
         }.getType();
         return ApiWrapper.babyrequest(HttpMethod.POST, USER_GENERATEORDERINFO, type, httpParams);
+    }
+/**
+     * 支付宝
+     */
+    public Observable<String> user_validateauth(String userId) {
+        HttpParams httpParams = new HttpParams();
+        httpParams.put("userId", userId);
+        Type type = new TypeToken<String>() {
+        }.getType();
+        return ApiWrapper.request(HttpMethod.GET, USER_VALIDATEAUTH, type, httpParams);
     }
 }
