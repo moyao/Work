@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.guansu.management.wigdet.banner.view.CBLoopViewPager
+    <com.golang.management.wigdet.banner.view.CBLoopViewPager
         android:id="@+id/cbLoopViewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

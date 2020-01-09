@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.guansu.management">
+    package="com.golang.management">
 
     <application
-        android:name="com.guansu.management.base.MainApplication"
+        android:name=".base.MainApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
         <activity
-            android:name="com.guansu.management.activity.MainActivity"
+            android:name=".activity.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -26,6 +27,7 @@
             android:name="io.github.xudaojie.qrcodelib.CaptureActivity"
             tools:ignore="WrongManifestParent" />
         <activity android:name=".activity.FaceLivenessExpActivity" />
+        <activity android:name=".activity.CertificationFinishActivity" />
 
         <meta-data
             android:name="com.amap.api.v2.apikey"
@@ -33,9 +35,28 @@
 
         <service android:name="com.amap.api.location.APSService"></service>
         <service
+            android:name=".servise.PushService"
+            android:enabled="true"
+            android:exported="false"
+            android:process=":push">
+            <intent-filter>
+                <action android:name="cn.jiguang.user.service.action" />
+            </intent-filter>
+        </service>
+        <service
             android:name=".servise.LocationService"
             android:enabled="true"
             android:exported="false" />
+
+        <receiver
+            android:name=".servise.MyJPushMessageReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="cn.jpush.android.intent.RECEIVE_MESSAGE" />
+                <category android:name="com.golang.management" />
+            </intent-filter>
+        </receiver> <!-- receiver -->
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -55,8 +76,6 @@
     <uses-permission
         android:name="android.permission.CHANGE_CONFIGURATION"
         tools:ignore="ProtectedPermissions" />
-    <!-- 请求网络 -->
-    <uses-permission android:name="android.permission.INTERNET" />
 
     <!-- 不是SDK需要的权限，是示例中的后台唤醒定位需要的权限 -->
     <uses-permission android:name="android.permission.WAKE_LOCK" />
@@ -84,26 +103,12 @@
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <!-- 3.2.0版本增加-->
     <uses-permission android:name="android.permission.BLUETOOTH" />
-
-
-
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
     <!-- 权限级别: dangerous -->
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
-    <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <!-- 权限级别: normal -->
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
-    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.hardware.camera.autofocus" />
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission
+        android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"
+        tools:ignore="ProtectedPermissions" />
     <!-- 需要使用Feature -->
-
 </manifest>

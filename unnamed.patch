@@ -1,12 +1,12 @@
-Index: app/src/main/java/com/guansu/management/wigdet/utils/ScreenUtils.java
+Index: app/src/main/java/com/golang/management/wigdet/utils/ScreenUtils.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/wigdet/utils/ScreenUtils.java	(date 1575452424244)
-+++ app/src/main/java/com/guansu/management/wigdet/utils/ScreenUtils.java	(date 1575452424244)
+--- app/src/main/java/com/golang/management/wigdet/utils/ScreenUtils.java	(date 1575452424244)
++++ app/src/main/java/com/golang/management/wigdet/utils/ScreenUtils.java	(date 1575452424244)
 @@ -0,0 +1,122 @@
-+package com.guansu.management.wigdet.utils;
++package com.golang.management.wigdet.utils;
 +
 +import android.app.Activity;
 +import android.content.Context;
@@ -129,15 +129,15 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +
 +}
 \ No newline at end of file
-Index: app/src/main/java/com/guansu/management/wigdet/utils/KeyboardConflictCompat.java
+Index: app/src/main/java/com/golang/management/wigdet/utils/KeyboardConflictCompat.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/wigdet/utils/KeyboardConflictCompat.java	(date 1575452424017)
-+++ app/src/main/java/com/guansu/management/wigdet/utils/KeyboardConflictCompat.java	(date 1575452424017)
+--- app/src/main/java/com/golang/management/wigdet/utils/KeyboardConflictCompat.java	(date 1575452424017)
++++ app/src/main/java/com/golang/management/wigdet/utils/KeyboardConflictCompat.java	(date 1575452424017)
 @@ -0,0 +1,71 @@
-+package com.guansu.management.wigdet.utils;
++package com.golang.management.wigdet.utils;
 +
 +import android.graphics.Rect;
 +import android.os.Build;
@@ -146,7 +146,7 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +import android.view.Window;
 +import android.widget.FrameLayout;
 +
-+import com.guansu.management.wigdet.statusbar.StatusBarUtils;
++import com.golang.management.wigdet.statusbar.StatusBarUtils;
 +
 +
 +/**
@@ -208,15 +208,15 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +        return (r.bottom - r.top);
 +    }
 +}
-Index: app/src/main/java/com/guansu/management/paymentmoney/SignUtils.java
+Index: app/src/main/java/com/golang/management/paymentmoney/SignUtils.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/paymentmoney/SignUtils.java	(date 1577073939801)
-+++ app/src/main/java/com/guansu/management/paymentmoney/SignUtils.java	(date 1577073939801)
+--- app/src/main/java/com/golang/management/paymentmoney/SignUtils.java	(date 1577073939801)
++++ app/src/main/java/com/golang/management/paymentmoney/SignUtils.java	(date 1577073939801)
 @@ -0,0 +1,44 @@
-+package com.guansu.management.paymentmoney;
++package com.golang.management.paymentmoney;
 +
 +import java.security.KeyFactory;
 +import java.security.PrivateKey;
@@ -260,15 +260,15 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +	}
 +
 +}
-Index: app/src/main/java/com/guansu/management/wigdet/CommonTitleBar.java
+Index: app/src/main/java/com/golang/management/wigdet/CommonTitleBar.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/wigdet/CommonTitleBar.java	(date 1576819253351)
-+++ app/src/main/java/com/guansu/management/wigdet/CommonTitleBar.java	(date 1576819253351)
+--- app/src/main/java/com/golang/management/wigdet/CommonTitleBar.java	(date 1576819253351)
++++ app/src/main/java/com/golang/management/wigdet/CommonTitleBar.java	(date 1576819253351)
 @@ -0,0 +1,1081 @@
-+package com.guansu.management.wigdet;
++package com.golang.management.wigdet;
 +
 +import android.app.Activity;
 +import android.content.Context;
@@ -295,9 +295,9 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +import android.widget.RelativeLayout;
 +import android.widget.TextView;
 +
-+import com.guansu.management.R;
-+import com.guansu.management.wigdet.statusbar.StatusBarUtils;
-+import com.guansu.management.wigdet.utils.ScreenUtils;
++import com.golang.management.R;
++import com.golang.management.wigdet.statusbar.StatusBarUtils;
++import com.golang.management.wigdet.utils.ScreenUtils;
 +
 +/**
 + * 通用标题栏
@@ -1349,15 +1349,15 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +        void onClicked(View v);
 +    }
 +}
-Index: app/src/main/java/com/guansu/management/base/BaseFragment.java
+Index: app/src/main/java/com/golang/management/base/BaseFragment.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/base/BaseFragment.java	(date 1577180410359)
-+++ app/src/main/java/com/guansu/management/base/BaseFragment.java	(date 1577180410359)
+--- app/src/main/java/com/golang/management/base/BaseFragment.java	(date 1577180410359)
++++ app/src/main/java/com/golang/management/base/BaseFragment.java	(date 1577180410359)
 @@ -0,0 +1,295 @@
-+package com.guansu.management.base;
++package com.golang.management.base;
 +
 +import android.os.Bundle;
 +import android.view.LayoutInflater;
@@ -1368,11 +1368,11 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +import android.widget.LinearLayout;
 +import android.widget.TextView;
 +import androidx.annotation.Nullable;
-+import com.guansu.management.R;
-+import com.guansu.management.api.APIException;
-+import com.guansu.management.api.ServiceException;
-+import com.guansu.management.common.ReplaceViewHelper;
-+import com.guansu.management.wigdet.CommonTitleBar;
++import com.golang.management.R;
++import com.golang.management.api.APIException;
++import com.golang.management.api.ServiceException;
++import com.golang.management.common.ReplaceViewHelper;
++import com.golang.management.wigdet.CommonTitleBar;
 +import java.net.ConnectException;
 +import java.net.SocketTimeoutException;
 +import java.net.UnknownHostException;
@@ -1652,15 +1652,15 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +        }
 +    }
 +}
-Index: app/src/main/java/com/guansu/management/wigdet/utils/DimensUtils.java
+Index: app/src/main/java/com/golang/management/wigdet/utils/DimensUtils.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/wigdet/utils/DimensUtils.java	(date 1575452424543)
-+++ app/src/main/java/com/guansu/management/wigdet/utils/DimensUtils.java	(date 1575452424543)
+--- app/src/main/java/com/golang/management/wigdet/utils/DimensUtils.java	(date 1575452424543)
++++ app/src/main/java/com/golang/management/wigdet/utils/DimensUtils.java	(date 1575452424543)
 @@ -0,0 +1,22 @@
-+package com.guansu.management.wigdet.utils;
++package com.golang.management.wigdet.utils;
 +
 +import android.content.Context;
 +import android.util.TypedValue;
@@ -1682,15 +1682,15 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, spValue, context.getResources().getDisplayMetrics());
 +    }
 +}
-Index: app/src/main/java/com/guansu/management/wigdet/utils/PhoneNumberValid.java
+Index: app/src/main/java/com/golang/management/wigdet/utils/PhoneNumberValid.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/wigdet/utils/PhoneNumberValid.java	(date 1575853901980)
-+++ app/src/main/java/com/guansu/management/wigdet/utils/PhoneNumberValid.java	(date 1575853901980)
+--- app/src/main/java/com/golang/management/wigdet/utils/PhoneNumberValid.java	(date 1575853901980)
++++ app/src/main/java/com/golang/management/wigdet/utils/PhoneNumberValid.java	(date 1575853901980)
 @@ -0,0 +1,16 @@
-+package com.guansu.management.wigdet.utils;
++package com.golang.management.wigdet.utils;
 +
 +import java.util.regex.Matcher;
 +import java.util.regex.Pattern;
@@ -1706,24 +1706,24 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +        return m.matches();
 +    }
 +}
-Index: app/src/main/java/com/guansu/management/ui/welcome/WelcomeFragment.java
+Index: app/src/main/java/com/golang/management/ui/welcome/WelcomeFragment.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/ui/welcome/WelcomeFragment.java	(date 1577254226078)
-+++ app/src/main/java/com/guansu/management/ui/welcome/WelcomeFragment.java	(date 1577254226078)
+--- app/src/main/java/com/golang/management/ui/welcome/WelcomeFragment.java	(date 1577254226078)
++++ app/src/main/java/com/golang/management/ui/welcome/WelcomeFragment.java	(date 1577254226078)
 @@ -0,0 +1,76 @@
-+package com.guansu.management.ui.welcome;
++package com.golang.management.ui.welcome;
 +import android.annotation.SuppressLint;
 +import android.os.CountDownTimer;
 +import android.view.View;
 +import android.widget.Button;
-+import com.guansu.management.R;
-+import com.guansu.management.base.BaseFragment;
-+import com.guansu.management.common.UserSharedPreferencesUtils;
-+import com.guansu.management.fragment.LoginFragment;
-+import com.guansu.management.fragment.MainFragment;
++import com.golang.management.R;
++import com.golang.management.base.BaseFragment;
++import com.golang.management.common.UserSharedPreferencesUtils;
++import com.golang.management.fragment.LoginFragment;
++import com.golang.management.fragment.MainFragment;
 +import butterknife.BindView;
 +
 +/**
@@ -1790,15 +1790,15 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +            startWithPop(LoginFragment.newInstance());
 +    }
 +}
-Index: app/src/main/java/com/guansu/management/paymentmoney/AuthResult.java
+Index: app/src/main/java/com/golang/management/paymentmoney/AuthResult.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/paymentmoney/AuthResult.java	(date 1577073939823)
-+++ app/src/main/java/com/guansu/management/paymentmoney/AuthResult.java	(date 1577073939823)
+--- app/src/main/java/com/golang/management/paymentmoney/AuthResult.java	(date 1577073939823)
++++ app/src/main/java/com/golang/management/paymentmoney/AuthResult.java	(date 1577073939823)
 @@ -0,0 +1,113 @@
-+package com.guansu.management.paymentmoney;
++package com.golang.management.paymentmoney;
 +
 +import android.text.TextUtils;
 +
@@ -1911,15 +1911,15 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +		return alipayOpenId;
 +	}
 +}
-Index: app/src/main/java/com/guansu/management/wigdet/utils/TimeCount.java
+Index: app/src/main/java/com/golang/management/wigdet/utils/TimeCount.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/wigdet/utils/TimeCount.java	(date 1575857133101)
-+++ app/src/main/java/com/guansu/management/wigdet/utils/TimeCount.java	(date 1575857133101)
+--- app/src/main/java/com/golang/management/wigdet/utils/TimeCount.java	(date 1575857133101)
++++ app/src/main/java/com/golang/management/wigdet/utils/TimeCount.java	(date 1575857133101)
 @@ -0,0 +1,32 @@
-+package com.guansu.management.wigdet.utils;
++package com.golang.management.wigdet.utils;
 +
 +import android.graphics.Color;
 +import android.os.CountDownTimer;
@@ -1951,15 +1951,15 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +
 +    }
 +}
-Index: app/src/main/java/com/guansu/management/config/Payment.java
+Index: app/src/main/java/com/golang/management/config/Payment.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/config/Payment.java	(date 1577073765733)
-+++ app/src/main/java/com/guansu/management/config/Payment.java	(date 1577073765733)
+--- app/src/main/java/com/golang/management/config/Payment.java	(date 1577073765733)
++++ app/src/main/java/com/golang/management/config/Payment.java	(date 1577073765733)
 @@ -0,0 +1,42 @@
-+package com.guansu.management.config;
++package com.golang.management.config;
 +
 +/**
 + * @date:
@@ -2001,15 +2001,15 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +    public static final int SDK_AUTH_FLAG = 2;
 +    public static final int REQUEST_READ_PHONE_STATE = 0;
 +}
-Index: app/src/main/java/com/guansu/management/paymentmoney/Base64.java
+Index: app/src/main/java/com/golang/management/paymentmoney/Base64.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/paymentmoney/Base64.java	(date 1577073939747)
-+++ app/src/main/java/com/guansu/management/paymentmoney/Base64.java	(date 1577073939747)
+--- app/src/main/java/com/golang/management/paymentmoney/Base64.java	(date 1577073939747)
++++ app/src/main/java/com/golang/management/paymentmoney/Base64.java	(date 1577073939747)
 @@ -0,0 +1,268 @@
-+package com.guansu.management.paymentmoney;
++package com.golang.management.paymentmoney;
 +
 +public final class Base64 {
 +
@@ -2277,15 +2277,15 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +		return newSize;
 +	}
 +}
-Index: app/src/main/java/com/guansu/management/activity/MainActivity.java
+Index: app/src/main/java/com/golang/management/activity/MainActivity.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/activity/MainActivity.java	(date 1577256068465)
-+++ app/src/main/java/com/guansu/management/activity/MainActivity.java	(date 1577256068465)
+--- app/src/main/java/com/golang/management/activity/MainActivity.java	(date 1577256068465)
++++ app/src/main/java/com/golang/management/activity/MainActivity.java	(date 1577256068465)
 @@ -0,0 +1,184 @@
-+package com.guansu.management.activity;
++package com.golang.management.activity;
 +import android.Manifest;
 +import android.annotation.TargetApi;
 +import android.app.AlertDialog;
@@ -2297,9 +2297,9 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +import android.os.Bundle;
 +import android.provider.Settings;
 +import android.view.View;
-+import com.guansu.management.R;
-+import com.guansu.management.base.BaseActivity;
-+import com.guansu.management.ui.welcome.WelcomeFragment;
++import com.golang.management.R;
++import com.golang.management.base.BaseActivity;
++import com.golang.management.ui.welcome.WelcomeFragment;
 +import java.lang.reflect.Method;
 +import java.util.ArrayList;
 +import java.util.List;
@@ -2469,15 +2469,15 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +        return true;
 +    }
 +}
-Index: app/src/main/java/com/guansu/management/paymentmoney/PayResult.java
+Index: app/src/main/java/com/golang/management/paymentmoney/PayResult.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/paymentmoney/PayResult.java	(date 1577073856693)
-+++ app/src/main/java/com/guansu/management/paymentmoney/PayResult.java	(date 1577073856693)
+--- app/src/main/java/com/golang/management/paymentmoney/PayResult.java	(date 1577073856693)
++++ app/src/main/java/com/golang/management/paymentmoney/PayResult.java	(date 1577073856693)
 @@ -0,0 +1,54 @@
-+package com.guansu.management.paymentmoney;
++package com.golang.management.paymentmoney;
 +
 +import android.text.TextUtils;
 +
@@ -2531,15 +2531,15 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +		return result;
 +	}
 +}
-Index: app/src/main/java/com/guansu/management/fragment/me/DistributionFragment.java
+Index: app/src/main/java/com/golang/management/fragment/me/DistributionFragment.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/fragment/me/DistributionFragment.java	(date 1577172977693)
-+++ app/src/main/java/com/guansu/management/fragment/me/DistributionFragment.java	(date 1577172977693)
+--- app/src/main/java/com/golang/management/fragment/me/DistributionFragment.java	(date 1577172977693)
++++ app/src/main/java/com/golang/management/fragment/me/DistributionFragment.java	(date 1577172977693)
 @@ -0,0 +1,180 @@
-+package com.guansu.management.fragment.me;
++package com.golang.management.fragment.me;
 +
 +import android.annotation.SuppressLint;
 +import android.os.Bundle;
@@ -2554,13 +2554,13 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +
 +import com.alipay.sdk.app.EnvUtils;
 +import com.alipay.sdk.app.PayTask;
-+import com.guansu.management.R;
-+import com.guansu.management.base.BaseFragment;
-+import com.guansu.management.common.OnClickListenerWrapper;
-+import com.guansu.management.config.Payment;
-+import com.guansu.management.paymentmoney.AuthResult;
-+import com.guansu.management.paymentmoney.PayResult;
-+import com.guansu.management.utils.OrderInfoUtil2_0;
++import com.golang.management.R;
++import com.golang.management.base.BaseFragment;
++import com.golang.management.common.OnClickListenerWrapper;
++import com.golang.management.config.Payment;
++import com.golang.management.paymentmoney.AuthResult;
++import com.golang.management.paymentmoney.PayResult;
++import com.golang.management.utils.OrderInfoUtil2_0;
 +
 +import java.util.Map;
 +
@@ -2719,15 +2719,15 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +        return false;
 +    }
 +}
-Index: app/src/main/java/com/guansu/management/bean/ActivitySignUpsBean.java
+Index: app/src/main/java/com/golang/management/bean/ActivitySignUpsBean.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/bean/ActivitySignUpsBean.java	(date 1576655186220)
-+++ app/src/main/java/com/guansu/management/bean/ActivitySignUpsBean.java	(date 1576655186220)
+--- app/src/main/java/com/golang/management/bean/ActivitySignUpsBean.java	(date 1576655186220)
++++ app/src/main/java/com/golang/management/bean/ActivitySignUpsBean.java	(date 1576655186220)
 @@ -0,0 +1,101 @@
-+package com.guansu.management.bean;
++package com.golang.management.bean;
 +
 +/**
 + * @date:
@@ -2828,15 +2828,15 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +        this.status = status;
 +    }
 +}
-Index: app/src/main/java/com/guansu/management/bean/ActivityCommentsBeanX.java
+Index: app/src/main/java/com/golang/management/bean/ActivityCommentsBeanX.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/bean/ActivityCommentsBeanX.java	(date 1577084594640)
-+++ app/src/main/java/com/guansu/management/bean/ActivityCommentsBeanX.java	(date 1577084594640)
+--- app/src/main/java/com/golang/management/bean/ActivityCommentsBeanX.java	(date 1577084594640)
++++ app/src/main/java/com/golang/management/bean/ActivityCommentsBeanX.java	(date 1577084594640)
 @@ -0,0 +1,156 @@
-+package com.guansu.management.bean;
++package com.golang.management.bean;
 +import java.util.List;
 +/**
 + * @date:
@@ -2992,15 +2992,15 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +    }
 +
 +}
-Index: app/src/main/java/com/guansu/management/bean/ActivityCommentsBean.java
+Index: app/src/main/java/com/golang/management/bean/ActivityCommentsBean.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/bean/ActivityCommentsBean.java	(date 1576660966812)
-+++ app/src/main/java/com/guansu/management/bean/ActivityCommentsBean.java	(date 1576660966812)
+--- app/src/main/java/com/golang/management/bean/ActivityCommentsBean.java	(date 1576660966812)
++++ app/src/main/java/com/golang/management/bean/ActivityCommentsBean.java	(date 1576660966812)
 @@ -0,0 +1,134 @@
-+package com.guansu.management.bean;
++package com.golang.management.bean;
 +
 +/**
 + * @date:
@@ -3134,15 +3134,15 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +        this.type = type;
 +    }
 +}
-Index: app/src/main/java/com/guansu/management/fragment/details/DetailsFragment.java
+Index: app/src/main/java/com/golang/management/fragment/details/DetailsFragment.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/fragment/details/DetailsFragment.java	(date 1577095576954)
-+++ app/src/main/java/com/guansu/management/fragment/details/DetailsFragment.java	(date 1577095576954)
+--- app/src/main/java/com/golang/management/fragment/details/DetailsFragment.java	(date 1577095576954)
++++ app/src/main/java/com/golang/management/fragment/details/DetailsFragment.java	(date 1577095576954)
 @@ -0,0 +1,313 @@
-+package com.guansu.management.fragment.details;
++package com.golang.management.fragment.details;
 +import android.annotation.SuppressLint;
 +import android.os.Build;
 +import android.os.Bundle;
@@ -3158,22 +3158,22 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +import androidx.recyclerview.widget.LinearLayoutManager;
 +import androidx.recyclerview.widget.RecyclerView;
 +import com.bumptech.glide.Glide;
-+import com.guansu.management.R;
-+import com.guansu.management.api.MyObserve;
-+import com.guansu.management.base.BaseFragment;
-+import com.guansu.management.bean.ActivityCommentsBeanX;
-+import com.guansu.management.bean.ActivitySignUpsBean;
-+import com.guansu.management.bean.ImagesListBean;
-+import com.guansu.management.common.OnClickListenerWrapper;
-+import com.guansu.management.common.UserSharedPreferencesUtils;
-+import com.guansu.management.config.Constant;
-+import com.guansu.management.config.Constants;
-+import com.guansu.management.fragment.home.adapter.CommentAdapter;
-+import com.guansu.management.fragment.home.adapter.ImageAdapter;
-+import com.guansu.management.fragment.home.adapter.SignUpsAdapter;
-+import com.guansu.management.fragment.me.PersonalFragment;
-+import com.guansu.management.model.MessageModellml;
-+import com.guansu.management.bean.ActivityDtoInfo;
++import com.golang.management.R;
++import com.golang.management.api.MyObserve;
++import com.golang.management.base.BaseFragment;
++import com.golang.management.bean.ActivityCommentsBeanX;
++import com.golang.management.bean.ActivitySignUpsBean;
++import com.golang.management.bean.ImagesListBean;
++import com.golang.management.common.OnClickListenerWrapper;
++import com.golang.management.common.UserSharedPreferencesUtils;
++import com.golang.management.config.Constant;
++import com.golang.management.config.Constants;
++import com.golang.management.fragment.home.adapter.CommentAdapter;
++import com.golang.management.fragment.home.adapter.ImageAdapter;
++import com.golang.management.fragment.home.adapter.SignUpsAdapter;
++import com.golang.management.fragment.me.PersonalFragment;
++import com.golang.management.model.MessageModellml;
++import com.golang.management.bean.ActivityDtoInfo;
 +import java.util.List;
 +import butterknife.BindView;
 +/**
@@ -3455,19 +3455,19 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +        initDataComment();
 +    }
 +}
-Index: app/src/main/java/com/guansu/management/activity/CheckPermissionsActivity.java
+Index: app/src/main/java/com/golang/management/activity/CheckPermissionsActivity.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/activity/CheckPermissionsActivity.java	(date 1577256579538)
-+++ app/src/main/java/com/guansu/management/activity/CheckPermissionsActivity.java	(date 1577256579538)
+--- app/src/main/java/com/golang/management/activity/CheckPermissionsActivity.java	(date 1577256579538)
++++ app/src/main/java/com/golang/management/activity/CheckPermissionsActivity.java	(date 1577256579538)
 @@ -0,0 +1,74 @@
-+package com.guansu.management.activity;
++package com.golang.management.activity;
 +import android.view.View;
 +import com.amap.api.location.AMapLocation;
-+import com.guansu.management.base.BaseFragment;
-+import com.guansu.management.servise.LocationManager;
++import com.golang.management.base.BaseFragment;
++import com.golang.management.servise.LocationManager;
 +/**
 + * @date:
 + * @author: dongyaoyao
@@ -3538,18 +3538,18 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +    }
 +}
 \ No newline at end of file
-Index: app/src/main/java/com/guansu/management/utils/Utils.java
+Index: app/src/main/java/com/golang/management/utils/Utils.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/utils/Utils.java	(date 1576980585906)
-+++ app/src/main/java/com/guansu/management/utils/Utils.java	(date 1576980585906)
+--- app/src/main/java/com/golang/management/utils/Utils.java	(date 1576980585906)
++++ app/src/main/java/com/golang/management/utils/Utils.java	(date 1576980585906)
 @@ -0,0 +1,119 @@
 +/**
 + * 
 + */
-+package com.guansu.management.utils;
++package com.golang.management.utils;
 +
 +import android.content.Context;
 +import android.content.pm.PackageInfo;
@@ -3665,15 +3665,15 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +		return appName;
 +	}
 +}
-Index: app/src/main/java/com/guansu/management/servise/LocationManager.java
+Index: app/src/main/java/com/golang/management/servise/LocationManager.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/servise/LocationManager.java	(date 1576996367026)
-+++ app/src/main/java/com/guansu/management/servise/LocationManager.java	(date 1576996367026)
+--- app/src/main/java/com/golang/management/servise/LocationManager.java	(date 1576996367026)
++++ app/src/main/java/com/golang/management/servise/LocationManager.java	(date 1576996367026)
 @@ -0,0 +1,41 @@
-+package com.guansu.management.servise;
++package com.golang.management.servise;
 +
 +import android.content.Context;
 +import android.content.Intent;
@@ -3715,15 +3715,15 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +    }
 +}
 \ No newline at end of file
-Index: app/src/main/java/com/guansu/management/common/OnClickListenerWrapper.java
+Index: app/src/main/java/com/golang/management/common/OnClickListenerWrapper.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/common/OnClickListenerWrapper.java	(date 1575452424987)
-+++ app/src/main/java/com/guansu/management/common/OnClickListenerWrapper.java	(date 1575452424987)
+--- app/src/main/java/com/golang/management/common/OnClickListenerWrapper.java	(date 1575452424987)
++++ app/src/main/java/com/golang/management/common/OnClickListenerWrapper.java	(date 1575452424987)
 @@ -0,0 +1,36 @@
-+package com.guansu.management.common;
++package com.golang.management.common;
 +
 +import android.view.View;
 +/**
@@ -3759,18 +3759,18 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +        return false;
 +    }
 +}
-Index: app/src/main/java/com/guansu/management/model/FootModellml.java
+Index: app/src/main/java/com/golang/management/model/FootModellml.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/model/FootModellml.java	(date 1577255017655)
-+++ app/src/main/java/com/guansu/management/model/FootModellml.java	(date 1577255017655)
+--- app/src/main/java/com/golang/management/model/FootModellml.java	(date 1577255017655)
++++ app/src/main/java/com/golang/management/model/FootModellml.java	(date 1577255017655)
 @@ -0,0 +1,35 @@
-+package com.guansu.management.model;
++package com.golang.management.model;
 +import com.google.gson.reflect.TypeToken;
-+import com.guansu.management.api.ApiWrapper;
-+import com.guansu.management.model.bean.LoginResult;
++import com.golang.management.api.ApiWrapper;
++import com.golang.management.model.bean.LoginResult;
 +import com.lzy.okgo.model.HttpMethod;
 +import com.lzy.okgo.model.HttpParams;
 +import java.lang.reflect.Type;
@@ -3802,15 +3802,15 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +        return ApiWrapper.babyrequest(HttpMethod.GET, URL_TRACE, type,httpParams);
 +    }
 +}
-Index: app/src/main/java/com/guansu/management/fragment/home/MeFragment.java
+Index: app/src/main/java/com/golang/management/fragment/home/MeFragment.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/fragment/home/MeFragment.java	(date 1577252744908)
-+++ app/src/main/java/com/guansu/management/fragment/home/MeFragment.java	(date 1577252744908)
+--- app/src/main/java/com/golang/management/fragment/home/MeFragment.java	(date 1577252744908)
++++ app/src/main/java/com/golang/management/fragment/home/MeFragment.java	(date 1577252744908)
 @@ -0,0 +1,152 @@
-+package com.guansu.management.fragment.home;
++package com.golang.management.fragment.home;
 +import android.app.Dialog;
 +import android.os.Bundle;
 +import android.view.Gravity;
@@ -3824,16 +3824,16 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +import android.widget.TextView;
 +
 +import com.bumptech.glide.Glide;
-+import com.guansu.management.R;
-+import com.guansu.management.base.BaseFragment;
-+import com.guansu.management.bean.ShareItem;
-+import com.guansu.management.common.OnClickListenerWrapper;
-+import com.guansu.management.common.UserSharedPreferencesUtils;
-+import com.guansu.management.fragment.MainFragment;
-+import com.guansu.management.fragment.me.AdviceFragment;
-+import com.guansu.management.fragment.me.DistributionFragment;
-+import com.guansu.management.fragment.me.EditFragment;
-+import com.guansu.management.fragment.me.QrCodeFragment;
++import com.golang.management.R;
++import com.golang.management.base.BaseFragment;
++import com.golang.management.bean.ShareItem;
++import com.golang.management.common.OnClickListenerWrapper;
++import com.golang.management.common.UserSharedPreferencesUtils;
++import com.golang.management.fragment.MainFragment;
++import com.golang.management.fragment.me.AdviceFragment;
++import com.golang.management.fragment.me.DistributionFragment;
++import com.golang.management.fragment.me.EditFragment;
++import com.golang.management.fragment.me.QrCodeFragment;
 +import java.util.ArrayList;
 +
 +import butterknife.BindView;
@@ -3963,15 +3963,15 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +
 +}
 \ No newline at end of file
-Index: app/src/main/java/com/guansu/management/fragment/me/EditFragment.java
+Index: app/src/main/java/com/golang/management/fragment/me/EditFragment.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/fragment/me/EditFragment.java	(date 1576228390363)
-+++ app/src/main/java/com/guansu/management/fragment/me/EditFragment.java	(date 1576228390363)
+--- app/src/main/java/com/golang/management/fragment/me/EditFragment.java	(date 1576228390363)
++++ app/src/main/java/com/golang/management/fragment/me/EditFragment.java	(date 1576228390363)
 @@ -0,0 +1,200 @@
-+package com.guansu.management.fragment.me;
++package com.golang.management.fragment.me;
 +
 +import android.app.Dialog;
 +import android.graphics.Color;
@@ -3982,13 +3982,13 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +import android.view.ViewGroup;
 +import android.widget.TextView;
 +
-+import com.guansu.management.R;
-+import com.guansu.management.base.BaseFragment;
-+import com.guansu.management.common.OnClickListenerWrapper;
-+import com.guansu.management.wigdet.datepicker.CustomDatePicker;
-+import com.guansu.management.wigdet.datepicker.DateFormatUtils;
-+import com.guansu.management.wigdet.datepicker.MyNumberPicker;
-+import com.guansu.management.wigdet.datepicker.PickValueView;
++import com.golang.management.R;
++import com.golang.management.base.BaseFragment;
++import com.golang.management.common.OnClickListenerWrapper;
++import com.golang.management.wigdet.datepicker.CustomDatePicker;
++import com.golang.management.wigdet.datepicker.DateFormatUtils;
++import com.golang.management.wigdet.datepicker.MyNumberPicker;
++import com.golang.management.wigdet.datepicker.PickValueView;
 +import com.lljjcoder.citypickerview.widget.CityPicker;
 +
 +import java.text.SimpleDateFormat;
@@ -4171,15 +4171,15 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +
 +    }
 +}
-Index: app/src/main/java/com/guansu/management/fragment/message/MessageAdapter.java
+Index: app/src/main/java/com/golang/management/fragment/message/MessageAdapter.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/fragment/message/MessageAdapter.java	(date 1576980782439)
-+++ app/src/main/java/com/guansu/management/fragment/message/MessageAdapter.java	(date 1576980782439)
+--- app/src/main/java/com/golang/management/fragment/message/MessageAdapter.java	(date 1576980782439)
++++ app/src/main/java/com/golang/management/fragment/message/MessageAdapter.java	(date 1576980782439)
 @@ -0,0 +1,105 @@
-+package com.guansu.management.fragment.message;
++package com.golang.management.fragment.message;
 +
 +import android.content.Context;
 +import android.view.LayoutInflater;
@@ -4189,7 +4189,7 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +import android.widget.TextView;
 +import androidx.annotation.NonNull;
 +import androidx.recyclerview.widget.RecyclerView;
-+import com.guansu.management.R;
++import com.golang.management.R;
 +
 +import butterknife.BindView;
 +
@@ -4284,15 +4284,15 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +        }
 +    }
 +}
-Index: app/src/main/java/com/guansu/management/fragment/home/MessageFragment.java
+Index: app/src/main/java/com/golang/management/fragment/home/MessageFragment.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/fragment/home/MessageFragment.java	(date 1576733581806)
-+++ app/src/main/java/com/guansu/management/fragment/home/MessageFragment.java	(date 1576733581806)
+--- app/src/main/java/com/golang/management/fragment/home/MessageFragment.java	(date 1576733581806)
++++ app/src/main/java/com/golang/management/fragment/home/MessageFragment.java	(date 1576733581806)
 @@ -0,0 +1,152 @@
-+package com.guansu.management.fragment.home;
++package com.golang.management.fragment.home;
 +
 +import android.os.Bundle;
 +import android.view.View;
@@ -4302,16 +4302,16 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +import androidx.recyclerview.widget.LinearLayoutManager;
 +import androidx.recyclerview.widget.RecyclerView;
 +
-+import com.guansu.management.R;
-+import com.guansu.management.base.BaseFragment;
-+import com.guansu.management.bean.UserInfo;
-+import com.guansu.management.fragment.MainFragment;
-+import com.guansu.management.fragment.me.PersonalFragment;
-+import com.guansu.management.fragment.message.DetailsMessageFragment;
-+import com.guansu.management.fragment.message.MessageAdapter;
-+import com.guansu.management.wigdet.recyclerview.EndLessOnScrollListener;
-+import com.guansu.management.wigdet.recyclerview.OnItemClickListener;
-+import com.guansu.management.wigdet.recyclerview.RecyclerItemClickListener;
++import com.golang.management.R;
++import com.golang.management.base.BaseFragment;
++import com.golang.management.bean.UserInfo;
++import com.golang.management.fragment.MainFragment;
++import com.golang.management.fragment.me.PersonalFragment;
++import com.golang.management.fragment.message.DetailsMessageFragment;
++import com.golang.management.fragment.message.MessageAdapter;
++import com.golang.management.wigdet.recyclerview.EndLessOnScrollListener;
++import com.golang.management.wigdet.recyclerview.OnItemClickListener;
++import com.golang.management.wigdet.recyclerview.RecyclerItemClickListener;
 +
 +import java.util.List;
 +
@@ -4444,15 +4444,15 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +            }
 +        };
 +    }
-Index: app/src/main/java/com/guansu/management/fragment/me/PersonalFragment.java
+Index: app/src/main/java/com/golang/management/fragment/me/PersonalFragment.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/fragment/me/PersonalFragment.java	(date 1576553532748)
-+++ app/src/main/java/com/guansu/management/fragment/me/PersonalFragment.java	(date 1576553532748)
+--- app/src/main/java/com/golang/management/fragment/me/PersonalFragment.java	(date 1576553532748)
++++ app/src/main/java/com/golang/management/fragment/me/PersonalFragment.java	(date 1576553532748)
 @@ -0,0 +1,85 @@
-+package com.guansu.management.fragment.me;
++package com.golang.management.fragment.me;
 +
 +import android.os.Bundle;
 +import android.view.View;
@@ -4462,8 +4462,8 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +import androidx.recyclerview.widget.RecyclerView;
 +
 +import com.bumptech.glide.Glide;
-+import com.guansu.management.R;
-+import com.guansu.management.base.BaseFragment;
++import com.golang.management.R;
++import com.golang.management.base.BaseFragment;
 +
 +import butterknife.BindView;
 +
@@ -4537,15 +4537,15 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +        return false;
 +    }
 +}
-Index: app/src/main/java/com/guansu/management/fragment/LoginFragment.java
+Index: app/src/main/java/com/golang/management/fragment/LoginFragment.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/fragment/LoginFragment.java	(date 1577253711428)
-+++ app/src/main/java/com/guansu/management/fragment/LoginFragment.java	(date 1577253711428)
+--- app/src/main/java/com/golang/management/fragment/LoginFragment.java	(date 1577253711428)
++++ app/src/main/java/com/golang/management/fragment/LoginFragment.java	(date 1577253711428)
 @@ -0,0 +1,234 @@
-+package com.guansu.management.fragment;
++package com.golang.management.fragment;
 +import android.app.AlertDialog;
 +import android.app.Dialog;
 +import android.content.Context;
@@ -4566,12 +4566,12 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +import android.widget.Toast;
 +import androidx.appcompat.widget.AppCompatEditText;
 +import androidx.core.app.NotificationManagerCompat;
-+import com.guansu.management.R;
-+import com.guansu.management.base.BaseFragment;
-+import com.guansu.management.common.OnClickListenerWrapper;
-+import com.guansu.management.ui.accont.AccountContract;
-+import com.guansu.management.ui.accont.AccountPresenter;
-+import com.guansu.management.wigdet.utils.PhoneNumberValid;
++import com.golang.management.R;
++import com.golang.management.base.BaseFragment;
++import com.golang.management.common.OnClickListenerWrapper;
++import com.golang.management.ui.accont.AccountContract;
++import com.golang.management.ui.accont.AccountPresenter;
++import com.golang.management.wigdet.utils.PhoneNumberValid;
 +import butterknife.BindView;
 +
 +/**
@@ -4779,15 +4779,15 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +
 +    }
 +}
-Index: app/src/main/java/com/guansu/management/ui/banner/ConvenientBanner.java
+Index: app/src/main/java/com/golang/management/ui/banner/ConvenientBanner.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/ui/banner/ConvenientBanner.java	(date 1576487197132)
-+++ app/src/main/java/com/guansu/management/ui/banner/ConvenientBanner.java	(date 1576487197132)
+--- app/src/main/java/com/golang/management/ui/banner/ConvenientBanner.java	(date 1576487197132)
++++ app/src/main/java/com/golang/management/ui/banner/ConvenientBanner.java	(date 1576487197132)
 @@ -0,0 +1,339 @@
-+package com.guansu.management.ui.banner;
++package com.golang.management.ui.banner;
 +
 +import android.annotation.TargetApi;
 +import android.content.Context;
@@ -4804,13 +4804,13 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +
 +import androidx.viewpager.widget.ViewPager;
 +
-+import com.guansu.management.R;
-+import com.guansu.management.wigdet.banner.ViewPagerScroller;
-+import com.guansu.management.wigdet.banner.adapter.CBPageAdapter;
-+import com.guansu.management.wigdet.banner.holder.CBViewHolderCreator;
-+import com.guansu.management.wigdet.banner.listener.CBPageChangeListener;
-+import com.guansu.management.wigdet.banner.listener.OnItemClickListener;
-+import com.guansu.management.wigdet.banner.view.CBLoopViewPager;
++import com.golang.management.R;
++import com.golang.management.wigdet.banner.ViewPagerScroller;
++import com.golang.management.wigdet.banner.adapter.CBPageAdapter;
++import com.golang.management.wigdet.banner.holder.CBViewHolderCreator;
++import com.golang.management.wigdet.banner.listener.CBPageChangeListener;
++import com.golang.management.wigdet.banner.listener.OnItemClickListener;
++import com.golang.management.wigdet.banner.view.CBLoopViewPager;
 +
 +import java.lang.ref.WeakReference;
 +import java.lang.reflect.Field;
@@ -5126,15 +5126,15 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +        viewPager.setCanLoop(canLoop);
 +    }
 +}
-Index: app/src/main/java/com/guansu/management/bean/HomeBean.java
+Index: app/src/main/java/com/golang/management/bean/HomeBean.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/bean/HomeBean.java	(date 1576840599061)
-+++ app/src/main/java/com/guansu/management/bean/HomeBean.java	(date 1576840599061)
+--- app/src/main/java/com/golang/management/bean/HomeBean.java	(date 1576840599061)
++++ app/src/main/java/com/golang/management/bean/HomeBean.java	(date 1576840599061)
 @@ -0,0 +1,177 @@
-+package com.guansu.management.bean;
++package com.golang.management.bean;
 +
 +import com.google.gson.annotations.SerializedName;
 +
@@ -5311,15 +5311,15 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +
 +
 +}
-Index: app/src/main/java/com/guansu/management/fragment/home/ReleaseFragment.java
+Index: app/src/main/java/com/golang/management/fragment/home/ReleaseFragment.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/fragment/home/ReleaseFragment.java	(date 1577256068575)
-+++ app/src/main/java/com/guansu/management/fragment/home/ReleaseFragment.java	(date 1577256068575)
+--- app/src/main/java/com/golang/management/fragment/home/ReleaseFragment.java	(date 1577256068575)
++++ app/src/main/java/com/golang/management/fragment/home/ReleaseFragment.java	(date 1577256068575)
 @@ -0,0 +1,247 @@
-+package com.guansu.management.fragment.home;
++package com.golang.management.fragment.home;
 +import android.content.Context;
 +import android.content.Intent;
 +import android.os.Bundle;
@@ -5332,21 +5332,21 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +import androidx.recyclerview.widget.GridLayoutManager;
 +import androidx.recyclerview.widget.RecyclerView;
 +import com.google.gson.Gson;
-+import com.guansu.management.R;
-+import com.guansu.management.activity.CheckPermissionsActivity;
-+import com.guansu.management.api.MyObserve;
-+import com.guansu.management.base.BaseFragment;
-+import com.guansu.management.bean.FileBean;
-+import com.guansu.management.common.OnClickListenerWrapper;
-+import com.guansu.management.common.UserSharedPreferencesUtils;
-+import com.guansu.management.config.Constant;
-+import com.guansu.management.config.Constants;
-+import com.guansu.management.config.HttpConstants;
-+import com.guansu.management.fragment.release.DetailsNextFragment;
-+import com.guansu.management.model.HomeModellml;
-+import com.guansu.management.model.ReleaseModellml;
-+import com.guansu.management.servise.LocationService;
-+import com.guansu.management.ui.release.ImagePickerAdapter;
++import com.golang.management.R;
++import com.golang.management.activity.CheckPermissionsActivity;
++import com.golang.management.api.MyObserve;
++import com.golang.management.base.BaseFragment;
++import com.golang.management.bean.FileBean;
++import com.golang.management.common.OnClickListenerWrapper;
++import com.golang.management.common.UserSharedPreferencesUtils;
++import com.golang.management.config.Constant;
++import com.golang.management.config.Constants;
++import com.golang.management.config.HttpConstants;
++import com.golang.management.fragment.release.DetailsNextFragment;
++import com.golang.management.model.HomeModellml;
++import com.golang.management.model.ReleaseModellml;
++import com.golang.management.servise.LocationService;
++import com.golang.management.ui.release.ImagePickerAdapter;
 +import com.lzy.imagepicker.ImagePicker;
 +import com.lzy.imagepicker.bean.ImageItem;
 +import com.lzy.imagepicker.ui.ImageGridActivity;
@@ -5566,15 +5566,15 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +        }
 +    }
 +}
-Index: app/src/main/java/com/guansu/management/fragment/MainFragment.java
+Index: app/src/main/java/com/golang/management/fragment/MainFragment.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/fragment/MainFragment.java	(date 1577256068524)
-+++ app/src/main/java/com/guansu/management/fragment/MainFragment.java	(date 1577256068524)
+--- app/src/main/java/com/golang/management/fragment/MainFragment.java	(date 1577256068524)
++++ app/src/main/java/com/golang/management/fragment/MainFragment.java	(date 1577256068524)
 @@ -0,0 +1,154 @@
-+package com.guansu.management.fragment;
++package com.golang.management.fragment;
 +import android.app.Dialog;
 +import android.os.Bundle;
 +import android.view.Gravity;
@@ -5583,17 +5583,17 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +import android.view.WindowManager;
 +import android.widget.RadioButton;
 +import androidx.annotation.Nullable;
-+import com.guansu.management.R;
-+import com.guansu.management.base.BaseFragment;
-+import com.guansu.management.common.OnClickListenerWrapper;
-+import com.guansu.management.config.Constant;
-+import com.guansu.management.fragment.home.FootprintFragemnt;
-+import com.guansu.management.fragment.home.MeFragment;
-+import com.guansu.management.fragment.home.MessageFragment;
-+import com.guansu.management.fragment.home.NewHomeFragment;
-+import com.guansu.management.fragment.home.ReleaseFragment;
-+import com.guansu.management.wigdet.bottombar.BottomBar;
-+import com.guansu.management.wigdet.bottombar.BottomBarTab;
++import com.golang.management.R;
++import com.golang.management.base.BaseFragment;
++import com.golang.management.common.OnClickListenerWrapper;
++import com.golang.management.config.Constant;
++import com.golang.management.fragment.home.FootprintFragemnt;
++import com.golang.management.fragment.home.MeFragment;
++import com.golang.management.fragment.home.MessageFragment;
++import com.golang.management.fragment.home.NewHomeFragment;
++import com.golang.management.fragment.home.ReleaseFragment;
++import com.golang.management.wigdet.bottombar.BottomBar;
++import com.golang.management.wigdet.bottombar.BottomBarTab;
 +
 +import butterknife.BindView;
 +import me.yokeyword.fragmentation.SupportFragment;
@@ -5728,17 +5728,17 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +        return false;
 +    }
 +}
-Index: app/src/main/java/com/guansu/management/model/ReleaseModellml.java
+Index: app/src/main/java/com/golang/management/model/ReleaseModellml.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/model/ReleaseModellml.java	(date 1577005555491)
-+++ app/src/main/java/com/guansu/management/model/ReleaseModellml.java	(date 1577005555491)
+--- app/src/main/java/com/golang/management/model/ReleaseModellml.java	(date 1577005555491)
++++ app/src/main/java/com/golang/management/model/ReleaseModellml.java	(date 1577005555491)
 @@ -0,0 +1,58 @@
-+package com.guansu.management.model;
++package com.golang.management.model;
 +import com.google.gson.reflect.TypeToken;
-+import com.guansu.management.api.ApiWrapper;
++import com.golang.management.api.ApiWrapper;
 +import com.lzy.okgo.model.HttpMethod;
 +
 +import org.json.JSONArray;
@@ -5794,15 +5794,15 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +        return ApiWrapper.babyrequest(HttpMethod.POST, USER_ACTIVITY_INFOSAVE, type,httpParams);
 +    }
 +}
-Index: app/src/main/java/com/guansu/management/fragment/home/ImageFullFragment.java
+Index: app/src/main/java/com/golang/management/fragment/home/ImageFullFragment.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/fragment/home/ImageFullFragment.java	(date 1576487593069)
-+++ app/src/main/java/com/guansu/management/fragment/home/ImageFullFragment.java	(date 1576487593069)
+--- app/src/main/java/com/golang/management/fragment/home/ImageFullFragment.java	(date 1576487593069)
++++ app/src/main/java/com/golang/management/fragment/home/ImageFullFragment.java	(date 1576487593069)
 @@ -0,0 +1,77 @@
-+package com.guansu.management.fragment.home;
++package com.golang.management.fragment.home;
 +
 +import android.content.Context;
 +import android.os.Bundle;
@@ -5812,11 +5812,11 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +import android.widget.LinearLayout;
 +
 +import com.bumptech.glide.Glide;
-+import com.guansu.management.R;
-+import com.guansu.management.base.BaseFragment;
-+import com.guansu.management.ui.banner.ConvenientBanner;
-+import com.guansu.management.wigdet.banner.holder.CBViewHolderCreator;
-+import com.guansu.management.wigdet.banner.holder.Holder;
++import com.golang.management.R;
++import com.golang.management.base.BaseFragment;
++import com.golang.management.ui.banner.ConvenientBanner;
++import com.golang.management.wigdet.banner.holder.CBViewHolderCreator;
++import com.golang.management.wigdet.banner.holder.Holder;
 +
 +import butterknife.BindView;
 +
@@ -5879,19 +5879,19 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +        }
 +    }
 +}
-Index: app/src/main/java/com/guansu/management/ui/welcome/WelcomeContract.java
+Index: app/src/main/java/com/golang/management/ui/welcome/WelcomeContract.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/ui/welcome/WelcomeContract.java	(date 1575452423632)
-+++ app/src/main/java/com/guansu/management/ui/welcome/WelcomeContract.java	(date 1575452423632)
+--- app/src/main/java/com/golang/management/ui/welcome/WelcomeContract.java	(date 1575452423632)
++++ app/src/main/java/com/golang/management/ui/welcome/WelcomeContract.java	(date 1575452423632)
 @@ -0,0 +1,23 @@
-+package com.guansu.management.ui.welcome;
++package com.golang.management.ui.welcome;
 +
 +
-+import com.guansu.management.base.BaseInterface;
-+import com.guansu.management.base.BasePresenter;
++import com.golang.management.base.BaseInterface;
++import com.golang.management.base.BasePresenter;
 +
 +/**
 + *
@@ -5910,21 +5910,21 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +    }
 +
 +}
-Index: app/src/main/java/com/guansu/management/ui/welcome/WelcomePresenter.java
+Index: app/src/main/java/com/golang/management/ui/welcome/WelcomePresenter.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/ui/welcome/WelcomePresenter.java	(date 1577252964830)
-+++ app/src/main/java/com/guansu/management/ui/welcome/WelcomePresenter.java	(date 1577252964830)
+--- app/src/main/java/com/golang/management/ui/welcome/WelcomePresenter.java	(date 1577252964830)
++++ app/src/main/java/com/golang/management/ui/welcome/WelcomePresenter.java	(date 1577252964830)
 @@ -0,0 +1,78 @@
-+package com.guansu.management.ui.welcome;
++package com.golang.management.ui.welcome;
 +
 +import android.os.CountDownTimer;
 +
-+import com.guansu.management.api.MyObserve;
-+import com.guansu.management.base.BaseCommonPresenter;
-+import com.guansu.management.utils.CommonUtils;
++import com.golang.management.api.MyObserve;
++import com.golang.management.base.BaseCommonPresenter;
++import com.golang.management.utils.CommonUtils;
 +
 +import java.util.concurrent.TimeUnit;
 +
@@ -5996,21 +5996,21 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +        super.unsubscribe();
 +    }
 +}
-Index: app/src/main/java/com/guansu/management/ui/accont/AccountContract.java
+Index: app/src/main/java/com/golang/management/ui/accont/AccountContract.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/ui/accont/AccountContract.java	(date 1575452424041)
-+++ app/src/main/java/com/guansu/management/ui/accont/AccountContract.java	(date 1575452424041)
+--- app/src/main/java/com/golang/management/ui/accont/AccountContract.java	(date 1575452424041)
++++ app/src/main/java/com/golang/management/ui/accont/AccountContract.java	(date 1575452424041)
 @@ -0,0 +1,32 @@
-+package com.guansu.management.ui.accont;//package com.wisdom.regulatory.ui.welcome;
++package com.golang.management.ui.accont;//package com.wisdom.regulatory.ui.welcome;
 +
 +
 +import android.content.Context;
 +
-+import com.guansu.management.base.BaseInterface;
-+import com.guansu.management.base.BasePresenter;
++import com.golang.management.base.BaseInterface;
++import com.golang.management.base.BasePresenter;
 +
 +/**
 + * Created by dongyaoyao
@@ -6036,15 +6036,15 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +    }
 +
 +}
-Index: app/src/main/java/com/guansu/management/ui/release/ImagePickerAdapter.java
+Index: app/src/main/java/com/golang/management/ui/release/ImagePickerAdapter.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/ui/release/ImagePickerAdapter.java	(date 1575452423727)
-+++ app/src/main/java/com/guansu/management/ui/release/ImagePickerAdapter.java	(date 1575452423727)
+--- app/src/main/java/com/golang/management/ui/release/ImagePickerAdapter.java	(date 1575452423727)
++++ app/src/main/java/com/golang/management/ui/release/ImagePickerAdapter.java	(date 1575452423727)
 @@ -0,0 +1,107 @@
-+package com.guansu.management.ui.release;
++package com.golang.management.ui.release;
 +
 +import android.app.Activity;
 +import android.content.Context;
@@ -6055,8 +6055,8 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +
 +import androidx.recyclerview.widget.RecyclerView;
 +
-+import com.guansu.management.R;
-+import com.guansu.management.config.Constant;
++import com.golang.management.R;
++import com.golang.management.config.Constant;
 +import com.lzy.imagepicker.ImagePicker;
 +import com.lzy.imagepicker.bean.ImageItem;
 +
@@ -6152,15 +6152,15 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +    }
 +}
 \ No newline at end of file
-Index: app/src/main/java/com/guansu/management/api/CommonResponse.java
+Index: app/src/main/java/com/golang/management/api/CommonResponse.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/api/CommonResponse.java	(date 1576052241403)
-+++ app/src/main/java/com/guansu/management/api/CommonResponse.java	(date 1576052241403)
+--- app/src/main/java/com/golang/management/api/CommonResponse.java	(date 1576052241403)
++++ app/src/main/java/com/golang/management/api/CommonResponse.java	(date 1576052241403)
 @@ -0,0 +1,13 @@
-+package com.guansu.management.api;
++package com.golang.management.api;
 +/**
 + *
 + * Created by dongyaoyao
@@ -6173,17 +6173,17 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +    public long ts;
 +    public T data;
 +}
-Index: app/src/main/java/com/guansu/management/api/ApiWrapper.java
+Index: app/src/main/java/com/golang/management/api/ApiWrapper.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/api/ApiWrapper.java	(date 1576987584603)
-+++ app/src/main/java/com/guansu/management/api/ApiWrapper.java	(date 1576987584603)
+--- app/src/main/java/com/golang/management/api/ApiWrapper.java	(date 1576987584603)
++++ app/src/main/java/com/golang/management/api/ApiWrapper.java	(date 1576987584603)
 @@ -0,0 +1,85 @@
-+package com.guansu.management.api;
-+import com.guansu.management.config.HttpConstants;
-+import com.guansu.management.utils.ParameterizedTypeImpl;
++package com.golang.management.api;
++import com.golang.management.config.HttpConstants;
++import com.golang.management.utils.ParameterizedTypeImpl;
 +import com.lzy.okgo.OkGo;
 +import com.lzy.okgo.cache.CacheMode;
 +import com.lzy.okgo.model.HttpMethod;
@@ -6266,15 +6266,15 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +    }
 +
 +}
-Index: app/src/main/java/com/guansu/management/api/ServiceException.java
+Index: app/src/main/java/com/golang/management/api/ServiceException.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/api/ServiceException.java	(date 1575452424175)
-+++ app/src/main/java/com/guansu/management/api/ServiceException.java	(date 1575452424175)
+--- app/src/main/java/com/golang/management/api/ServiceException.java	(date 1575452424175)
++++ app/src/main/java/com/golang/management/api/ServiceException.java	(date 1575452424175)
 @@ -0,0 +1,15 @@
-+package com.guansu.management.api;
++package com.golang.management.api;
 +/**
 + *
 + * Created by dongyaoyao
@@ -6290,15 +6290,15 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +
 +}
 \ No newline at end of file
-Index: app/src/main/java/com/guansu/management/api/APIException.java
+Index: app/src/main/java/com/golang/management/api/APIException.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/api/APIException.java	(date 1575452423084)
-+++ app/src/main/java/com/guansu/management/api/APIException.java	(date 1575452423084)
+--- app/src/main/java/com/golang/management/api/APIException.java	(date 1575452423084)
++++ app/src/main/java/com/golang/management/api/APIException.java	(date 1575452423084)
 @@ -0,0 +1,18 @@
-+package com.guansu.management.api;
++package com.golang.management.api;
 +/**
 + *
 + * Created by dongyaoyao
@@ -6317,21 +6317,21 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +
 +}
 \ No newline at end of file
-Index: app/src/main/java/com/guansu/management/fragment/payment/PaymentSuccessFragment.java
+Index: app/src/main/java/com/golang/management/fragment/payment/PaymentSuccessFragment.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/fragment/payment/PaymentSuccessFragment.java	(date 1577175329908)
-+++ app/src/main/java/com/guansu/management/fragment/payment/PaymentSuccessFragment.java	(date 1577175329908)
+--- app/src/main/java/com/golang/management/fragment/payment/PaymentSuccessFragment.java	(date 1577175329908)
++++ app/src/main/java/com/golang/management/fragment/payment/PaymentSuccessFragment.java	(date 1577175329908)
 @@ -0,0 +1,40 @@
-+package com.guansu.management.fragment.payment;
++package com.golang.management.fragment.payment;
 +
 +import android.os.Bundle;
 +import android.view.View;
 +
-+import com.guansu.management.R;
-+import com.guansu.management.base.BaseFragment;
++import com.golang.management.R;
++import com.golang.management.base.BaseFragment;
 +
 +/**
 + * @date:
@@ -6365,15 +6365,15 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +        return false;
 +    }
 +}
-Index: app/src/main/java/com/guansu/management/api/SimpleResponse.java
+Index: app/src/main/java/com/golang/management/api/SimpleResponse.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/api/SimpleResponse.java	(date 1576998008317)
-+++ app/src/main/java/com/guansu/management/api/SimpleResponse.java	(date 1576998008317)
+--- app/src/main/java/com/golang/management/api/SimpleResponse.java	(date 1576998008317)
++++ app/src/main/java/com/golang/management/api/SimpleResponse.java	(date 1576998008317)
 @@ -0,0 +1,19 @@
-+package com.guansu.management.api;
++package com.golang.management.api;
 +
 +import java.io.Serializable;
 +/**
@@ -6393,21 +6393,21 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +    }
 +}
 \ No newline at end of file
-Index: app/src/main/java/com/guansu/management/base/MainApplication.java
+Index: app/src/main/java/com/golang/management/base/MainApplication.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/base/MainApplication.java	(date 1576980859823)
-+++ app/src/main/java/com/guansu/management/base/MainApplication.java	(date 1576980859823)
+--- app/src/main/java/com/golang/management/base/MainApplication.java	(date 1576980859823)
++++ app/src/main/java/com/golang/management/base/MainApplication.java	(date 1576980859823)
 @@ -0,0 +1,120 @@
-+package com.guansu.management.base;
++package com.golang.management.base;
 +
 +import android.app.Application;
 +import android.content.Context;
 +
-+import com.guansu.management.BuildConfig;
-+import com.guansu.management.common.ActivityPageManager;
++import com.golang.management.BuildConfig;
++import com.golang.management.common.ActivityPageManager;
 +import com.lzy.imagepicker.ImagePicker;
 +import com.lzy.okgo.OkGo;
 +import com.lzy.okgo.cache.CacheEntity;
@@ -6521,18 +6521,18 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +        ActivityPageManager.getInstance().exit(this);
 +    }
 +}
-Index: app/src/main/java/com/guansu/management/api/MyObserve.java
+Index: app/src/main/java/com/golang/management/api/MyObserve.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/api/MyObserve.java	(date 1576978889053)
-+++ app/src/main/java/com/guansu/management/api/MyObserve.java	(date 1576978889053)
+--- app/src/main/java/com/golang/management/api/MyObserve.java	(date 1576978889053)
++++ app/src/main/java/com/golang/management/api/MyObserve.java	(date 1576978889053)
 @@ -0,0 +1,75 @@
-+package com.guansu.management.api;
++package com.golang.management.api;
 +
-+import com.guansu.management.base.BaseInterface;
-+import com.guansu.management.config.HttpConstants;
++import com.golang.management.base.BaseInterface;
++import com.golang.management.config.HttpConstants;
 +import com.lzy.okgo.exception.HttpException;
 +
 +import java.lang.ref.WeakReference;
@@ -6604,19 +6604,19 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +    protected abstract void onSuccess(T t);
 +
 +}
-Index: app/src/main/java/com/guansu/management/api/JsonConvert.java
+Index: app/src/main/java/com/golang/management/api/JsonConvert.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/api/JsonConvert.java	(date 1576987584646)
-+++ app/src/main/java/com/guansu/management/api/JsonConvert.java	(date 1576987584646)
+--- app/src/main/java/com/golang/management/api/JsonConvert.java	(date 1576987584646)
++++ app/src/main/java/com/golang/management/api/JsonConvert.java	(date 1576987584646)
 @@ -0,0 +1,57 @@
-+package com.guansu.management.api;
++package com.golang.management.api;
 +
 +import com.google.gson.Gson;
 +import com.google.gson.stream.JsonReader;
-+import com.guansu.management.config.HttpConstants;
++import com.golang.management.config.HttpConstants;
 +import com.lzy.okgo.convert.Converter;
 +
 +import java.lang.reflect.Type;
@@ -6670,22 +6670,22 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +//    }
 +}
 \ No newline at end of file
-Index: app/src/main/java/com/guansu/management/base/GlideImageLoader.java
+Index: app/src/main/java/com/golang/management/base/GlideImageLoader.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/base/GlideImageLoader.java	(date 1575452424774)
-+++ app/src/main/java/com/guansu/management/base/GlideImageLoader.java	(date 1575452424774)
+--- app/src/main/java/com/golang/management/base/GlideImageLoader.java	(date 1575452424774)
++++ app/src/main/java/com/golang/management/base/GlideImageLoader.java	(date 1575452424774)
 @@ -0,0 +1,38 @@
-+package com.guansu.management.base;
++package com.golang.management.base;
 +
 +import android.app.Activity;
 +import android.widget.ImageView;
 +
 +import com.bumptech.glide.Glide;
 +import com.bumptech.glide.load.engine.DiskCacheStrategy;
-+import com.guansu.management.R;
++import com.golang.management.R;
 +import com.lzy.imagepicker.loader.ImageLoader;
 +/**
 + *
@@ -6717,15 +6717,15 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +    }
 +}
 \ No newline at end of file
-Index: app/src/main/java/com/guansu/management/bean/ShareItem.java
+Index: app/src/main/java/com/golang/management/bean/ShareItem.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/bean/ShareItem.java	(date 1575621687859)
-+++ app/src/main/java/com/guansu/management/bean/ShareItem.java	(date 1575621687859)
+--- app/src/main/java/com/golang/management/bean/ShareItem.java	(date 1575621687859)
++++ app/src/main/java/com/golang/management/bean/ShareItem.java	(date 1575621687859)
 @@ -0,0 +1,16 @@
-+package com.guansu.management.bean;
++package com.golang.management.bean;
 +
 +/**
 + * @date: $ $
@@ -6742,15 +6742,15 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +    }
 +}
 \ No newline at end of file
-Index: app/src/main/java/com/guansu/management/base/BasePresenter.java
+Index: app/src/main/java/com/golang/management/base/BasePresenter.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/base/BasePresenter.java	(date 1575452423448)
-+++ app/src/main/java/com/guansu/management/base/BasePresenter.java	(date 1575452423448)
+--- app/src/main/java/com/golang/management/base/BasePresenter.java	(date 1575452423448)
++++ app/src/main/java/com/golang/management/base/BasePresenter.java	(date 1575452423448)
 @@ -0,0 +1,15 @@
-+package com.guansu.management.base;
++package com.golang.management.base;
 +
 +import io.reactivex.disposables.Disposable;
 +
@@ -6766,15 +6766,15 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +
 +}
 \ No newline at end of file
-Index: app/src/main/java/com/guansu/management/base/BaseCommonPresenter.java
+Index: app/src/main/java/com/golang/management/base/BaseCommonPresenter.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/base/BaseCommonPresenter.java	(date 1575452424403)
-+++ app/src/main/java/com/guansu/management/base/BaseCommonPresenter.java	(date 1575452424403)
+--- app/src/main/java/com/golang/management/base/BaseCommonPresenter.java	(date 1575452424403)
++++ app/src/main/java/com/golang/management/base/BaseCommonPresenter.java	(date 1575452424403)
 @@ -0,0 +1,43 @@
-+package com.guansu.management.base;
++package com.golang.management.base;
 +
 +
 +import io.reactivex.disposables.CompositeDisposable;
@@ -6817,23 +6817,23 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +    }
 +
 +}
-Index: app/src/main/java/com/guansu/management/model/AccountModelIml.java
+Index: app/src/main/java/com/golang/management/model/AccountModelIml.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/model/AccountModelIml.java	(date 1576746639293)
-+++ app/src/main/java/com/guansu/management/model/AccountModelIml.java	(date 1576746639293)
+--- app/src/main/java/com/golang/management/model/AccountModelIml.java	(date 1576746639293)
++++ app/src/main/java/com/golang/management/model/AccountModelIml.java	(date 1576746639293)
 @@ -0,0 +1,78 @@
-+package com.guansu.management.model;
++package com.golang.management.model;
 +
 +import android.util.Log;
 +
 +import com.google.gson.reflect.TypeToken;
-+import com.guansu.management.api.ApiWrapper;
-+import com.guansu.management.api.CommonResponse;
-+import com.guansu.management.bean.UserInfo;
-+import com.guansu.management.model.bean.LoginResult;
++import com.golang.management.api.ApiWrapper;
++import com.golang.management.api.CommonResponse;
++import com.golang.management.bean.UserInfo;
++import com.golang.management.model.bean.LoginResult;
 +import com.lzy.okgo.cache.CacheMode;
 +import com.lzy.okgo.model.HttpMethod;
 +import com.lzy.okgo.model.HttpParams;
@@ -6903,15 +6903,15 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +        return ApiWrapper.request(HttpMethod.POST, URL_APPVERSIONINFO, type,httpParams);
 +    }*/
 +}
-Index: app/src/main/java/com/guansu/management/bean/UserInfo.java
+Index: app/src/main/java/com/golang/management/bean/UserInfo.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/bean/UserInfo.java	(date 1577254072088)
-+++ app/src/main/java/com/guansu/management/bean/UserInfo.java	(date 1577254072088)
+--- app/src/main/java/com/golang/management/bean/UserInfo.java	(date 1577254072088)
++++ app/src/main/java/com/golang/management/bean/UserInfo.java	(date 1577254072088)
 @@ -0,0 +1,62 @@
-+package com.guansu.management.bean;
++package com.golang.management.bean;
 +
 +import android.os.Parcel;
 +import android.os.Parcelable;
@@ -6974,19 +6974,19 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +    };
 +}
 \ No newline at end of file
-Index: app/src/main/java/com/guansu/management/model/MessageModellml.java
+Index: app/src/main/java/com/golang/management/model/MessageModellml.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/model/MessageModellml.java	(date 1577082429698)
-+++ app/src/main/java/com/guansu/management/model/MessageModellml.java	(date 1577082429698)
+--- app/src/main/java/com/golang/management/model/MessageModellml.java	(date 1577082429698)
++++ app/src/main/java/com/golang/management/model/MessageModellml.java	(date 1577082429698)
 @@ -0,0 +1,69 @@
-+package com.guansu.management.model;
++package com.golang.management.model;
 +import com.google.gson.reflect.TypeToken;
-+import com.guansu.management.api.ApiWrapper;
-+import com.guansu.management.bean.ActivityDtoInfo;
-+import com.guansu.management.config.Constant;
++import com.golang.management.api.ApiWrapper;
++import com.golang.management.bean.ActivityDtoInfo;
++import com.golang.management.config.Constant;
 +import com.lzy.okgo.model.HttpMethod;
 +import com.lzy.okgo.model.HttpParams;
 +
@@ -7051,22 +7051,22 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +        return ApiWrapper.babyrequest(HttpMethod.POST, HTTPURL, type,httpParams);
 +    }
 +}
-Index: app/src/main/java/com/guansu/management/utils/CommonUtils.java
+Index: app/src/main/java/com/golang/management/utils/CommonUtils.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/utils/CommonUtils.java	(date 1575452425095)
-+++ app/src/main/java/com/guansu/management/utils/CommonUtils.java	(date 1575452425095)
+--- app/src/main/java/com/golang/management/utils/CommonUtils.java	(date 1575452425095)
++++ app/src/main/java/com/golang/management/utils/CommonUtils.java	(date 1575452425095)
 @@ -0,0 +1,64 @@
-+package com.guansu.management.utils;
++package com.golang.management.utils;
 +
 +import android.content.pm.PackageInfo;
 +import android.content.pm.PackageManager;
 +import android.text.TextUtils;
 +
 +
-+import com.guansu.management.base.MainApplication;
++import com.golang.management.base.MainApplication;
 +
 +import java.text.DecimalFormat;
 +/**
@@ -7123,15 +7123,15 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +        }
 +    }
 +}
-Index: app/src/main/java/com/guansu/management/utils/ParameterizedTypeImpl.java
+Index: app/src/main/java/com/golang/management/utils/ParameterizedTypeImpl.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/utils/ParameterizedTypeImpl.java	(date 1575452424310)
-+++ app/src/main/java/com/guansu/management/utils/ParameterizedTypeImpl.java	(date 1575452424310)
+--- app/src/main/java/com/golang/management/utils/ParameterizedTypeImpl.java	(date 1575452424310)
++++ app/src/main/java/com/golang/management/utils/ParameterizedTypeImpl.java	(date 1575452424310)
 @@ -0,0 +1,32 @@
-+package com.guansu.management.utils;
++package com.golang.management.utils;
 +
 +import java.lang.reflect.ParameterizedType;
 +import java.lang.reflect.Type;
@@ -7164,18 +7164,18 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +    }
 +}
 \ No newline at end of file
-Index: app/src/main/java/com/guansu/management/model/bean/LoginResult.java
+Index: app/src/main/java/com/golang/management/model/bean/LoginResult.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/model/bean/LoginResult.java	(date 1576649435597)
-+++ app/src/main/java/com/guansu/management/model/bean/LoginResult.java	(date 1576649435597)
+--- app/src/main/java/com/golang/management/model/bean/LoginResult.java	(date 1576649435597)
++++ app/src/main/java/com/golang/management/model/bean/LoginResult.java	(date 1576649435597)
 @@ -0,0 +1,12 @@
-+package com.guansu.management.model.bean;
++package com.golang.management.model.bean;
 +
 +import com.google.gson.JsonArray;
-+import com.guansu.management.bean.UserInfo;
++import com.golang.management.bean.UserInfo;
 +/**
 + *
 + * Created by dongyaoyao
@@ -7184,15 +7184,15 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +    private UserInfo userInfo;
 +
 +}
-Index: app/src/main/java/com/guansu/management/model/bean/HomeBannerBean.java
+Index: app/src/main/java/com/golang/management/model/bean/HomeBannerBean.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/model/bean/HomeBannerBean.java	(date 1576207571736)
-+++ app/src/main/java/com/guansu/management/model/bean/HomeBannerBean.java	(date 1576207571736)
+--- app/src/main/java/com/golang/management/model/bean/HomeBannerBean.java	(date 1576207571736)
++++ app/src/main/java/com/golang/management/model/bean/HomeBannerBean.java	(date 1576207571736)
 @@ -0,0 +1,41 @@
-+package com.guansu.management.model.bean;
++package com.golang.management.model.bean;
 +/**
 + *
 + * Created by dongyaoyao
@@ -7233,15 +7233,15 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +        this.content = content;
 +    }
 +}
-Index: app/src/main/java/com/guansu/management/common/ActivityPageManager.java
+Index: app/src/main/java/com/golang/management/common/ActivityPageManager.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/common/ActivityPageManager.java	(date 1575452423021)
-+++ app/src/main/java/com/guansu/management/common/ActivityPageManager.java	(date 1575452423021)
+--- app/src/main/java/com/golang/management/common/ActivityPageManager.java	(date 1575452423021)
++++ app/src/main/java/com/golang/management/common/ActivityPageManager.java	(date 1575452423021)
 @@ -0,0 +1,216 @@
-+package com.guansu.management.common;
++package com.golang.management.common;
 +
 +import android.app.Activity;
 +import android.content.Context;
@@ -7457,15 +7457,15 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +		}
 +	}
 +}
-Index: app/src/main/java/com/guansu/management/common/ReplaceViewHelper.java
+Index: app/src/main/java/com/golang/management/common/ReplaceViewHelper.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/common/ReplaceViewHelper.java	(date 1575452423610)
-+++ app/src/main/java/com/guansu/management/common/ReplaceViewHelper.java	(date 1575452423610)
+--- app/src/main/java/com/golang/management/common/ReplaceViewHelper.java	(date 1575452423610)
++++ app/src/main/java/com/golang/management/common/ReplaceViewHelper.java	(date 1575452423610)
 @@ -0,0 +1,91 @@
-+package com.guansu.management.common;
++package com.golang.management.common;
 +
 +import android.content.Context;
 +import android.view.View;
@@ -7557,15 +7557,15 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +    }  
 +}  
 \ No newline at end of file
-Index: app/src/main/java/com/guansu/management/utils/ParcelableUtil.java
+Index: app/src/main/java/com/golang/management/utils/ParcelableUtil.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/utils/ParcelableUtil.java	(date 1575452424210)
-+++ app/src/main/java/com/guansu/management/utils/ParcelableUtil.java	(date 1575452424210)
+--- app/src/main/java/com/golang/management/utils/ParcelableUtil.java	(date 1575452424210)
++++ app/src/main/java/com/golang/management/utils/ParcelableUtil.java	(date 1575452424210)
 @@ -0,0 +1,41 @@
-+package com.guansu.management.utils;
++package com.golang.management.utils;
 +
 +import android.os.Parcel;
 +import android.os.Parcelable;
@@ -7606,15 +7606,15 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +    }
 +
 +}
-Index: app/src/main/java/com/guansu/management/config/Constants.java
+Index: app/src/main/java/com/golang/management/config/Constants.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/config/Constants.java	(date 1575452424434)
-+++ app/src/main/java/com/guansu/management/config/Constants.java	(date 1575452424434)
+--- app/src/main/java/com/golang/management/config/Constants.java	(date 1575452424434)
++++ app/src/main/java/com/golang/management/config/Constants.java	(date 1575452424434)
 @@ -0,0 +1,14 @@
-+package com.guansu.management.config;
++package com.golang.management.config;
 +/**
 + *
 + * Created by dongyaoyao
@@ -7628,15 +7628,15 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +
 +    public static final int PAGE_SIZE = 20;
 +}
-Index: app/src/main/java/com/guansu/management/config/Constant.java
+Index: app/src/main/java/com/golang/management/config/Constant.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/config/Constant.java	(date 1577256639516)
-+++ app/src/main/java/com/guansu/management/config/Constant.java	(date 1577256639516)
+--- app/src/main/java/com/golang/management/config/Constant.java	(date 1577256639516)
++++ app/src/main/java/com/golang/management/config/Constant.java	(date 1577256639516)
 @@ -0,0 +1,45 @@
-+package com.guansu.management.config;
++package com.golang.management.config;
 +/**
 + *
 + * Created by dongyaoyao
@@ -7681,20 +7681,20 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +    public static String VIEW_BLEND="viewBlend";
 +
 +}
-Index: app/src/main/java/com/guansu/management/common/UserSharedPreferencesUtils.java
+Index: app/src/main/java/com/golang/management/common/UserSharedPreferencesUtils.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/common/UserSharedPreferencesUtils.java	(date 1577254072048)
-+++ app/src/main/java/com/guansu/management/common/UserSharedPreferencesUtils.java	(date 1577254072048)
+--- app/src/main/java/com/golang/management/common/UserSharedPreferencesUtils.java	(date 1577254072048)
++++ app/src/main/java/com/golang/management/common/UserSharedPreferencesUtils.java	(date 1577254072048)
 @@ -0,0 +1,103 @@
-+package com.guansu.management.common;
++package com.golang.management.common;
 +
 +import android.content.Context;
 +import android.content.SharedPreferences;
-+import com.guansu.management.bean.UserInfo;
-+import com.guansu.management.utils.ParcelableUtil;
++import com.golang.management.bean.UserInfo;
++import com.golang.management.utils.ParcelableUtil;
 +/**
 + *
 + * Created by dongyaoyao
@@ -7792,25 +7792,25 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +
 +
 +}
-Index: app/src/main/java/com/guansu/management/ui/accont/AccountPresenter.java
+Index: app/src/main/java/com/golang/management/ui/accont/AccountPresenter.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/ui/accont/AccountPresenter.java	(date 1577253196832)
-+++ app/src/main/java/com/guansu/management/ui/accont/AccountPresenter.java	(date 1577253196832)
+--- app/src/main/java/com/golang/management/ui/accont/AccountPresenter.java	(date 1577253196832)
++++ app/src/main/java/com/golang/management/ui/accont/AccountPresenter.java	(date 1577253196832)
 @@ -0,0 +1,186 @@
-+package com.guansu.management.ui.accont;//package com.wisdom.regulatory.ui.welcome;
++package com.golang.management.ui.accont;//package com.wisdom.regulatory.ui.welcome;
 +
 +import android.content.Context;
 +import android.text.TextUtils;
 +
-+import com.guansu.management.api.MyObserve;
-+import com.guansu.management.base.BaseCommonPresenter;
-+import com.guansu.management.bean.UserInfo;
-+import com.guansu.management.common.UserSharedPreferencesUtils;
-+import com.guansu.management.model.AccountModelIml;
-+import com.guansu.management.model.bean.LoginResult;
++import com.golang.management.api.MyObserve;
++import com.golang.management.base.BaseCommonPresenter;
++import com.golang.management.bean.UserInfo;
++import com.golang.management.common.UserSharedPreferencesUtils;
++import com.golang.management.model.AccountModelIml;
++import com.golang.management.model.bean.LoginResult;
 +
 +/**
 + *
@@ -7986,15 +7986,15 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +//        super.unsubscribe();
 +//    }
 +}
-Index: app/src/main/java/com/guansu/management/config/HttpConstants.java
+Index: app/src/main/java/com/golang/management/config/HttpConstants.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/config/HttpConstants.java	(date 1576647726434)
-+++ app/src/main/java/com/guansu/management/config/HttpConstants.java	(date 1576647726434)
+--- app/src/main/java/com/golang/management/config/HttpConstants.java	(date 1576647726434)
++++ app/src/main/java/com/golang/management/config/HttpConstants.java	(date 1576647726434)
 @@ -0,0 +1,22 @@
-+package com.guansu.management.config;
++package com.golang.management.config;
 +
 +/**
 + *
@@ -8017,15 +8017,15 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +
 +}
 \ No newline at end of file
-Index: app/src/main/java/com/guansu/management/wigdet/EncodingUtils.java
+Index: app/src/main/java/com/golang/management/wigdet/EncodingUtils.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/wigdet/EncodingUtils.java	(date 1575623370918)
-+++ app/src/main/java/com/guansu/management/wigdet/EncodingUtils.java	(date 1575623370918)
+--- app/src/main/java/com/golang/management/wigdet/EncodingUtils.java	(date 1575623370918)
++++ app/src/main/java/com/golang/management/wigdet/EncodingUtils.java	(date 1575623370918)
 @@ -0,0 +1,96 @@
-+package com.guansu.management.wigdet;
++package com.golang.management.wigdet;
 +
 +import android.graphics.Bitmap;
 +import android.graphics.Canvas;
@@ -8121,15 +8121,15 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +        return bitmap;
 +    }
 +}
-Index: app/src/main/java/com/guansu/management/wigdet/banner/ViewPagerScroller.java
+Index: app/src/main/java/com/golang/management/wigdet/banner/ViewPagerScroller.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/wigdet/banner/ViewPagerScroller.java	(date 1575452423772)
-+++ app/src/main/java/com/guansu/management/wigdet/banner/ViewPagerScroller.java	(date 1575452423772)
+--- app/src/main/java/com/golang/management/wigdet/banner/ViewPagerScroller.java	(date 1575452423772)
++++ app/src/main/java/com/golang/management/wigdet/banner/ViewPagerScroller.java	(date 1575452423772)
 @@ -0,0 +1,52 @@
-+package com.guansu.management.wigdet.banner;
++package com.golang.management.wigdet.banner;
 +
 +import android.content.Context;
 +import android.view.animation.Interpolator;
@@ -8182,15 +8182,15 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +	}
 +}
 \ No newline at end of file
-Index: app/src/main/java/com/guansu/management/wigdet/banner/view/CBLoopViewPager.java
+Index: app/src/main/java/com/golang/management/wigdet/banner/view/CBLoopViewPager.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/wigdet/banner/view/CBLoopViewPager.java	(date 1575452424684)
-+++ app/src/main/java/com/guansu/management/wigdet/banner/view/CBLoopViewPager.java	(date 1575452424684)
+--- app/src/main/java/com/golang/management/wigdet/banner/view/CBLoopViewPager.java	(date 1575452424684)
++++ app/src/main/java/com/golang/management/wigdet/banner/view/CBLoopViewPager.java	(date 1575452424684)
 @@ -0,0 +1,169 @@
-+package com.guansu.management.wigdet.banner.view;
++package com.golang.management.wigdet.banner.view;
 +
 +import android.content.Context;
 +import android.util.AttributeSet;
@@ -8199,8 +8199,8 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +import androidx.viewpager.widget.PagerAdapter;
 +import androidx.viewpager.widget.ViewPager;
 +
-+import com.guansu.management.wigdet.banner.adapter.CBPageAdapter;
-+import com.guansu.management.wigdet.banner.listener.OnItemClickListener;
++import com.golang.management.wigdet.banner.adapter.CBPageAdapter;
++import com.golang.management.wigdet.banner.listener.OnItemClickListener;
 +
 +
 +public class CBLoopViewPager extends ViewPager {
@@ -8359,15 +8359,15 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +        this.onItemClickListener = onItemClickListener;
 +    }
 +}
-Index: app/src/main/java/com/guansu/management/wigdet/banner/ConvenientBanner.java
+Index: app/src/main/java/com/golang/management/wigdet/banner/ConvenientBanner.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/wigdet/banner/ConvenientBanner.java	(date 1575452423055)
-+++ app/src/main/java/com/guansu/management/wigdet/banner/ConvenientBanner.java	(date 1575452423055)
+--- app/src/main/java/com/golang/management/wigdet/banner/ConvenientBanner.java	(date 1575452423055)
++++ app/src/main/java/com/golang/management/wigdet/banner/ConvenientBanner.java	(date 1575452423055)
 @@ -0,0 +1,338 @@
-+package com.guansu.management.wigdet.banner;
++package com.golang.management.wigdet.banner;
 +
 +import android.annotation.TargetApi;
 +import android.content.Context;
@@ -8384,12 +8384,12 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +import androidx.viewpager.widget.ViewPager;
 +
 +
-+import com.guansu.management.R;
-+import com.guansu.management.wigdet.banner.adapter.CBPageAdapter;
-+import com.guansu.management.wigdet.banner.holder.CBViewHolderCreator;
-+import com.guansu.management.wigdet.banner.listener.CBPageChangeListener;
-+import com.guansu.management.wigdet.banner.listener.OnItemClickListener;
-+import com.guansu.management.wigdet.banner.view.CBLoopViewPager;
++import com.golang.management.R;
++import com.golang.management.wigdet.banner.adapter.CBPageAdapter;
++import com.golang.management.wigdet.banner.holder.CBViewHolderCreator;
++import com.golang.management.wigdet.banner.listener.CBPageChangeListener;
++import com.golang.management.wigdet.banner.listener.OnItemClickListener;
++import com.golang.management.wigdet.banner.view.CBLoopViewPager;
 +
 +import java.lang.ref.WeakReference;
 +import java.lang.reflect.Field;
@@ -8705,25 +8705,25 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +        viewPager.setCanLoop(canLoop);
 +    }
 +}
-Index: app/src/main/java/com/guansu/management/wigdet/banner/adapter/CBPageAdapter.java
+Index: app/src/main/java/com/golang/management/wigdet/banner/adapter/CBPageAdapter.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/wigdet/banner/adapter/CBPageAdapter.java	(date 1575452425008)
-+++ app/src/main/java/com/guansu/management/wigdet/banner/adapter/CBPageAdapter.java	(date 1575452425008)
+--- app/src/main/java/com/golang/management/wigdet/banner/adapter/CBPageAdapter.java	(date 1575452425008)
++++ app/src/main/java/com/golang/management/wigdet/banner/adapter/CBPageAdapter.java	(date 1575452425008)
 @@ -0,0 +1,106 @@
-+package com.guansu.management.wigdet.banner.adapter;
++package com.golang.management.wigdet.banner.adapter;
 +
 +import android.view.View;
 +import android.view.ViewGroup;
 +
 +import androidx.viewpager.widget.PagerAdapter;
 +
-+import com.guansu.management.R;
-+import com.guansu.management.wigdet.banner.holder.CBViewHolderCreator;
-+import com.guansu.management.wigdet.banner.holder.Holder;
-+import com.guansu.management.wigdet.banner.view.CBLoopViewPager;
++import com.golang.management.R;
++import com.golang.management.wigdet.banner.holder.CBViewHolderCreator;
++import com.golang.management.wigdet.banner.holder.Holder;
++import com.golang.management.wigdet.banner.view.CBLoopViewPager;
 +
 +import java.util.List;
 +/**
@@ -8819,15 +8819,15 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +//        this.onItemClickListener = onItemClickListener;
 +//    }
 +}
-Index: app/src/main/java/com/guansu/management/wigdet/banner/listener/CBPageChangeListener.java
+Index: app/src/main/java/com/golang/management/wigdet/banner/listener/CBPageChangeListener.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/wigdet/banner/listener/CBPageChangeListener.java	(date 1575452424092)
-+++ app/src/main/java/com/guansu/management/wigdet/banner/listener/CBPageChangeListener.java	(date 1575452424092)
+--- app/src/main/java/com/golang/management/wigdet/banner/listener/CBPageChangeListener.java	(date 1575452424092)
++++ app/src/main/java/com/golang/management/wigdet/banner/listener/CBPageChangeListener.java	(date 1575452424092)
 @@ -0,0 +1,45 @@
-+package com.guansu.management.wigdet.banner.listener;
++package com.golang.management.wigdet.banner.listener;
 +
 +import android.widget.ImageView;
 +
@@ -8872,15 +8872,15 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +        this.onPageChangeListener = onPageChangeListener;
 +    }
 +}
-Index: app/src/main/java/com/guansu/management/wigdet/banner/holder/Holder.java
+Index: app/src/main/java/com/golang/management/wigdet/banner/holder/Holder.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/wigdet/banner/holder/Holder.java	(date 1575452423303)
-+++ app/src/main/java/com/guansu/management/wigdet/banner/holder/Holder.java	(date 1575452423303)
+--- app/src/main/java/com/golang/management/wigdet/banner/holder/Holder.java	(date 1575452423303)
++++ app/src/main/java/com/golang/management/wigdet/banner/holder/Holder.java	(date 1575452423303)
 @@ -0,0 +1,12 @@
-+package com.guansu.management.wigdet.banner.holder;
++package com.golang.management.wigdet.banner.holder;
 +
 +import android.content.Context;
 +import android.view.View;
@@ -8893,15 +8893,15 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +    void UpdateUI(Context context, int position, T data);
 +}
 \ No newline at end of file
-Index: app/src/main/java/com/guansu/management/wigdet/banner/holder/CBViewHolderCreator.java
+Index: app/src/main/java/com/golang/management/wigdet/banner/holder/CBViewHolderCreator.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/wigdet/banner/holder/CBViewHolderCreator.java	(date 1575452424651)
-+++ app/src/main/java/com/guansu/management/wigdet/banner/holder/CBViewHolderCreator.java	(date 1575452424651)
+--- app/src/main/java/com/golang/management/wigdet/banner/holder/CBViewHolderCreator.java	(date 1575452424651)
++++ app/src/main/java/com/golang/management/wigdet/banner/holder/CBViewHolderCreator.java	(date 1575452424651)
 @@ -0,0 +1,8 @@
-+package com.guansu.management.wigdet.banner.holder;
++package com.golang.management.wigdet.banner.holder;
 +/**
 + *
 + * Created by dongyaoyao
@@ -8909,15 +8909,15 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +public interface CBViewHolderCreator<Holder> {
 +	public Holder createHolder();
 +}
-Index: app/src/main/java/com/guansu/management/wigdet/dialog/BaseDialog.java
+Index: app/src/main/java/com/golang/management/wigdet/dialog/BaseDialog.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/wigdet/dialog/BaseDialog.java	(date 1575522989930)
-+++ app/src/main/java/com/guansu/management/wigdet/dialog/BaseDialog.java	(date 1575522989930)
+--- app/src/main/java/com/golang/management/wigdet/dialog/BaseDialog.java	(date 1575522989930)
++++ app/src/main/java/com/golang/management/wigdet/dialog/BaseDialog.java	(date 1575522989930)
 @@ -0,0 +1,795 @@
-+package com.guansu.management.wigdet.dialog;
++package com.golang.management.wigdet.dialog;
 +
 +import android.content.Context;
 +import android.content.DialogInterface;
@@ -8948,7 +8948,7 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +import androidx.appcompat.app.AppCompatDialog;
 +
 +
-+import com.guansu.management.R;
++import com.golang.management.R;
 +
 +import java.util.ArrayList;
 +import java.util.List;
@@ -9713,15 +9713,15 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +    }
 +}
 \ No newline at end of file
-Index: app/src/main/java/com/guansu/management/wigdet/dialog/BaseDialogFragment.java
+Index: app/src/main/java/com/golang/management/wigdet/dialog/BaseDialogFragment.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/wigdet/dialog/BaseDialogFragment.java	(date 1575522989817)
-+++ app/src/main/java/com/guansu/management/wigdet/dialog/BaseDialogFragment.java	(date 1575522989817)
+--- app/src/main/java/com/golang/management/wigdet/dialog/BaseDialogFragment.java	(date 1575522989817)
++++ app/src/main/java/com/golang/management/wigdet/dialog/BaseDialogFragment.java	(date 1575522989817)
 @@ -0,0 +1,144 @@
-+package com.guansu.management.wigdet.dialog;
++package com.golang.management.wigdet.dialog;
 +
 +import android.app.Dialog;
 +import android.os.Bundle;
@@ -9866,15 +9866,15 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +    }
 +}
 \ No newline at end of file
-Index: app/src/main/java/com/guansu/management/wigdet/banner/listener/OnItemClickListener.java
+Index: app/src/main/java/com/golang/management/wigdet/banner/listener/OnItemClickListener.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/wigdet/banner/listener/OnItemClickListener.java	(date 1575452424269)
-+++ app/src/main/java/com/guansu/management/wigdet/banner/listener/OnItemClickListener.java	(date 1575452424269)
+--- app/src/main/java/com/golang/management/wigdet/banner/listener/OnItemClickListener.java	(date 1575452424269)
++++ app/src/main/java/com/golang/management/wigdet/banner/listener/OnItemClickListener.java	(date 1575452424269)
 @@ -0,0 +1,8 @@
-+package com.guansu.management.wigdet.banner.listener;
++package com.golang.management.wigdet.banner.listener;
 +/**
 + *
 + * Created by dongyaoyao
@@ -9882,15 +9882,15 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +public interface OnItemClickListener {
 +    public void onItemClick(int position);
 +}
-Index: app/src/main/java/com/guansu/management/wigdet/dialog/PaySuccessDialog.java
+Index: app/src/main/java/com/golang/management/wigdet/dialog/PaySuccessDialog.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/wigdet/dialog/PaySuccessDialog.java	(date 1575522989843)
-+++ app/src/main/java/com/guansu/management/wigdet/dialog/PaySuccessDialog.java	(date 1575522989843)
+--- app/src/main/java/com/golang/management/wigdet/dialog/PaySuccessDialog.java	(date 1575522989843)
++++ app/src/main/java/com/golang/management/wigdet/dialog/PaySuccessDialog.java	(date 1575522989843)
 @@ -0,0 +1,42 @@
-+package com.guansu.management.wigdet.dialog;
++package com.golang.management.wigdet.dialog;
 +
 +import android.view.Gravity;
 +import android.view.View;
@@ -9898,7 +9898,7 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +
 +import androidx.fragment.app.FragmentActivity;
 +
-+import com.guansu.management.R;
++import com.golang.management.R;
 +
 +public final class PaySuccessDialog {
 +
@@ -9933,15 +9933,15 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +
 +}
 \ No newline at end of file
-Index: app/src/main/java/com/guansu/management/wigdet/statusbar/FlymeStatusBarUtils.java
+Index: app/src/main/java/com/golang/management/wigdet/statusbar/FlymeStatusBarUtils.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/wigdet/statusbar/FlymeStatusBarUtils.java	(date 1575452423145)
-+++ app/src/main/java/com/guansu/management/wigdet/statusbar/FlymeStatusBarUtils.java	(date 1575452423145)
+--- app/src/main/java/com/golang/management/wigdet/statusbar/FlymeStatusBarUtils.java	(date 1575452423145)
++++ app/src/main/java/com/golang/management/wigdet/statusbar/FlymeStatusBarUtils.java	(date 1575452423145)
 @@ -0,0 +1,216 @@
-+package com.guansu.management.wigdet.statusbar;
++package com.golang.management.wigdet.statusbar;
 +
 +import android.app.Activity;
 +import android.os.Build;
@@ -10157,15 +10157,15 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +        }
 +    }
 +}
-Index: app/src/main/java/com/guansu/management/wigdet/statusbar/OSUtils.java
+Index: app/src/main/java/com/golang/management/wigdet/statusbar/OSUtils.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/wigdet/statusbar/OSUtils.java	(date 1575452424880)
-+++ app/src/main/java/com/guansu/management/wigdet/statusbar/OSUtils.java	(date 1575452424880)
+--- app/src/main/java/com/golang/management/wigdet/statusbar/OSUtils.java	(date 1575452424880)
++++ app/src/main/java/com/golang/management/wigdet/statusbar/OSUtils.java	(date 1575452424880)
 @@ -0,0 +1,123 @@
-+package com.guansu.management.wigdet.statusbar;
++package com.golang.management.wigdet.statusbar;
 +
 +import android.os.Build;
 +import android.text.TextUtils;
@@ -10288,15 +10288,15 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +    }
 +}
 +
-Index: app/src/main/java/com/guansu/management/wigdet/bottombar/BottomBarTab.java
+Index: app/src/main/java/com/golang/management/wigdet/bottombar/BottomBarTab.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/wigdet/bottombar/BottomBarTab.java	(date 1576466991788)
-+++ app/src/main/java/com/guansu/management/wigdet/bottombar/BottomBarTab.java	(date 1576466991788)
+--- app/src/main/java/com/golang/management/wigdet/bottombar/BottomBarTab.java	(date 1576466991788)
++++ app/src/main/java/com/golang/management/wigdet/bottombar/BottomBarTab.java	(date 1576466991788)
 @@ -0,0 +1,162 @@
-+package com.guansu.management.wigdet.bottombar;
++package com.golang.management.wigdet.bottombar;
 +
 +import android.content.Context;
 +import android.content.res.TypedArray;
@@ -10315,7 +10315,7 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +import androidx.annotation.DrawableRes;
 +import androidx.core.content.ContextCompat;
 +
-+import com.guansu.management.R;
++import com.golang.management.R;
 +
 +
 +/**
@@ -10458,15 +10458,15 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, context.getResources().getDisplayMetrics());
 +    }
 +}
-Index: app/src/main/java/com/guansu/management/wigdet/bottombar/BottomBar.java
+Index: app/src/main/java/com/golang/management/wigdet/bottombar/BottomBar.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/wigdet/bottombar/BottomBar.java	(date 1576546697398)
-+++ app/src/main/java/com/guansu/management/wigdet/bottombar/BottomBar.java	(date 1576546697398)
+--- app/src/main/java/com/golang/management/wigdet/bottombar/BottomBar.java	(date 1576546697398)
++++ app/src/main/java/com/golang/management/wigdet/bottombar/BottomBar.java	(date 1576546697398)
 @@ -0,0 +1,229 @@
-+package com.guansu.management.wigdet.bottombar;
++package com.golang.management.wigdet.bottombar;
 +
 +import android.content.Context;
 +import android.graphics.Color;
@@ -10483,7 +10483,7 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +import androidx.core.content.ContextCompat;
 +import androidx.core.view.ViewCompat;
 +
-+import com.guansu.management.R;
++import com.golang.management.R;
 +
 +import java.util.ArrayList;
 +import java.util.List;
@@ -10695,15 +10695,15 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +        }
 +    }
 +}
-Index: app/src/main/java/com/guansu/management/wigdet/datepicker/CustomDatePicker.java
+Index: app/src/main/java/com/golang/management/wigdet/datepicker/CustomDatePicker.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/wigdet/datepicker/CustomDatePicker.java	(date 1575612379229)
-+++ app/src/main/java/com/guansu/management/wigdet/datepicker/CustomDatePicker.java	(date 1575612379229)
+--- app/src/main/java/com/golang/management/wigdet/datepicker/CustomDatePicker.java	(date 1575612379229)
++++ app/src/main/java/com/golang/management/wigdet/datepicker/CustomDatePicker.java	(date 1575612379229)
 @@ -0,0 +1,574 @@
-+package com.guansu.management.wigdet.datepicker;
++package com.golang.management.wigdet.datepicker;
 +
 +import android.app.Dialog;
 +import android.content.Context;
@@ -10714,7 +10714,7 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +import android.view.WindowManager;
 +
 +
-+import com.guansu.management.R;
++import com.golang.management.R;
 +
 +import java.text.DecimalFormat;
 +import java.util.ArrayList;
@@ -11277,15 +11277,15 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +    }
 +
 +}
-Index: app/src/main/java/com/guansu/management/wigdet/datepicker/DateFormatUtils.java
+Index: app/src/main/java/com/golang/management/wigdet/datepicker/DateFormatUtils.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/wigdet/datepicker/DateFormatUtils.java	(date 1575612379262)
-+++ app/src/main/java/com/guansu/management/wigdet/datepicker/DateFormatUtils.java	(date 1575612379262)
+--- app/src/main/java/com/golang/management/wigdet/datepicker/DateFormatUtils.java	(date 1575612379262)
++++ app/src/main/java/com/golang/management/wigdet/datepicker/DateFormatUtils.java	(date 1575612379262)
 @@ -0,0 +1,52 @@
-+package com.guansu.management.wigdet.datepicker;
++package com.golang.management.wigdet.datepicker;
 +
 +import java.text.SimpleDateFormat;
 +import java.util.Date;
@@ -11337,15 +11337,15 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +            return DATE_FORMAT_PATTERN_YMD;
 +    }
 +}
-Index: app/src/main/java/com/guansu/management/fragment/home/adapter/ImageAdapter.java
+Index: app/src/main/java/com/golang/management/fragment/home/adapter/ImageAdapter.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/fragment/home/adapter/ImageAdapter.java	(date 1576562015946)
-+++ app/src/main/java/com/guansu/management/fragment/home/adapter/ImageAdapter.java	(date 1576562015946)
+--- app/src/main/java/com/golang/management/fragment/home/adapter/ImageAdapter.java	(date 1576562015946)
++++ app/src/main/java/com/golang/management/fragment/home/adapter/ImageAdapter.java	(date 1576562015946)
 @@ -0,0 +1,50 @@
-+package com.guansu.management.fragment.home.adapter;
++package com.golang.management.fragment.home.adapter;
 +
 +import android.view.LayoutInflater;
 +import android.view.View;
@@ -11355,9 +11355,9 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +import androidx.recyclerview.widget.RecyclerView;
 +
 +import com.bumptech.glide.Glide;
-+import com.guansu.management.R;
-+import com.guansu.management.bean.HomeBean;
-+import com.guansu.management.bean.ImagesListBean;
++import com.golang.management.R;
++import com.golang.management.bean.HomeBean;
++import com.golang.management.bean.ImagesListBean;
 +
 +import java.util.List;
 +
@@ -11395,15 +11395,15 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +        }
 +    }
 +}
-Index: app/src/main/java/com/guansu/management/wigdet/statusbar/StatusBarUtils.java
+Index: app/src/main/java/com/golang/management/wigdet/statusbar/StatusBarUtils.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/wigdet/statusbar/StatusBarUtils.java	(date 1575452424958)
-+++ app/src/main/java/com/guansu/management/wigdet/statusbar/StatusBarUtils.java	(date 1575452424958)
+--- app/src/main/java/com/golang/management/wigdet/statusbar/StatusBarUtils.java	(date 1575452424958)
++++ app/src/main/java/com/golang/management/wigdet/statusbar/StatusBarUtils.java	(date 1575452424958)
 @@ -0,0 +1,238 @@
-+package com.guansu.management.wigdet.statusbar;
++package com.golang.management.wigdet.statusbar;
 +
 +import android.annotation.TargetApi;
 +import android.content.Context;
@@ -11641,19 +11641,19 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +        }
 +    }
 +}
-Index: app/src/main/java/com/guansu/management/utils/OrderInfoUtil2_0.java
+Index: app/src/main/java/com/golang/management/utils/OrderInfoUtil2_0.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/utils/OrderInfoUtil2_0.java	(date 1577073939846)
-+++ app/src/main/java/com/guansu/management/utils/OrderInfoUtil2_0.java	(date 1577073939846)
+--- app/src/main/java/com/golang/management/utils/OrderInfoUtil2_0.java	(date 1577073939846)
++++ app/src/main/java/com/golang/management/utils/OrderInfoUtil2_0.java	(date 1577073939846)
 @@ -0,0 +1,197 @@
-+package com.guansu.management.utils;
++package com.golang.management.utils;
 +
 +import android.util.Log;
 +
-+import com.guansu.management.paymentmoney.SignUtils;
++import com.golang.management.paymentmoney.SignUtils;
 +
 +import java.io.UnsupportedEncodingException;
 +import java.net.URLEncoder;
@@ -11846,15 +11846,15 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +	}
 +
 +}
-Index: app/src/main/java/com/guansu/management/wigdet/datepicker/PickerView.java
+Index: app/src/main/java/com/golang/management/wigdet/datepicker/PickerView.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/wigdet/datepicker/PickerView.java	(date 1575612867802)
-+++ app/src/main/java/com/guansu/management/wigdet/datepicker/PickerView.java	(date 1575612867802)
+--- app/src/main/java/com/golang/management/wigdet/datepicker/PickerView.java	(date 1575612867802)
++++ app/src/main/java/com/golang/management/wigdet/datepicker/PickerView.java	(date 1575612867802)
 @@ -0,0 +1,386 @@
-+package com.guansu.management.wigdet.datepicker;
++package com.golang.management.wigdet.datepicker;
 +
 +import android.animation.ObjectAnimator;
 +import android.animation.PropertyValuesHolder;
@@ -11873,7 +11873,7 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +
 +import androidx.core.content.ContextCompat;
 +
-+import com.guansu.management.R;
++import com.golang.management.R;
 +
 +import java.lang.ref.WeakReference;
 +import java.util.ArrayList;
@@ -12241,20 +12241,20 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +
 +}
 \ No newline at end of file
-Index: app/src/main/java/com/guansu/management/fragment/message/DetailsMessageFragment.java
+Index: app/src/main/java/com/golang/management/fragment/message/DetailsMessageFragment.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/fragment/message/DetailsMessageFragment.java	(date 1576554289960)
-+++ app/src/main/java/com/guansu/management/fragment/message/DetailsMessageFragment.java	(date 1576554289960)
+--- app/src/main/java/com/golang/management/fragment/message/DetailsMessageFragment.java	(date 1576554289960)
++++ app/src/main/java/com/golang/management/fragment/message/DetailsMessageFragment.java	(date 1576554289960)
 @@ -0,0 +1,43 @@
-+package com.guansu.management.fragment.message;
++package com.golang.management.fragment.message;
 +
 +import android.os.Bundle;
 +import android.view.View;
-+import com.guansu.management.R;
-+import com.guansu.management.base.BaseFragment;
++import com.golang.management.R;
++import com.golang.management.base.BaseFragment;
 +
 +/**
 + * @author: dongyaoyao
@@ -12292,15 +12292,15 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +        return false;
 +    }
 +}
-Index: app/src/main/java/com/guansu/management/wigdet/recyclerview/OnItemClickListener.java
+Index: app/src/main/java/com/golang/management/wigdet/recyclerview/OnItemClickListener.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/wigdet/recyclerview/OnItemClickListener.java	(date 1575452424591)
-+++ app/src/main/java/com/guansu/management/wigdet/recyclerview/OnItemClickListener.java	(date 1575452424591)
+--- app/src/main/java/com/golang/management/wigdet/recyclerview/OnItemClickListener.java	(date 1575452424591)
++++ app/src/main/java/com/golang/management/wigdet/recyclerview/OnItemClickListener.java	(date 1575452424591)
 @@ -0,0 +1,12 @@
-+package com.guansu.management.wigdet.recyclerview;
++package com.golang.management.wigdet.recyclerview;
 +
 +import android.view.View;
 +/**
@@ -12313,15 +12313,15 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +    void onLongClick(View view, int position);
 +}
 \ No newline at end of file
-Index: app/src/main/java/com/guansu/management/wigdet/recyclerview/RecyclerItemClickListener.java
+Index: app/src/main/java/com/golang/management/wigdet/recyclerview/RecyclerItemClickListener.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/wigdet/recyclerview/RecyclerItemClickListener.java	(date 1575942601908)
-+++ app/src/main/java/com/guansu/management/wigdet/recyclerview/RecyclerItemClickListener.java	(date 1575942601908)
+--- app/src/main/java/com/golang/management/wigdet/recyclerview/RecyclerItemClickListener.java	(date 1575942601908)
++++ app/src/main/java/com/golang/management/wigdet/recyclerview/RecyclerItemClickListener.java	(date 1575942601908)
 @@ -0,0 +1,57 @@
-+package com.guansu.management.wigdet.recyclerview;
++package com.golang.management.wigdet.recyclerview;
 +
 +import android.content.Context;
 +import android.view.GestureDetector;
@@ -12330,7 +12330,7 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +
 +import androidx.recyclerview.widget.RecyclerView;
 +
-+import com.guansu.management.fragment.home.MessageFragment;
++import com.golang.management.fragment.home.MessageFragment;
 +
 +/**
 + *
@@ -12378,15 +12378,15 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +
 +    }
 +}
-Index: app/src/main/java/com/guansu/management/wigdet/recyclerview/DividerItemDecoration.java
+Index: app/src/main/java/com/golang/management/wigdet/recyclerview/DividerItemDecoration.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/wigdet/recyclerview/DividerItemDecoration.java	(date 1575452423115)
-+++ app/src/main/java/com/guansu/management/wigdet/recyclerview/DividerItemDecoration.java	(date 1575452423115)
+--- app/src/main/java/com/golang/management/wigdet/recyclerview/DividerItemDecoration.java	(date 1575452423115)
++++ app/src/main/java/com/golang/management/wigdet/recyclerview/DividerItemDecoration.java	(date 1575452423115)
 @@ -0,0 +1,302 @@
-+package com.guansu.management.wigdet.recyclerview;
++package com.golang.management.wigdet.recyclerview;
 +
 +import android.content.Context;
 +import android.graphics.Canvas;
@@ -12400,8 +12400,8 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +import androidx.recyclerview.widget.RecyclerView;
 +import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 +
-+import com.guansu.management.R;
-+import com.guansu.management.wigdet.utils.DimensUtils;
++import com.golang.management.R;
++import com.golang.management.wigdet.utils.DimensUtils;
 +
 +/**
 + *
@@ -12689,15 +12689,15 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +    }
 +}
 \ No newline at end of file
-Index: app/src/main/java/com/guansu/management/wigdet/recyclerview/EndLessOnScrollListener.java
+Index: app/src/main/java/com/golang/management/wigdet/recyclerview/EndLessOnScrollListener.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/wigdet/recyclerview/EndLessOnScrollListener.java	(date 1577092540540)
-+++ app/src/main/java/com/guansu/management/wigdet/recyclerview/EndLessOnScrollListener.java	(date 1577092540540)
+--- app/src/main/java/com/golang/management/wigdet/recyclerview/EndLessOnScrollListener.java	(date 1577092540540)
++++ app/src/main/java/com/golang/management/wigdet/recyclerview/EndLessOnScrollListener.java	(date 1577092540540)
 @@ -0,0 +1,72 @@
-+package com.guansu.management.wigdet.recyclerview;
++package com.golang.management.wigdet.recyclerview;
 +
 +import androidx.recyclerview.widget.LinearLayoutManager;
 +import androidx.recyclerview.widget.RecyclerView;
@@ -12769,15 +12769,15 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +     */
 +    public abstract void onLoadMore(int currentPage);
 +}
-Index: app/src/main/java/com/guansu/management/wigdet/customimageview/DefinedCircleView.java
+Index: app/src/main/java/com/golang/management/wigdet/customimageview/DefinedCircleView.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/wigdet/customimageview/DefinedCircleView.java	(date 1575452423703)
-+++ app/src/main/java/com/guansu/management/wigdet/customimageview/DefinedCircleView.java	(date 1575452423703)
+--- app/src/main/java/com/golang/management/wigdet/customimageview/DefinedCircleView.java	(date 1575452423703)
++++ app/src/main/java/com/golang/management/wigdet/customimageview/DefinedCircleView.java	(date 1575452423703)
 @@ -0,0 +1,105 @@
-+package com.guansu.management.wigdet.customimageview;
++package com.golang.management.wigdet.customimageview;
 +
 +import android.content.Context;
 +import android.graphics.Bitmap;
@@ -12882,15 +12882,15 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +    }
 +
 +}
-Index: app/src/main/java/com/guansu/management/fragment/release/DetailsNextFragment.java
+Index: app/src/main/java/com/golang/management/fragment/release/DetailsNextFragment.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/fragment/release/DetailsNextFragment.java	(date 1577256068597)
-+++ app/src/main/java/com/guansu/management/fragment/release/DetailsNextFragment.java	(date 1577256068597)
+--- app/src/main/java/com/golang/management/fragment/release/DetailsNextFragment.java	(date 1577256068597)
++++ app/src/main/java/com/golang/management/fragment/release/DetailsNextFragment.java	(date 1577256068597)
 @@ -0,0 +1,330 @@
-+package com.guansu.management.fragment.release;
++package com.golang.management.fragment.release;
 +import android.app.Dialog;
 +import android.graphics.Color;
 +import android.os.Build;
@@ -12909,18 +12909,18 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +import android.widget.TextView;
 +import androidx.annotation.RequiresApi;
 +import com.google.gson.Gson;
-+import com.guansu.management.R;
-+import com.guansu.management.activity.CheckPermissionsActivity;
-+import com.guansu.management.api.MyObserve;
-+import com.guansu.management.bean.FileBean;
-+import com.guansu.management.common.OnClickListenerWrapper;
-+import com.guansu.management.common.UserSharedPreferencesUtils;
-+import com.guansu.management.config.Constants;
-+import com.guansu.management.config.HttpConstants;
-+import com.guansu.management.fragment.release.data.CalendarList;
-+import com.guansu.management.model.HomeModellml;
-+import com.guansu.management.model.ReleaseModellml;
-+import com.guansu.management.wigdet.datepicker.PickValueView;
++import com.golang.management.R;
++import com.golang.management.activity.CheckPermissionsActivity;
++import com.golang.management.api.MyObserve;
++import com.golang.management.bean.FileBean;
++import com.golang.management.common.OnClickListenerWrapper;
++import com.golang.management.common.UserSharedPreferencesUtils;
++import com.golang.management.config.Constants;
++import com.golang.management.config.HttpConstants;
++import com.golang.management.fragment.release.data.CalendarList;
++import com.golang.management.model.HomeModellml;
++import com.golang.management.model.ReleaseModellml;
++import com.golang.management.wigdet.datepicker.PickValueView;
 +import com.lljjcoder.citypickerview.widget.CityPicker;
 +import com.lzy.imagepicker.bean.ImageItem;
 +import com.lzy.okgo.OkGo;
@@ -13220,15 +13220,15 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +        });
 +    }
 +}
-Index: app/src/main/java/com/guansu/management/base/BaseActivity.java
+Index: app/src/main/java/com/golang/management/base/BaseActivity.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/base/BaseActivity.java	(date 1577253955108)
-+++ app/src/main/java/com/guansu/management/base/BaseActivity.java	(date 1577253955108)
+--- app/src/main/java/com/golang/management/base/BaseActivity.java	(date 1577253955108)
++++ app/src/main/java/com/golang/management/base/BaseActivity.java	(date 1577253955108)
 @@ -0,0 +1,232 @@
-+package com.guansu.management.base;
++package com.golang.management.base;
 +
 +import android.app.ProgressDialog;
 +import android.content.Intent;
@@ -13242,12 +13242,12 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +import android.view.View;
 +import android.widget.Toast;
 +
-+import com.guansu.management.R;
-+import com.guansu.management.common.ActivityPageManager;
-+import com.guansu.management.common.ReplaceViewHelper;
-+import com.guansu.management.common.UserSharedPreferencesUtils;
-+import com.guansu.management.fragment.LoginFragment;
-+import com.guansu.management.wigdet.CommonTitleBar;
++import com.golang.management.R;
++import com.golang.management.common.ActivityPageManager;
++import com.golang.management.common.ReplaceViewHelper;
++import com.golang.management.common.UserSharedPreferencesUtils;
++import com.golang.management.fragment.LoginFragment;
++import com.golang.management.wigdet.CommonTitleBar;
 +
 +import io.reactivex.disposables.CompositeDisposable;
 +import io.reactivex.disposables.Disposable;
@@ -13461,15 +13461,15 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +    }
 +}
 \ No newline at end of file
-Index: app/src/main/java/com/guansu/management/base/BaseInterface.java
+Index: app/src/main/java/com/golang/management/base/BaseInterface.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/base/BaseInterface.java	(date 1575452424344)
-+++ app/src/main/java/com/guansu/management/base/BaseInterface.java	(date 1575452424344)
+--- app/src/main/java/com/golang/management/base/BaseInterface.java	(date 1575452424344)
++++ app/src/main/java/com/golang/management/base/BaseInterface.java	(date 1575452424344)
 @@ -0,0 +1,38 @@
-+package com.guansu.management.base;
++package com.golang.management.base;
 +
 +import io.reactivex.disposables.Disposable;
 +
@@ -13507,15 +13507,15 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +
 +    boolean isLogin();
 +}
-Index: app/src/main/java/com/guansu/management/fragment/foot/FootAdapter.java
+Index: app/src/main/java/com/golang/management/fragment/foot/FootAdapter.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/fragment/foot/FootAdapter.java	(date 1575774382969)
-+++ app/src/main/java/com/guansu/management/fragment/foot/FootAdapter.java	(date 1575774382969)
+--- app/src/main/java/com/golang/management/fragment/foot/FootAdapter.java	(date 1575774382969)
++++ app/src/main/java/com/golang/management/fragment/foot/FootAdapter.java	(date 1575774382969)
 @@ -0,0 +1,82 @@
-+package com.guansu.management.fragment.foot;
++package com.golang.management.fragment.foot;
 +
 +import android.content.Context;
 +import android.view.LayoutInflater;
@@ -13526,7 +13526,7 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +import androidx.annotation.NonNull;
 +import androidx.recyclerview.widget.RecyclerView;
 +
-+import com.guansu.management.R;
++import com.golang.management.R;
 +
 +import butterknife.BindView;
 +import butterknife.ButterKnife;
@@ -13597,15 +13597,15 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +          notifyDataSetChanged();
 +      }*/
 +}
-Index: app/src/main/java/com/guansu/management/fragment/release/data/CalendarList.java
+Index: app/src/main/java/com/golang/management/fragment/release/data/CalendarList.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/fragment/release/data/CalendarList.java	(date 1577181485363)
-+++ app/src/main/java/com/guansu/management/fragment/release/data/CalendarList.java	(date 1577181485363)
+--- app/src/main/java/com/golang/management/fragment/release/data/CalendarList.java	(date 1577181485363)
++++ app/src/main/java/com/golang/management/fragment/release/data/CalendarList.java	(date 1577181485363)
 @@ -0,0 +1,461 @@
-+package com.guansu.management.fragment.release.data;
++package com.golang.management.fragment.release.data;
 +
 +import android.content.Context;
 +import android.graphics.Color;
@@ -13621,8 +13621,8 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +import androidx.recyclerview.widget.GridLayoutManager;
 +import androidx.recyclerview.widget.RecyclerView;
 +
-+import com.guansu.management.R;
-+import com.guansu.management.common.OnClickListenerWrapper;
++import com.golang.management.R;
++import com.golang.management.common.OnClickListenerWrapper;
 +
 +import java.text.SimpleDateFormat;
 +import java.util.ArrayList;
@@ -14066,15 +14066,15 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +        this.onDateSelected = onDateSelected;
 +    }
 +}
-Index: app/src/main/java/com/guansu/management/wigdet/datepicker/MyNumberPicker.java
+Index: app/src/main/java/com/golang/management/wigdet/datepicker/MyNumberPicker.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/wigdet/datepicker/MyNumberPicker.java	(date 1576225016618)
-+++ app/src/main/java/com/guansu/management/wigdet/datepicker/MyNumberPicker.java	(date 1576225016618)
+--- app/src/main/java/com/golang/management/wigdet/datepicker/MyNumberPicker.java	(date 1576225016618)
++++ app/src/main/java/com/golang/management/wigdet/datepicker/MyNumberPicker.java	(date 1576225016618)
 @@ -0,0 +1,331 @@
-+package com.guansu.management.wigdet.datepicker;
++package com.golang.management.wigdet.datepicker;
 +
 +import android.content.Context;
 +import android.graphics.Canvas;
@@ -14405,15 +14405,15 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +        return (int) (scale * sp + 0.5f);
 +    }
 +}
-Index: app/src/main/java/com/guansu/management/fragment/home/adapter/CommentAdapter.java
+Index: app/src/main/java/com/golang/management/fragment/home/adapter/CommentAdapter.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/fragment/home/adapter/CommentAdapter.java	(date 1577087459357)
-+++ app/src/main/java/com/guansu/management/fragment/home/adapter/CommentAdapter.java	(date 1577087459357)
+--- app/src/main/java/com/golang/management/fragment/home/adapter/CommentAdapter.java	(date 1577087459357)
++++ app/src/main/java/com/golang/management/fragment/home/adapter/CommentAdapter.java	(date 1577087459357)
 @@ -0,0 +1,143 @@
-+package com.guansu.management.fragment.home.adapter;
++package com.golang.management.fragment.home.adapter;
 +import android.content.Context;
 +import android.view.LayoutInflater;
 +import android.view.View;
@@ -14425,9 +14425,9 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 +
 +import com.bumptech.glide.Glide;
-+import com.guansu.management.R;
-+import com.guansu.management.bean.ActivityCommentsBeanX;
-+import com.guansu.management.bean.ActivityDtoInfo;
++import com.golang.management.R;
++import com.golang.management.bean.ActivityCommentsBeanX;
++import com.golang.management.bean.ActivityDtoInfo;
 +import java.util.ArrayList;
 +import java.util.List;
 +import butterknife.BindView;
@@ -14556,15 +14556,15 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +        }
 +
 +}
-Index: app/src/main/java/com/guansu/management/fragment/release/data/DateBean.java
+Index: app/src/main/java/com/golang/management/fragment/release/data/DateBean.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/fragment/release/data/DateBean.java	(date 1576137898875)
-+++ app/src/main/java/com/guansu/management/fragment/release/data/DateBean.java	(date 1576137898875)
+--- app/src/main/java/com/golang/management/fragment/release/data/DateBean.java	(date 1576137898875)
++++ app/src/main/java/com/golang/management/fragment/release/data/DateBean.java	(date 1576137898875)
 @@ -0,0 +1,80 @@
-+package com.guansu.management.fragment.release.data;
++package com.golang.management.fragment.release.data;
 +
 +import java.util.Date;
 +
@@ -14644,15 +14644,15 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +        this.date = date;
 +    }
 +}
-Index: app/src/main/java/com/guansu/management/fragment/release/data/MyItemD.java
+Index: app/src/main/java/com/golang/management/fragment/release/data/MyItemD.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/fragment/release/data/MyItemD.java	(date 1576137898898)
-+++ app/src/main/java/com/guansu/management/fragment/release/data/MyItemD.java	(date 1576137898898)
+--- app/src/main/java/com/golang/management/fragment/release/data/MyItemD.java	(date 1576137898898)
++++ app/src/main/java/com/golang/management/fragment/release/data/MyItemD.java	(date 1576137898898)
 @@ -0,0 +1,83 @@
-+package com.guansu.management.fragment.release.data;
++package com.golang.management.fragment.release.data;
 +
 +import android.graphics.Canvas;
 +import android.graphics.Color;
@@ -14746,10 +14746,10 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +<?xml version="1.0" encoding="utf-8"?>
 +<manifest xmlns:android="http://schemas.android.com/apk/res/android"
 +    xmlns:tools="http://schemas.android.com/tools"
-+    package="com.guansu.management">
++    package="com.golang.management">
 +
 +    <application
-+        android:name="com.guansu.management.base.MainApplication"
++        android:name="com.golang.management.base.MainApplication"
 +        android:allowBackup="true"
 +        android:icon="@mipmap/ic_launcher"
 +        android:label="@string/app_name"
@@ -14757,7 +14757,7 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +        android:supportsRtl="true"
 +        android:theme="@style/AppTheme">
 +        <activity
-+            android:name="com.guansu.management.activity.MainActivity"
++            android:name="com.golang.management.activity.MainActivity"
 +            android:label="@string/app_name"
 +            android:theme="@style/AppTheme.NoActionBar">
 +            <intent-filter>
@@ -14829,21 +14829,21 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +    <uses-permission android:name="android.permission.BLUETOOTH" />
 +</manifest>
 \ No newline at end of file
-Index: app/src/main/java/com/guansu/management/fragment/me/MyDistributionFragment.java
+Index: app/src/main/java/com/golang/management/fragment/me/MyDistributionFragment.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/fragment/me/MyDistributionFragment.java	(date 1577157366950)
-+++ app/src/main/java/com/guansu/management/fragment/me/MyDistributionFragment.java	(date 1577157366950)
+--- app/src/main/java/com/golang/management/fragment/me/MyDistributionFragment.java	(date 1577157366950)
++++ app/src/main/java/com/golang/management/fragment/me/MyDistributionFragment.java	(date 1577157366950)
 @@ -0,0 +1,40 @@
-+package com.guansu.management.fragment.me;
++package com.golang.management.fragment.me;
 +
 +import android.os.Bundle;
 +import android.view.View;
 +
-+import com.guansu.management.R;
-+import com.guansu.management.base.BaseFragment;
++import com.golang.management.R;
++import com.golang.management.base.BaseFragment;
 +
 +/**
 + * @date:
@@ -14877,19 +14877,19 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +        return false;
 +    }
 +}
-Index: app/src/main/java/com/guansu/management/model/HomeModellml.java
+Index: app/src/main/java/com/golang/management/model/HomeModellml.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/model/HomeModellml.java	(date 1576839527934)
-+++ app/src/main/java/com/guansu/management/model/HomeModellml.java	(date 1576839527934)
+--- app/src/main/java/com/golang/management/model/HomeModellml.java	(date 1576839527934)
++++ app/src/main/java/com/golang/management/model/HomeModellml.java	(date 1576839527934)
 @@ -0,0 +1,46 @@
-+package com.guansu.management.model;
++package com.golang.management.model;
 +
 +import com.google.gson.reflect.TypeToken;
-+import com.guansu.management.api.ApiWrapper;
-+import com.guansu.management.bean.HomeBean;
++import com.golang.management.api.ApiWrapper;
++import com.golang.management.bean.HomeBean;
 +import com.lzy.okgo.model.HttpMethod;
 +import com.lzy.okgo.model.HttpParams;
 +
@@ -14932,15 +14932,15 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +    }
 +}
 \ No newline at end of file
-Index: app/src/main/java/com/guansu/management/wigdet/datepicker/PickValueView.java
+Index: app/src/main/java/com/golang/management/wigdet/datepicker/PickValueView.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/wigdet/datepicker/PickValueView.java	(date 1576225476700)
-+++ app/src/main/java/com/guansu/management/wigdet/datepicker/PickValueView.java	(date 1576225476700)
+--- app/src/main/java/com/golang/management/wigdet/datepicker/PickValueView.java	(date 1576225476700)
++++ app/src/main/java/com/golang/management/wigdet/datepicker/PickValueView.java	(date 1576225476700)
 @@ -0,0 +1,485 @@
-+package com.guansu.management.wigdet.datepicker;
++package com.golang.management.wigdet.datepicker;
 +
 +import android.content.Context;
 +import android.graphics.Color;
@@ -15426,15 +15426,15 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +    }
 +}
 \ No newline at end of file
-Index: app/src/main/java/com/guansu/management/fragment/me/QrCodeFragment.java
+Index: app/src/main/java/com/golang/management/fragment/me/QrCodeFragment.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/fragment/me/QrCodeFragment.java	(date 1577164933308)
-+++ app/src/main/java/com/guansu/management/fragment/me/QrCodeFragment.java	(date 1577164933308)
+--- app/src/main/java/com/golang/management/fragment/me/QrCodeFragment.java	(date 1577164933308)
++++ app/src/main/java/com/golang/management/fragment/me/QrCodeFragment.java	(date 1577164933308)
 @@ -0,0 +1,74 @@
-+package com.guansu.management.fragment.me;
++package com.golang.management.fragment.me;
 +import android.os.Build;
 +import android.os.Bundle;
 +import android.view.View;
@@ -15444,18 +15444,18 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +import androidx.annotation.RequiresApi;
 +
 +import com.bumptech.glide.Glide;
-+import com.guansu.management.R;
-+import com.guansu.management.api.MyObserve;
-+import com.guansu.management.base.BaseFragment;
-+import com.guansu.management.bean.orcode;
-+import com.guansu.management.common.OnClickListenerWrapper;
-+import com.guansu.management.common.UserSharedPreferencesUtils;
-+import com.guansu.management.model.MeModellml;
-+import com.guansu.management.wigdet.CommonTitleBar;
++import com.golang.management.R;
++import com.golang.management.api.MyObserve;
++import com.golang.management.base.BaseFragment;
++import com.golang.management.bean.orcode;
++import com.golang.management.common.OnClickListenerWrapper;
++import com.golang.management.common.UserSharedPreferencesUtils;
++import com.golang.management.model.MeModellml;
++import com.golang.management.wigdet.CommonTitleBar;
 +
 +import butterknife.BindView;
 +
-+import static com.guansu.management.R.*;
++import static com.golang.management.R.*;
 +/**
 + * @author: dongyaoyao
 + */
@@ -15508,15 +15508,15 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +        return false;
 +    }
 +}
-Index: app/src/main/java/com/guansu/management/fragment/me/AdviceFragment.java
+Index: app/src/main/java/com/golang/management/fragment/me/AdviceFragment.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/fragment/me/AdviceFragment.java	(date 1577245695379)
-+++ app/src/main/java/com/guansu/management/fragment/me/AdviceFragment.java	(date 1577245695379)
+--- app/src/main/java/com/golang/management/fragment/me/AdviceFragment.java	(date 1577245695379)
++++ app/src/main/java/com/golang/management/fragment/me/AdviceFragment.java	(date 1577245695379)
 @@ -0,0 +1,72 @@
-+package com.guansu.management.fragment.me;
++package com.golang.management.fragment.me;
 +
 +import android.os.Bundle;
 +import android.view.LayoutInflater;
@@ -15527,10 +15527,10 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +
 +import androidx.fragment.app.FragmentActivity;
 +
-+import com.guansu.management.R;
-+import com.guansu.management.base.BaseFragment;
-+import com.guansu.management.common.OnClickListenerWrapper;
-+import com.guansu.management.wigdet.dialog.PaySuccessDialog;
++import com.golang.management.R;
++import com.golang.management.base.BaseFragment;
++import com.golang.management.common.OnClickListenerWrapper;
++import com.golang.management.wigdet.dialog.PaySuccessDialog;
 +
 +import butterknife.BindView;
 +
@@ -15588,15 +15588,15 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +        return false;
 +    }
 +}
-Index: app/src/main/java/com/guansu/management/wigdet/dialog/LoginSuccessDialog.java
+Index: app/src/main/java/com/golang/management/wigdet/dialog/LoginSuccessDialog.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/wigdet/dialog/LoginSuccessDialog.java	(date 1575946213691)
-+++ app/src/main/java/com/guansu/management/wigdet/dialog/LoginSuccessDialog.java	(date 1575946213691)
+--- app/src/main/java/com/golang/management/wigdet/dialog/LoginSuccessDialog.java	(date 1575946213691)
++++ app/src/main/java/com/golang/management/wigdet/dialog/LoginSuccessDialog.java	(date 1575946213691)
 @@ -0,0 +1,41 @@
-+package com.guansu.management.wigdet.dialog;
++package com.golang.management.wigdet.dialog;
 +
 +import android.view.Gravity;
 +import android.view.View;
@@ -15604,7 +15604,7 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +
 +import androidx.fragment.app.FragmentActivity;
 +
-+import com.guansu.management.R;
++import com.golang.management.R;
 +
 +public final class LoginSuccessDialog {
 +
@@ -15638,15 +15638,15 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +
 +}
 \ No newline at end of file
-Index: app/src/main/java/com/guansu/management/fragment/home/FootprintFragemnt.java
+Index: app/src/main/java/com/golang/management/fragment/home/FootprintFragemnt.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/fragment/home/FootprintFragemnt.java	(date 1577256068498)
-+++ app/src/main/java/com/guansu/management/fragment/home/FootprintFragemnt.java	(date 1577256068498)
+--- app/src/main/java/com/golang/management/fragment/home/FootprintFragemnt.java	(date 1577256068498)
++++ app/src/main/java/com/golang/management/fragment/home/FootprintFragemnt.java	(date 1577256068498)
 @@ -0,0 +1,148 @@
-+package com.guansu.management.fragment.home;
++package com.golang.management.fragment.home;
 +
 +import android.app.Dialog;
 +import android.os.Bundle;
@@ -15661,15 +15661,15 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +import androidx.recyclerview.widget.LinearLayoutManager;
 +import androidx.recyclerview.widget.RecyclerView;
 +
-+import com.guansu.management.R;
-+import com.guansu.management.activity.CheckPermissionsActivity;
-+import com.guansu.management.api.MyObserve;
-+import com.guansu.management.base.BaseFragment;
-+import com.guansu.management.common.OnClickListenerWrapper;
-+import com.guansu.management.common.UserSharedPreferencesUtils;
-+import com.guansu.management.fragment.foot.FootAdapter;
-+import com.guansu.management.model.FootModellml;
-+import com.guansu.management.model.bean.LoginResult;
++import com.golang.management.R;
++import com.golang.management.activity.CheckPermissionsActivity;
++import com.golang.management.api.MyObserve;
++import com.golang.management.base.BaseFragment;
++import com.golang.management.common.OnClickListenerWrapper;
++import com.golang.management.common.UserSharedPreferencesUtils;
++import com.golang.management.fragment.foot.FootAdapter;
++import com.golang.management.model.FootModellml;
++import com.golang.management.model.bean.LoginResult;
 +
 +import butterknife.BindView;
 +
@@ -15794,15 +15794,15 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +        return false;
 +    }
 +}
-Index: app/src/main/java/com/guansu/management/bean/ActivityDtoInfo.java
+Index: app/src/main/java/com/golang/management/bean/ActivityDtoInfo.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/bean/ActivityDtoInfo.java	(date 1576841000877)
-+++ app/src/main/java/com/guansu/management/bean/ActivityDtoInfo.java	(date 1576841000877)
+--- app/src/main/java/com/golang/management/bean/ActivityDtoInfo.java	(date 1576841000877)
++++ app/src/main/java/com/golang/management/bean/ActivityDtoInfo.java	(date 1576841000877)
 @@ -0,0 +1,196 @@
-+package com.guansu.management.bean;
++package com.golang.management.bean;
 +
 +import com.google.gson.annotations.SerializedName;
 +
@@ -15998,15 +15998,15 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +        this.activityComments = activityComments;
 +    }
 +}
-Index: app/src/main/java/com/guansu/management/fragment/home/adapter/SignUpsAdapter.java
+Index: app/src/main/java/com/golang/management/fragment/home/adapter/SignUpsAdapter.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/fragment/home/adapter/SignUpsAdapter.java	(date 1577084242653)
-+++ app/src/main/java/com/guansu/management/fragment/home/adapter/SignUpsAdapter.java	(date 1577084242653)
+--- app/src/main/java/com/golang/management/fragment/home/adapter/SignUpsAdapter.java	(date 1577084242653)
++++ app/src/main/java/com/golang/management/fragment/home/adapter/SignUpsAdapter.java	(date 1577084242653)
 @@ -0,0 +1,83 @@
-+package com.guansu.management.fragment.home.adapter;
++package com.golang.management.fragment.home.adapter;
 +
 +import android.content.Context;
 +import android.view.LayoutInflater;
@@ -16017,9 +16017,9 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +import androidx.annotation.NonNull;
 +import androidx.recyclerview.widget.RecyclerView;
 +import com.bumptech.glide.Glide;
-+import com.guansu.management.R;
-+import com.guansu.management.bean.ActivitySignUpsBean;
-+import com.guansu.management.common.OnClickListenerWrapper;
++import com.golang.management.R;
++import com.golang.management.bean.ActivitySignUpsBean;
++import com.golang.management.common.OnClickListenerWrapper;
 +import java.util.List;
 +import butterknife.BindView;
 +import butterknife.ButterKnife;
@@ -16089,15 +16089,15 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +    }
 +}
 +
-Index: app/src/main/java/com/guansu/management/bean/ImagesListBean.java
+Index: app/src/main/java/com/golang/management/bean/ImagesListBean.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/bean/ImagesListBean.java	(date 1576751412077)
-+++ app/src/main/java/com/guansu/management/bean/ImagesListBean.java	(date 1576751412077)
+--- app/src/main/java/com/golang/management/bean/ImagesListBean.java	(date 1576751412077)
++++ app/src/main/java/com/golang/management/bean/ImagesListBean.java	(date 1576751412077)
 @@ -0,0 +1,60 @@
-+package com.guansu.management.bean;
++package com.golang.management.bean;
 +
 +/**
 + * @author: dongyaoyao
@@ -16157,15 +16157,15 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +        this.isCover = isCover;
 +    }
 +}
-Index: app/src/main/java/com/guansu/management/fragment/home/adapter/NewHomeAdapter.java
+Index: app/src/main/java/com/golang/management/fragment/home/adapter/NewHomeAdapter.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/fragment/home/adapter/NewHomeAdapter.java	(date 1577246519742)
-+++ app/src/main/java/com/guansu/management/fragment/home/adapter/NewHomeAdapter.java	(date 1577246519742)
+--- app/src/main/java/com/golang/management/fragment/home/adapter/NewHomeAdapter.java	(date 1577246519742)
++++ app/src/main/java/com/golang/management/fragment/home/adapter/NewHomeAdapter.java	(date 1577246519742)
 @@ -0,0 +1,360 @@
-+package com.guansu.management.fragment.home.adapter;
++package com.golang.management.fragment.home.adapter;
 +
 +import android.annotation.SuppressLint;
 +import android.content.Context;
@@ -16187,16 +16187,16 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +import androidx.recyclerview.widget.RecyclerView;
 +
 +import com.bumptech.glide.Glide;
-+import com.guansu.management.R;
-+import com.guansu.management.bean.HomeBean;
-+import com.guansu.management.bean.ImagesListBean;
-+import com.guansu.management.config.Constant;
-+import com.guansu.management.fragment.MainFragment;
-+import com.guansu.management.fragment.details.DetailsFragment;
-+import com.guansu.management.model.bean.HomeBannerBean;
-+import com.guansu.management.wigdet.banner.ConvenientBanner;
-+import com.guansu.management.wigdet.banner.holder.CBViewHolderCreator;
-+import com.guansu.management.wigdet.banner.holder.Holder;
++import com.golang.management.R;
++import com.golang.management.bean.HomeBean;
++import com.golang.management.bean.ImagesListBean;
++import com.golang.management.config.Constant;
++import com.golang.management.fragment.MainFragment;
++import com.golang.management.fragment.details.DetailsFragment;
++import com.golang.management.model.bean.HomeBannerBean;
++import com.golang.management.wigdet.banner.ConvenientBanner;
++import com.golang.management.wigdet.banner.holder.CBViewHolderCreator;
++import com.golang.management.wigdet.banner.holder.Holder;
 +
 +import java.util.ArrayList;
 +import java.util.Collection;
@@ -16525,15 +16525,15 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +        }
 +    }
 +}
-Index: app/src/main/java/com/guansu/management/bean/orcode.java
+Index: app/src/main/java/com/golang/management/bean/orcode.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/bean/orcode.java	(date 1577096749491)
-+++ app/src/main/java/com/guansu/management/bean/orcode.java	(date 1577096749491)
+--- app/src/main/java/com/golang/management/bean/orcode.java	(date 1577096749491)
++++ app/src/main/java/com/golang/management/bean/orcode.java	(date 1577096749491)
 @@ -0,0 +1,32 @@
-+package com.guansu.management.bean;
++package com.golang.management.bean;
 +
 +/**
 + * @date:
@@ -16565,15 +16565,15 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +        this.recommendCode = recommendCode;
 +    }
 +}
-Index: app/src/main/java/com/guansu/management/fragment/home/NewHomeFragment.java
+Index: app/src/main/java/com/golang/management/fragment/home/NewHomeFragment.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/fragment/home/NewHomeFragment.java	(date 1577246982412)
-+++ app/src/main/java/com/guansu/management/fragment/home/NewHomeFragment.java	(date 1577246982412)
+--- app/src/main/java/com/golang/management/fragment/home/NewHomeFragment.java	(date 1577246982412)
++++ app/src/main/java/com/golang/management/fragment/home/NewHomeFragment.java	(date 1577246982412)
 @@ -0,0 +1,156 @@
-+package com.guansu.management.fragment.home;
++package com.golang.management.fragment.home;
 +
 +import android.os.Bundle;
 +import android.view.View;
@@ -16583,18 +16583,18 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +import androidx.recyclerview.widget.RecyclerView;
 +import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 +
-+import com.guansu.management.R;
-+import com.guansu.management.api.MyObserve;
-+import com.guansu.management.api.ServiceException;
-+import com.guansu.management.base.BaseFragment;
-+import com.guansu.management.bean.HomeBean;
-+import com.guansu.management.config.Constant;
-+import com.guansu.management.config.HttpConstants;
-+import com.guansu.management.fragment.MainFragment;
-+import com.guansu.management.fragment.details.DetailsFragment;
-+import com.guansu.management.fragment.home.adapter.NewHomeAdapter;
-+import com.guansu.management.model.HomeModellml;
-+import com.guansu.management.wigdet.recyclerview.EndLessOnScrollListener;
++import com.golang.management.R;
++import com.golang.management.api.MyObserve;
++import com.golang.management.api.ServiceException;
++import com.golang.management.base.BaseFragment;
++import com.golang.management.bean.HomeBean;
++import com.golang.management.config.Constant;
++import com.golang.management.config.HttpConstants;
++import com.golang.management.fragment.MainFragment;
++import com.golang.management.fragment.details.DetailsFragment;
++import com.golang.management.fragment.home.adapter.NewHomeAdapter;
++import com.golang.management.model.HomeModellml;
++import com.golang.management.wigdet.recyclerview.EndLessOnScrollListener;
 +
 +import java.util.List;
 +
@@ -16729,15 +16729,15 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +        layoutSwipeRefresh.setRefreshing(false);
 +    }
 +}
-Index: app/src/main/java/com/guansu/management/servise/LocationService.java
+Index: app/src/main/java/com/golang/management/servise/LocationService.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/servise/LocationService.java	(date 1577255540460)
-+++ app/src/main/java/com/guansu/management/servise/LocationService.java	(date 1577255540460)
+--- app/src/main/java/com/golang/management/servise/LocationService.java	(date 1577255540460)
++++ app/src/main/java/com/golang/management/servise/LocationService.java	(date 1577255540460)
 @@ -0,0 +1,52 @@
-+package com.guansu.management.servise;
++package com.golang.management.servise;
 +import android.app.Service;
 +import android.content.Intent;
 +import android.os.IBinder;
@@ -16789,18 +16789,18 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +        return mOption;
 +    }
 +}
-Index: app/src/main/java/com/guansu/management/model/MeModellml.java
+Index: app/src/main/java/com/golang/management/model/MeModellml.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/model/MeModellml.java	(date 1577247278099)
-+++ app/src/main/java/com/guansu/management/model/MeModellml.java	(date 1577247278099)
+--- app/src/main/java/com/golang/management/model/MeModellml.java	(date 1577247278099)
++++ app/src/main/java/com/golang/management/model/MeModellml.java	(date 1577247278099)
 @@ -0,0 +1,31 @@
-+package com.guansu.management.model;
++package com.golang.management.model;
 +import com.google.gson.reflect.TypeToken;
-+import com.guansu.management.api.ApiWrapper;
-+import com.guansu.management.bean.orcode;
++import com.golang.management.api.ApiWrapper;
++import com.golang.management.bean.orcode;
 +import com.lzy.okgo.model.HttpMethod;
 +import com.lzy.okgo.model.HttpParams;
 +import java.lang.reflect.Type;
@@ -16828,15 +16828,15 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 +        return ApiWrapper.request(HttpMethod.GET, FIND_BASEINFO_USERBYID, type,httpParams);
 +    }
 +}
-Index: app/src/main/java/com/guansu/management/bean/FileBean.java
+Index: app/src/main/java/com/golang/management/bean/FileBean.java
 IDEA additional info:
 Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 <+>UTF-8
 ===================================================================
---- app/src/main/java/com/guansu/management/bean/FileBean.java	(date 1576752655457)
-+++ app/src/main/java/com/guansu/management/bean/FileBean.java	(date 1576752655457)
+--- app/src/main/java/com/golang/management/bean/FileBean.java	(date 1576752655457)
++++ app/src/main/java/com/golang/management/bean/FileBean.java	(date 1576752655457)
 @@ -0,0 +1,117 @@
-+package com.guansu.management.bean;
++package com.golang.management.bean;
 +
 +import java.util.List;
 +

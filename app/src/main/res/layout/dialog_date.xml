@@ -5,10 +5,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:gravity="center_horizontal"
     android:orientation="vertical">
-    <com.guansu.management.fragment.release.data.CalendarList
+    <com.golang.management.fragment.release.data.CalendarList
         android:id="@+id/calendarList"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    </com.guansu.management.fragment.release.data.CalendarList>
+    </com.golang.management.fragment.release.data.CalendarList>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

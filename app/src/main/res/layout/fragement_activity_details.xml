@@ -79,7 +79,7 @@
         app:layout_constraintStart_toEndOf="@id/butComment"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:visibility="visible"/>
+        android:visibility="gone"/>
     <EditText
         android:id="@+id/editTextContext"
         android:layout_width="0dp"

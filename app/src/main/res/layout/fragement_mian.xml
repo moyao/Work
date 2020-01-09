@@ -15,7 +15,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"></FrameLayout>
 
-    <com.guansu.management.wigdet.bottombar.BottomBar
+    <com.golang.management.wigdet.bottombar.BottomBar
         android:id="@+id/navigation"
         android:layout_width="0dp"
         android:layout_height="56dp"

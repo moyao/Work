@@ -28,7 +28,7 @@
         app:layout_constraintStart_toEndOf="@id/tv_send"
         app:layout_constraintEnd_toEndOf="parent"
         tools:ignore="MissingConstraints" />
-    <com.guansu.management.wigdet.datepicker.PickValueView
+    <com.golang.management.wigdet.datepicker.PickValueView
         android:id="@+id/pickString"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

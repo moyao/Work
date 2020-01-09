@@ -20,9 +20,11 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:text="雯雯"
+        android:textSize="14dp"
         android:textColor="#000000"
         app:layout_constraintStart_toEndOf="@id/imageViewPhoto"
-        app:layout_constraintTop_toTopOf="@id/imageViewPhoto" />
+        app:layout_constraintTop_toTopOf="@id/imageViewPhoto"
+        android:layout_marginTop="10dp"/>
 
     <TextView
         android:id="@+id/textViewAddress"
@@ -52,7 +54,7 @@
         android:background="@drawable/but_item_age"
         app:layout_constraintBottom_toBottomOf="@id/imageViewPhoto"
         app:layout_constraintEnd_toEndOf="@id/textViewAge"
-        app:layout_constraintStart_toEndOf="@id/imageViewPhoto" />
+        app:layout_constraintStart_toEndOf="@id/imageViewPhoto"/>
 
     <TextView
         android:id="@+id/textViewAge"
@@ -64,7 +66,8 @@
         android:paddingRight="10dp"
         android:text="22岁"
         app:layout_constraintStart_toStartOf="@id/view"
-        app:layout_constraintTop_toTopOf="@id/view" />
+        app:layout_constraintTop_toTopOf="@id/view"
+        />
 
     <TextView
         android:id="@+id/textViewDistance"
@@ -82,7 +85,7 @@
         android:padding="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imageViewPhoto"
+        app:layout_constraintTop_toBottomOf="@id/textViewContext"
         tools:ignore="MissingConstraints" />
 
     <TextView
@@ -93,8 +96,9 @@
         android:text="下一站西安，有一起玩的小伙伴吗？"
         android:textColor="@color/black"
         android:textSize="14dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/rvPics" />
+        app:layout_constraintStart_toStartOf="@id/imageViewPhoto"
+        app:layout_constraintTop_toBottomOf="@id/imageViewPhoto"
+        android:layout_marginTop="3dp"/>
 
     <View
         android:id="@+id/view1"
@@ -102,7 +106,7 @@
         android:layout_height="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textViewContext" />
+        app:layout_constraintTop_toBottomOf="@id/rvPics" />
 
     <TextView
         android:id="@+id/textViewCondition"
@@ -179,7 +183,7 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="0.3dp"
+        android:layout_height="10dp"
         android:layout_marginTop="15dp"
         android:background="@color/color_CCCCCC"
         app:layout_constraintTop_toBottomOf="@+id/textViewSo" />

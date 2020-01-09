@@ -162,6 +162,7 @@
         android:background="@color/line"
         android:layout_marginTop="30dp"/>
     <TextView
+        android:id="@+id/textViewContext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/Operate"

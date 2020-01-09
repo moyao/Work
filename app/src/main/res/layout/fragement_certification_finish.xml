@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="#F1F6FC"
+        app:layout_constraintBottom_toBottomOf="@id/tv_finsh"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/image_view"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:scaleType="fitXY"
+        android:src="@drawable/btn_golden_round"
+        app:layout_constraintEnd_toEndOf="@id/tv_start"
+        app:layout_constraintStart_toStartOf="@id/tv_start"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_start"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:text="身份认证"
+        android:textColor="@color/black"
+        android:textSize="16dp"
+        app:layout_constraintEnd_toStartOf="@+id/tv_face"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/image_view" />
+
+    <View
+        android:id="@+id/v_line"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/color_fee256"
+        app:layout_constraintBottom_toBottomOf="@+id/image_view"
+        app:layout_constraintEnd_toStartOf="@id/image_view1"
+        app:layout_constraintStart_toEndOf="@+id/image_view"
+        app:layout_constraintTop_toTopOf="@+id/image_view" />
+
+    <ImageView
+        android:id="@+id/image_view1"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/btn_golden_round"
+        app:layout_constraintBottom_toBottomOf="@+id/image_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/image_view" />
+
+    <TextView
+        android:id="@+id/tv_face"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:text="人脸识别"
+        android:textColor="@color/black"
+        android:textSize="16dp"
+        app:layout_constraintBottom_toBottomOf="@id/tv_start"
+        app:layout_constraintEnd_toStartOf="@+id/tv_finsh"
+        app:layout_constraintStart_toEndOf="@id/tv_start"
+        app:layout_constraintTop_toTopOf="@id/tv_start" />
+
+    <View
+        android:id="@+id/tv_line1"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/color_fee256"
+        app:layout_constraintBottom_toBottomOf="@+id/image_view"
+        app:layout_constraintEnd_toStartOf="@id/image_view2"
+        app:layout_constraintStart_toEndOf="@+id/image_view1"
+        app:layout_constraintTop_toTopOf="@+id/image_view" />
+
+    <ImageView
+        android:id="@+id/image_view2"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/btn_golden_round"
+        app:layout_constraintEnd_toEndOf="@id/tv_finsh"
+        app:layout_constraintStart_toStartOf="@id/tv_finsh"
+        app:layout_constraintTop_toTopOf="@+id/image_view" />
+
+    <TextView
+        android:id="@+id/tv_finsh"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:text="认证成功"
+        android:textColor="@color/black"
+        android:textSize="16dp"
+        app:layout_constraintBottom_toBottomOf="@id/tv_start"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tv_face"
+        app:layout_constraintTop_toTopOf="@id/tv_start" />
+
+    <View
+        android:id="@+id/view1"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="#EEEEEE"
+        app:layout_constraintTop_toBottomOf="@+id/view" />
+
+    <ImageView
+        android:id="@+id/image_picture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="40dp"
+        android:src="@mipmap/image_certification_photo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view1" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:padding="10dp"
+        android:text="恭喜您已完成实名认证!"
+        android:textColor="@color/text_color_black"
+        android:textSize="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/image_picture"
+        app:layout_constraintStart_toEndOf="@+id/image_picture"
+        app:layout_constraintTop_toTopOf="@id/image_picture" />
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="姓名:"
+        android:textColor="@color/black"
+        android:textSize="16dp"
+        app:layout_constraintStart_toStartOf="@+id/image_picture"
+        app:layout_constraintTop_toBottomOf="@+id/image_picture" />
+
+    <TextView
+        android:id="@+id/tv_name_context"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/black"
+        android:textSize="16dp"
+        app:layout_constraintStart_toEndOf="@+id/tv_name"
+        app:layout_constraintTop_toBottomOf="@+id/image_picture"
+        tools:text="sssssssssssss" />
+
+    <TextView
+        android:id="@+id/tv_idcard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="身份证号:"
+        android:textColor="@color/black"
+        android:textSize="16dp"
+        app:layout_constraintStart_toStartOf="@+id/image_picture"
+        app:layout_constraintTop_toBottomOf="@+id/tv_name" />
+
+    <TextView
+        android:id="@+id/tv_idcard_context"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/black"
+        android:textSize="16dp"
+        app:layout_constraintStart_toEndOf="@+id/tv_idcard"
+        app:layout_constraintTop_toBottomOf="@+id/tv_name"
+        tools:text="sssssssssssss" />
+
+    <TextView
+        android:id="@+id/tv_validity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="证件有效期:"
+        android:textColor="@color/black"
+        android:textSize="16dp"
+        app:layout_constraintStart_toStartOf="@+id/image_picture"
+        app:layout_constraintTop_toBottomOf="@+id/tv_idcard" />
+
+    <TextView
+        android:id="@+id/tv_validity_context"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/black"
+        android:textSize="16dp"
+        app:layout_constraintStart_toEndOf="@+id/tv_validity"
+        app:layout_constraintTop_toBottomOf="@+id/tv_idcard"
+        tools:text="sssssssssssss" />
+
+    <TextView
+        android:id="@+id/tv_finish"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@drawable/but_release"
+        android:text="完成"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="15dp"
+        app:layout_constraintBottom_toBottomOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

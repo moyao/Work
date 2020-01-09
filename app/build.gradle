@@ -4,7 +4,7 @@ android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
     defaultConfig {
-        applicationId "com.guansu.management"
+        applicationId "com.golang.management"
         minSdkVersion 21
         targetSdkVersion 29
         versionCode 1
@@ -25,6 +25,11 @@ android {
             abiFilters 'armeabi', 'armeabi-v7a'
             // 还可以添加 'armeabi', 'x86', 'x86_64', 'mips', 'mips64','armeabi-v8a', 'armeabi-v7a'
         }
+        manifestPlaceholders = [
+                JPUSH_PKGNAME : applicationId,
+                JPUSH_APPKEY : "4a0572bf09ef68b1fed01c24", //JPush 上注册的包名对应的 Appkey.
+                JPUSH_CHANNEL : "developer-default", //暂时填写默认值即可.
+        ]
         repositories {
 
             // 添加下面的内容
@@ -73,6 +78,8 @@ dependencies {
     implementation project(path: ':ocr_ui')
     implementation files('libs/ocr-sdk.jar')
     implementation project(path: ':faceplatform-ui')
+    implementation 'cn.jiguang.sdk:jpush:3.5.4'  // 此处以JPush 3.5.4 版本为例。
+    implementation 'cn.jiguang.sdk:jcore:2.2.4'
 }
 
 MobSDK {

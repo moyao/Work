@@ -68,7 +68,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <com.guansu.management.wigdet.banner.ConvenientBanner
+            <com.golang.management.wigdet.banner.ConvenientBanner
                 android:id="@+id/banner"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
