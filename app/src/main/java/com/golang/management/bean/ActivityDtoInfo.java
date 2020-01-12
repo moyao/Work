@@ -52,6 +52,15 @@ public class ActivityDtoInfo {
     @SerializedName(value = "activityComments", alternate = {"contentComments"})
     private List<ActivityCommentsBeanX> activityComments;
 
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    private int type;
 
     public String getUserId() {
         return userId;

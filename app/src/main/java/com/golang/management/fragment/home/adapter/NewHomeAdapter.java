@@ -136,7 +136,8 @@ public class NewHomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
         } else if (holder instanceof ContextViewHolder) {
             Glide.with(mcontext).load(homeBean.getProfileImage())
-                    .apply(RequestOptions.bitmapTransform(new CircleCrop())).into(((ContextViewHolder) holder).imageViewPhoto);
+                    .apply(RequestOptions.bitmapTransform(new CircleCrop()))
+                    .placeholder(R.mipmap.load_icon).into(((ContextViewHolder) holder).imageViewPhoto);
             ((ContextViewHolder) holder).textViewName.setText(homeBean.getNickName());
             if ("0".equals(homeBean.getVisible()+"")) {
                 ((ContextViewHolder) holder).textViewSo.setText("活动成员:对外不可见");

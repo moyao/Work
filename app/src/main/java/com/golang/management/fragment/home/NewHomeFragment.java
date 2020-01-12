@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -42,7 +43,7 @@ public class NewHomeFragment extends BaseFragment implements NewHomeAdapter.Item
     NewHomeAdapter newHomeAdapter;
     private List<HomeBean> homeBeanList;
     private EndLessOnScrollListener endLessOnScrollListener;
-    private int REQUEST_CODE_SCAN = 0;
+
     int page = 1;
     int tag;
 
@@ -147,8 +148,7 @@ public class NewHomeFragment extends BaseFragment implements NewHomeAdapter.Item
             status = Constant.VIEW_CIRCLE;
             inithomeData(status);
         } else if ("3".equals(id)) {
-            Intent intent = new Intent(getContext(), CaptureActivity.class);
-            startActivityForResult(intent, REQUEST_CODE_SCAN);
+            ((MainFragment) getParentFragment()).start(SweepCodeFragment.newInstance());
         } else {
             if (2 == tag) {
                 ((MainFragment) getParentFragment()).start(DetailsFragment.newInstance(id, Constant.VIEW_CIRCLE));
@@ -169,15 +169,6 @@ public class NewHomeFragment extends BaseFragment implements NewHomeAdapter.Item
         page = 1;
         ReporteNameData(1, tag);
     }
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        // 扫描二维码/条码回传
-        if (requestCode == REQUEST_CODE_SCAN && resultCode == RESULT_OK) {
-            if (data != null) {
-                String content = data.getStringExtra("result");
-                showToast(content);
-            }
-        }
-    }
+
+
 }

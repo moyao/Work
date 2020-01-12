@@ -5,367 +5,379 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <View
-        android:id="@+id/view"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:background="#FFE457"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="MissingConstraints" />
-
-    <ImageButton
-        android:id="@+id/imageBlack"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:background="@null"
-        android:padding="15dp"
-        android:src="@mipmap/black"
-        app:layout_constraintBottom_toBottomOf="@id/view"
-        app:layout_constraintTop_toTopOf="@id/view"
-        tools:ignore="MissingConstraints" />
-
-    <TextView
-        android:id="@+id/textViewTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="发布活动"
-        android:textColor="@color/black"
-        android:textSize="16dp"
-        app:layout_constraintBottom_toBottomOf="@id/view"
-        app:layout_constraintEnd_toStartOf="@id/imagePreservation"
-        app:layout_constraintStart_toEndOf="@id/imageBlack"
-        app:layout_constraintTop_toTopOf="@id/view" />
-
-    <ImageButton
-        android:id="@+id/imagePreservation"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:background="@null"
-        android:padding="15dp"
-        app:layout_constraintBottom_toBottomOf="@id/view"
-        app:layout_constraintRight_toRightOf="@id/view"
-        app:layout_constraintTop_toTopOf="@id/view"
-        tools:ignore="MissingConstraints" />
-
-    <TextView
-        android:id="@+id/tvPhoto"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginLeft="10dp"
-        android:drawablePadding="10dp"
-        android:gravity="center_vertical"
-        android:singleLine="true"
-        android:text="添加图片："
-        android:textColor="@color/black"
-        app:layout_constraintHeight_percent="0.06"
-        app:layout_constraintTop_toBottomOf="@id/view"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintTop_toBottomOf="@id/butRelease"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="20dp"
-        android:drawableRight="@mipmap/finish"
-        android:drawablePadding="10dp"
-        android:text="已完成"
-        app:layout_constraintBottom_toBottomOf="@id/tvPhoto"
-        app:layout_constraintRight_toRightOf="@id/tvPhoto"
-        app:layout_constraintTop_toTopOf="@id/tvPhoto"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        />
+            <View
+                android:id="@+id/view"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:background="#FFE457"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:ignore="MissingConstraints" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2px"
-        android:background="@color/color_CCCCCC"
-        app:layout_constraintTop_toBottomOf="@+id/tvPhoto" />
+            <ImageButton
+                android:id="@+id/imageBlack"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:background="@null"
+                android:padding="15dp"
+                android:src="@mipmap/black"
+                app:layout_constraintBottom_toBottomOf="@id/view"
+                app:layout_constraintTop_toTopOf="@id/view"
+                tools:ignore="MissingConstraints" />
 
-    <TextView
-        android:id="@+id/tvContent"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginLeft="10dp"
-        android:drawablePadding="10dp"
-        android:gravity="center_vertical"
-        android:singleLine="true"
-        android:text="活动内容："
-        android:textColor="@color/black"
-        app:layout_constraintHeight_percent="0.06"
-        app:layout_constraintTop_toBottomOf="@id/tvPhoto"
-        tools:ignore="MissingConstraints" />
+            <TextView
+                android:id="@+id/textViewTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="发布活动"
+                android:textColor="@color/black"
+                android:textSize="16dp"
+                app:layout_constraintBottom_toBottomOf="@id/view"
+                app:layout_constraintEnd_toStartOf="@id/imagePreservation"
+                app:layout_constraintStart_toEndOf="@id/imageBlack"
+                app:layout_constraintTop_toTopOf="@id/view" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="20dp"
-        android:drawableRight="@mipmap/finish"
-        android:drawablePadding="10dp"
-        android:text="已完成"
-        app:layout_constraintBottom_toBottomOf="@id/tvContent"
-        app:layout_constraintRight_toRightOf="@id/tvContent"
-        app:layout_constraintTop_toTopOf="@id/tvContent"
+            <ImageButton
+                android:id="@+id/imagePreservation"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:background="@null"
+                android:padding="15dp"
+                app:layout_constraintBottom_toBottomOf="@id/view"
+                app:layout_constraintRight_toRightOf="@id/view"
+                app:layout_constraintTop_toTopOf="@id/view"
+                tools:ignore="MissingConstraints" />
 
-        />
+            <TextView
+                android:id="@+id/tvPhoto"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="10dp"
+                android:drawablePadding="10dp"
+                android:gravity="center_vertical"
+                android:singleLine="true"
+                android:text="添加图片："
+                android:textColor="@color/black"
+                app:layout_constraintHeight_percent="0.06"
+                app:layout_constraintTop_toBottomOf="@id/view"
+                tools:ignore="MissingConstraints" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2px"
-        android:background="@color/color_CCCCCC"
-        app:layout_constraintTop_toBottomOf="@id/tvContent" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:drawableRight="@mipmap/finish"
+                android:drawablePadding="10dp"
+                android:text="已完成"
+                app:layout_constraintBottom_toBottomOf="@id/tvPhoto"
+                app:layout_constraintRight_toRightOf="@id/tvPhoto"
+                app:layout_constraintTop_toTopOf="@id/tvPhoto"
 
-    <TextView
-        android:id="@+id/tvTime"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginLeft="10dp"
-        android:drawableRight="@mipmap/next"
-        android:drawablePadding="10dp"
-        android:gravity="center_vertical"
-        android:paddingRight="20dp"
-        android:singleLine="true"
-        android:text="活动日期："
-        android:textColor="@color/black"
-        app:layout_constraintHeight_percent="0.06"
-        app:layout_constraintTop_toBottomOf="@id/tvContent"
-        tools:ignore="MissingConstraints" />
+                />
 
-    <TextView
-        android:id="@+id/textViewStartEndTime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="40dp"
-        android:hint="开始时间——结束时间"
-        app:layout_constraintBottom_toBottomOf="@id/tvTime"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@id/tvTime" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2px"
+                android:background="@color/color_CCCCCC"
+                app:layout_constraintTop_toBottomOf="@+id/tvPhoto" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2px"
-        android:background="@color/color_CCCCCC"
-        app:layout_constraintTop_toBottomOf="@id/tvTime" />
+            <TextView
+                android:id="@+id/tvContent"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="10dp"
+                android:drawablePadding="10dp"
+                android:gravity="center_vertical"
+                android:singleLine="true"
+                android:text="活动内容："
+                android:textColor="@color/black"
+                app:layout_constraintHeight_percent="0.06"
+                app:layout_constraintTop_toBottomOf="@id/tvPhoto"
+                tools:ignore="MissingConstraints" />
 
-    <TextView
-        android:id="@+id/tvAddress"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginLeft="10dp"
-        android:drawablePadding="10dp"
-        android:gravity="center_vertical"
-        android:paddingRight="20dp"
-        android:singleLine="true"
-        android:text="目的地："
-        android:textColor="@color/black"
-        app:layout_constraintEnd_toStartOf="@id/textViewAddress"
-        app:layout_constraintHeight_percent="0.06"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvTime"
-        tools:ignore="MissingConstraints" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:drawableRight="@mipmap/finish"
+                android:drawablePadding="10dp"
+                android:text="已完成"
+                app:layout_constraintBottom_toBottomOf="@id/tvContent"
+                app:layout_constraintRight_toRightOf="@id/tvContent"
+                app:layout_constraintTop_toTopOf="@id/tvContent"
 
-    <TextView
-        android:id="@+id/textViewAddress"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="20dp"
-        android:gravity="right"
-        android:hint="请选择目的地"
-        app:layout_constraintBottom_toBottomOf="@id/tvAddress"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/tvAddress"
-        app:layout_constraintTop_toTopOf="@id/tvAddress" />
+                />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2px"
-        android:background="@color/color_CCCCCC"
-        app:layout_constraintTop_toBottomOf="@id/tvAddress" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2px"
+                android:background="@color/color_CCCCCC"
+                app:layout_constraintTop_toBottomOf="@id/tvContent" />
 
-    <TextView
-        android:id="@+id/tvSetAddress"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginLeft="10dp"
-        android:drawablePadding="10dp"
-        android:gravity="center_vertical"
-        android:paddingRight="20dp"
-        android:singleLine="true"
-        android:text="详细地址："
-        android:textColor="@color/black"
-        app:layout_constraintEnd_toStartOf="@id/textViewSetAddress"
-        app:layout_constraintHeight_percent="0.06"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvAddress"
-        tools:ignore="MissingConstraints" />
+            <TextView
+                android:id="@+id/tvTime"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="10dp"
+                android:drawableRight="@mipmap/next"
+                android:drawablePadding="10dp"
+                android:gravity="center_vertical"
+                android:paddingRight="20dp"
+                android:singleLine="true"
+                android:text="活动日期："
+                android:textColor="@color/black"
+                app:layout_constraintHeight_percent="0.06"
+                app:layout_constraintTop_toBottomOf="@id/tvContent"
+                tools:ignore="MissingConstraints" />
 
-    <EditText
-        android:id="@+id/textViewSetAddress"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="20dp"
-        android:background="@color/transparent"
-        android:gravity="right"
-        android:hint="请输入地址"
-        android:textSize="13dp"
-        app:layout_constraintBottom_toBottomOf="@id/tvSetAddress"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintRight_toRightOf="@id/tvSetAddress"
-        app:layout_constraintStart_toEndOf="@id/tvSetAddress"
-        app:layout_constraintTop_toTopOf="@id/tvSetAddress" />
+            <TextView
+                android:id="@+id/textViewStartEndTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="40dp"
+                android:hint="开始时间——结束时间"
+                app:layout_constraintBottom_toBottomOf="@id/tvTime"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tvTime" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2px"
-        android:background="@color/color_CCCCCC"
-        app:layout_constraintTop_toBottomOf="@id/tvSetAddress" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2px"
+                android:background="@color/color_CCCCCC"
+                app:layout_constraintTop_toBottomOf="@id/tvTime" />
 
-    <TextView
-        android:id="@+id/tvNumber"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginLeft="10dp"
-        android:drawablePadding="10dp"
-        android:gravity="center_vertical"
-        android:paddingRight="20dp"
-        android:singleLine="true"
-        android:text="参加人数："
-        android:textColor="@color/black"
-        app:layout_constraintEnd_toStartOf="@id/textViewNumber"
-        app:layout_constraintHeight_percent="0.06"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvSetAddress"
-        tools:ignore="MissingConstraints" />
+            <TextView
+                android:id="@+id/tvAddress"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="10dp"
+                android:drawablePadding="10dp"
+                android:gravity="center_vertical"
+                android:paddingRight="20dp"
+                android:singleLine="true"
+                android:text="目的地："
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toStartOf="@id/textViewAddress"
+                app:layout_constraintHeight_percent="0.06"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvTime"
+                tools:ignore="MissingConstraints" />
 
-    <EditText
-        android:id="@+id/textViewNumber"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="20dp"
-        android:background="@color/white"
-        android:gravity="right"
-        android:hint="请输入计划参加人数"
-        android:inputType="number"
-        android:maxLength="2"
-        android:singleLine="true"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="@id/tvNumber"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintRight_toRightOf="@id/tvNumber"
-        app:layout_constraintStart_toEndOf="@id/tvNumber"
-        app:layout_constraintTop_toTopOf="@id/tvNumber" />
+            <TextView
+                android:id="@+id/textViewAddress"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:gravity="right"
+                android:hint="请选择目的地"
+                app:layout_constraintBottom_toBottomOf="@id/tvAddress"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tvAddress"
+                app:layout_constraintTop_toTopOf="@id/tvAddress" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2px"
-        android:background="@color/color_CCCCCC"
-        app:layout_constraintTop_toBottomOf="@id/tvNumber" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2px"
+                android:background="@color/color_CCCCCC"
+                app:layout_constraintTop_toBottomOf="@id/tvAddress" />
 
-    <TextView
-        android:id="@+id/tvName"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginLeft="10dp"
-        android:drawablePadding="10dp"
-        android:gravity="center_vertical"
-        android:paddingRight="20dp"
-        android:singleLine="true"
-        android:text="参加成员："
-        android:textColor="@color/black"
-        app:layout_constraintHeight_percent="0.06"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvNumber"
-        tools:ignore="MissingConstraints" />
+            <TextView
+                android:id="@+id/tvSetAddress"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="10dp"
+                android:drawablePadding="10dp"
+                android:gravity="center_vertical"
+                android:paddingRight="20dp"
+                android:singleLine="true"
+                android:text="详细地址："
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toStartOf="@id/textViewSetAddress"
+                app:layout_constraintHeight_percent="0.06"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvAddress"
+                tools:ignore="MissingConstraints" />
 
-    <TextView
-        android:id="@+id/textViewSo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="60dp"
-        android:text="隐藏"
-        app:layout_constraintBottom_toBottomOf="@id/tvName"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@id/tvName" />
+            <EditText
+                android:id="@+id/textViewSetAddress"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:background="@color/transparent"
+                android:gravity="right"
+                android:hint="请输入地址"
+                android:textSize="13dp"
+                app:layout_constraintBottom_toBottomOf="@id/tvSetAddress"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintRight_toRightOf="@id/tvSetAddress"
+                app:layout_constraintStart_toEndOf="@id/tvSetAddress"
+                app:layout_constraintTop_toTopOf="@id/tvSetAddress" />
 
-    <CheckBox
-        android:id="@+id/checkBoxSo"
-        style="@style/CheckBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="20dp"
-        app:layout_constraintBottom_toBottomOf="@id/textViewSo"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@id/textViewSo" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2px"
+                android:background="@color/color_CCCCCC"
+                app:layout_constraintTop_toBottomOf="@id/tvSetAddress" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2px"
-        android:background="@color/color_CCCCCC"
-        app:layout_constraintTop_toBottomOf="@id/tvName" />
+            <TextView
+                android:id="@+id/tvNumber"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="10dp"
+                android:drawablePadding="10dp"
+                android:gravity="center_vertical"
+                android:paddingRight="20dp"
+                android:singleLine="true"
+                android:text="参加人数："
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toStartOf="@id/textViewNumber"
+                app:layout_constraintHeight_percent="0.06"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvSetAddress"
+                tools:ignore="MissingConstraints" />
 
-    <TextView
-        android:id="@+id/tvLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginLeft="10dp"
-        android:drawablePadding="10dp"
-        android:gravity="center_vertical"
-        android:singleLine="true"
-        android:text="活动标签："
-        android:textColor="@color/black"
-        app:layout_constraintHeight_percent="0.06"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvName"
-        tools:ignore="MissingConstraints" />
+            <EditText
+                android:id="@+id/textViewNumber"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:background="@color/white"
+                android:gravity="right"
+                android:hint="请输入计划参加人数"
+                android:inputType="number"
+                android:maxLength="2"
+                android:singleLine="true"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@id/tvNumber"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintRight_toRightOf="@id/tvNumber"
+                app:layout_constraintStart_toEndOf="@id/tvNumber"
+                app:layout_constraintTop_toTopOf="@id/tvNumber" />
 
-    <EditText
-        android:id="@+id/editTextLabel"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="10dp"
-        android:background="@drawable/shape_edit_on"
-        android:maxLength="8"
-        android:padding="5dp"
-        android:textSize="12dp"
-        app:layout_constraintBottom_toBottomOf="@id/tvLabel"
-        app:layout_constraintEnd_toStartOf="@id/butAddition"
-        app:layout_constraintStart_toEndOf="@id/tvLabel"
-        app:layout_constraintTop_toTopOf="@id/tvLabel" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2px"
+                android:background="@color/color_CCCCCC"
+                app:layout_constraintTop_toBottomOf="@id/tvNumber" />
 
-    <Button
-        android:id="@+id/butAddition"
-        android:layout_width="50dp"
-        android:layout_height="25dp"
-        android:layout_marginRight="20dp"
-        android:background="@drawable/foot_text_bg"
-        android:padding="5dp"
-        android:text="添加"
-        android:textSize="12dp"
-        app:layout_constraintBottom_toBottomOf="@id/tvLabel"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@id/tvLabel" />
+            <TextView
+                android:id="@+id/tvName"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginLeft="10dp"
+                android:drawablePadding="10dp"
+                android:gravity="center_vertical"
+                android:paddingRight="20dp"
+                android:singleLine="true"
+                android:text="参加成员："
+                android:textColor="@color/black"
+                app:layout_constraintHeight_percent="0.06"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvNumber"
+                tools:ignore="MissingConstraints" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2px"
-        android:background="@color/color_CCCCCC"
-        app:layout_constraintTop_toBottomOf="@id/tvLabel" />
+            <TextView
+                android:id="@+id/textViewSo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="60dp"
+                android:text="隐藏"
+                app:layout_constraintBottom_toBottomOf="@id/tvName"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tvName" />
 
-    <GridLayout
-        android:id="@+id/gridLayoutLevel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvLabel" />
+            <CheckBox
+                android:id="@+id/checkBoxSo"
+                style="@style/CheckBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                app:layout_constraintBottom_toBottomOf="@id/textViewSo"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@id/textViewSo" />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="30dp"
-        android:text="活动标签：展示参加活动成员特征或活动目的以便参与的小伙伴查找。"
-        app:layout_constraintTop_toBottomOf="@id/gridLayoutLevel"
-        tools:ignore="MissingConstraints" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2px"
+                android:background="@color/color_CCCCCC"
+                app:layout_constraintTop_toBottomOf="@id/tvName" />
+
+            <TextView
+                android:id="@+id/tvLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginLeft="10dp"
+                android:drawablePadding="10dp"
+                android:gravity="center_vertical"
+                android:singleLine="true"
+                android:text="活动标签："
+                android:textColor="@color/black"
+                app:layout_constraintHeight_percent="0.06"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvName"
+                tools:ignore="MissingConstraints" />
+
+            <EditText
+                android:id="@+id/editTextLabel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/shape_edit_on"
+                android:maxLength="8"
+                android:padding="5dp"
+                android:textSize="12dp"
+                app:layout_constraintBottom_toBottomOf="@id/tvLabel"
+                app:layout_constraintEnd_toStartOf="@id/butAddition"
+                app:layout_constraintStart_toEndOf="@id/tvLabel"
+                app:layout_constraintTop_toTopOf="@id/tvLabel" />
+
+            <Button
+                android:id="@+id/butAddition"
+                android:layout_width="50dp"
+                android:layout_height="25dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/foot_text_bg"
+                android:padding="5dp"
+                android:text="添加"
+                android:textSize="12dp"
+                app:layout_constraintBottom_toBottomOf="@id/tvLabel"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tvLabel" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2px"
+                android:background="@color/color_CCCCCC"
+                app:layout_constraintTop_toBottomOf="@id/tvLabel" />
+
+            <GridLayout
+                android:id="@+id/gridLayoutLevel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvLabel" />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="30dp"
+                android:text="活动标签：展示参加活动成员特征或活动目的以便参与的小伙伴查找。"
+                app:layout_constraintTop_toBottomOf="@id/gridLayoutLevel"
+                tools:ignore="MissingConstraints" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
 
     <Button
         android:id="@+id/butRelease"

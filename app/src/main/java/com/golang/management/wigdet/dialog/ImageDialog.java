@@ -23,9 +23,9 @@ public final class ImageDialog {
         public Builder(FragmentActivity activity, List<ImagesListBean> image, int page) {
             super(activity);
             this.context = activity;
-            setAnimStyle(BaseDialog.AnimStyle.SCALE);
-            setWidth(WRAP_CONTENT);
-            setHeight(WRAP_CONTENT);
+            setAnimStyle(BaseDialog.AnimStyle.RIGHT);
+            setWidth(MATCH_PARENT);
+            setHeight(MATCH_PARENT);
             setContentView(R.layout.fragement_full_img);
             List<String> images = new ArrayList<>();
             for (int i=0;i<image.size();i++){

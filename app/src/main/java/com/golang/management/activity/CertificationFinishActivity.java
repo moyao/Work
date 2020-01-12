@@ -35,9 +35,6 @@ public class CertificationFinishActivity extends BaseActivity {
     public void bindEvent() {
         mTvNameContext.setText(getIntent().getStringExtra("name"));
         mTvIdcardContext.setText(getIntent().getStringExtra(Constant.INTENT_ID_NUMBER));
-        /*UserSharedPreferencesUtils userSharedPreferencesUtils = new UserSharedPreferencesUtils(this);
-        userSharedPreferencesUtils.getUserInfo().setHasAuthentication("1");
-        userSharedPreferencesUtils.saveSharedPreferences();*/
         try {
             mTvValidityContext.setText(StringToDate(getIntent().getStringExtra("date")));
         } catch (ParseException e) {

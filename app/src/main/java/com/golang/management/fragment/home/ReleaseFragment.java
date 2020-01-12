@@ -64,7 +64,7 @@ public class ReleaseFragment extends CheckPermissionsActivity implements
     private ImageButton mImagePreservation;
     private RecyclerView mRvPics;
     private Button mButRelease;
-    private ArrayList<ImageItem> selImageList  = new ArrayList<>(); //当前选择的所有图片
+    private ArrayList<ImageItem> selImageList = new ArrayList<>(); //当前选择的所有图片
     private ImagePickerAdapter adapter;
     String userId;
     private String lat, lng;
@@ -138,10 +138,12 @@ public class ReleaseFragment extends CheckPermissionsActivity implements
                     showToast("请输入您要发布的内容");
                     return;
                 }
+                if (selImageList.size() < 2) {
+                    showToast("至少选择3张图片");
+                    return;
+                }
                 if (getArguments().getString(Constants.KEY_TITLE).equals(Constant.VIEW_CIRCLE)) {
-                    showLoadingDialog("上传中……");
                     //圈子
-
                     for (ImageItem imageItem : selImageList) {
                         if (!imageItem.path.startsWith("http"))
                             list.add(new File(imageItem.path));
@@ -153,7 +155,6 @@ public class ReleaseFragment extends CheckPermissionsActivity implements
                     }
 
                 } else {
-                    //活动
                     final List<File> list = new ArrayList();
                     for (ImageItem imageItem : selImageList) {
                         if (!imageItem.path.startsWith("http"))
@@ -161,6 +162,8 @@ public class ReleaseFragment extends CheckPermissionsActivity implements
                     }
                     startForResult(DetailsNextFragment.newInstance(selImageList, editTextContext.getText().toString()), 0);
                 }
+                //活动
+
             }
         });
         mImageBlack.setOnClickListener(new OnClickListenerWrapper() {
@@ -173,6 +176,7 @@ public class ReleaseFragment extends CheckPermissionsActivity implements
     }
 
     private void DataImage() {
+        showLoadingDialog("上传中……");
         HttpParams params = new HttpParams();
         params.put("uid", userId);
         OkGo.<String>post(HttpConstants.BASE_URL + HomeModellml.IMAGEUPLOADLIST)

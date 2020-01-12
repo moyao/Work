@@ -3,6 +3,7 @@ package com.golang.management.fragment;
 import android.app.Activity;
 import android.app.Dialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
@@ -25,8 +26,15 @@ import com.golang.management.utils.StringHandler;
 import com.golang.management.wigdet.bottombar.BottomBar;
 import com.golang.management.wigdet.bottombar.BottomBarTab;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import butterknife.BindView;
+import cn.jpush.android.api.JPushInterface;
+import cn.jpush.android.api.TagAliasCallback;
 import me.yokeyword.fragmentation.SupportFragment;
+
+import static com.baidu.idl.face.platform.ui.utils.VolumeUtils.TAG;
 
 /**
  * Created by dongyaoyao
@@ -34,6 +42,8 @@ import me.yokeyword.fragmentation.SupportFragment;
 public class MainFragment extends BaseFragment {
     @BindView(R.id.radioRelease)
     RadioButton radioRelease;
+    @BindView(R.id.checkView)
+    View checkView;
     private String lat, lng, address;
     private SupportFragment[] mFragments = new SupportFragment[5];
     private BottomBar mNavigation;
@@ -96,30 +106,52 @@ public class MainFragment extends BaseFragment {
         Window w = dia.getWindow();
         WindowManager.LayoutParams lp = w.getAttributes();
         dia.onWindowAttributesChanged(lp);
+        if (!StringHandler.hasNull(userSharedPreferencesUtils.getUserid())){
+            Set<String> tagSet = new HashSet<>();
+            tagSet.add(userSharedPreferencesUtils.getUserid());
+            JPushInterface.setTags(getContext(), tagSet, new TagAliasCallback() {
+                @Override
+                public void gotResult(int i, String s, Set<String> set) {
+                    Log.e(TAG,"--设置标签returnCode:"+i+",s:"+s);
+                }
+            });
+        }
     }
 
     @Override
     public void bindEvent() {
         initApi();
-        mNavigation.setOnTabSelectedListener(new BottomBar.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(int position, int prePosition) {
-                if (position >= 0 && !StringHandler.hasNull(userSharedPreferencesUtils.getUserid())) {
-                    showHideFragment(mFragments[position], mFragments[prePosition]);
-                } else {
 
+        if (!StringHandler.hasNull(userSharedPreferencesUtils.getUserid())) {
+            checkView.setVisibility(View.GONE);
+            mNavigation.setOnTabSelectedListener(new BottomBar.OnTabSelectedListener() {
+                @Override
+                public void onTabSelected(int position, int prePosition) {
+                    if (position >= 0 && !StringHandler.hasNull(userSharedPreferencesUtils.getUserid())) {
+                        showHideFragment(mFragments[position], mFragments[prePosition]);
+                    } else {
+
+                        loginDialog((Activity) getContext());
+                    }
+                }
+
+                @Override
+                public void onTabUnselected(int position) {
+                }
+
+                @Override
+                public void onTabReselected(int position) {
+                }
+            });
+        } else {
+            checkView.setVisibility(View.VISIBLE);
+            checkView.setOnClickListener(new OnClickListenerWrapper() {
+                @Override
+                protected void onSingleClick(View v) {
                     loginDialog((Activity) getContext());
                 }
-            }
-
-            @Override
-            public void onTabUnselected(int position) {
-            }
-
-            @Override
-            public void onTabReselected(int position) {
-            }
-        });
+            });
+        }
         radioRelease.setOnClickListener(new OnClickListenerWrapper() {
             @Override
             protected void onSingleClick(View v) {

@@ -11,6 +11,8 @@ import com.baidu.ocr.sdk.exception.OCRError;
 import com.baidu.ocr.sdk.model.AccessToken;
 import com.golang.management.BuildConfig;
 import com.golang.management.common.ActivityPageManager;
+import com.golang.management.common.UserSharedPreferencesUtils;
+import com.golang.management.config.config;
 import com.golang.management.helper.GenerateTestUserSig;
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.okgo.OkGo;
@@ -37,9 +39,6 @@ import me.yokeyword.fragmentation.Fragmentation;
 import me.yokeyword.fragmentation.helper.ExceptionHandler;
 import okhttp3.OkHttpClient;
 
-import static com.golang.management.config.config.apiKey;
-import static com.golang.management.config.config.secretKey;
-
 /**
  * Created by dongyaoyao
  */
@@ -56,7 +55,7 @@ public class MainApplication extends Application {
     public static MainApplication instance() {
         return instance;
     }
-
+    UserSharedPreferencesUtils userSharedPreferencesUtils;
     @Override
     public void onCreate() {
         super.onCreate();
@@ -84,7 +83,7 @@ public class MainApplication extends Application {
             public void onError(OCRError error) {
                 // 调用失败，返回OCRError子类SDKError对象
             }
-        }, getApplicationContext(), apiKey, secretKey);
+        }, getApplicationContext(), config.apiKey, config.secretKey);
         MultiDex.install(this);
         TUIKitConfigs configs = TUIKit.getConfigs();
         configs.setSdkConfig(new TIMSdkConfig(GenerateTestUserSig.SDKAPPID));
@@ -98,8 +97,10 @@ public class MainApplication extends Application {
             }
         };
         TUIKit.addIMEventListener(imEventListener);
+        userSharedPreferencesUtils = new UserSharedPreferencesUtils(this);
         JPushInterface.setDebugMode(BuildConfig.DEBUG);
         JPushInterface.init(this);
+
     }
 
     private void initImagePicker() {

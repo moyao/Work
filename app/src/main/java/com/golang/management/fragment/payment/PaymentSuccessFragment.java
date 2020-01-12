@@ -36,7 +36,6 @@ public class PaymentSuccessFragment extends BaseFragment {
     TextView textViewTime;
     @BindView(R.id.textViewContext)
     TextView textViewContext;
-
     public static PaymentSuccessFragment newInstance(String out_trade_no) {
         Bundle args = new Bundle();
         PaymentSuccessFragment fragment = new PaymentSuccessFragment();
@@ -58,12 +57,19 @@ public class PaymentSuccessFragment extends BaseFragment {
     @Override
     public void bindEvent() {
         userSharedPreferencesUtils = new UserSharedPreferencesUtils(getContext());
-        new MeModellml().user_mybill(userSharedPreferencesUtils.getUserid(),getArguments().getString(Constants.KEY_TITLE))
+        if ("".equals(getArguments().getString(Constants.KEY_TITLE))){
+            textViewContext.setVisibility(View.GONE);
+        }else {
+            textViewContext.setVisibility(View.VISIBLE);
+        }
+        showLoadingDialog("加载中。。。");
+        new MeModellml().user_mybill(userSharedPreferencesUtils.getUserid(),
+                getArguments().getString(Constants.KEY_TITLE))
                 .safeSubscribe(new MyObserve<List<PaymentBean>>(this) {
                     @Override
                     protected void onSuccess(List<PaymentBean> paymentBean) {
+                        showPage();
                         PaymentBean paymentBean1=paymentBean.get(0);
-                        textViewContext.setVisibility(View.GONE);
                         textViewOrderNumber.setText(paymentBean1.getOrderNo());
                         textViewMoney.setText(paymentBean1.getPaymentFee() + "元");
                         textViewType.setText(paymentBean1.getPaymentChannel());

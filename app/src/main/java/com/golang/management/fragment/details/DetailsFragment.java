@@ -36,11 +36,13 @@ import com.golang.management.config.Constants;
 import com.golang.management.api.MyObserve;
 import com.golang.management.fragment.home.adapter.CommentAdapter;
 import com.golang.management.fragment.home.adapter.ImageAdapter;
+import com.golang.management.fragment.home.adapter.NewHomeAdapter;
 import com.golang.management.fragment.home.adapter.SignUpsAdapter;
 import com.golang.management.fragment.me.PersonalFragment;
 import com.golang.management.model.FriendModellml;
 import com.golang.management.model.MessageModellml;
 import com.golang.management.utils.KeyboardStateObserver;
+import com.golang.management.utils.StringHandler;
 import com.golang.management.wigdet.CommonTitleBar;
 import com.tencent.imsdk.TIMFriendshipManager;
 import com.tencent.imsdk.TIMValueCallBack;
@@ -115,6 +117,7 @@ public class DetailsFragment extends BaseFragment implements CommentAdapter.Item
     UserSharedPreferencesUtils userSharedPreferencesUtils;
     private String userId, objectId, parentId, targetUserNickname;
     ImageAdapter imageAdapter;
+
     public static DetailsFragment newInstance(String id, String title) {
         Bundle args = new Bundle();
         args.putString(Constants.KEY_TYPE, id);
@@ -128,6 +131,7 @@ public class DetailsFragment extends BaseFragment implements CommentAdapter.Item
     public int onSetLayoutId() {
         return R.layout.fragement_activity_details;
     }
+
     @Override
     public void initView(View view) {
         userSharedPreferencesUtils = new UserSharedPreferencesUtils(getContext());
@@ -242,10 +246,19 @@ public class DetailsFragment extends BaseFragment implements CommentAdapter.Item
                         objectId = getArguments().get(Constants.KEY_TYPE) + "";
                         targetUserNickname = userSharedPreferencesUtils.getUserid();
                         parentId = activityDtoInfo.getUserId();
-                        initDataSend();
+                        if (!StringHandler.hasNull(editTextContext.getText().toString())) {
+                            initDataSend();
+                        } else {
+                            showToast("请输入您要评论的内容");
+                        }
+
                         break;
                     case 1:
-                        initDataSend();
+                        if (!StringHandler.hasNull(editTextContext.getText().toString())) {
+                            initDataSend();
+                        } else {
+                            showToast("请输入您要评论的内容");
+                        }
                         break;
                 }
             }
@@ -318,12 +331,15 @@ public class DetailsFragment extends BaseFragment implements CommentAdapter.Item
                                 layoutFilterItem(gridLayoutLevel, spit.replace("[", "").replace("]", ""));
                             }
                         }
-                        Ageview.setBackground(getResources().getDrawable(R.drawable.but_item_distance));
-                        textViewAge.setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(R.mipmap.male, null),
-                                null, null, null);
-                        Ageview.setBackground(getResources().getDrawable(R.drawable.but_item_age));
-                        textViewAge.setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(R.mipmap.female, null),
-                                null, null, null);
+                        if ("MALE".equals(userInfos.getSex())) {
+                            Ageview.setBackground(getResources().getDrawable(R.drawable.but_item_distance));
+                            textViewAge.setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(R.mipmap.male, null),
+                                    null, null, null);
+                        } else {
+                            Ageview.setBackground(getResources().getDrawable(R.drawable.but_item_age));
+                            textViewAge.setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(R.mipmap.female, null),
+                                    null, null, null);
+                        }
                         commentsBeans = userInfos.getActivityComments();
                         getDataComment();
                         signUpsBeans = userInfos.getActivitySignUps();
@@ -394,6 +410,7 @@ public class DetailsFragment extends BaseFragment implements CommentAdapter.Item
                     protected void onSuccess(String activityDtoInfo) {
                         showPage();
                         showToast("报名成功");
+                        initDetails();
                     }
                 });
     }
@@ -405,7 +422,7 @@ public class DetailsFragment extends BaseFragment implements CommentAdapter.Item
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recycler.setLayoutManager(layoutManager);
-        SignUpsAdapter signUpsAdapter = new SignUpsAdapter(signUpsBeans, activityDtoInfo.getUserId(), getContext());
+        SignUpsAdapter signUpsAdapter = new SignUpsAdapter(signUpsBeans, activityDtoInfo.getVisible() + "", activityDtoInfo.getUserId(), getContext());
         recycler.setAdapter(signUpsAdapter);
     }
 

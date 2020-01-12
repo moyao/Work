@@ -1,15 +1,13 @@
 package com.golang.management.model;
 
-import com.google.gson.reflect.TypeToken;
 import com.golang.management.api.ApiWrapper;
 import com.golang.management.bean.HomeBean;
+import com.google.gson.reflect.TypeToken;
 import com.lzy.okgo.model.HttpMethod;
 import com.lzy.okgo.model.HttpParams;
 
 import java.lang.reflect.Type;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import io.reactivex.Observable;
 /**

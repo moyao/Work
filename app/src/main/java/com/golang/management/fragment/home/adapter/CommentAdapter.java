@@ -10,6 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CircleCrop;
+import com.bumptech.glide.request.RequestOptions;
 import com.golang.management.R;
 import com.golang.management.bean.ActivityCommentsBeanX;
 import com.golang.management.bean.ActivityDtoInfo;
@@ -46,6 +48,7 @@ public class CommentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 commentsBean.setParentId(commentsBeanX.getParentId());
                 commentsBean.setUserId(commentsBeanX.getUserId());
                 commentsBean.setTargetNickname(commentsBeanX.getTargetNickname());
+                commentsBean.setProfileImageUrl(commentsBeanX.getProfileImageUrl());
                 this.commentsBeans.add(commentsBean);
                 for (ActivityCommentsBeanX commentsBeanX1 : commentsBeanX.getContentComments()) {
                     ActivityCommentsBeanX commentsBean1 = new ActivityCommentsBeanX();
@@ -58,6 +61,7 @@ public class CommentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                     commentsBean1.setUserId(commentsBeanX1.getUserId());
                     commentsBean1.setObjectId(commentsBeanX1.getObjectId());
                     commentsBean1.setTargetNickname(commentsBeanX1.getTargetNickname());
+                    commentsBean1.setProfileImageUrl(commentsBeanX1.getProfileImageUrl());
                     this.commentsBeans.add(commentsBean1);
                 }
         }
@@ -82,8 +86,7 @@ public class CommentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
         ActivityCommentsBeanX commentsBean = commentsBeans.get(position);
         if (holder instanceof TopViewHolder) {
-
-            Glide.with(context).load(commentsBean.getProfileImageUrl()).error(R.mipmap.photo).into(((TopViewHolder) holder).textViewPhoto);
+            Glide.with(context).load(commentsBean.getProfileImageUrl()+"").apply(RequestOptions.bitmapTransform(new CircleCrop())).into(((TopViewHolder) holder).textViewPhoto);
             ((TopViewHolder) holder).textViewName.setText(commentsBean.getNickname() + "");
             ((TopViewHolder) holder).textViewTime.setText(commentsBean.getCreatedAt());
             ((TopViewHolder) holder).textViewContent.setText(commentsBean.getContent());
@@ -94,8 +97,8 @@ public class CommentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 }
             });
         } else if (holder instanceof ItemViewHolder) {
-            Glide.with(context).load(commentsBean.getProfileImageUrl()).error(R.mipmap.photo).into(((ItemViewHolder) holder).textViewPhoto);
-            ((ItemViewHolder) holder).textViewName.setText(commentsBean.getNickname() + "");
+            Glide.with(context).load(commentsBean.getProfileImageUrl()+"").apply(RequestOptions.bitmapTransform(new CircleCrop())).into(((ItemViewHolder) holder).textViewPhoto);
+            ((ItemViewHolder) holder).textViewName.setText(commentsBean.getNickname() + "@"+commentsBean.getTargetNickname());
             ((ItemViewHolder) holder).textViewTime.setText(commentsBean.getCreatedAt());
             ((ItemViewHolder) holder).textViewContent.setText(commentsBean.getContent());
             holder.itemView.setOnClickListener(new View.OnClickListener() {

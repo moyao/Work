@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -13,6 +14,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CircleCrop;
+import com.bumptech.glide.request.RequestOptions;
 import com.golang.management.R;
 import com.golang.management.bean.ActivitySignUpsBean;
 import com.golang.management.common.OnClickListenerWrapper;
@@ -41,11 +44,13 @@ public class SignUpsAdapter extends RecyclerView.Adapter<SignUpsAdapter.MyViewHo
     private List<ActivitySignUpsBean> signUpsBeans;
     private String activityid;
     private UserSharedPreferencesUtils userSharedPreferencesUtils;
+    private String Visible;
 
-    public SignUpsAdapter(List<ActivitySignUpsBean> signUpsBeans, String activityid, Context context) {
+    public SignUpsAdapter(List<ActivitySignUpsBean> signUpsBeans, String Visible, String activityid, Context context) {
         this.signUpsBeans = signUpsBeans;
         this.mcontext = context;
         this.activityid = activityid;
+        this.Visible=Visible;
     }
     @NonNull
     @Override
@@ -58,9 +63,20 @@ public class SignUpsAdapter extends RecyclerView.Adapter<SignUpsAdapter.MyViewHo
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         userSharedPreferencesUtils = new UserSharedPreferencesUtils(mcontext);
         ActivitySignUpsBean signUpsBean = signUpsBeans.get(position);
-        Glide.with(mcontext).load(signUpsBean.getProfileImageUrl())
-                .error(R.mipmap.photo).centerCrop().into(holder.imageViewPhoto);
-        holder.textViewName.setText(signUpsBean.getNickname());
+        if ("1".equals(Visible)){
+            Glide.with(mcontext).load(signUpsBean.getProfileImageUrl()).apply(RequestOptions.bitmapTransform(new CircleCrop()))
+                    .error(R.mipmap.photo).into(holder.imageViewPhoto);
+            holder.textViewName.setText(signUpsBean.getNickname());
+        }else {
+            if ("MALE".equals(signUpsBean.getAge())){
+                Glide.with(mcontext).load(R.mipmap.details_item_male)
+                        .error(R.mipmap.details_item_male).centerCrop().into(holder.imageViewPhoto);
+            }else {
+                Glide.with(mcontext).load(R.mipmap.details_item_female)
+                        .error(R.mipmap.details_item_female).centerCrop().into(holder.imageViewPhoto);
+            }
+            holder.textViewName.setText("***");
+        }
         if ("HAS_SIGN_UP".equals(signUpsBean.getStatus())) {
             if (activityid.equals(userSharedPreferencesUtils.getUserid())) {
                 holder.textViewAgree.setVisibility(View.VISIBLE);

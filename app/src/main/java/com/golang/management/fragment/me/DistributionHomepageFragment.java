@@ -31,7 +31,6 @@ import com.golang.management.paymentmoney.AuthResult;
 import com.golang.management.wigdet.CommonTitleBar;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
-import com.lzy.okgo.model.HttpParams;
 import com.lzy.okgo.model.Response;
 
 import org.json.JSONException;
@@ -86,14 +85,12 @@ public class DistributionHomepageFragment extends BaseFragment {
             }
         }
     };
-
     public static DistributionHomepageFragment newInstance() {
         Bundle args = new Bundle();
         DistributionHomepageFragment fragment = new DistributionHomepageFragment();
         fragment.setArguments(args);
         return fragment;
     }
-
     @Override
     public int onSetLayoutId() {
         return R.layout.fragement_my_distribution;
@@ -153,10 +150,12 @@ public class DistributionHomepageFragment extends BaseFragment {
     @Override
     public void bindEvent() {
         userSharedPreferencesUtils = new UserSharedPreferencesUtils(getContext());
+        showLoadingDialog("加载中。。。");
         new MeModellml().query_Point_Account_Page(userSharedPreferencesUtils.getUserid()).
                 safeSubscribe(new MyObserve<DistributiopnHomepageBean>(this) {
                     @Override
                     protected void onSuccess(DistributiopnHomepageBean distributiopnHomepageBean) {
+                        showPage();
                         Glide.with(getContext()).load(distributiopnHomepageBean.getContent().get(0).getUserInfoDto().getProfileImageUrl()).apply(RequestOptions.bitmapTransform(new CircleCrop())).into(imageViewPhoto);
                         textViewGrade.setText("等级：" + distributiopnHomepageBean.getContent().get(0).getUserInfoDto().getUserLevel().getLevelName());
                         textViewName.setText("昵称：" + distributiopnHomepageBean.getContent().get(0).getUserInfoDto().getNickname());
@@ -176,7 +175,7 @@ public class DistributionHomepageFragment extends BaseFragment {
             }
         });
 
-        HttpParams httpParams = new HttpParams();
+      /*  HttpParams httpParams = new HttpParams();
         httpParams.put("userId", userSharedPreferencesUtils.getUserid());
         OkGo.<String>get(HttpConstants.BASE_URL + MeModellml.USER_ALIPAYAUTH)
                 .tag(this)
@@ -196,7 +195,7 @@ public class DistributionHomepageFragment extends BaseFragment {
                             e.printStackTrace();
                         }
                     }
-                });
+                });*/
     }
 
     @Override

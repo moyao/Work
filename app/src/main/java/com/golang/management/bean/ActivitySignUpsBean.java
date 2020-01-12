@@ -16,7 +16,6 @@ public class ActivitySignUpsBean {
      * age : null
      * status : HAS_SIGN_UP
      */
-
     private Object userInfoDto;
     private String createdAt;
     private String activityId;

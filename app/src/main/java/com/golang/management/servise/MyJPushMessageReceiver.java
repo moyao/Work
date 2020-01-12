@@ -1,7 +1,5 @@
 package com.golang.management.servise;
-
 import android.content.Context;
-
 import cn.jpush.android.api.JPushMessage;
 import cn.jpush.android.service.JPushMessageReceiver;
 /*

@@ -7,10 +7,9 @@
 
     <ImageView
         android:id="@+id/imageViewPhoto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:layout_margin="10dp"
-        android:background="@mipmap/photo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -98,7 +97,7 @@
         android:textSize="14dp"
         app:layout_constraintStart_toStartOf="@id/imageViewPhoto"
         app:layout_constraintTop_toBottomOf="@id/imageViewPhoto"
-        android:layout_marginTop="3dp"/>
+        android:layout_marginTop="10dp"/>
 
     <View
         android:id="@+id/view1"
@@ -185,6 +184,6 @@
         android:layout_width="match_parent"
         android:layout_height="10dp"
         android:layout_marginTop="15dp"
-        android:background="@color/color_CCCCCC"
+        android:background="@color/color_F2F2F2"
         app:layout_constraintTop_toBottomOf="@+id/textViewSo" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,7 @@
 package com.golang.management.fragment.me;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -80,7 +81,7 @@ public class CertificationIDCardFragment extends BaseFragment {
     private String front;
     private String reverse;
     UserSharedPreferencesUtils userSharedPreferencesUtils;
-
+    private ProgressDialog dialog;
     public static CertificationIDCardFragment newInstance() {
         Bundle args = new Bundle();
         CertificationIDCardFragment fragment = new CertificationIDCardFragment();
@@ -232,7 +233,7 @@ public class CertificationIDCardFragment extends BaseFragment {
                 .execute(new StringCallback() {
                     @Override
                     public void onSuccess(Response<String> response) {
-                        showPage();
+                        dialog.dismiss();
                         String body = response.body();
                         Gson gson = new Gson();
                         ImagePhoto user = gson.fromJson(body, ImagePhoto.class);
@@ -277,5 +278,15 @@ public class CertificationIDCardFragment extends BaseFragment {
             }
         }
 
+    }
+    public void showLoadingDialog(String message) {
+        if (dialog == null) {
+            dialog = new ProgressDialog(getContext());
+            dialog.setCanceledOnTouchOutside(false);
+            dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        }
+        if (dialog.isShowing()) return;
+        dialog.setMessage(message);
+        dialog.show();
     }
 }

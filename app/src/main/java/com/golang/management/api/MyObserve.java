@@ -52,7 +52,8 @@ public abstract class MyObserve<T> implements Observer<T> {
             }else if(serviceException.code.equals(HttpConstants.ERROR_SYSTEM)||
             serviceException.code.equals(HttpConstants.ERROR_NUMBER)||
             serviceException.code.equals(HttpConstants.NO_DATA)||
-                    serviceException.code.equals(HttpConstants.SUCCESS_CODE)){
+                    serviceException.code.equals(HttpConstants.SUCCESS_CODE)
+                    ||serviceException.code.equals(HttpConstants.BUSSINESS_ACTIVITY)){
                 baseInterface.get().showToast(serviceException.message);
             }else {
                 baseInterface.get().showToast("服务器异常，请稍后再试");
@@ -64,7 +65,6 @@ public abstract class MyObserve<T> implements Observer<T> {
             baseInterface.get().showToast("服务器异常，请稍后再试");
         }
     }
-
     @Override
     public void onComplete() {
 

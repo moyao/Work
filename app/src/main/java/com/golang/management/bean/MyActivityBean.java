@@ -34,16 +34,20 @@ public class MyActivityBean {
     private Object activitySignUps;
     private double distance;
     private int maxPeopleNumber;
+    @SerializedName(value = "nickName", alternate = {"name"})
     private String nickName;
     private String sex;
+    @SerializedName(value = "profileImage", alternate = {"profileImageUrl"})
     private String profileImage;
     private int signUpPeopleNumber;
     private Object userId;
+    @SerializedName(value = "content", alternate = {"title"})
     private String content;
     private int traficCount;
     private int commentCount;
     @SerializedName(value = "startTime", alternate = {"createdAt"})
     private String startTime;
+    private String district;
     private long id;
     private Object age;
     private Object activityComments;
@@ -192,6 +196,14 @@ public class MyActivityBean {
 
     public void setImagesList(List<ImagesListBean> imagesList) {
         this.imagesList = imagesList;
+    }
+
+    public String getDistrict() {
+        return district;
+    }
+
+    public void setDistrict(String district) {
+        this.district = district;
     }
 }
 

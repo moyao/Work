@@ -400,6 +400,7 @@ public class DetailsNextFragment extends CheckPermissionsActivity implements Pic
                     userSharedPreferencesUtils.saveSharedPreferences();
                     getRelease();
                     dialog.dismiss();
+                    ExemptionDialog.dismiss();
                 } else {
                     showToast("同意遵守本声明，以后每次默认都同意");
                 }

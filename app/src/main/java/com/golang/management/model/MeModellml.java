@@ -1,6 +1,5 @@
 package com.golang.management.model;
 
-import com.google.gson.reflect.TypeToken;
 import com.golang.management.api.ApiWrapper;
 import com.golang.management.bean.DistributiopnHomepageBean;
 import com.golang.management.bean.EditBean;
@@ -8,7 +7,7 @@ import com.golang.management.bean.MyDistributionBean;
 import com.golang.management.bean.PaymentBean;
 import com.golang.management.bean.PersonalBean;
 import com.golang.management.bean.orcode;
-import com.golang.management.config.Constant;
+import com.google.gson.reflect.TypeToken;
 import com.lzy.okgo.model.HttpMethod;
 import com.lzy.okgo.model.HttpParams;
 

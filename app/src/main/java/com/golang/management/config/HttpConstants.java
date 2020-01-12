@@ -17,6 +17,7 @@ public class HttpConstants {
     public static final String WARNING_MESSAGE_MAX = "040999";
     public static final String BUSSINESS_CODE_MIN= "050100";
     public static final String BUSSINESS_CODE_MAX= "050999";
+    public static final String BUSSINESS_ACTIVITY= "120007";
     public static final String BUSSINESS_CODE_TOKEN= "401";
 
 

@@ -1,8 +1,10 @@
 package com.golang.management.config;
 
 public class config {
-    public static String apiKey = "BBrH4G7suL2PRq8DkoWoQEEA";
-    public static String secretKey = "HWKnzlN2rjTSBU2qYVarwGohYdPNLr4z";
-    public static String licenseID = "Golan-face-android";
-    public static String licenseFileName = "idl-license.face-android-debug";
+    public static String apiKey = "AQUgrqb9fmBXMK2bZGZsrxbs";
+    public static String secretKey = "zZ9OOF4ZbCwls4CspXolVMInNrzRFO33";
+    public static String licenseID = "GoGoLang-face-android";
+    public static String licenseFileName = "idl-license.face-android";
+/*    public static String licenseID = "GoGo-face-android";
+    public static String licenseFileName = "idl-license.face-android-debug";*/
 }

@@ -14,6 +14,7 @@ import com.baidu.idl.face.platform.ui.FaceLivenessActivity;
 import com.baidu.idl.face.platform.utils.Base64Utils;
 import com.baidu.idl.face.platform.utils.FileUtils;
 import com.baidu.idl.util.FileUtil;
+import com.golang.management.utils.MessageEvent;
 import com.google.gson.Gson;
 import com.golang.management.bean.ImagePhoto;
 import com.golang.management.common.UserSharedPreferencesUtils;
@@ -26,6 +27,7 @@ import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.HttpParams;
 import com.lzy.okgo.model.Response;
 
+import org.greenrobot.eventbus.EventBus;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -133,9 +135,10 @@ public class FaceLivenessExpActivity extends FaceLivenessActivity {
                                 intent.putExtra("date", getIntent().getStringExtra("date"));
                                 intent.setClass(FaceLivenessExpActivity.this, CertificationFinishActivity.class);
                                 startActivity(intent);
+                                EventBus.getDefault().post(new MessageEvent("已认证"));
                                 finish();
                             }else {
-                                Toast.makeText(getContext(), "认真失败，请来联系客服", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(), "认证失败，请来联系客服", Toast.LENGTH_SHORT).show();
                                 finish();
                             }
                         } catch (JSONException e) {

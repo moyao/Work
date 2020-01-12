@@ -43,6 +43,8 @@ import com.lzy.okgo.model.HttpParams;
 import com.lzy.okgo.model.Response;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -146,16 +148,19 @@ public class EditFragment extends BaseFragment implements PickValueView.onSelect
     String single = "";
     String auth = "", wantToGo = "", nickname = "", hobby = "";
     private ArrayList<ImageItem> selImageList; //当前选择的所有图片
+
     public static EditFragment newInstance() {
         Bundle args = new Bundle();
         EditFragment fragment = new EditFragment();
         fragment.setArguments(args);
         return fragment;
     }
+
     @Override
     public int onSetLayoutId() {
         return R.layout.fragement_personal_center;
     }
+
     @Override
     public void initView(View view) {
         initApi();
@@ -173,7 +178,9 @@ public class EditFragment extends BaseFragment implements PickValueView.onSelect
         simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         date = new Date(System.currentTimeMillis());
         initDatePicker();
+        EventBus.getDefault().register(this);
     }
+
     @Override
     public void bindEvent() {
         userSharedPreferencesUtils = new UserSharedPreferencesUtils(getContext());
@@ -352,7 +359,6 @@ public class EditFragment extends BaseFragment implements PickValueView.onSelect
             }
         });
     }
-
     private void selectAddress() {
         CityPicker cityPicker = new CityPicker.Builder(getContext())
                 .textSize(14)
@@ -429,6 +435,12 @@ public class EditFragment extends BaseFragment implements PickValueView.onSelect
                 Glide.with(getContext()).load(selImageList.get(0).path)
                         .apply(RequestOptions.bitmapTransform(new CircleCrop())).into(imageViewPhoto);
             }
+        }
+    }
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void EvenData(MessageEvent messageEvent) {
+        if ("已认证".equals(messageEvent.getMessage())) {
+            textViewAuthentication.setText("已认证");
         }
     }
 }

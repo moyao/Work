@@ -119,7 +119,7 @@ public class MeFragment extends BaseFragment {
         textViewExtension.setOnClickListener(new OnClickListenerWrapper() {
             @Override
             protected void onSingleClick(View v) {
-                if ("普通用户".equals(textViewGrade.getText().toString())) {
+                if ("等级：普通会员".equals(textViewGrade.getText().toString())) {
                     ((MainFragment) getParentFragment()).start(DistributionFragment.newInstance());
                 } else {
                     ((MainFragment) getParentFragment()).start(DistributionHomepageFragment.newInstance());
