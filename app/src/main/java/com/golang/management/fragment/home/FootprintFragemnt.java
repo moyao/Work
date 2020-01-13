@@ -23,6 +23,8 @@ import com.golang.management.fragment.foot.FootAdapter;
 import com.golang.management.api.MyObserve;
 import com.golang.management.model.FootModellml;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.List;
 
 import butterknife.BindView;
@@ -73,22 +75,24 @@ public class FootprintFragemnt extends CheckPermissionsActivity {
         this.city = city;
         this.district = district;
         mTextViewTitle.setText(province + "," + city);
-        textViewGps.setText(city);
+        if (StringUtils.isEmpty(address)) {
+            textViewGps.setText("定位失败，请点击重试");
+        } else {
+            textViewGps.setText(city);
+        }
     }
 
     @Override
     public int onSetLayoutId() {
         return R.layout.fragement_footprint;
     }
-
     @Override
     public void initView(View view) {
         hideTitle();
         initApi();
         initDialog();
-        startLocation();
-    }
 
+    }
     private void initDialog() {
         dialog = new Dialog(getContext(), R.style.BaseDialogStyle);
         dialog.setContentView(R.layout.dialog_foot_success);
@@ -173,8 +177,14 @@ public class FootprintFragemnt extends CheckPermissionsActivity {
                 dialog.show();
             }
         });
+        textViewGps.setOnClickListener(new OnClickListenerWrapper() {
+            @Override
+            protected void onSingleClick(View v) {
+                startLocation();
+                textViewGps.setText("定位中……");
+            }
+        });
     }
-
     @Override
     public boolean canSwipeBack() {
         return false;

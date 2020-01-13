@@ -11,8 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.bitmap.CircleCrop;
-import com.bumptech.glide.request.RequestOptions;
 import com.golang.management.R;
 import com.golang.management.bean.MessageBean;
 
@@ -27,7 +25,7 @@ import butterknife.ButterKnife;
 public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context mcontext;
     private List<MessageBean> messageBeansList;
-    private int HTTP_URL;
+    private int HTTP_URL=1;
 
     public MessageAdapter(Context mcontext, List<MessageBean> messageBeans, int HTTP_URL) {
         this.mcontext = mcontext;
@@ -50,11 +48,19 @@ public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         MessageBean messageBean = messageBeansList.get(position);
-        if (holder instanceof ItemViewHolder) {
+        if (holder instanceof MyViewHolder) {
+            Glide.with(mcontext).load(messageBean.getProfileImageUrl()).centerCrop().error(R.mipmap.load_icon)
+                    .into(((MyViewHolder) holder).imageViewPhoto);
+            ((MyViewHolder) holder).textViewName.setText(messageBean.getNickname());
+            ((MyViewHolder) holder).textViewTime.setText(messageBean.getCreatedAt());
+            ((MyViewHolder) holder).textViewComment.setText(messageBean.getTargetUserNickname()+"回复你");
+
+        } else if (holder instanceof ItemViewHolder) {
             Glide.with(mcontext).load(messageBean.getProfileImageUrl()).centerCrop()
                     .into(((ItemViewHolder) holder).imageViewPhoto);
             ((ItemViewHolder) holder).textViewName.setText(messageBean.getNickname());
             ((ItemViewHolder) holder).textViewTime.setText(messageBean.getCreatedAt());
+            ((ItemViewHolder) holder).textViewParticipate.setText(messageBean.getMessage());
         }
     }
 
@@ -68,19 +74,21 @@ public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         ImageView imageViewPhoto;
         @BindView(R.id.textViewName)
         TextView textViewName;
+        @BindView(R.id.textViewComment)
+        TextView textViewComment;
         @BindView(R.id.textViewParticipate)
         TextView textViewParticipate;
         @BindView(R.id.textViewTime)
         TextView textViewTime;
         @BindView(R.id.textViewDetails)
         TextView textViewDetails;
-
-        public MyViewHolder(@NonNull View itemView) {
-            super(itemView);
+        public MyViewHolder(@NonNull View view) {
+            super(view);
+            ButterKnife.bind(this, view);
         }
     }
 
-    public class ItemViewHolder extends MyViewHolder {
+    public class ItemViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.imageViewPhoto)
         ImageView imageViewPhoto;
         @BindView(R.id.textViewName)
@@ -98,13 +106,14 @@ public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         }
     }
 
-    public class SystemViewHolder extends MyViewHolder {
+    public class SystemViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.imageViewPhoto)
         ImageView imageViewPhoto;
         @BindView(R.id.textViewContext)
         TextView textViewContext;
         @BindView(R.id.textViewTime)
         TextView textViewTime;
+
         SystemViewHolder(View view) {
             super(view);
         }

@@ -24,6 +24,8 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
+            android:textColor="@color/black"
+            android:textSize="18dp"
             android:text="主人寄语：愿你放下执着，放下不甘心，从今以后，只负责精彩自己的人生。往事不回 头，未来不将就。"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintRight_toRightOf="parent"

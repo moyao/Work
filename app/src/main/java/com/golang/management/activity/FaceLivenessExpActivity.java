@@ -4,7 +4,6 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
-
 import com.baidu.idl.face.platform.FaceConfig;
 import com.baidu.idl.face.platform.FaceEnvironment;
 import com.baidu.idl.face.platform.FaceSDKManager;
@@ -26,17 +25,14 @@ import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.HttpParams;
 import com.lzy.okgo.model.Response;
-
 import org.greenrobot.eventbus.EventBus;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import static com.mob.MobSDK.getContext;
 
 public class FaceLivenessExpActivity extends FaceLivenessActivity {
@@ -49,7 +45,6 @@ public class FaceLivenessExpActivity extends FaceLivenessActivity {
         super.onCreate(savedInstanceState);
         userSharedPreferencesUtils = new UserSharedPreferencesUtils(this);
     }
-
     private void setFaceConfig() {
         FaceConfig config = FaceSDKManager.getInstance().getFaceConfig();
         // SDK初始化已经设置完默认参数（推荐参数），您也根据实际需求进行数值调整
@@ -104,7 +99,6 @@ public class FaceLivenessExpActivity extends FaceLivenessActivity {
                     }
                 });
     }
-
     private void certification(String path) {
         showLoadingDialog("加载中。。。。");
         Map<String, Object> httpParams = new HashMap<>();
@@ -135,7 +129,7 @@ public class FaceLivenessExpActivity extends FaceLivenessActivity {
                                 intent.putExtra("date", getIntent().getStringExtra("date"));
                                 intent.setClass(FaceLivenessExpActivity.this, CertificationFinishActivity.class);
                                 startActivity(intent);
-                                EventBus.getDefault().post(new MessageEvent("已认证"));
+                                EventBus.getDefault().post(new MessageEvent("已认证",1));
                                 finish();
                             }else {
                                 Toast.makeText(getContext(), "认证失败，请来联系客服", Toast.LENGTH_SHORT).show();
@@ -143,6 +137,11 @@ public class FaceLivenessExpActivity extends FaceLivenessActivity {
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
+                            try {
+                                Toast.makeText(getContext(), jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
+                            } catch (JSONException ex) {
+                                ex.printStackTrace();
+                            }
                         }
                     }
                     @Override
@@ -150,7 +149,6 @@ public class FaceLivenessExpActivity extends FaceLivenessActivity {
                         super.onError(response);
                         dialog.dismiss();
                         Toast.makeText(getContext(), response.message(), Toast.LENGTH_SHORT).show();
-                        finish();
                     }
                 });
     }

@@ -1,4 +1,5 @@
 package com.golang.management.fragment.me.adapter;
+
 import android.content.Context;
 import android.os.Build;
 import android.view.LayoutInflater;
@@ -8,10 +9,12 @@ import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.bumptech.glide.request.RequestOptions;
@@ -19,9 +22,9 @@ import com.golang.management.R;
 import com.golang.management.bean.ImagesListBean;
 import com.golang.management.bean.MyActivityBean;
 import com.golang.management.fragment.home.adapter.ImageAdapter;
-import com.golang.management.fragment.home.adapter.NewHomeAdapter;
 
 import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 /**

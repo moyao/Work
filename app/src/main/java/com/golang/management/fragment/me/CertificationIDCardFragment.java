@@ -8,7 +8,6 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.baidu.ocr.sdk.OCR;
 import com.baidu.ocr.sdk.OnResultListener;
 import com.baidu.ocr.sdk.exception.OCRError;
@@ -18,6 +17,7 @@ import com.baidu.ocr.ui.camera.CameraActivity;
 import com.baidu.ocr.ui.camera.CameraNativeHelper;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.golang.management.utils.MessageEvent;
 import com.google.gson.Gson;
 import com.golang.management.R;
 import com.golang.management.activity.FaceLivenessExpActivity;
@@ -33,16 +33,14 @@ import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.HttpParams;
 import com.lzy.okgo.model.Response;
-import com.tencent.qcloud.tim.uikit.utils.ToastUtil;
-
 import org.apache.commons.lang3.StringUtils;
-
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-
 import butterknife.BindView;
-
 import static com.mob.tools.utils.DeviceHelper.getApplication;
 
 /**
@@ -88,7 +86,6 @@ public class CertificationIDCardFragment extends BaseFragment {
         fragment.setArguments(args);
         return fragment;
     }
-
     @Override
     public int onSetLayoutId() {
         return R.layout.fragement_certification_idcard;
@@ -137,7 +134,7 @@ public class CertificationIDCardFragment extends BaseFragment {
                 intent.putExtra("date", beginDate+"-"+endDate);
                 intent.putExtra("url", front);
                 intent.putExtra("idCardReverseSide", reverse);
-                startActivity(intent);
+                startActivityForResult(intent,4);
 
             }
         });
@@ -260,7 +257,6 @@ public class CertificationIDCardFragment extends BaseFragment {
     public boolean canSwipeBack() {
         return false;
     }
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -276,8 +272,9 @@ public class CertificationIDCardFragment extends BaseFragment {
                     }
                 }
             }
+        }else if (requestCode==4){
+            getActivity().onBackPressed();//销毁自己
         }
-
     }
     public void showLoadingDialog(String message) {
         if (dialog == null) {

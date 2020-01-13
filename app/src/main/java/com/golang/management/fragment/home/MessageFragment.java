@@ -16,12 +16,16 @@ import com.golang.management.bean.MessageBean;
 import com.golang.management.bean.UserInfo;
 import com.golang.management.common.UserSharedPreferencesUtils;
 import com.golang.management.api.ServiceException;
+import com.golang.management.config.Constant;
 import com.golang.management.config.HttpConstants;
 import com.golang.management.fragment.MainFragment;
+import com.golang.management.fragment.details.DetailsFragment;
+import com.golang.management.fragment.home.adapter.NewHomeAdapter;
 import com.golang.management.fragment.me.PersonalFragment;
 import com.golang.management.fragment.message.DetailsMessageFragment;
 import com.golang.management.fragment.message.MessageAdapter;
 import com.golang.management.model.FriendModellml;
+import com.golang.management.model.MessageModellml;
 import com.golang.management.wigdet.recyclerview.EndLessOnScrollListener;
 import com.golang.management.wigdet.recyclerview.OnItemClickListener;
 import com.golang.management.wigdet.recyclerview.RecyclerItemClickListener;
@@ -99,30 +103,63 @@ public class MessageFragment extends BaseFragment implements SwipeRefreshLayout.
 
     private void Data() {
         showLoadingPage();
-        new FriendModellml().user_friend(userSharedPreferencesUtils.getUserid())
-                .safeSubscribe(new MyObserve<List<MessageBean>>(this) {
-                    @Override
-                    protected void onSuccess(List<MessageBean> messageBeans) {
-                        showPage();
-                        if (0 == messageBeans.size()) {
-                            showNoData();
-                        } else {
-                            ListmessageBeans = messageBeans;
-                            messageAdapter = new MessageAdapter(getContext(), messageBeans, status);
-                            rvListMessage.setAdapter(messageAdapter);
-                        }
-                    }
+        switch (status) {
+            case STATUS_UNVERIFIED:
+                ListmessageBeans=null;
+                new MessageModellml().find_activity_comments(userSharedPreferencesUtils.getUserid())
+                        .safeSubscribe(new MyObserve<List<MessageBean>>(this) {
+                            @Override
+                            protected void onSuccess(List<MessageBean> messageBeans) {
+                                showPage();
+                                if (0 == messageBeans.size()) {
+                                    showNoData();
+                                } else {
+                                    ListmessageBeans = messageBeans;
+                                    messageAdapter = new MessageAdapter(getContext(), messageBeans, status);
+                                    rvListMessage.setAdapter(messageAdapter);
+                                }
+                            }
+                            @Override
+                            public void onError(Throwable e) {
+                                super.onError(e);
+                                if (e instanceof ServiceException && ((ServiceException) e).code.equals(HttpConstants.SUCCESS_CODE)) {
+                                    showNoData();
+                                } else {
+                                    showError(e);
+                                }
+                            }
+                        });
 
-                    @Override
-                    public void onError(Throwable e) {
-                        super.onError(e);
-                        if (e instanceof ServiceException && ((ServiceException) e).code.equals(HttpConstants.SUCCESS_CODE)) {
-                            showNoData();
-                        } else {
-                            showError(e);
-                        }
-                    }
-                });
+                break;
+            case STATUS_VERIFIED:
+                ListmessageBeans=null;
+                new FriendModellml().user_friend(userSharedPreferencesUtils.getUserid())
+                        .safeSubscribe(new MyObserve<List<MessageBean>>(this) {
+                            @Override
+                            protected void onSuccess(List<MessageBean> messageBeans) {
+                                showPage();
+                                if (0 == messageBeans.size()) {
+                                    showNoData();
+                                } else {
+                                    ListmessageBeans = messageBeans;
+                                    messageAdapter = new MessageAdapter(getContext(), messageBeans, STATUS_VERIFIED);
+                                    rvListMessage.setAdapter(messageAdapter);
+                                }
+                            }
+
+                            @Override
+                            public void onError(Throwable e) {
+                                super.onError(e);
+                                if (e instanceof ServiceException && ((ServiceException) e).code.equals(HttpConstants.SUCCESS_CODE)) {
+                                    showNoData();
+                                } else {
+                                    showError(e);
+                                }
+                            }
+                        });
+                break;
+        }
+
     }
 
     private class ListOnItemClickListener implements OnItemClickListener {
@@ -130,7 +167,8 @@ public class MessageFragment extends BaseFragment implements SwipeRefreshLayout.
         public void onItemClick(View view, int position) {
             switch (status) {
                 case 1:
-                    ((MainFragment) getParentFragment()).start(PersonalFragment.newInstance(""));
+                    getDataCommentstatus(position);
+
                     break;
                 case 2:
                     ChatInfo chatInfo = new ChatInfo();
@@ -148,15 +186,29 @@ public class MessageFragment extends BaseFragment implements SwipeRefreshLayout.
         }
     }
 
+    private void getDataCommentstatus(int position) {
+        new MessageModellml().find_activity_commentstatus(userSharedPreferencesUtils.getUserid()
+                ,ListmessageBeans.get(position).getObjectId()).safeSubscribe(new MyObserve<String>(this) {
+            @Override
+            protected void onSuccess(String s) {
+                ((MainFragment) getParentFragment()).start(DetailsFragment.newInstance(ListmessageBeans.get(position).getObjectId(), Constant.VIEW_CONSTRAINTS));
+            }
+            @Override
+            public void onError(Throwable e) {
+                super.onError(e);
+                showToast(e.getMessage());
+            }
+        });
+    }
+
     private RadioGroup.OnCheckedChangeListener ChangeRadioGroup = new RadioGroup.OnCheckedChangeListener() {
         @Override
         public void onCheckedChanged(RadioGroup group, int checkedId) {
             if (R.id.rbComment == checkedId) {
                 status = STATUS_UNVERIFIED;
-            } else if (checkedId == rbFriend.getId() && rbFriend.isChecked()) {
+            } else if (R.id.rbFriend==checkedId) {
                 status = STATUS_VERIFIED;
-
-            } else if (checkedId == rbSystem.getId() && rbSystem.isChecked()) {
+            } else if (R.id.rbSystem==checkedId) {
                 status = STATUS_SYSTEM;
             }
             Data();

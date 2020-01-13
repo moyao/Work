@@ -1,23 +1,17 @@
 package com.golang.management.fragment.me;
-
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.alipay.sdk.app.EnvUtils;
 import com.alipay.sdk.app.PayTask;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.golang.management.R;
 import com.golang.management.base.BaseFragment;
-import com.golang.management.bean.FileBean;
 import com.golang.management.bean.PayResultBean;
 import com.golang.management.common.OnClickListenerWrapper;
 import com.golang.management.common.UserSharedPreferencesUtils;
@@ -27,21 +21,17 @@ import com.golang.management.fragment.payment.PaymentSuccessFragment;
 import com.golang.management.model.MeModellml;
 import com.golang.management.paymentmoney.PayResult;
 import com.golang.management.utils.MessageEvent;
+import com.google.gson.Gson;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
-
 import org.greenrobot.eventbus.EventBus;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.lang.reflect.Type;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
-
 /**
  * @date:
  * @author: dongyaoyao
@@ -64,14 +54,13 @@ public class DistributionFragment extends BaseFragment {
     @BindView(R.id.textViewActivity)
     TextView textViewActivity;
     UserSharedPreferencesUtils userSharedPreferencesUtils;
-
+    String LevelName;
     public static DistributionFragment newInstance() {
         Bundle args = new Bundle();
         DistributionFragment fragment = new DistributionFragment();
         fragment.setArguments(args);
         return fragment;
     }
-
     @SuppressLint("HandlerLeak")
     private Handler mHandler = new Handler() {
         @SuppressWarnings("unused")
@@ -86,6 +75,10 @@ public class DistributionFragment extends BaseFragment {
             // 判断resultStatus 为9000则代表支付成功
             if (TextUtils.equals(resultStatus, "9000")) {
                 // 该笔订单是否真实支付成功，需要依赖服务端的异步通知。
+                UserSharedPreferencesUtils userSharedPreferencesUtil = new UserSharedPreferencesUtils(getContext());
+                userSharedPreferencesUtil.setLevelName(LevelName);
+                userSharedPreferencesUtil.saveSharedPreferences();
+                EventBus.getDefault().post(new MessageEvent("发生改变",2));
                 Gson gson = new Gson();
                 PayResultBean user = gson.fromJson(resultInfo, PayResultBean.class);
                 startWithPop(PaymentSuccessFragment.newInstance(user.getAlipay_trade_app_pay_response().getOut_trade_no()));
@@ -106,9 +99,8 @@ public class DistributionFragment extends BaseFragment {
         mTitlebar.showStatusBar(true);
         initApi();
         mTitlebar.setBackgroundResource(R.color.white);
-        setTitle("分销");
+        setTitle("会员充值");
     }
-
     @Override
     public void bindEvent() {
         userSharedPreferencesUtils = new UserSharedPreferencesUtils(getContext());
@@ -135,22 +127,18 @@ public class DistributionFragment extends BaseFragment {
             }
         });
     }
-
     private void getData() {
         String body, amount;
-        UserSharedPreferencesUtils userSharedPreferencesUtil = new UserSharedPreferencesUtils(getContext());
+
         if (checkGolden.isChecked()) {
             body = "GOLD_MEMBER";
             amount = "399";
-            userSharedPreferencesUtil.setLevelName("金卡会员");
-            userSharedPreferencesUtil.saveSharedPreferences();
-            EventBus.getDefault().post(new MessageEvent("发生改变"));
+            LevelName="金卡会员";
+
         } else {
             body = "MERCHANT";
             amount = "19999";
-            userSharedPreferencesUtil.setLevelName("运营商");
-            userSharedPreferencesUtil.saveSharedPreferences();
-            EventBus.getDefault().post(new MessageEvent("发生改变"));
+            LevelName="运营商";
         }
         Map<String, Object> httpParams = new HashMap<>();
         httpParams.put("body", body);
@@ -166,7 +154,6 @@ public class DistributionFragment extends BaseFragment {
                         JSONObject jsonObject = null;
                         try {
                             jsonObject = new JSONObject(response.body());
-
                             if ("0000000".equals(jsonObject.getString("code"))) {
                                 String data = jsonObject.getString("data");
                                 final Runnable payRunnable = new Runnable() {
@@ -185,10 +172,15 @@ public class DistributionFragment extends BaseFragment {
                                 Thread payThread = new Thread(payRunnable);
                                 payThread.start();
                             } else {
-                                showToast(jsonObject.getString("code"));
+                                showToast(jsonObject.getString("message"));
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
+                            try {
+                                showToast(jsonObject.getString("message"));
+                            } catch (JSONException ex) {
+                                ex.printStackTrace();
+                            }
                         }
                     }
 
@@ -199,16 +191,8 @@ public class DistributionFragment extends BaseFragment {
                     }
                 });
     }
-
     @Override
     public boolean canSwipeBack() {
         return false;
-    }
-
-    public <T> T fromToJson(String json, Type listType) {
-        Gson gson = new Gson();
-        T t = null;
-        t = gson.fromJson(json, listType);
-        return t;
     }
 }

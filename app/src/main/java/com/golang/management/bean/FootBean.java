@@ -1,7 +1,5 @@
 package com.golang.management.bean;
 
-import java.util.List;
-
 /**
  * @date:
  * @author: dongyaoyao

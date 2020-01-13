@@ -5,14 +5,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.GridLayout;
 
 import com.golang.management.R;
 import com.golang.management.api.MyObserve;
 import com.golang.management.base.BaseFragment;
-import com.golang.management.bean.EditBean;
 import com.golang.management.common.OnClickListenerWrapper;
 import com.golang.management.common.UserSharedPreferencesUtils;
 import com.golang.management.model.MeModellml;

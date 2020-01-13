@@ -19,6 +19,7 @@ import android.widget.TextView;
 import androidx.annotation.RequiresApi;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.golang.management.R;
 import com.golang.management.api.MyObserve;
 import com.golang.management.base.BaseFragment;
@@ -95,17 +96,22 @@ public class QrCodeFragment extends BaseFragment {
         initApi();
         mTitlebar.setBackgroundResource(drawable.but_release);
         setTitle("我的二维码");
+
     }
 
     @Override
     public void bindEvent() {
+        setLoadingContentView(imageViewQrCode);
+        showLoadingPage();
         userSharedPreferencesUtils = new UserSharedPreferencesUtils(getContext());
         new MeModellml().find_activity_byuserid(userSharedPreferencesUtils.getUserid())
                 .safeSubscribe(new MyObserve<orcode>(this) {
                     @Override
                     protected void onSuccess(orcode orcode) {
+                        showPage();
                         ImageUrl = orcode.getQR_URI();
-                        Glide.with(getContext()).load(orcode.getQR_URI()).into(imageViewQrCode);
+                        Glide.with(getContext()).load(orcode.getQR_URI())
+                                .into(imageViewQrCode);
                         textViewCode.setText("推荐码：" + orcode.getRecommendCode());
                     }
                 });

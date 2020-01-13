@@ -6,9 +6,7 @@ import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
 import android.widget.GridLayout;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -25,14 +23,12 @@ import com.bumptech.glide.request.RequestOptions;
 import com.golang.management.R;
 import com.golang.management.bean.HomeBean;
 import com.golang.management.bean.ImagesListBean;
-import com.golang.management.common.OnClickListenerWrapper;
 import com.golang.management.model.bean.HomeBannerBean;
 import com.golang.management.wigdet.banner.ConvenientBanner;
 import com.golang.management.wigdet.banner.holder.CBViewHolderCreator;
 import com.golang.management.wigdet.banner.holder.Holder;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import butterknife.BindView;
@@ -50,7 +46,6 @@ public class NewHomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     private ItemClickListener mItemClickListener;
     private int tag;
     private List<HomeBean> list;
-
     public interface ItemClickListener {
         void OnItemClick(String id, int tag);
     }
@@ -62,6 +57,7 @@ public class NewHomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     public NewHomeAdapter(List<HomeBean> homeBeans, Context context, int page, int tag) {
         this.mcontext = context;
         this.tag = tag;
+
     }
 
     @Override
@@ -100,14 +96,6 @@ public class NewHomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             }, arrayList)
                     .startTurning(3000)
                     .setCanLoop(true);
-            ((MyViewHolder) holder).imagePreservation.setOnClickListener(new OnClickListenerWrapper() {
-                @Override
-                protected void onSingleClick(View v) {
-                    mItemClickListener.OnItemClick("3", -1);
-                }
-            });
-
-
         } else if (holder instanceof ItemViewHolder) {
             switch (tag) {
                 case 0:
@@ -231,6 +219,7 @@ public class NewHomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         notifyDataSetChanged();
     }
 
+
     private void initData(List<HomeBean> homeBeans) {
         for (int i = 0; i < homeBeans.size() + 2; i++) {
             HomeBean homeBean = new HomeBean();
@@ -311,16 +300,8 @@ public class NewHomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.view2)
-        View view2;
-        @BindView(R.id.imageBlack)
-        TextView imageBlack;
-        @BindView(R.id.imagePreservation)
-        ImageButton imagePreservation;
         @BindView(R.id.banner)
         ConvenientBanner banner;
-
-
         public MyViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);

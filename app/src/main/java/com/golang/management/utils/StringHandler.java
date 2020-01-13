@@ -94,7 +94,7 @@ public class StringHandler {
         String dest = "";
 
         if (str != null) {
-            Pattern p = Pattern.compile("\\s*|\t|\r|\n");
+            Pattern p = Pattern.compile("\\s*|\t|\r|\n|");
             Matcher m = p.matcher(str);
             dest = m.replaceAll("");
         }

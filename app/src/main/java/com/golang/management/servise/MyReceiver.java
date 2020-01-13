@@ -43,7 +43,7 @@ public class MyReceiver extends BroadcastReceiver {
                 String str_Test = bundle.getString(JPushInterface.EXTRA_ALERT);
                 Log.e("tag", "测试：" + str_Test);
                 //这里通过EventBus来想我需要更新数据的界面发送更新通知
-                EventBus.getDefault().postSticky(new MessageEvent(str_Test));
+                EventBus.getDefault().postSticky(new MessageEvent(str_Test,3));
             } else if (JPushInterface.ACTION_NOTIFICATION_OPENED.equals(intent.getAction())) {
                 Logger.d(TAG, "[MyReceiver] 用户点击打开了通知");
             } else if (JPushInterface.ACTION_RICHPUSH_CALLBACK.equals(intent.getAction())) {

@@ -1,6 +1,7 @@
 package com.golang.management.fragment.me;
 
 import android.os.Bundle;
+import android.text.Html;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -10,6 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CircleCrop;
+import com.bumptech.glide.request.RequestOptions;
 import com.golang.management.R;
 import com.golang.management.api.MyObserve;
 import com.golang.management.base.BaseFragment;
@@ -88,9 +91,11 @@ public class PersonalFragment extends BaseFragment {
                 getArguments().getString(Constants.KEY_TITLE)).safeSubscribe(new MyObserve<PersonalBean>(this) {
             @Override
             protected void onSuccess(PersonalBean personalBean) {
-                Glide.with(getContext()).load(personalBean.getProfileImageUrl()).into(imageViewPhoto);
-                textViewMessage.setText("主人寄语：" + personalBean.getMessage());
-                if ("Auth_".equals(personalBean.getAuth())) {
+                Glide.with(getContext()).load(personalBean.getProfileImageUrl()).apply(RequestOptions.bitmapTransform(new CircleCrop())).into(imageViewPhoto);
+                String str="主人寄语：<font color='#6B6B6B'><small>"+ personalBean.getMessage()+"</small></font>";
+                textViewMessage.setTextSize(18);
+                textViewMessage.setText(Html.fromHtml(str));
+                if ("Auth_T".equals(personalBean.getAuth())) {
                     textViewRealName.setText("已认证");
                 } else {
                     textViewRealName.setText("未认证");

@@ -4,56 +4,6 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-    <View
-        android:id="@+id/view2"
-        android:layout_width="0dp"
-        android:layout_height="45dp"
-        android:background="#FFE457"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="MissingConstraints"
-        android:visibility="visible"/>
-
-    <TextView
-        android:id="@+id/imageBlack"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@null"
-        android:padding="15dp"
-        android:drawableRight="@mipmap/gps"
-        android:text="西安"
-        android:drawablePadding="5dp"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="@id/view2"
-        app:layout_constraintTop_toTopOf="@id/view2"
-        tools:ignore="MissingConstraints"
-        android:visibility="visible"
-        />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Go 浪"
-        android:textColor="@color/black"
-        android:textSize="20dp"
-        app:layout_constraintBottom_toBottomOf="@id/view2"
-        app:layout_constraintEnd_toStartOf="@id/imagePreservation"
-        app:layout_constraintStart_toEndOf="@id/imageBlack"
-        app:layout_constraintTop_toTopOf="@id/view2"
-        android:visibility="visible"/>
-
-    <ImageButton
-        android:id="@+id/imagePreservation"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:background="@null"
-        android:padding="15dp"
-        android:src="@mipmap/cion_scan"
-        app:layout_constraintBottom_toBottomOf="@id/view2"
-        app:layout_constraintRight_toRightOf="@id/view2"
-        app:layout_constraintTop_toTopOf="@id/view2"
-        tools:ignore="MissingConstraints"
-        android:visibility="visible"/>
     <com.golang.management.wigdet.banner.ConvenientBanner
         android:id="@+id/banner"
         android:layout_width="0dp"
@@ -61,8 +11,7 @@
         app:layout_constraintDimensionRatio="2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="MissingConstraints"
-        app:layout_constraintTop_toBottomOf="@id/imagePreservation"/>
+        tools:ignore="MissingConstraints"/>
     <View
         android:id="@+id/view"
         android:layout_width="0dp"

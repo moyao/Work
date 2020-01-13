@@ -1,8 +1,6 @@
 package com.golang.management.activity;
-
 import android.view.View;
 import android.widget.TextView;
-
 import com.golang.management.R;
 import com.golang.management.base.BaseActivity;
 import com.golang.management.config.Constant;
@@ -56,6 +54,7 @@ public class CertificationFinishActivity extends BaseActivity {
         switch (view.getId()) {
             case R.id.tv_finish:
                 finish();
+                setResult(4, null);
                 break;
         }
     }

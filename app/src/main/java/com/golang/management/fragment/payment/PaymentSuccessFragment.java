@@ -36,17 +36,26 @@ public class PaymentSuccessFragment extends BaseFragment {
     TextView textViewTime;
     @BindView(R.id.textViewContext)
     TextView textViewContext;
+    @BindView(R.id.textViewTitle)
+    TextView textViewTitle;
+    @BindView(R.id.textView5)
+    TextView textView5;
+    @BindView(R.id.viewLine)
+    View viewLine;
+
     public static PaymentSuccessFragment newInstance(String out_trade_no) {
         Bundle args = new Bundle();
         PaymentSuccessFragment fragment = new PaymentSuccessFragment();
-        args.putString(Constants.KEY_TITLE,out_trade_no);
+        args.putString(Constants.KEY_TITLE, out_trade_no);
         fragment.setArguments(args);
         return fragment;
     }
+
     @Override
     public int onSetLayoutId() {
         return R.layout.fragement_payment_success;
     }
+
     @Override
     public void initView(View view) {
         mTitlebar.showStatusBar(true);
@@ -54,12 +63,13 @@ public class PaymentSuccessFragment extends BaseFragment {
         mTitlebar.setBackgroundResource(R.drawable.but_release);
         setTitle("支付订单");
     }
+
     @Override
     public void bindEvent() {
         userSharedPreferencesUtils = new UserSharedPreferencesUtils(getContext());
-        if ("".equals(getArguments().getString(Constants.KEY_TITLE))){
+        if ("".equals(getArguments().getString(Constants.KEY_TITLE))) {
             textViewContext.setVisibility(View.GONE);
-        }else {
+        } else {
             textViewContext.setVisibility(View.VISIBLE);
         }
         showLoadingDialog("加载中。。。");
@@ -69,11 +79,20 @@ public class PaymentSuccessFragment extends BaseFragment {
                     @Override
                     protected void onSuccess(List<PaymentBean> paymentBean) {
                         showPage();
-                        PaymentBean paymentBean1=paymentBean.get(0);
-                        textViewOrderNumber.setText(paymentBean1.getOrderNo());
-                        textViewMoney.setText(paymentBean1.getPaymentFee() + "元");
-                        textViewType.setText(paymentBean1.getPaymentChannel());
-                        textViewTime.setText(paymentBean1.getPaymentTime());
+                        if (null != paymentBean) {
+                            PaymentBean paymentBean1 = paymentBean.get(0);
+                            if ("399".equals(paymentBean1.getPaymentFee())) {
+                                textViewTitle.setText("创客资格认证");
+                            }
+                            if ("19999".equals(paymentBean1.getPaymentFee())) {
+                                textViewTitle.setText("运营商资格认证");
+                            }
+                            textViewOrderNumber.setText(paymentBean1.getOrderNo());
+                            textViewMoney.setText(paymentBean1.getPaymentFee() + "元");
+                            textViewType.setText(paymentBean1.getPaymentChannel());
+                            textViewTime.setText(paymentBean1.getPaymentTime());
+                        }
+
                     }
                 });
     }

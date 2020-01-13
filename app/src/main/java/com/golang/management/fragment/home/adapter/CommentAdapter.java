@@ -86,7 +86,8 @@ public class CommentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
         ActivityCommentsBeanX commentsBean = commentsBeans.get(position);
         if (holder instanceof TopViewHolder) {
-            Glide.with(context).load(commentsBean.getProfileImageUrl()+"").apply(RequestOptions.bitmapTransform(new CircleCrop())).into(((TopViewHolder) holder).textViewPhoto);
+            Glide.with(context).load(commentsBean.getProfileImageUrl()+"")
+                    .apply(RequestOptions.bitmapTransform(new CircleCrop())).error(R.mipmap.load_icon).into(((TopViewHolder) holder).textViewPhoto);
             ((TopViewHolder) holder).textViewName.setText(commentsBean.getNickname() + "");
             ((TopViewHolder) holder).textViewTime.setText(commentsBean.getCreatedAt());
             ((TopViewHolder) holder).textViewContent.setText(commentsBean.getContent());
@@ -97,7 +98,8 @@ public class CommentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 }
             });
         } else if (holder instanceof ItemViewHolder) {
-            Glide.with(context).load(commentsBean.getProfileImageUrl()+"").apply(RequestOptions.bitmapTransform(new CircleCrop())).into(((ItemViewHolder) holder).textViewPhoto);
+            Glide.with(context).load(commentsBean.getProfileImageUrl()+"")
+                    .apply(RequestOptions.bitmapTransform(new CircleCrop())).error(R.mipmap.load_icon).into(((ItemViewHolder) holder).textViewPhoto);
             ((ItemViewHolder) holder).textViewName.setText(commentsBean.getNickname() + "@"+commentsBean.getTargetNickname());
             ((ItemViewHolder) holder).textViewTime.setText(commentsBean.getCreatedAt());
             ((ItemViewHolder) holder).textViewContent.setText(commentsBean.getContent());

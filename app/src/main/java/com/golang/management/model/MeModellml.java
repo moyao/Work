@@ -57,15 +57,6 @@ public class MeModellml {
         }.getType();
         return ApiWrapper.request(HttpMethod.GET, FIND_ACTIVITY_BYUSERID, type, httpParams);
     }
-
-    public Observable<orcode> find_baseinfo_userbyid(String userId) {
-        HttpParams httpParams = new HttpParams();
-        httpParams.put("userId", userId);
-        Type type = new TypeToken<orcode>() {
-        }.getType();
-        return ApiWrapper.request(HttpMethod.GET, FIND_BASEINFO_USERBYID, type, httpParams);
-    }
-
     public Observable<List<MyDistributionBean>> my_distri_bution(String userId) {
         HttpParams httpParams = new HttpParams();
         httpParams.put("userId", userId);
@@ -157,21 +148,4 @@ public class MeModellml {
         }.getType();
         return ApiWrapper.request(HttpMethod.GET, USER_MYBILL, type, httpParams);
     }
-
-   /* public Observable<List<PaymentBean>> user_facerecognition(String userId, String path,String identityImage,String identity
-    ,String name) {
-        Map<String, Object> httpParams = new HashMap<>();
-        httpParams.put("userId",userId);
-        //生活照
-        httpParams.put("faceImage", path);
-        //身份证照片
-        httpParams.put("identityImage", identityImage);
-        //身份证号码
-        httpParams.put("identity",identity);
-        //姓名
-        httpParams.put("name", name);
-        Type type = new TypeToken<List<PaymentBean>>() {
-        }.getType();
-        return ApiWrapper.babyrequest(HttpMethod.POST, USER_FACERECOGNITION, type, httpParams);
-    }*/
 }

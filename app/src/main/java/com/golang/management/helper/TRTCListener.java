@@ -13,7 +13,6 @@ public class TRTCListener extends TRTCCloudListener {
 
     private static TRTCListener sTRTCListener;
     private ArrayList<TRTCCloudListener> mList = new ArrayList<>();
-
     private TRTCListener() {
 
     }
@@ -111,5 +110,4 @@ public class TRTCListener extends TRTCCloudListener {
             l.onFirstVideoFrame(userId, steamType, width, height);
         }
     }
-
 }

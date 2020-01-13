@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/color_F9F8F4">
 
     <View
@@ -27,12 +28,12 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/textViewTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="20dp"
-        android:text="运营商资格认证"
+        android:text="订单"
         android:textColor="@color/black"
         android:textSize="16sp"
         android:textStyle="bold"
@@ -47,19 +48,19 @@
         android:text="单号："
         android:textColor="@color/color_898989"
         android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="@id/textView"
-        app:layout_constraintTop_toBottomOf="@id/textView" />
+        app:layout_constraintStart_toStartOf="@id/textViewTitle"
+        app:layout_constraintTop_toBottomOf="@id/textViewTitle" />
 
     <TextView
         android:id="@+id/textViewOrderNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="gl201912310012"
+        android:text="暂无订单"
         android:textColor="@color/black"
         android:textSize="14sp"
         app:layout_constraintStart_toEndOf="@id/textView1"
-        app:layout_constraintTop_toBottomOf="@id/textView" />
+        app:layout_constraintTop_toBottomOf="@id/textViewTitle" />
 
     <TextView
         android:id="@+id/textViewMoney"
@@ -67,9 +68,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:layout_marginRight="20dp"
-        android:text="¥19999.00元"
         android:textColor="@color/player_red"
         android:textSize="14sp"
+        android:text="0"
         app:layout_constraintRight_toRightOf="@id/view1"
         app:layout_constraintTop_toTopOf="@id/textView1" />
 
@@ -101,7 +102,7 @@
         android:id="@+id/textViewAccountNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="13379070133"
+        tools:text="13379070133"
         android:textColor="@color/black"
         android:textSize="14sp"
         app:layout_constraintStart_toEndOf="@id/textView5"
@@ -123,7 +124,7 @@
         android:id="@+id/textViewType"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="支付宝"
+        tools:text="支付宝"
         android:textColor="@color/black"
         android:textSize="14sp"
         app:layout_constraintStart_toEndOf="@id/textView5"
@@ -145,7 +146,7 @@
         android:id="@+id/textViewTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="2019年12月11日"
+        tools:text="2019年12月11日"
         android:textColor="@color/black"
         android:textSize="14sp"
         app:layout_constraintStart_toEndOf="@id/textView5"

@@ -1,18 +1,12 @@
 package com.golang.management.model;
 
-import android.util.Log;
-
-import com.google.gson.reflect.TypeToken;
 import com.golang.management.api.ApiWrapper;
 import com.golang.management.api.CommonResponse;
 import com.golang.management.bean.UserInfo;
 import com.golang.management.model.bean.LoginResult;
-import com.lzy.okgo.cache.CacheMode;
+import com.google.gson.reflect.TypeToken;
 import com.lzy.okgo.model.HttpMethod;
 import com.lzy.okgo.model.HttpParams;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -67,10 +61,4 @@ public class AccountModelIml {
         }.getType();
         return ApiWrapper.request(HttpMethod.POST, URL_EXIT, type,httpParams);
     }
- /*   public Observable<List<VersionBean>> version() {
-        HttpParams httpParams = new HttpParams();
-        Type type = new TypeToken<List<VersionBean>>() {
-        }.getType();
-        return ApiWrapper.request(HttpMethod.POST, URL_APPVERSIONINFO, type,httpParams);
-    }*/
 }

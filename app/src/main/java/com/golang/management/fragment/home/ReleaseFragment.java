@@ -1,5 +1,4 @@
 package com.golang.management.fragment.home;
-
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -50,7 +49,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-
 /**
  * Created by dongyaoyao
  */
@@ -64,7 +62,7 @@ public class ReleaseFragment extends CheckPermissionsActivity implements
     private ImageButton mImagePreservation;
     private RecyclerView mRvPics;
     private Button mButRelease;
-    private ArrayList<ImageItem> selImageList = new ArrayList<>(); //当前选择的所有图片
+    private ArrayList<ImageItem> selImageList; //当前选择的所有图片
     private ImagePickerAdapter adapter;
     String userId;
     private String lat, lng;
@@ -73,6 +71,7 @@ public class ReleaseFragment extends CheckPermissionsActivity implements
     private Button butDetermine, butCancel;
     private WebView webView;
     final List<File> list = new ArrayList();
+    private int maxImgCount = 9;
 
     public static ReleaseFragment newInstance(String title) {
         Bundle args = new Bundle();
@@ -105,10 +104,10 @@ public class ReleaseFragment extends CheckPermissionsActivity implements
         mImagePreservation = view.findViewById(R.id.imagePreservation);
         mRvPics = view.findViewById(R.id.rvPics);
         mButRelease = view.findViewById(R.id.butRelease);
-
+        selImageList = new ArrayList<>();
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 3);
         mRvPics.setLayoutManager(gridLayoutManager);
-        adapter = new ImagePickerAdapter(getContext(), selImageList, 9);
+        adapter = new ImagePickerAdapter(getContext(), selImageList, maxImgCount);
         mRvPics.setAdapter(adapter);
         mRvPics.setNestedScrollingEnabled(false);
         adapter.setOnItemClickListener(this);
@@ -223,7 +222,7 @@ public class ReleaseFragment extends CheckPermissionsActivity implements
             case Constant.IMAGE_ITEM_ADD:
                 view.requestFocus();
                 ImagePicker imagePicker = ImagePicker.getInstance();
-                imagePicker.setSelectLimit(9);
+                imagePicker.setSelectLimit(maxImgCount);
                 imagePicker.setCrop(false);
                 imagePicker.setShowCamera(true);
                 imagePicker.setMultiMode(true);

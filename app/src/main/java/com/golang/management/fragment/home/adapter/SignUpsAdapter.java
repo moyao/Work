@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -65,7 +64,7 @@ public class SignUpsAdapter extends RecyclerView.Adapter<SignUpsAdapter.MyViewHo
         ActivitySignUpsBean signUpsBean = signUpsBeans.get(position);
         if ("1".equals(Visible)){
             Glide.with(mcontext).load(signUpsBean.getProfileImageUrl()).apply(RequestOptions.bitmapTransform(new CircleCrop()))
-                    .error(R.mipmap.photo).into(holder.imageViewPhoto);
+                    .error(R.mipmap.load_icon).into(holder.imageViewPhoto);
             holder.textViewName.setText(signUpsBean.getNickname());
         }else {
             if ("MALE".equals(signUpsBean.getAge())){

@@ -1,20 +1,20 @@
 package com.golang.management.fragment.home;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.RadioGroup;
-import android.widget.Toast;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.golang.management.R;
+import com.golang.management.activity.CheckPermissionsActivity;
 import com.golang.management.api.MyObserve;
 import com.golang.management.api.ServiceException;
-import com.golang.management.base.BaseFragment;
 import com.golang.management.bean.HomeBean;
+import com.golang.management.common.OnClickListenerWrapper;
 import com.golang.management.config.Constant;
 import com.golang.management.config.HttpConstants;
 import com.golang.management.fragment.MainFragment;
@@ -26,15 +26,18 @@ import com.golang.management.wigdet.recyclerview.EndLessOnScrollListener;
 import java.util.List;
 
 import butterknife.BindView;
-import io.github.xudaojie.qrcodelib.CaptureActivity;
 
 /**
  * Created by dongyaoyao
  */
-public class NewHomeFragment extends BaseFragment implements NewHomeAdapter.ItemClickListener,
+public class NewHomeFragment extends CheckPermissionsActivity implements NewHomeAdapter.ItemClickListener,
         SwipeRefreshLayout.OnRefreshListener {
-    @BindView(R.id.rgStatus)
-    RadioGroup rgStatus;
+    @BindView(R.id.view2)
+    View view2;
+    @BindView(R.id.imageBlack)
+    TextView imageBlack;
+    @BindView(R.id.imagePreservation)
+    ImageButton imagePreservation;
     @BindView(R.id.rvListMessage)
     RecyclerView rvListMessage;
     @BindView(R.id.layout_swipe_refresh)
@@ -55,8 +58,13 @@ public class NewHomeFragment extends BaseFragment implements NewHomeAdapter.Item
     }
 
     @Override
+    protected void locationResult(String longitude, String latitude, String address, String city, String province, String district) {
+        imageBlack.setText(city);
+    }
+
+    @Override
     public int onSetLayoutId() {
-        return R.layout.fragement_message;
+        return R.layout.fragement_home;
     }
 
     @Override
@@ -65,8 +73,8 @@ public class NewHomeFragment extends BaseFragment implements NewHomeAdapter.Item
         hideTitle();
         mTitlebar.showStatusBar(true);
         mTitlebar.setBackgroundResource(R.drawable.but_release);
+        startLocation();
     }
-
     private void inithomeData(String status) {
         if (status == Constant.VIEW_BLEND) {
             tag = 0;
@@ -80,10 +88,8 @@ public class NewHomeFragment extends BaseFragment implements NewHomeAdapter.Item
         rvListMessage.setAdapter(newHomeAdapter);
         ReporteNameData(1, tag);
     }
-
     @Override
     public void bindEvent() {
-        rgStatus.setVisibility(View.GONE);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         rvListMessage.setLayoutManager(layoutManager);
@@ -99,6 +105,12 @@ public class NewHomeFragment extends BaseFragment implements NewHomeAdapter.Item
         layoutSwipeRefresh.setOnRefreshListener(this);
         setLoadingContentView(layoutSwipeRefresh);
         inithomeData(status);
+        imagePreservation.setOnClickListener(new OnClickListenerWrapper() {
+            @Override
+            protected void onSingleClick(View v) {
+                ((MainFragment) getParentFragment()).start(SweepCodeFragment.newInstance());
+            }
+        });
     }
 
     private void ReporteNameData(int currentPage, int tag) {
@@ -117,7 +129,6 @@ public class NewHomeFragment extends BaseFragment implements NewHomeAdapter.Item
                 }
                 initOnclick();
             }
-
             @Override
             public void onError(Throwable e) {
                 super.onError(e);
@@ -147,8 +158,6 @@ public class NewHomeFragment extends BaseFragment implements NewHomeAdapter.Item
         } else if ("0".equals(id)) {
             status = Constant.VIEW_CIRCLE;
             inithomeData(status);
-        } else if ("3".equals(id)) {
-            ((MainFragment) getParentFragment()).start(SweepCodeFragment.newInstance());
         } else {
             if (2 == tag) {
                 ((MainFragment) getParentFragment()).start(DetailsFragment.newInstance(id, Constant.VIEW_CIRCLE));

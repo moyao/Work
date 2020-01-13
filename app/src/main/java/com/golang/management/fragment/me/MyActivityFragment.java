@@ -3,25 +3,22 @@ package com.golang.management.fragment.me;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Switch;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.tabs.TabLayout;
 import com.golang.management.R;
 import com.golang.management.api.MyObserve;
 import com.golang.management.api.ServiceException;
 import com.golang.management.base.BaseFragment;
-import com.golang.management.bean.HomeBean;
 import com.golang.management.bean.MyActivityBean;
 import com.golang.management.common.OnClickListenerWrapper;
 import com.golang.management.common.UserSharedPreferencesUtils;
 import com.golang.management.config.Constant;
 import com.golang.management.config.HttpConstants;
 import com.golang.management.fragment.me.adapter.MyActivityAdapter;
-import com.golang.management.model.HomeModellml;
 import com.golang.management.model.MyActivityModellml;
+import com.google.android.material.tabs.TabLayout;
 
 import java.util.List;
 

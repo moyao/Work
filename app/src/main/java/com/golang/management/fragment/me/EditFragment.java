@@ -17,7 +17,6 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.bumptech.glide.request.RequestOptions;
-import com.google.gson.Gson;
 import com.golang.management.R;
 import com.golang.management.api.MyObserve;
 import com.golang.management.base.BaseFragment;
@@ -29,10 +28,12 @@ import com.golang.management.config.Constant;
 import com.golang.management.config.HttpConstants;
 import com.golang.management.model.MeModellml;
 import com.golang.management.utils.MessageEvent;
+import com.golang.management.utils.StringHandler;
 import com.golang.management.wigdet.CommonTitleBar;
 import com.golang.management.wigdet.datepicker.CustomDatePicker;
 import com.golang.management.wigdet.datepicker.DateFormatUtils;
 import com.golang.management.wigdet.datepicker.PickValueView;
+import com.google.gson.Gson;
 import com.lljjcoder.citypickerview.widget.CityPicker;
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.bean.ImageItem;
@@ -135,6 +136,8 @@ public class EditFragment extends BaseFragment implements PickValueView.onSelect
     View view10;
     @BindView(R.id.view11)
     View view11;
+    @BindView(R.id.viewPhoto)
+    View viewPhoto;
     private SimpleDateFormat simpleDateFormat;
     private Date date;
     private Dialog dialog;
@@ -210,7 +213,7 @@ public class EditFragment extends BaseFragment implements PickValueView.onSelect
                 }
             }
         });
-        imageViewPhoto.setOnClickListener(new OnClickListenerWrapper() {
+        viewPhoto.setOnClickListener(new OnClickListenerWrapper() {
             @Override
             protected void onSingleClick(View v) {
                 ImagePicker imagePicker = ImagePicker.getInstance();
@@ -246,14 +249,18 @@ public class EditFragment extends BaseFragment implements PickValueView.onSelect
                         }
                         if ("Auth_F".equals(editBean.getAuth())) {
                             textViewAuthentication.setText("未认证");
-                        } else if ("Auth_".equals(editBean.getAuth())) {
+                        } else if ("Auth_T".equals(editBean.getAuth())) {
                             textViewAuthentication.setText("已认证");
                         }
                         textViewBirthday.setText(editBean.getBirthday() + "");
                         textViewEducation.setText(editBean.getEducation());
                         textViewOccupation.setText(editBean.getOccupation());
-                        textViewInterest.setText(editBean.getHobby() + "");
-                        textViewAddress.setText(editBean.getWantToGo() + "");
+                        if (!StringHandler.hasNull(editBean.getHobby()+"")){
+                            textViewInterest.setText(editBean.getHobby() + "");
+                        }
+                        if (!StringHandler.hasNull(editBean.getWantToGo() + "")){
+                            textViewAddress.setText(editBean.getWantToGo() + "");
+                        }
                     }
                 });
     }
@@ -315,7 +322,7 @@ public class EditFragment extends BaseFragment implements PickValueView.onSelect
         nickname = textViewName.getText().toString();
         hobby = textViewInterest.getText().toString();
         if ("已认证".equals(textViewAuthentication.getText().toString())) {
-            auth = "Auth_";
+            auth = "Auth_T";
         } else {
             auth = "Auth_F";
         }
@@ -353,12 +360,13 @@ public class EditFragment extends BaseFragment implements PickValueView.onSelect
                 userSharedPreferencesUtils.setNickname(nickname);
                 userSharedPreferencesUtils.setProfileImageUrl(imageList);
                 userSharedPreferencesUtils.saveSharedPreferences();
-                EventBus.getDefault().post(new MessageEvent("发生改变"));
+                EventBus.getDefault().post(new MessageEvent("发生改变", 2));
                 showPage();
                 getActivity().onBackPressed();//销毁自己
             }
         });
     }
+
     private void selectAddress() {
         CityPicker cityPicker = new CityPicker.Builder(getContext())
                 .textSize(14)
@@ -403,7 +411,7 @@ public class EditFragment extends BaseFragment implements PickValueView.onSelect
 
     private void initDatePicker() {
         long beginTimestamp = DateFormatUtils.str2Long("2020-01-01", false);
-        long endTimestamp = DateFormatUtils.str2Long("1990-01-01", false);
+        long endTimestamp = DateFormatUtils.str2Long("1980-01-01", false);
         // 通过时间戳初始化日期，毫秒级别
         mDatePicker = new CustomDatePicker(getContext(), new CustomDatePicker.Callback() {
             @Override
@@ -437,9 +445,10 @@ public class EditFragment extends BaseFragment implements PickValueView.onSelect
             }
         }
     }
+
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void EvenData(MessageEvent messageEvent) {
-        if ("已认证".equals(messageEvent.getMessage())) {
+        if (1==(messageEvent.getCode())) {
             textViewAuthentication.setText("已认证");
         }
     }

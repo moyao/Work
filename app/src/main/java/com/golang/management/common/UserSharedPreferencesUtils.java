@@ -23,6 +23,7 @@ public class UserSharedPreferencesUtils {
     private final String LEVELNAME = "levelName";
     private final String LOGIN = "Login";
     private final String DETAILS = "Details";
+    private final String CITY = "city";
 
     private UserInfo userInfo;
     private String account;
@@ -32,6 +33,15 @@ public class UserSharedPreferencesUtils {
     private String nickname;
     private String Login;
     private String Details;
+    private String city;
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
 
     public String getDetails() {
         return Details;
@@ -107,6 +117,7 @@ public class UserSharedPreferencesUtils {
         this.setLevelName(sharedPreferences.getString(LEVELNAME, ""));
         this.setLogin(sharedPreferences.getString(LOGIN, ""));
         this.setDetails(sharedPreferences.getString(DETAILS, ""));
+        this.setCity(sharedPreferences.getString(CITY, ""));
     }
 
 
@@ -126,6 +137,7 @@ public class UserSharedPreferencesUtils {
         editor.putString(LEVELNAME, getLevelName());
         editor.putString(LOGIN, getLogin());
         editor.putString(DETAILS, getDetails());
+        editor.putString(CITY, getCity());
         editor.commit();
     }
 

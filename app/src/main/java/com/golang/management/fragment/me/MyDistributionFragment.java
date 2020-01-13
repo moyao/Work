@@ -13,7 +13,6 @@ import com.golang.management.api.MyObserve;
 import com.golang.management.base.BaseFragment;
 import com.golang.management.bean.MyDistributionBean;
 import com.golang.management.common.UserSharedPreferencesUtils;
-import com.golang.management.fragment.foot.FootAdapter;
 import com.golang.management.fragment.me.adapter.MyDistributionAdapter;
 import com.golang.management.model.MeModellml;
 
@@ -25,7 +24,7 @@ import butterknife.BindView;
  * @date:
  * @author: dongyaoyao
  */
-public class MyDistributionFragment extends BaseFragment {
+public class MyDistributionFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener {
     UserSharedPreferencesUtils userSharedPreferencesUtils;
     @BindView(R.id.rgStatus)
     RadioGroup rgStatus;
@@ -40,7 +39,6 @@ public class MyDistributionFragment extends BaseFragment {
         fragment.setArguments(args);
         return fragment;
     }
-
     @Override
     public int onSetLayoutId() {
         return R.layout.fragement_message;
@@ -62,21 +60,35 @@ public class MyDistributionFragment extends BaseFragment {
         rvListMessage.setLayoutManager(layoutManager);
         userSharedPreferencesUtils = new UserSharedPreferencesUtils(getContext());
         setLoadingContentView(layoutSwipeRefresh);
+        layoutSwipeRefresh.setOnRefreshListener(this);
+        getData();
+    }
+
+    private void getData() {
         showLoadingPage();
         new MeModellml().my_distri_bution(userSharedPreferencesUtils.getUserid())
                 .safeSubscribe(new MyObserve<List<MyDistributionBean>>(this) {
                     @Override
                     protected void onSuccess(List<MyDistributionBean> orcode) {
                         showPage();
-                        myDistributionAdapter = new MyDistributionAdapter(getContext(), orcode);
-                        rvListMessage.setAdapter(myDistributionAdapter);
+                        if (0 == orcode.size()) {
+                            showNoData();
+                        } else {
+                            myDistributionAdapter = new MyDistributionAdapter(getContext(), orcode);
+                            rvListMessage.setAdapter(myDistributionAdapter);
+                        }
                     }
                 });
-
     }
 
     @Override
     public boolean canSwipeBack() {
         return false;
+    }
+
+    @Override
+    public void onRefresh() {
+        layoutSwipeRefresh.setRefreshing(false);
+        getData();
     }
 }

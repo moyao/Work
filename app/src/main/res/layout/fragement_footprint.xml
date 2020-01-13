@@ -16,16 +16,24 @@
         android:id="@+id/textViewGps"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="西安"
+        android:hint="定位中"
         tools:ignore="MissingConstraints"
-        android:drawableRight="@mipmap/gps"
-        android:textSize="20dp"
-        android:drawablePadding="5dp"
+        android:textSize="16dp"
         android:textColor="@color/black"
         android:layout_marginTop="30dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:padding="10dp"/>
+        android:paddingRight="5dp"
+        android:paddingLeft="10dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"/>
+    <ImageView
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        app:layout_constraintTop_toTopOf="@id/textViewGps"
+        app:layout_constraintBottom_toBottomOf="@id/textViewGps"
+        app:layout_constraintStart_toEndOf="@id/textViewGps"
+        android:background="@mipmap/gps"/>
     <TextView
         android:id="@+id/textViewRelease"
         android:layout_width="wrap_content"

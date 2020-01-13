@@ -36,7 +36,6 @@ import com.golang.management.config.Constants;
 import com.golang.management.api.MyObserve;
 import com.golang.management.fragment.home.adapter.CommentAdapter;
 import com.golang.management.fragment.home.adapter.ImageAdapter;
-import com.golang.management.fragment.home.adapter.NewHomeAdapter;
 import com.golang.management.fragment.home.adapter.SignUpsAdapter;
 import com.golang.management.fragment.me.PersonalFragment;
 import com.golang.management.model.FriendModellml;
@@ -115,7 +114,7 @@ public class DetailsFragment extends BaseFragment implements CommentAdapter.Item
     List<ActivityCommentsBeanX> commentsBeans;
     List<ActivitySignUpsBean> signUpsBeans;
     UserSharedPreferencesUtils userSharedPreferencesUtils;
-    private String userId, objectId, parentId, targetUserNickname;
+    private String userId, objectId, parentId, targetUserNickname,targetUserId;
     ImageAdapter imageAdapter;
 
     public static DetailsFragment newInstance(String id, String title) {
@@ -246,6 +245,7 @@ public class DetailsFragment extends BaseFragment implements CommentAdapter.Item
                         objectId = getArguments().get(Constants.KEY_TYPE) + "";
                         targetUserNickname = userSharedPreferencesUtils.getUserid();
                         parentId = activityDtoInfo.getUserId();
+                        targetUserId=activityDtoInfo.getUserId();
                         if (!StringHandler.hasNull(editTextContext.getText().toString())) {
                             initDataSend();
                         } else {
@@ -368,7 +368,8 @@ public class DetailsFragment extends BaseFragment implements CommentAdapter.Item
         new MessageModellml().find_activity_commentsave(userSharedPreferencesUtils.getUserid(),
                 objectId, editTextContext.getText().toString(),
                 parentId, targetUserNickname,
-                getArguments().getString(Constants.KEY_TITLE))
+                getArguments().getString(Constants.KEY_TITLE),
+                targetUserId)
                 .safeSubscribe(new MyObserve<String>(this) {
                     @Override
                     protected void onSuccess(String s) {
@@ -442,7 +443,6 @@ public class DetailsFragment extends BaseFragment implements CommentAdapter.Item
     public boolean canSwipeBack() {
         return false;
     }
-
     @Override
     public void OnItemClick(ActivityCommentsBeanX comments, int tag) {
         switch (tag) {
@@ -456,6 +456,7 @@ public class DetailsFragment extends BaseFragment implements CommentAdapter.Item
         SEND = 1;
         objectId = comments.getObjectId();
         targetUserNickname = comments.getTargetNickname();
+        targetUserId = comments.getUserId();
         initDataComment();
     }
 }
