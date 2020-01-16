@@ -145,6 +145,7 @@ public class FootprintFragemnt extends CheckPermissionsActivity {
         textViewRelease.setOnClickListener(new OnClickListenerWrapper() {
             @Override
             protected void onSingleClick(View v) {
+                startLocation();
                 dialog.show();
             }
         });
@@ -174,6 +175,7 @@ public class FootprintFragemnt extends CheckPermissionsActivity {
             @Override
             protected void onSingleClick(View v) {
                 Log.e("view","点击数据");
+                startLocation();
                 dialog.show();
             }
         });

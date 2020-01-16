@@ -32,12 +32,14 @@ import com.golang.management.fragment.payment.PaymentSuccessFragment;
 import com.golang.management.model.MeModellml;
 import com.golang.management.paymentmoney.AuthResult;
 import com.golang.management.paymentmoney.PayResult;
+import com.golang.management.utils.MessageEvent;
 import com.golang.management.wigdet.CommonTitleBar;
 import com.google.gson.Gson;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 
+import org.greenrobot.eventbus.EventBus;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -90,6 +92,10 @@ public class DistributionHomepageFragment extends BaseFragment {
                     // 判断resultStatus 为9000则代表支付成功
                     if (TextUtils.equals(resultStatus, "9000")) {
                         // 该笔订单是否真实支付成功，需要依赖服务端的异步通知。
+                        UserSharedPreferencesUtils userSharedPreferencesUtil = new UserSharedPreferencesUtils(getContext());
+                        userSharedPreferencesUtil.setLevelName("运营商");
+                        userSharedPreferencesUtil.saveSharedPreferences();
+                        EventBus.getDefault().post(new MessageEvent("发生改变",2));
                         popWindow.dismiss();
                         Gson gson = new Gson();
                         PayResultBean user = gson.fromJson(resultInfo, PayResultBean.class);

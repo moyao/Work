@@ -61,6 +61,12 @@ public final class ImageDialog {
                 imageView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                         ViewGroup.LayoutParams.MATCH_PARENT));
                 imageView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+                imageView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dismiss();
+                    }
+                });
                 return imageView;
             }
 

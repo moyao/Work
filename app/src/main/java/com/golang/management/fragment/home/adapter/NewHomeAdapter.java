@@ -46,6 +46,7 @@ public class NewHomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     private ItemClickListener mItemClickListener;
     private int tag;
     private List<HomeBean> list;
+
     public interface ItemClickListener {
         void OnItemClick(String id, int tag);
     }
@@ -127,9 +128,9 @@ public class NewHomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                     .apply(RequestOptions.bitmapTransform(new CircleCrop()))
                     .placeholder(R.mipmap.load_icon).into(((ContextViewHolder) holder).imageViewPhoto);
             ((ContextViewHolder) holder).textViewName.setText(homeBean.getNickName());
-            if ("0".equals(homeBean.getVisible()+"")) {
+            if ("0".equals(homeBean.getVisible() + "")) {
                 ((ContextViewHolder) holder).textViewSo.setText("活动成员:对外不可见");
-            } else if ("1".equals(homeBean.getVisible()+"")) {
+            } else if ("1".equals(homeBean.getVisible() + "")) {
                 ((ContextViewHolder) holder).textViewSo.setText("活动成员:对外可见");
             }
             ((ContextViewHolder) holder).textViewTime.setText(homeBean.getStartTime());
@@ -139,12 +140,11 @@ public class NewHomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             ((ContextViewHolder) holder).rButJoin.setText(homeBean.getMaxPeopleNumber() + "");
             ((ContextViewHolder) holder).textViewDistance.setText("距离：" + Math.round(homeBean.getDistance() / 100d) / 10d + "km");
             if (homeBean.getSignUpCondition() != null) {
-                String imglist = homeBean.getSignUpCondition().replace(",,",",");
-                String[] split = imglist.split(",");
+                String imlist = homeBean.getSignUpCondition();
+                String[] split = imlist.split(",");
+                ((ContextViewHolder) holder).gridLayoutLevel.removeAllViews();
                 for (String spit : split) {
-                    if (!spit.equals("")) {
-                        layoutFilterItem(((ContextViewHolder) holder).gridLayoutLevel, spit.replace("[", "").replace("]", ""));
-                    }
+                    layoutFilterItem(((ContextViewHolder) holder).gridLayoutLevel, spit.replace("[", "").replace("]", ""));
                 }
             }
             switch (tag) {
@@ -157,6 +157,8 @@ public class NewHomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                     ((ContextViewHolder) holder).textViewCondition.setVisibility(View.GONE);
                     ((ContextViewHolder) holder).view1.setVisibility(View.GONE);
                     ((ContextViewHolder) holder).textViewSo.setText("来自圈子");
+                    ((ContextViewHolder) holder).textViewTime.setVisibility(View.GONE);
+                    ((ContextViewHolder) holder).textViewAddress.setVisibility(View.GONE);
                     ((ContextViewHolder) holder).textViewSo.setCompoundDrawablesWithIntrinsicBounds(null, null,
                             mcontext.getResources().getDrawable(R.mipmap.home_circle, null), null);
                     break;
@@ -178,7 +180,7 @@ public class NewHomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             List<ImagesListBean> img_list = homeBean.getImagesList();
             GridLayoutManager gridLayoutManager = new GridLayoutManager(mcontext, 3);
             ((ContextViewHolder) holder).rvPics.setLayoutManager(gridLayoutManager);
-            ImageAdapter imageAdapter = new ImageAdapter(img_list,mcontext);
+            ImageAdapter imageAdapter = new ImageAdapter(img_list, mcontext);
             ((ContextViewHolder) holder).rvPics.setAdapter(imageAdapter);
 
             holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -302,6 +304,7 @@ public class NewHomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     public class MyViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.banner)
         ConvenientBanner banner;
+
         public MyViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
@@ -361,6 +364,7 @@ public class NewHomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         TextView textViewSo;
         @BindView(R.id.gridLayoutLevel)
         GridLayout gridLayoutLevel;
+
         public ContextViewHolder(View view) {
             super(view);
 

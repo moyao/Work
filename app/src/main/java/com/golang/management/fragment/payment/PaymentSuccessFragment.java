@@ -63,7 +63,6 @@ public class PaymentSuccessFragment extends BaseFragment {
         mTitlebar.setBackgroundResource(R.drawable.but_release);
         setTitle("支付订单");
     }
-
     @Override
     public void bindEvent() {
         userSharedPreferencesUtils = new UserSharedPreferencesUtils(getContext());

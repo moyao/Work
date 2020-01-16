@@ -84,7 +84,6 @@ public class MainApplication extends Application {
                 // 调用失败，返回OCRError子类SDKError对象
             }
         }, getApplicationContext(), config.apiKey, config.secretKey);
-        MultiDex.install(this);
         TUIKitConfigs configs = TUIKit.getConfigs();
         configs.setSdkConfig(new TIMSdkConfig(GenerateTestUserSig.SDKAPPID));
         configs.setCustomFaceConfig(new CustomFaceConfig());

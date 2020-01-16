@@ -46,6 +46,7 @@ public class NewHomeFragment extends CheckPermissionsActivity implements NewHome
     NewHomeAdapter newHomeAdapter;
     private List<HomeBean> homeBeanList;
     private EndLessOnScrollListener endLessOnScrollListener;
+    private String longitude,latitude;
 
     int page = 1;
     int tag;
@@ -58,8 +59,11 @@ public class NewHomeFragment extends CheckPermissionsActivity implements NewHome
     }
 
     @Override
-    protected void locationResult(String longitude, String latitude, String address, String city, String province, String district) {
+    protected void locationResult(String longitude, String latitude,
+                                  String address, String city, String province, String district) {
         imageBlack.setText(city);
+        this.latitude=latitude;
+        this.longitude=longitude;
     }
 
     @Override
@@ -112,12 +116,12 @@ public class NewHomeFragment extends CheckPermissionsActivity implements NewHome
             }
         });
     }
-
     private void ReporteNameData(int currentPage, int tag) {
         if (1 == currentPage) {
             showLoadingPage();
         }
-        new HomeModellml().queryactivityinfopage(currentPage, tag).subscribe(new MyObserve<List<HomeBean>>(this) {
+        new HomeModellml().queryactivityinfopage(currentPage, tag,latitude,longitude).
+                subscribe(new MyObserve<List<HomeBean>>(this) {
             @Override
             protected void onSuccess(List<HomeBean> homeBeans) {
                 if (1 == currentPage) {

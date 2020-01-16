@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import com.golang.management.R;
@@ -59,7 +60,6 @@ public class WelcomeFragment extends BaseFragment<WelcomeContract.Presenter>
     public void initView(View view) {
         hideTitle();
     }
-
         @Override
     public void bindEvent() {
             createPresenter(new WelcomePresenter(this, 3 * 1000));
@@ -77,12 +77,11 @@ public class WelcomeFragment extends BaseFragment<WelcomeContract.Presenter>
                 TUIKit.login(userSharedPreferencesUtils.getAccount(), userSig, new IUIKitCallBack() {
                     @Override
                     public void onSuccess(Object data) {
-                        showToast("login failed. code: ");
+                        Log.e("login failed. code: ","");
                     }
-
                     @Override
                     public void onError(String module, int errCode, String errMsg) {
-                        showToast("login failed. code: " + errCode + " errmsg: " + errMsg);
+                        Log.e("login failed. code: " + errCode ," errmsg: " + errMsg);
                     }
                 });
             }

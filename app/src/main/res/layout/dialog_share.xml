@@ -1,38 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
     android:background="@drawable/shape_ad_c1"
-    android:orientation="vertical">
-        <TextView
-            android:id="@+id/textView"
-            android:text="选择要分享的平台~"
-            android:textSize="12sp"
-            android:textColor="#828282"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:ignore="MissingConstraints"
-            android:layout_margin="20dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
-        <ImageView
-            android:id="@+id/iv_close"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/next"
-            app:layout_constraintRight_toRightOf="parent"
-            android:padding="20dp"
-            tools:ignore="MissingConstraints" />
-    <GridLayout
-        android:id="@+id/gridLayoutLevel"
+    android:padding="10dp"
+    >
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="选择要分享的平台~"
+        tools:ignore="MissingConstraints" />
+    <ImageView
+        android:id="@+id/imageViewBlack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/close"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginRight="10dp"
+        tools:ignore="MissingConstraints" />
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:alignmentMode="alignBounds"
-        android:columnCount="4"
         android:orientation="horizontal"
-        tools:ignore="MissingConstraints"
-        app:layout_constraintTop_toBottomOf="@id/textView"/>
+        app:layout_constraintTop_toBottomOf="@id/textView"
+        android:padding="10dp">
+    <RadioButton
+        android:id="@+id/image_weixin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableTop="@mipmap/weixin"
+        android:layout_weight="1"
+        android:button="@null"
+        android:text="微信"
+        android:gravity="center"
+        android:drawablePadding="10dp"/>
+    <RadioButton
+        android:id="@+id/iamge_weixinpengyouquan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableTop="@mipmap/pengyouquan"
+        android:layout_weight="1"
+        android:button="@null"
+        android:text="朋友圈"
+        android:gravity="center"
+        android:drawablePadding="10dp"/>
+    <RadioButton
+        android:id="@+id/image_black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableTop="@mipmap/lianjie"
+        android:layout_weight="1"
+        android:button="@null"
+        android:text="复制链接"
+        android:gravity="center"
+        android:drawablePadding="10dp"/>
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

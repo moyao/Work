@@ -33,7 +33,7 @@ public class MessageModellml {
     //确认读取消息的接口
     public static final String FIND_ACTIVITY_COMMENTSTATUS = "/activity/api/updateActivityCommentStatus";
 
-    public Observable<ActivityDtoInfo> find_activity_dtoinfo(String userId, String activityId, String tag) {
+    public Observable<ActivityDtoInfo> find_activity_dtoinfo(String userId, String activityId, String tag,String longitude,String latitude) {
         String HTTPURL;
         HttpParams httpParams = new HttpParams();
         httpParams.put("userId", userId);
@@ -44,6 +44,8 @@ public class MessageModellml {
             HTTPURL = FIND_ACTIVITY_DTOINFO;
             httpParams.put("activityId", activityId);
         }
+        httpParams.put("longitude", longitude);
+        httpParams.put("latitude", latitude);
         Type type = new TypeToken<ActivityDtoInfo>() {
         }.getType();
         return ApiWrapper.request(HttpMethod.GET, HTTPURL, type, httpParams);
@@ -59,7 +61,7 @@ public class MessageModellml {
     }
 
     public Observable<String> find_activity_commentsave(String userId, String objectId, String content,
-                                                        String parentId, String targetUserNickname, String targetUserId, String tag) {
+                                                        String parentId, String targetUserNickname, String tag, String targetUserId) {
         String HTTPURL;
         HashMap<String, Object> httpParams = new HashMap<>();
         if (tag.equals(Constant.VIEW_CIRCLE)) {

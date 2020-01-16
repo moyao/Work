@@ -22,7 +22,7 @@ public class HomeModellml {
     //
     public static final String IMAGEUPLOADLIST = "/system/imageUploadList";
     public  String HTTP_URL;
-    public Observable<List<HomeBean>> queryactivityinfopage(int currentPage,int status) {
+    public Observable<List<HomeBean>> queryactivityinfopage(int currentPage,int status,String latitude,String longitude ) {
         HttpParams httpParams=new HttpParams();
         if (status==0){
             httpParams.put("type","activity");
@@ -36,6 +36,8 @@ public class HomeModellml {
         }
         httpParams.put("pageSize","8");
         httpParams.put("page",currentPage);
+        httpParams.put("longitude", longitude);
+        httpParams.put("latitude", latitude);
         Type type = new TypeToken<List<HomeBean>>() {
         }.getType();
         return ApiWrapper.request(HttpMethod.GET, HTTP_URL, type,httpParams);

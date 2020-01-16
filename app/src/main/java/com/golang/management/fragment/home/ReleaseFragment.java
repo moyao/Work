@@ -162,7 +162,6 @@ public class ReleaseFragment extends CheckPermissionsActivity implements
                     startForResult(DetailsNextFragment.newInstance(selImageList, editTextContext.getText().toString()), 0);
                 }
                 //活动
-
             }
         });
         mImageBlack.setOnClickListener(new OnClickListenerWrapper() {

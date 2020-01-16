@@ -1,10 +1,18 @@
 package com.golang.management.fragment.me;
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -55,6 +63,11 @@ public class DistributionFragment extends BaseFragment {
     TextView textViewActivity;
     UserSharedPreferencesUtils userSharedPreferencesUtils;
     String LevelName;
+    private Dialog ExemptionDialog;
+    private CheckBox checkbox;
+    private Button butDetermine, butCancel;
+    private WebView webView;
+    String body, amount;
     public static DistributionFragment newInstance() {
         Bundle args = new Bundle();
         DistributionFragment fragment = new DistributionFragment();
@@ -100,46 +113,69 @@ public class DistributionFragment extends BaseFragment {
         initApi();
         mTitlebar.setBackgroundResource(R.color.white);
         setTitle("会员充值");
+
     }
     @Override
     public void bindEvent() {
         userSharedPreferencesUtils = new UserSharedPreferencesUtils(getContext());
         checkGolden.isChecked();
         checkOperator.setChecked(false);
-        checkOperator.setOnClickListener(new OnClickListenerWrapper() {
+
+        imageViewGolden.setOnClickListener(new OnClickListenerWrapper() {
             @Override
             protected void onSingleClick(View v) {
-                checkOperator.isChecked();
-                checkGolden.setChecked(false);
+                checkData();
+
+            }
+        });
+        imageViewOperator.setOnClickListener(new OnClickListenerWrapper() {
+            @Override
+            protected void onSingleClick(View v) {
+                checkData();
             }
         });
         checkGolden.setOnClickListener(new OnClickListenerWrapper() {
             @Override
             protected void onSingleClick(View v) {
-                checkGolden.isChecked();
-                checkOperator.setChecked(false);
+                checkData();
+            }
+        });
+        checkOperator.setOnClickListener(new OnClickListenerWrapper() {
+            @Override
+            protected void onSingleClick(View v) {
+                checkData();
             }
         });
         imageViewJoin.setOnClickListener(new OnClickListenerWrapper() {
             @Override
             protected void onSingleClick(View v) {
-                getData();
+                if (checkGolden.isChecked()) {
+                    body = "GOLD_MEMBER";
+                    amount = "399";
+                    LevelName="金卡会员";
+
+                } else {
+                    body = "MERCHANT";
+                    amount = "19999";
+                    LevelName="运营商";
+                }
+                showDialogExemption();
+                ExemptionDialog.show();
             }
         });
     }
-    private void getData() {
-        String body, amount;
-
-        if (checkGolden.isChecked()) {
-            body = "GOLD_MEMBER";
-            amount = "399";
-            LevelName="金卡会员";
-
-        } else {
-            body = "MERCHANT";
-            amount = "19999";
-            LevelName="运营商";
+    private void checkData() {
+        if (checkGolden.isChecked()){
+            checkOperator.setChecked(true);
+            checkGolden.setChecked(false);
+        }else if (checkOperator.isChecked()){
+            checkGolden.setChecked(true);
+            checkOperator.setChecked(false);
         }
+
+    }
+
+    private void getData() {
         Map<String, Object> httpParams = new HashMap<>();
         httpParams.put("body", body);
         httpParams.put("amount", amount);
@@ -194,5 +230,47 @@ public class DistributionFragment extends BaseFragment {
     @Override
     public boolean canSwipeBack() {
         return false;
+    }
+    private void showDialogExemption() {
+        ExemptionDialog = new Dialog(getContext(), R.style.BaseDialogStyle);
+        ExemptionDialog.setContentView(R.layout.dialog_login_exemption);
+        checkbox = ExemptionDialog.findViewById(R.id.checkbox);
+        webView = ExemptionDialog.findViewById(R.id.webView);
+        butCancel = ExemptionDialog.findViewById(R.id.butCancel);
+        butDetermine = ExemptionDialog.findViewById(R.id.butDetermine);
+        checkbox.setChecked(false);
+        ExemptionDialog.setCanceledOnTouchOutside(false);
+        ExemptionDialog.getWindow().setGravity(Gravity.CENTER);
+        Window w = ExemptionDialog.getWindow();
+        WindowManager.LayoutParams lp = w.getAttributes();
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+        lp.height = WindowManager.LayoutParams.MATCH_PARENT;
+        ExemptionDialog.onWindowAttributesChanged(lp);
+        webView.getSettings().setJavaScriptEnabled(true);
+        webView.setWebViewClient(new WebViewClient());
+        WebSettings webSettings = webView.getSettings();
+        webSettings.setLoadWithOverviewMode(true); // 缩放至屏幕的大小
+        if (checkGolden.isChecked()){
+            webView.loadUrl("http://www.golangkeji.com/Golang/page6.html");
+        }else {
+            webView.loadUrl("http://www.golangkeji.com/Golang/page7.html");
+        }
+        butCancel.setOnClickListener(new OnClickListenerWrapper() {
+            @Override
+            protected void onSingleClick(View v) {
+                ExemptionDialog.dismiss();
+            }
+        });
+        butDetermine.setOnClickListener(new OnClickListenerWrapper() {
+            @Override
+            protected void onSingleClick(View v) {
+                if (checkbox.isChecked()) {
+                    getData();
+                    ExemptionDialog.dismiss();
+                } else {
+                    showToast("同意遵守本声明，以后每次默认都同意");
+                }
+            }
+        });
     }
 }

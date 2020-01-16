@@ -13,7 +13,6 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.bumptech.glide.request.RequestOptions;
@@ -187,12 +186,7 @@ public class EditFragment extends BaseFragment implements PickValueView.onSelect
     @Override
     public void bindEvent() {
         userSharedPreferencesUtils = new UserSharedPreferencesUtils(getContext());
-        textView4.setOnClickListener(new OnClickListenerWrapper() {
-            @Override
-            protected void onSingleClick(View v) {
-                mDatePicker.show(textViewBirthday.getText().toString());
-            }
-        });
+
         textView9.setOnClickListener(new OnClickListenerWrapper() {
             @Override
             protected void onSingleClick(View v) {
@@ -205,6 +199,16 @@ public class EditFragment extends BaseFragment implements PickValueView.onSelect
                 initDialog();
             }
         });
+
+        textView4.setOnClickListener(new OnClickListenerWrapper() {
+            @Override
+            protected void onSingleClick(View v) {
+                if ("未认证".equals(textViewAuthentication.getText())) {
+                    mDatePicker.show(textViewBirthday.getText().toString());
+                }
+            }
+        });
+
         textView1.setOnClickListener(new OnClickListenerWrapper() {
             @Override
             protected void onSingleClick(View v) {
@@ -255,10 +259,10 @@ public class EditFragment extends BaseFragment implements PickValueView.onSelect
                         textViewBirthday.setText(editBean.getBirthday() + "");
                         textViewEducation.setText(editBean.getEducation());
                         textViewOccupation.setText(editBean.getOccupation());
-                        if (!StringHandler.hasNull(editBean.getHobby()+"")){
+                        if (!StringHandler.hasNull(editBean.getHobby() + "")) {
                             textViewInterest.setText(editBean.getHobby() + "");
                         }
-                        if (!StringHandler.hasNull(editBean.getWantToGo() + "")){
+                        if (!StringHandler.hasNull(editBean.getWantToGo() + "")) {
                             textViewAddress.setText(editBean.getWantToGo() + "");
                         }
                     }
@@ -448,7 +452,7 @@ public class EditFragment extends BaseFragment implements PickValueView.onSelect
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void EvenData(MessageEvent messageEvent) {
-        if (1==(messageEvent.getCode())) {
+        if (1 == (messageEvent.getCode())) {
             textViewAuthentication.setText("已认证");
         }
     }

@@ -41,7 +41,8 @@
         android:textColor="#000000"
         app:layout_constraintTop_toBottomOf="@id/tv_sign_out"
         android:textSize="14sp"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+        android:visibility="gone"/>
 
     <View
         android:layout_width="match_parent"
@@ -50,5 +51,6 @@
         android:layout_marginRight="10dp"
         android:background="#D4D4D4"
         tools:ignore="MissingConstraints"
-        app:layout_constraintTop_toBottomOf="@id/tv_replace_phone"/>
+        app:layout_constraintTop_toBottomOf="@id/tv_replace_phone"
+        android:visibility="gone"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

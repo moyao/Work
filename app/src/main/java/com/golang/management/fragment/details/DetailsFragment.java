@@ -1,5 +1,4 @@
 package com.golang.management.fragment.details;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Build;
@@ -14,17 +13,15 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-
 import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.bumptech.glide.request.RequestOptions;
 import com.golang.management.R;
-import com.golang.management.base.BaseFragment;
+import com.golang.management.activity.CheckPermissionsActivity;
 import com.golang.management.bean.ActivityCommentsBeanX;
 import com.golang.management.bean.ActivityDtoInfo;
 import com.golang.management.bean.ActivitySignUpsBean;
@@ -49,15 +46,12 @@ import com.tencent.imsdk.friendship.TIMFriendRequest;
 import com.tencent.imsdk.friendship.TIMFriendResult;
 import com.tencent.imsdk.friendship.TIMFriendStatus;
 import com.tencent.qcloud.tim.uikit.utils.ToastUtil;
-
 import java.util.List;
-
 import butterknife.BindView;
-
 /**
  * @author: dongyaoyao
  */
-public class DetailsFragment extends BaseFragment implements CommentAdapter.ItemClickListener {
+public class DetailsFragment extends CheckPermissionsActivity implements CommentAdapter.ItemClickListener {
     @BindView(R.id.imageViewPhoto)
     ImageView imageViewPhoto;
     @BindView(R.id.textViewName)
@@ -114,9 +108,8 @@ public class DetailsFragment extends BaseFragment implements CommentAdapter.Item
     List<ActivityCommentsBeanX> commentsBeans;
     List<ActivitySignUpsBean> signUpsBeans;
     UserSharedPreferencesUtils userSharedPreferencesUtils;
-    private String userId, objectId, parentId, targetUserNickname,targetUserId;
+    private String userId, objectId, parentId, targetUserNickname,targetUserId,longitude,latitude;
     ImageAdapter imageAdapter;
-
     public static DetailsFragment newInstance(String id, String title) {
         Bundle args = new Bundle();
         args.putString(Constants.KEY_TYPE, id);
@@ -125,7 +118,12 @@ public class DetailsFragment extends BaseFragment implements CommentAdapter.Item
         fragment.setArguments(args);
         return fragment;
     }
-
+    @Override
+    protected void locationResult(String longitude, String latitude, String address,
+                                  String city, String province, String district) {
+        this.latitude=latitude;
+        this.longitude=longitude;
+    }
     @Override
     public int onSetLayoutId() {
         return R.layout.fragement_activity_details;
@@ -146,6 +144,7 @@ public class DetailsFragment extends BaseFragment implements CommentAdapter.Item
                 friendData();
             }
         });
+        startLocation();
     }
 
     private void friendData() {
@@ -212,7 +211,12 @@ public class DetailsFragment extends BaseFragment implements CommentAdapter.Item
     @Override
     public void bindEvent() {
         initDetails();
-        radioGroup.check(radioComment.getId());
+        if (status==STATUS_UNVERIFIED){
+            radioGroup.check(radioComment.getId());
+        }else {
+            radioGroup.check(status);
+        }
+
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -251,7 +255,6 @@ public class DetailsFragment extends BaseFragment implements CommentAdapter.Item
                         } else {
                             showToast("请输入您要评论的内容");
                         }
-
                         break;
                     case 1:
                         if (!StringHandler.hasNull(editTextContext.getText().toString())) {
@@ -268,7 +271,6 @@ public class DetailsFragment extends BaseFragment implements CommentAdapter.Item
                     @Override
                     public void onKeyboardShow() {
                     }
-
                     @Override
                     public void onKeyboardHide() {
                         butComment.setVisibility(View.VISIBLE);
@@ -297,7 +299,7 @@ public class DetailsFragment extends BaseFragment implements CommentAdapter.Item
         }
         showLoadingDialog("加载中...");
         new MessageModellml().find_activity_dtoinfo(userSharedPreferencesUtils.getUserid(),
-                getArguments().getString(Constants.KEY_TYPE), getArguments().getString(Constants.KEY_TITLE))
+                getArguments().getString(Constants.KEY_TYPE), getArguments().getString(Constants.KEY_TITLE),longitude,latitude)
                 .safeSubscribe(new MyObserve<ActivityDtoInfo>(this) {
                     protected void onSuccess(ActivityDtoInfo userInfos) {
                         showPage();
@@ -312,13 +314,15 @@ public class DetailsFragment extends BaseFragment implements CommentAdapter.Item
                         rvPics.setLayoutManager(gridLayoutManager);
                         imageAdapter = new ImageAdapter(imglist, getContext());
                         rvPics.setAdapter(imageAdapter);
-
                         textViewContext.setText(userInfos.getContent() + "");
                         rButComment.setText(userInfos.getCommentCount() + "");
                         rButWatch.setText(userInfos.getTraficCount() + "");
                         rButJoin.setText(userInfos.getSignUpPeopleNumber() + "/" + userInfos.getMaxPeopleNumber());
+                        textViewDistance.setText("距离：" + Math.round(userInfos.getDistance() / 100d) / 10d + "km");
                         if (getArguments().getString(Constants.KEY_TITLE).equals(Constant.VIEW_CIRCLE)) {
                             textViewSo.setText("来自圈子");
+                            textViewTime.setVisibility(View.GONE);
+                            textViewAddress.setVisibility(View.GONE);
                         } else {
                             if ("0".equals(userInfos.getVisible() + "")) {
                                 textViewSo.setText("活动成员:对外不可见");
@@ -352,14 +356,12 @@ public class DetailsFragment extends BaseFragment implements CommentAdapter.Item
                     }
                 });
     }
-
     private void layoutFilterItem(GridLayout gridLayoutLevel, String replace) {
         View view = LayoutInflater.from(getContext()).inflate(R.layout.item_home_laber, gridLayoutLevel, false);
         TextView mCheckBoxFilter = view.findViewById(R.id.textViewLaber);
         mCheckBoxFilter.setText(replace);
         gridLayoutLevel.addView(view);
     }
-
     /**
      * 发送评论
      */
@@ -423,7 +425,8 @@ public class DetailsFragment extends BaseFragment implements CommentAdapter.Item
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recycler.setLayoutManager(layoutManager);
-        SignUpsAdapter signUpsAdapter = new SignUpsAdapter(signUpsBeans, activityDtoInfo.getVisible() + "", activityDtoInfo.getUserId(), getContext());
+        SignUpsAdapter signUpsAdapter = new SignUpsAdapter(signUpsBeans, activityDtoInfo.getVisible() + "",
+                activityDtoInfo.getUserId(), getContext());
         recycler.setAdapter(signUpsAdapter);
     }
 

@@ -52,6 +52,7 @@ public class AdviceFragment extends BaseFragment {
     @Override
     public void initView(View view) {
         initApi();
+
         setTitle("意见反馈");
         mTitlebar.showStatusBar(true);
         mTitlebar.setBackgroundResource(R.drawable.but_release);

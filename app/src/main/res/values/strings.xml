@@ -8,15 +8,9 @@
     <string name="navMe">我的</string>
     <string name="cancel">取消</string>
     <string name="confirm">确定</string>
-    <string name="exemption">&#160;&#160;&#160;&#160;&#160;&#160;本声明适用于本网站所提供的各种工具和服务(以下简称"服务"),
-        适用于本网站注册的会员也适用于其他相关用户以及可能与本网站发生联系的第三人。在使用本网站前，请您务必仔细阅读并透彻理解本声明。
-        您可以选择不使用本网站，但如果您使用本网站，您的使用行为将被视为对本声明全部内容的认可。\n
-第一条：\n
-     &#160;&#160;&#160;&#160;&#160;&#160;本网站为第三方信息发布平台（互联网信息服务提供者），其中链接的相关广告、项目信息等，均由广告主、会员、用户等第三方信息发布者自行提供。
-        本网站对此等信息的准确性、完整性、合法性或真实性均不承担任何责任。此外，对任何使用或提供本网站信息的商业活动及其风险不承担任何责任，
-        不保证每一广告、项目中商业机会的收益、每一产品的质量、每一商业模式的营利。您应该对使用本网站的服务结果自行承担风险。
-                            </string>
-
+    <string name="meiyouweixin">您还没有安装微信</string>
+    <string name="share_title">和“Go浪”一起踏遍世界！</string>
+    <string name="share_cotent">和“Go浪”一起踏遍世界！</string>
     <string name="notifyTitle">提示</string>
     <string name="notifyMsg">当前应用缺少必要权限。\n\n请点击\"设置\"-\"权限\"-打开所需权限。</string>
     <string name="setting">设置</string>

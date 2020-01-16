@@ -2,27 +2,24 @@ package com.golang.management.fragment;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Dialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.TypedArray;
-import android.graphics.BitmapFactory;
-import android.graphics.Point;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.AttributeSet;
+import android.os.Environment;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.RadioButton;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.core.content.FileProvider;
 
+import com.golang.management.BuildConfig;
 import com.golang.management.R;
 import com.golang.management.base.BaseFragment;
 import com.golang.management.common.OnClickListenerWrapper;
@@ -37,16 +34,16 @@ import com.golang.management.fragment.home.ReleaseFragment;
 import com.golang.management.utils.StringHandler;
 import com.golang.management.utils.WisdomMyTool;
 import com.golang.management.wigdet.AppUpdateProgressDialog;
-import com.golang.management.wigdet.animation.CircleList;
 import com.golang.management.wigdet.bottombar.BottomBar;
 import com.golang.management.wigdet.bottombar.BottomBarTab;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.FileCallback;
 import com.lzy.okgo.callback.StringCallback;
+import com.lzy.okgo.model.HttpParams;
 import com.lzy.okgo.model.Progress;
 import com.lzy.okgo.model.Response;
 import com.lzy.okgo.request.base.Request;
-import com.tencent.qcloud.tim.uikit.component.CircleImageView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -67,17 +64,27 @@ import static com.baidu.idl.face.platform.ui.utils.VolumeUtils.TAG;
  * Created by dongyaoyao
  */
 public class MainFragment extends BaseFragment {
-    @BindView(R.id.radioRelease)
-    RadioButton radioRelease;
     @BindView(R.id.checkView)
     View checkView;
+    @BindView(R.id.checktextView)
+    View checktextView;
+    @BindView(R.id.radioRelease)
+    FloatingActionButton radioRelease;
+    @BindView(R.id.textView)
+    TextView textView;
+    @BindView(R.id.textViewVisibility)
+    TextView textViewVisibility;
+    @BindView(R.id.iamgefabu)
+    ImageButton iamgefabu;
+    @BindView(R.id.imagequnzi)
+    ImageButton imagequnzi;
     private SupportFragment[] mFragments = new SupportFragment[5];
     private BottomBar mNavigation;
-    private View viewCircle, viewConstraints;
-    private Dialog dia;
     UserSharedPreferencesUtils userSharedPreferencesUtils;
     private String downUrl;
     private AppUpdateProgressDialog appUpdateProgressDialog;
+    boolean fabOpened = false;
+
     public static MainFragment newInstance() {
         Bundle args = new Bundle();
         MainFragment fragment = new MainFragment();
@@ -116,7 +123,7 @@ public class MainFragment extends BaseFragment {
     public void initView(View view) {
         initApi();
         hideTitle();
-//        initDownloadApk();
+//        downloadAPP();
         userSharedPreferencesUtils = new UserSharedPreferencesUtils(getContext());
         mNavigation = view.findViewById(R.id.navigation);
         mNavigation
@@ -125,15 +132,6 @@ public class MainFragment extends BaseFragment {
                 .addItem(new BottomBarTab(_mActivity, R.color.transparent, ""))
                 .addItem(new BottomBarTab(_mActivity, R.mipmap.footprint_no, getString(R.string.navMessage)))
                 .addItem(new BottomBarTab(_mActivity, R.mipmap.my_no, getString(R.string.navMe)));
-        dia = new Dialog(getContext(), R.style.BaseDialogStyle);
-        dia.setContentView(R.layout.dialog_release);
-        viewCircle = dia.findViewById(R.id.view);
-        viewConstraints = dia.findViewById(R.id.view1);
-        dia.setCanceledOnTouchOutside(true);
-        dia.getWindow().setGravity(Gravity.BOTTOM);
-        Window w = dia.getWindow();
-        WindowManager.LayoutParams lp = w.getAttributes();
-        dia.onWindowAttributesChanged(lp);
         if (!StringHandler.hasNull(userSharedPreferencesUtils.getUserid())) {
             Set<String> tagSet = new HashSet<>();
             tagSet.add(userSharedPreferencesUtils.getUserid());
@@ -144,12 +142,13 @@ public class MainFragment extends BaseFragment {
                 }
             });
         }
-
     }
 
     private void initDownloadApk() {
-        OkGo.<String>post("").isSpliceUrl(true)
-                .tag(this)
+      /*  HttpParams httpParams = new HttpParams();
+        httpParams.put("version", WisdomMyTool.getVersionCode());*/
+        OkGo.<String>get("http://www.golangkeji.com/apk/download")
+//                .params(httpParams)
                 .execute(new StringCallback() {
                     @Override
                     public void onSuccess(Response<String> response) {
@@ -190,7 +189,6 @@ public class MainFragment extends BaseFragment {
                         }
                     }
                 });
-
     }
 
     /***
@@ -198,74 +196,62 @@ public class MainFragment extends BaseFragment {
      * @param
      */
     private void downloadAPP() {
-        if (!StringHandler.hasNull(downUrl))
-            OkGo.<File>get(downUrl)
-                    .execute(new FileCallback("wisdom_doctor.apk") {
-                        @Override
-                        public void onStart(Request<File, ? extends Request> request) {
-                            super.onStart(request);
-                            appUpdateProgressDialog = new AppUpdateProgressDialog(getContext());
-                            appUpdateProgressDialog.show();
-                        }
+        HttpParams httpParams = new HttpParams();
+        httpParams.put("version", WisdomMyTool.getVersionCode());
+        OkGo.<File>get("http://www.golangkeji.com/apk/download")
+                .params(httpParams)
+                .execute(new FileCallback("golang.apk") {
+                    @Override
+                    public void onStart(Request<File, ? extends Request> request) {
+                        super.onStart(request);
+                        appUpdateProgressDialog = new AppUpdateProgressDialog(getContext());
+                        appUpdateProgressDialog.show();
+                    }
 
-                        @Override
-                        public void onSuccess(Response<File> response) {
-                            appUpdateProgressDialog.dismiss();
-                            File absoluteFile = response.body().getAbsoluteFile();
-                            installApk(absoluteFile);
-                        }
+                    @Override
+                    public void onSuccess(Response<File> response) {
+                        appUpdateProgressDialog.dismiss();
+                        File absoluteFile = response.body().getAbsoluteFile();
+                        installApk(absoluteFile);
+                    }
 
-                        @Override
-                        public void onError(Response<File> response) {
-                            String message = response.message();
-                            appUpdateProgressDialog.dismiss();
-                           showToast("下载失败,请您稍后再试!");
-                        }
+                    @Override
+                    public void onError(Response<File> response) {
+                        String message = response.message();
+                        appUpdateProgressDialog.dismiss();
+                        showToast("下载失败,请您稍后再试!");
+                    }
 
-                        @Override
-                        public void downloadProgress(Progress progress) {
-                            int currentSize = (int) progress.currentSize;
-                            int totalSize = (int) progress.totalSize;
-                            double result = new BigDecimal((float) currentSize / totalSize).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
-                            int i = (int) (result * 100);
-                            appUpdateProgressDialog.setProgress(i);
-                            appUpdateProgressDialog.show();
-                        }
+                    @Override
+                    public void downloadProgress(Progress progress) {
+                        int currentSize = (int) progress.currentSize;
+                        int totalSize = (int) progress.totalSize;
+                        double result = new BigDecimal((float) currentSize / totalSize).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+                        int i = (int) (result * 100);
+                        appUpdateProgressDialog.setProgress(i);
+                        appUpdateProgressDialog.show();
+                    }
 
-                    });
+                });
     }
 
-    private void installApk(File absoluteFile) {
-        new Thread(){
-            @Override
-            public void run() {
-                if (absoluteFile != null) {
-                    if(Build.VERSION.SDK_INT>=24) {//判读版本是否在7.0以上
-                        Uri apkUri = FileProvider.getUriForFile(getContext(), "com.csti.cetx.fileProvider", absoluteFile);//在AndroidManifest中的android:authorities值
-                        Intent install = new Intent(Intent.ACTION_VIEW);
-                        install.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);// 一定要记得 先 setFlags 在 addFlags 否则 set 会覆盖 add
-                        install.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);//添加这一句表示对目标应用临时授权该Uri所代表的文件
-                        install.setDataAndType(apkUri, "application/vnd.android.package-archive");
-                        try {
-                            sleep(3000);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        startActivity(install);
-                    } else{
-                        Intent install = new Intent(Intent.ACTION_VIEW);
-                        install.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        install.setDataAndType(Uri.fromFile(absoluteFile), "application/vnd.android.package-archive");
-                        try {
-                            sleep(3000);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        startActivity(install);
-                    }
-                }
-            }
-        }.start();
+    /***
+     * APP 安装
+     * @param file
+     */
+    protected void installApk(File file) {
+        Intent intent = new Intent();
+        //执行动作
+        intent.setAction(Intent.ACTION_VIEW);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            Uri contentUri = FileProvider.getUriForFile(getContext(), BuildConfig.APPLICATION_ID + ".provider", file);
+            intent.setDataAndType(contentUri, "application/vnd.android.package-archive");
+        } else {
+            intent.setDataAndType(Uri.fromFile(file), "application/vnd.android.package-archive");
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        }
+        startActivity(intent);
     }
 
     @Override
@@ -278,8 +264,7 @@ public class MainFragment extends BaseFragment {
                 public void onTabSelected(int position, int prePosition) {
                     if (position >= 0 && !StringHandler.hasNull(userSharedPreferencesUtils.getUserid())) {
                         showHideFragment(mFragments[position], mFragments[prePosition]);
-                    } else {
-
+                    } else if (StringHandler.hasNull(userSharedPreferencesUtils.getUserid())) {
                         loginDialog((Activity) getContext());
                     }
                 }
@@ -301,30 +286,53 @@ public class MainFragment extends BaseFragment {
                 }
             });
         }
-        radioRelease.setOnClickListener(new OnClickListenerWrapper() {
+        radioRelease.setOnClickListener(new View.OnClickListener() {
             @Override
-            protected void onSingleClick(View v) {
-                if (!StringHandler.hasNull(userSharedPreferencesUtils.getUserid())) {
-                    if (!dia.isShowing()) {
-                        dia.show();
-                    }
-                } else {
+            public void onClick(View view) {
+                if (StringHandler.hasNull(userSharedPreferencesUtils.getUserid())) {
                     loginDialog((Activity) getContext());
+                } else if (!fabOpened) {
+                    openMenu();
+                    textViewVisibility.setVisibility(View.VISIBLE);
+                } else {
+                    closeMenu();
                 }
             }
         });
-        viewCircle.setOnClickListener(new OnClickListenerWrapper() {
+        checktextView.setOnClickListener(new View.OnClickListener() {
             @Override
-            protected void onSingleClick(View v) {
-                start(ReleaseFragment.newInstance(Constant.VIEW_CIRCLE));
-                dia.dismiss();
+            public void onClick(View v) {
+                if (StringHandler.hasNull(userSharedPreferencesUtils.getUserid())) {
+                    loginDialog((Activity) getContext());
+                } else if (!fabOpened) {
+                    openMenu();
+                    textViewVisibility.setVisibility(View.VISIBLE);
+                } else {
+                    closeMenu();
+                }
             }
         });
-        viewConstraints.setOnClickListener(new OnClickListenerWrapper() {
+        textViewVisibility.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (fabOpened) {
+                    closeMenu();
+                }
+            }
+        });
+        imagequnzi.setOnClickListener(new OnClickListenerWrapper() {
             @Override
             protected void onSingleClick(View v) {
                 start(ReleaseFragment.newInstance(Constant.VIEW_CONSTRAINTS));
-                dia.dismiss();
+                closeMenu();
+            }
+        });
+        iamgefabu.setOnClickListener(new OnClickListenerWrapper() {
+            @Override
+            protected void onSingleClick(View v) {
+                start(ReleaseFragment.newInstance(Constant.VIEW_CIRCLE));
+
+                closeMenu();
             }
         });
     }
@@ -343,6 +351,7 @@ public class MainFragment extends BaseFragment {
             return super.onBackPressedSupport();
         }
     }
+
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -355,5 +364,36 @@ public class MainFragment extends BaseFragment {
 
     protected void immediatelyLogin() {
         start(LoginFragment.newInstance("1"));
+    }
+
+    private void closeMenu() {
+        textViewVisibility.setVisibility(View.GONE);
+        textView.setVisibility(View.GONE);
+        AlphaAnimation alphaAnimation = new AlphaAnimation(0.7f, 0);
+        alphaAnimation.setDuration(500);
+        alphaAnimation.setFillAfter(true);
+        textView.startAnimation(alphaAnimation);
+        Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.translate_false);
+        Animation animation1 = AnimationUtils.loadAnimation(getContext(), R.anim.translate_yfalse);
+        iamgefabu.startAnimation(animation);
+        imagequnzi.startAnimation(animation1);
+        imagequnzi.setVisibility(View.GONE);
+        iamgefabu.setVisibility(View.GONE);
+        fabOpened = false;
+    }
+
+    private void openMenu() {
+        textView.setVisibility(View.VISIBLE);
+        imagequnzi.setVisibility(View.VISIBLE);
+        iamgefabu.setVisibility(View.VISIBLE);
+        Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.translate);
+        Animation animation1 = AnimationUtils.loadAnimation(getContext(), R.anim.translate_y);
+        iamgefabu.startAnimation(animation);
+        imagequnzi.startAnimation(animation1);
+        AlphaAnimation alphaAnimation = new AlphaAnimation(0, 0.7f);
+        alphaAnimation.setDuration(500);
+        alphaAnimation.setFillAfter(true);
+        textView.startAnimation(alphaAnimation);
+        fabOpened = true;
     }
 }

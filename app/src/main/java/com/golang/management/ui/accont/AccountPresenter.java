@@ -1,4 +1,4 @@
-package com.golang.management.ui.accont;//package com.wisdom.regulatory.ui.welcome;
+package com.golang.management.ui.accont;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.text.TextUtils;

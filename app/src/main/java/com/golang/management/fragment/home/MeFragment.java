@@ -1,13 +1,7 @@
 package com.golang.management.fragment.home;
-
-import android.app.Dialog;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.FrameLayout;
-import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -25,15 +19,16 @@ import com.golang.management.fragment.me.DistributionHomepageFragment;
 import com.golang.management.fragment.me.EditFragment;
 import com.golang.management.fragment.me.InstallFragment;
 import com.golang.management.fragment.me.MyActivityFragment;
+import com.golang.management.fragment.payment.MyPanymentListFragment;
 import com.golang.management.fragment.payment.PaymentSuccessFragment;
 import com.golang.management.utils.MessageEvent;
+import com.golang.management.view.ShareWind;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.BindView;
-import cn.sharesdk.onekeyshare.OnekeyShare;
 /**
  * @author: dongyaoyao
  */
@@ -62,12 +57,6 @@ public class MeFragment extends BaseFragment {
     TextView tv_Order;
     @BindView(R.id.textView_order)
     TextView textView_order;
-    private TextView mTvMyTeam;
-    private Dialog dia;
-    private TextView mTextView;
-    private ImageView mIvClose;
-    private GridLayout mGridLayoutLevel;
-
     public static MeFragment newInstance() {
         Bundle args = new Bundle();
         MeFragment fragment = new MeFragment();
@@ -82,7 +71,6 @@ public class MeFragment extends BaseFragment {
     @Override
     public void initView(View view) {
         hideTitle();
-        initDialog();
         EventBus.getDefault().register(this);
     }
     @Override
@@ -113,13 +101,16 @@ public class MeFragment extends BaseFragment {
         tvShare.setOnClickListener(new OnClickListenerWrapper() {
             @Override
             protected void onSingleClick(View v) {
-                showShare();
+                ShareWind.Sharepartake(getContext(),"","","1","",0);
             }
         });
         textViewExtension.setOnClickListener(new OnClickListenerWrapper() {
             @Override
             protected void onSingleClick(View v) {
-                if ("等级：普通会员".equals(textViewGrade.getText().toString())) {
+                if ("等级：普通会员".equals(textViewGrade.getText().toString())
+                        ||"普通会员".equals(textViewGrade.getText().toString())
+                        ||"等级：普通用户".equals(textViewGrade.getText().toString())
+                ||"普通用户".equals(textViewGrade.getText().toString())) {
                     ((MainFragment) getParentFragment()).start(DistributionFragment.newInstance());
                 } else {
                     ((MainFragment) getParentFragment()).start(DistributionHomepageFragment.newInstance());
@@ -135,7 +126,7 @@ public class MeFragment extends BaseFragment {
         tv_Order.setOnClickListener(new OnClickListenerWrapper() {
             @Override
             protected void onSingleClick(View v) {
-                ((MainFragment) getParentFragment()).start(PaymentSuccessFragment.newInstance(""));
+                ((MainFragment) getParentFragment()).start(MyPanymentListFragment.newInstance());
             }
         });
         tvWallet.setOnClickListener(new OnClickListenerWrapper() {
@@ -151,44 +142,10 @@ public class MeFragment extends BaseFragment {
             }
         });
     }
-
-    private void initDialog() {
-        dia = new Dialog(getContext(), R.style.BaseDialogStyle);
-        dia.setContentView(R.layout.dialog_share);
-        dia.setCanceledOnTouchOutside(true);
-        dia.getWindow().setGravity(Gravity.BOTTOM);
-        mTextView = dia.findViewById(R.id.textView);
-        mIvClose = dia.findViewById(R.id.iv_close);
-        mGridLayoutLevel = dia.findViewById(R.id.gridLayoutLevel);
-        Window w = dia.getWindow();
-        WindowManager.LayoutParams lp = w.getAttributes();
-        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
-        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
-        dia.onWindowAttributesChanged(lp);
-    }
-
     @Override
     public boolean canSwipeBack() {
         return false;
     }
-
-    //java
-    private void showShare() {
-        OnekeyShare oks = new OnekeyShare();
-        // title标题，微信、QQ和QQ空间等平台使用
-        oks.setTitle(getString(R.string.app_name));
-        // titleUrl QQ和QQ空间跳转链接
-        oks.setTitleUrl("http://sharesdk.cn");
-        // text是分享文本，所有平台都需要这个字段
-        oks.setText("我是分享文本");
-        // imagePath是图片的本地路径，确保SDcard下面存在此张图片
-        oks.setImagePath("/sdcard/test.jpg");
-        // url在微信、Facebook等平台中使用
-        oks.setUrl("http://sharesdk.cn");
-        // 启动分享GUI
-        oks.show(getContext());
-    }
-
     @Override
     public void onDestroy() {
         super.onDestroy();

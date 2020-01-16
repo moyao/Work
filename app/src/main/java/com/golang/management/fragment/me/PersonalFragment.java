@@ -6,7 +6,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,13 +15,10 @@ import com.bumptech.glide.request.RequestOptions;
 import com.golang.management.R;
 import com.golang.management.api.MyObserve;
 import com.golang.management.base.BaseFragment;
-import com.golang.management.bean.EditBean;
 import com.golang.management.bean.PersonalBean;
 import com.golang.management.common.UserSharedPreferencesUtils;
 import com.golang.management.config.Constants;
-import com.golang.management.fragment.home.adapter.ImageAdapter;
 import com.golang.management.fragment.home.adapter.ImageHorizontalAdapter;
-import com.golang.management.fragment.home.adapter.NewHomeAdapter;
 import com.golang.management.model.MeModellml;
 
 import butterknife.BindView;
