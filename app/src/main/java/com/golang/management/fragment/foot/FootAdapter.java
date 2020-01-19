@@ -22,12 +22,13 @@ import butterknife.ButterKnife;
  */
 public class FootAdapter extends RecyclerView.Adapter<FootAdapter.FootViewHolder> {
     private Context mcontext;
-    private List<FootBean> footBean;
+    private List<FootBean> footBeanList;
 
     public FootAdapter(Context mcontext, List<FootBean> footBean) {
         this.mcontext = mcontext;
-        this.footBean = footBean;
+        this.footBeanList = footBean;
     }
+
     @NonNull
     @Override
     public FootViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -38,7 +39,7 @@ public class FootAdapter extends RecyclerView.Adapter<FootAdapter.FootViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull FootViewHolder holder, int position) {
-        FootBean footBeana = footBean.get(position);
+        FootBean footBeana = footBeanList.get(position);
         holder.textViewAddress.setText(footBeana.getAddress());
         holder.textViewTime.setText(footBeana.getCreatedAt());
 
@@ -46,7 +47,14 @@ public class FootAdapter extends RecyclerView.Adapter<FootAdapter.FootViewHolder
 
     @Override
     public int getItemCount() {
-       return footBean != null ? footBean.size() : 0;
+        return footBeanList != null ? footBeanList.size() : 0;
+    }
+
+    public void addData(FootBean footBean, int position) {
+//      在list中添加数据，并通知条目加入一条
+        footBeanList.add(position, footBean);
+        //添加动画
+        notifyDataSetChanged();
     }
 
     public class FootViewHolder extends RecyclerView.ViewHolder {

@@ -33,8 +33,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import static com.mob.MobSDK.getContext;
-
 public class FaceLivenessExpActivity extends FaceLivenessActivity {
     UserSharedPreferencesUtils userSharedPreferencesUtils;
     private ProgressDialog dialog;
@@ -132,13 +130,13 @@ public class FaceLivenessExpActivity extends FaceLivenessActivity {
                                 EventBus.getDefault().post(new MessageEvent("已认证",1));
                                 finish();
                             }else {
-                                Toast.makeText(getContext(), "认证失败，请来联系客服", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplication(), "认证失败，请来联系客服", Toast.LENGTH_SHORT).show();
                                 finish();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
                             try {
-                                Toast.makeText(getContext(), jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplication(), jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
                             } catch (JSONException ex) {
                                 ex.printStackTrace();
                             }
@@ -148,7 +146,7 @@ public class FaceLivenessExpActivity extends FaceLivenessActivity {
                     public void onError(Response<String> response) {
                         super.onError(response);
                         dialog.dismiss();
-                        Toast.makeText(getContext(), response.message(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplication(), response.message(), Toast.LENGTH_SHORT).show();
                     }
                 });
     }

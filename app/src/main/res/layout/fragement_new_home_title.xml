@@ -6,9 +6,9 @@
     xmlns:tools="http://schemas.android.com/tools">
     <com.golang.management.wigdet.banner.ConvenientBanner
         android:id="@+id/banner"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="2"
+        app:layout_constraintDimensionRatio="1.5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="MissingConstraints"/>

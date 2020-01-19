@@ -8,7 +8,6 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_margin="20dp"
-        android:src="@mipmap/photo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
     <TextView

@@ -96,9 +96,9 @@ public class DetailsNextFragment extends CheckPermissionsActivity implements Pic
     private Dialog dialog, ExemptionDialog;
     private CalendarList calendarList;
     private String selectedStr;
-    String userId, visible="0", startTime, endTime;
+    String userId, visible = "0", startTime, endTime;
     List<String> tage = new ArrayList<>();
-    private String lat, lng, province, city, district;
+    private String lat, lng, province, city, district, poiName;
     private CheckBox checkbox;
     private Button butDetermine, butCancel;
     private WebView webView;
@@ -114,12 +114,14 @@ public class DetailsNextFragment extends CheckPermissionsActivity implements Pic
 
     @Override
     protected void locationResult(String longitude, String latitude, String address
-            , String city, String province, String district) {
+            , String city, String province, String district, String poiName) {
         this.lng = longitude;
         this.lat = latitude;
         this.province = province;
         this.city = city;
         this.district = district;
+        this.poiName = poiName;
+        textViewSetAddress.setText(poiName);
     }
 
     @Override
@@ -231,9 +233,9 @@ public class DetailsNextFragment extends CheckPermissionsActivity implements Pic
                     return;
                 }
                 UserSharedPreferencesUtils userSharedPreferencesUtils = new UserSharedPreferencesUtils(getContext());
-                if ("true".equals(userSharedPreferencesUtils.getDetails())){
+                if ("true".equals(userSharedPreferencesUtils.getDetails())) {
                     getRelease();
-                }else {
+                } else {
                     ExemptionDialog.show();
                 }
 
@@ -365,6 +367,7 @@ public class DetailsNextFragment extends CheckPermissionsActivity implements Pic
             }
         });
     }
+
     private void showDialogExemption() {
         ExemptionDialog = new Dialog(getContext(), R.style.BaseDialogStyle);
         ExemptionDialog.setContentView(R.layout.dialog_login_exemption);

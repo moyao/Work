@@ -1,15 +1,22 @@
 package com.golang.management.fragment.me;
 
+import android.app.Dialog;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.WindowManager;
-import android.widget.ImageButton;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
+import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
@@ -33,6 +40,7 @@ import com.golang.management.model.MeModellml;
 import com.golang.management.paymentmoney.AuthResult;
 import com.golang.management.paymentmoney.PayResult;
 import com.golang.management.utils.MessageEvent;
+import com.golang.management.utils.StringHandler;
 import com.golang.management.wigdet.CommonTitleBar;
 import com.google.gson.Gson;
 import com.lzy.okgo.OkGo;
@@ -53,7 +61,6 @@ import butterknife.BindView;
  * @author: dongyaoyao
  */
 public class DistributionHomepageFragment extends BaseFragment {
-    ImageButton imageButton;
     UserSharedPreferencesUtils userSharedPreferencesUtils;
     @BindView(R.id.imageViewPhoto)
     ImageView imageViewPhoto;
@@ -77,6 +84,10 @@ public class DistributionHomepageFragment extends BaseFragment {
     private static final int SDK_AUTH_FLAG = 2;
     private String Operator;
     PopupWindow popWindow;
+    private Dialog ExemptionDialog;
+    private CheckBox checkbox;
+    private Button butDetermine, butCancel;
+    private WebView webView;
     private Handler mHandler = new Handler() {
         @SuppressWarnings("unused")
         public void handleMessage(Message msg) {
@@ -95,7 +106,7 @@ public class DistributionHomepageFragment extends BaseFragment {
                         UserSharedPreferencesUtils userSharedPreferencesUtil = new UserSharedPreferencesUtils(getContext());
                         userSharedPreferencesUtil.setLevelName("运营商");
                         userSharedPreferencesUtil.saveSharedPreferences();
-                        EventBus.getDefault().post(new MessageEvent("发生改变",2));
+                        EventBus.getDefault().post(new MessageEvent("发生改变", 2));
                         popWindow.dismiss();
                         Gson gson = new Gson();
                         PayResultBean user = gson.fromJson(resultInfo, PayResultBean.class);
@@ -114,10 +125,10 @@ public class DistributionHomepageFragment extends BaseFragment {
                     if (TextUtils.equals(resultStatus, "9000") && TextUtils.equals(authResult.getResultCode(), "200")) {
                         // 获取alipay_open_id，调支付时作为参数extern_token 的value
                         // 传入，则支付账户为该授权账户
-//                        showAlert(PayDemoActivity.this, getString(R.string.auth_success) + authResult);
+                        showToast(getString(R.string.auth_success) + authResult);
                     } else {
                         // 其他状态值则为授权失败
-//                        showAlert(PayDemoActivity.this, getString(R.string.auth_failed) + authResult);
+                        showToast(getString(R.string.auth_failed) + authResult);
                     }
                     break;
                 }
@@ -125,15 +136,15 @@ public class DistributionHomepageFragment extends BaseFragment {
                     break;
             }
         }
-
-        ;
     };
+
     public static DistributionHomepageFragment newInstance() {
         Bundle args = new Bundle();
         DistributionHomepageFragment fragment = new DistributionHomepageFragment();
         fragment.setArguments(args);
         return fragment;
     }
+
     @Override
     public int onSetLayoutId() {
         return R.layout.fragement_my_distribution;
@@ -163,29 +174,38 @@ public class DistributionHomepageFragment extends BaseFragment {
                 JSONObject jsonObject = null;
                 try {
                     jsonObject = new JSONObject(response.body());
-                    if ("0000000".equals(jsonObject.getString("code"))) {
-                        String data = jsonObject.getString("data");
-                        Runnable authRunnable = new Runnable() {
-                            @Override
-                            public void run() {
-                                // 构造AuthTask 对象
-                                AuthTask authTask = new AuthTask(getActivity());
-                                // 调用授权接口，获取授权结果
-                                Map<String, String> result = authTask.authV2(data, true);
-                                Message msg = new Message();
-                                msg.what = SDK_AUTH_FLAG;
-                                msg.obj = result;
-                                mHandler.sendMessage(msg);
-                            }
-                        };
-                        // 必须异步调用
-                        Thread authThread = new Thread(authRunnable);
-                        authThread.start();
+                    if ("404".equals(jsonObject.getString("status"))) {
+                        showToast(jsonObject.getString("status"));
+                    } else {
+                        if ("0000000".equals(jsonObject.getString("code"))) {
+                            String data = jsonObject.getString("data");
+                            Runnable authRunnable = new Runnable() {
+                                @Override
+                                public void run() {
+                                    // 构造AuthTask 对象
+                                    AuthTask authTask = new AuthTask(getActivity());
+                                    // 调用授权接口，获取授权结果
+                                    Map<String, String> result = authTask.authV2(data, true);
+                                    Message msg = new Message();
+                                    msg.what = SDK_AUTH_FLAG;
+                                    msg.obj = result;
+                                    mHandler.sendMessage(msg);
+                                }
+                            };
+                            // 必须异步调用
+                            Thread authThread = new Thread(authRunnable);
+                            authThread.start();
+                        }
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+            }
 
+            @Override
+            public void onError(Response<String> response) {
+                super.onError(response);
+                showToast(response.message());
             }
         });
     }
@@ -199,7 +219,7 @@ public class DistributionHomepageFragment extends BaseFragment {
                     @Override
                     protected void onSuccess(DistributiopnHomepageBean distributiopnHomepageBean) {
                         showPage();
-                        Operator=distributiopnHomepageBean.getContent().get(0).getUserInfoDto().getUserLevel().getLevelName();
+                        Operator = distributiopnHomepageBean.getContent().get(0).getUserInfoDto().getUserLevel().getLevelName();
                         Glide.with(getContext()).load(distributiopnHomepageBean.getContent().get(0).getUserInfoDto().getProfileImageUrl()).apply(RequestOptions.bitmapTransform(new CircleCrop())).into(imageViewPhoto);
                         textViewGrade.setText("等级：" + distributiopnHomepageBean.getContent().get(0).getUserInfoDto().getUserLevel().getLevelName());
                         textViewName.setText("昵称：" + distributiopnHomepageBean.getContent().get(0).getUserInfoDto().getNickname());
@@ -218,7 +238,6 @@ public class DistributionHomepageFragment extends BaseFragment {
                 start(MyDistributionFragment.newInstance());
             }
         });
-
       /*  HttpParams httpParams = new HttpParams();
         httpParams.put("userId", userSharedPreferencesUtils.getUserid());
         OkGo.<String>get(HttpConstants.BASE_URL + MeModellml.USER_ALIPAYAUTH)
@@ -246,16 +265,17 @@ public class DistributionHomepageFragment extends BaseFragment {
     public boolean canSwipeBack() {
         return false;
     }
+
     private void MorePopShow() {
         View view = LayoutInflater.from(getContext()).inflate(R.layout.popwind_distribution, null, false);
-        TextView CashWithdrawal = (TextView) view.findViewById(R.id.CashWithdrawal);
-        TextView BindingAlipay = (TextView) view.findViewById(R.id.BindingAlipay);
-        TextView OperatorTextView = (TextView) view.findViewById(R.id.OperatorTextView);
-        if ("运营商".equals(Operator)){
+        TextView CashWithdrawal = view.findViewById(R.id.CashWithdrawal);
+        TextView BindingAlipay = view.findViewById(R.id.BindingAlipay);
+        TextView OperatorTextView = view.findViewById(R.id.OperatorTextView);
+        if ("运营商".equals(Operator)) {
             OperatorTextView.setVisibility(View.GONE);
         }
         //1.构造一个PopupWindow，参数依次是加载的View，宽高
-         popWindow = new PopupWindow(view,
+        popWindow = new PopupWindow(view,
                 ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
         popWindow.setAnimationStyle(R.style.ActionSheetDialogStyle);
         setBackgroundAlpha(0.5f);//设置屏幕透明度
@@ -275,63 +295,14 @@ public class DistributionHomepageFragment extends BaseFragment {
         BindingAlipay.setOnClickListener(new OnClickListenerWrapper() {
             @Override
             protected void onSingleClick(View v) {
-
+                getData();
             }
         });
         OperatorTextView.setOnClickListener(new OnClickListenerWrapper() {
             @Override
             protected void onSingleClick(View v) {
-                Map<String, Object> httpParams = new HashMap<>();
-                httpParams.put("body", "MERCHANT");
-                httpParams.put("amount", "19999");
-                httpParams.put("userId", userSharedPreferencesUtils.getUserid());
-                JSONObject jsonObject = new JSONObject(httpParams);
-                OkGo.<String>post(HttpConstants.BASE_URL + MeModellml.USER_GENERATEORDERINFO)
-                        .tag(this)
-                        .upJson(jsonObject.toString())
-                        .execute(new StringCallback() {
-                            @Override
-                            public void onSuccess(Response<String> response) {
-                                JSONObject jsonObject = null;
-                                try {
-                                    jsonObject = new JSONObject(response.body());
-
-                                    if ("0000000".equals(jsonObject.getString("code"))) {
-                                        String data = jsonObject.getString("data");
-                                        final Runnable payRunnable = new Runnable() {
-                                            @Override
-                                            public void run() {
-                                                EnvUtils.setEnv(EnvUtils.EnvEnum.SANDBOX);
-                                                PayTask alipay = new PayTask(getActivity());
-                                                Map<String, String> result = alipay.payV2(data, true);
-                                                Message msg = new Message();
-                                                msg.what = SDK_PAY_FLAG;
-                                                msg.obj = result;
-                                                mHandler.sendMessage(msg);
-                                            }
-                                        };
-                                        // 必须异步调用
-                                        Thread payThread = new Thread(payRunnable);
-                                        payThread.start();
-                                    } else {
-                                        showToast(jsonObject.getString("message"));
-                                    }
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                    try {
-                                        showToast(jsonObject.getString("message"));
-                                    } catch (JSONException ex) {
-                                        ex.printStackTrace();
-                                    }
-                                }
-                            }
-
-                            @Override
-                            public void onError(Response<String> response) {
-                                super.onError(response);
-                                showToast("服务器异常，请稍后重试！！！！");
-                            }
-                        });
+                showDialogExemption();
+                ExemptionDialog.show();
             }
         });
         popWindow.setOnDismissListener(new poponDismissListener());
@@ -349,5 +320,98 @@ public class DistributionHomepageFragment extends BaseFragment {
         public void onDismiss() {
             setBackgroundAlpha(1f);
         }
+    }
+
+    private void showDialogExemption() {
+        ExemptionDialog = new Dialog(getContext(), R.style.BaseDialogStyle);
+        ExemptionDialog.setContentView(R.layout.dialog_login_exemption);
+        checkbox = ExemptionDialog.findViewById(R.id.checkbox);
+        webView = ExemptionDialog.findViewById(R.id.webView);
+        butCancel = ExemptionDialog.findViewById(R.id.butCancel);
+        butDetermine = ExemptionDialog.findViewById(R.id.butDetermine);
+        checkbox.setChecked(false);
+        ExemptionDialog.setCanceledOnTouchOutside(false);
+        ExemptionDialog.getWindow().setGravity(Gravity.CENTER);
+        Window w = ExemptionDialog.getWindow();
+        WindowManager.LayoutParams lp = w.getAttributes();
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+        lp.height = WindowManager.LayoutParams.MATCH_PARENT;
+        ExemptionDialog.onWindowAttributesChanged(lp);
+        webView.getSettings().setJavaScriptEnabled(true);
+        webView.setWebViewClient(new WebViewClient());
+        WebSettings webSettings = webView.getSettings();
+        webSettings.setLoadWithOverviewMode(true); // 缩放至屏幕的大小
+        webView.loadUrl("http://www.golangkeji.com/Golang/page7.html");
+        butCancel.setOnClickListener(new OnClickListenerWrapper() {
+            @Override
+            protected void onSingleClick(View v) {
+                ExemptionDialog.dismiss();
+            }
+        });
+        butDetermine.setOnClickListener(new OnClickListenerWrapper() {
+            @Override
+            protected void onSingleClick(View v) {
+                if (checkbox.isChecked()) {
+                    ExemptionData();
+                    ExemptionDialog.dismiss();
+                } else {
+                    showToast("同意遵守本声明，以后每次默认都同意");
+                }
+            }
+        });
+    }
+
+    private void ExemptionData() {
+        Map<String, Object> httpParams = new HashMap<>();
+        httpParams.put("body", "MERCHANT");
+        httpParams.put("amount", "19999");
+        httpParams.put("userId", userSharedPreferencesUtils.getUserid());
+        JSONObject jsonObject = new JSONObject(httpParams);
+        OkGo.<String>post(HttpConstants.BASE_URL + MeModellml.USER_GENERATEORDERINFO)
+                .tag(this)
+                .upJson(jsonObject.toString())
+                .execute(new StringCallback() {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+                        JSONObject jsonObject = null;
+                        try {
+                            jsonObject = new JSONObject(response.body());
+
+                            if ("0000000".equals(jsonObject.getString("code"))) {
+                                String data = jsonObject.getString("data");
+                                final Runnable payRunnable = new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        EnvUtils.setEnv(EnvUtils.EnvEnum.SANDBOX);
+                                        PayTask alipay = new PayTask(getActivity());
+                                        Map<String, String> result = alipay.payV2(data, true);
+                                        Message msg = new Message();
+                                        msg.what = SDK_PAY_FLAG;
+                                        msg.obj = result;
+                                        mHandler.sendMessage(msg);
+                                    }
+                                };
+                                // 必须异步调用
+                                Thread payThread = new Thread(payRunnable);
+                                payThread.start();
+                            } else {
+                                showToast(jsonObject.getString("message"));
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            try {
+                                showToast(jsonObject.getString("message"));
+                            } catch (JSONException ex) {
+                                ex.printStackTrace();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onError(Response<String> response) {
+                        super.onError(response);
+                        showToast("服务器异常，请稍后重试！！！！");
+                    }
+                });
     }
 }

@@ -53,7 +53,6 @@ import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
-
 /**
  * @author: dongyaoyao
  */
@@ -142,7 +141,7 @@ public class EditFragment extends BaseFragment implements PickValueView.onSelect
     private Dialog dialog;
     private TextView tv_cancel, tv_send;
     private PickValueView pickString;
-    String selectedStr;
+    String selectedStr="大专";
     String[] valueStr = new String[]{"其他", "大专", "本科", "研究生", "博士"};
     UserSharedPreferencesUtils userSharedPreferencesUtils;
     String profileImageUrl;
@@ -236,9 +235,12 @@ public class EditFragment extends BaseFragment implements PickValueView.onSelect
                     protected void onSuccess(EditBean editBean) {
                         showPage();
                         Glide.with(getContext()).load(editBean.getProfileImageUrl())
-                                .apply(RequestOptions.bitmapTransform(new CircleCrop())).placeholder(R.mipmap.photo).into(imageViewPhoto);
+                                .apply(RequestOptions.bitmapTransform(new CircleCrop()))
+                                .placeholder(R.mipmap.ic_launcher).into(imageViewPhoto);
                         profileImageUrl = editBean.getProfileImageUrl();
-                        editTextAutograph.setText(editBean.getMessage() + "");
+                        if (!StringHandler.hasNull(editBean.getMessage()+"")){
+                            editTextAutograph.setText(editBean.getMessage() + "");
+                        }
                         textViewAuthentication.setText("");
                         textViewName.setText(editBean.getNickname());
                         if ("MALE".equals(editBean.getSex())) {

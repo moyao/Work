@@ -1,12 +1,9 @@
 package com.golang.management.fragment.me;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
-
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.golang.management.R;
 import com.golang.management.api.MyObserve;
 import com.golang.management.api.ServiceException;
@@ -16,19 +13,18 @@ import com.golang.management.common.OnClickListenerWrapper;
 import com.golang.management.common.UserSharedPreferencesUtils;
 import com.golang.management.config.Constant;
 import com.golang.management.config.HttpConstants;
+import com.golang.management.fragment.details.DetailsFragment;
 import com.golang.management.fragment.me.adapter.MyActivityAdapter;
 import com.golang.management.model.MyActivityModellml;
 import com.google.android.material.tabs.TabLayout;
-
 import java.util.List;
-
 import butterknife.BindView;
 
 /**
  * @date:
  * @author: dongyaoyao
  */
-public class MyActivityFragment extends BaseFragment {
+public class MyActivityFragment extends BaseFragment implements MyActivityAdapter.ItemClickListener {
     @BindView(R.id.tabLayoutPeople)
     TabLayout mTabLayoutPeople;
     @BindView(R.id.Recycler)
@@ -38,20 +34,16 @@ public class MyActivityFragment extends BaseFragment {
     private String status = Constant.VIEW_CONSTRAINTS;
     UserSharedPreferencesUtils userSharedPreferencesUtils;
     MyActivityAdapter myActivityAdapter;
-    List<MyActivityBean> homeBeanList;
-
     public static MyActivityFragment newInstance() {
         Bundle args = new Bundle();
         MyActivityFragment fragment = new MyActivityFragment();
         fragment.setArguments(args);
         return fragment;
     }
-
     @Override
     public int onSetLayoutId() {
         return R.layout.fragement_my_activity;
     }
-
     @Override
     public void initView(View view) {
         initApi();
@@ -59,7 +51,6 @@ public class MyActivityFragment extends BaseFragment {
         mTitlebar.showStatusBar(true);
         mTitlebar.setBackgroundResource(R.drawable.but_release);
     }
-
     @Override
     public void bindEvent() {
         userSharedPreferencesUtils = new UserSharedPreferencesUtils(getContext());
@@ -81,12 +72,9 @@ public class MyActivityFragment extends BaseFragment {
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
-
             }
-
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
-
             }
         });
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
@@ -103,14 +91,14 @@ public class MyActivityFragment extends BaseFragment {
                     @Override
                     protected void onSuccess(List<MyActivityBean> homeBeans) {
                         showPage();
-                        if (0==homeBeans.size()){
+                        if (0 == homeBeans.size()) {
                             showNoData();
-                        }else {
+                        } else {
                             myActivityAdapter = new MyActivityAdapter(homeBeans, getContext(), position);
                             Recycler.setAdapter(myActivityAdapter);
                         }
+                        initData();
                     }
-
                     @Override
                     public void onError(Throwable e) {
                         super.onError(e);
@@ -123,6 +111,9 @@ public class MyActivityFragment extends BaseFragment {
                 });
     }
 
+    private void initData() {
+        myActivityAdapter.setItemClickListener(this);
+    }
     private void mTabLayoutPeople(int position) {
         switch (position) {
             case 0:
@@ -136,11 +127,20 @@ public class MyActivityFragment extends BaseFragment {
                 break;
         }
         activityData(position);
-
     }
 
     @Override
     public boolean canSwipeBack() {
         return false;
+    }
+
+    @Override
+    public void OnItemClick(String id, int tag) {
+        if (2 == tag) {
+            start(DetailsFragment.newInstance(id, Constant.VIEW_CIRCLE));
+        } else {
+           start(DetailsFragment.newInstance(id, Constant.VIEW_CONSTRAINTS));
+        }
+
     }
 }

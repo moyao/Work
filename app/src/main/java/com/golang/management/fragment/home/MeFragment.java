@@ -4,12 +4,13 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.bumptech.glide.request.RequestOptions;
 import com.golang.management.R;
+import com.golang.management.api.MyObserve;
 import com.golang.management.base.BaseFragment;
+import com.golang.management.bean.EideBean;
 import com.golang.management.common.OnClickListenerWrapper;
 import com.golang.management.common.UserSharedPreferencesUtils;
 import com.golang.management.fragment.MainFragment;
@@ -20,13 +21,13 @@ import com.golang.management.fragment.me.EditFragment;
 import com.golang.management.fragment.me.InstallFragment;
 import com.golang.management.fragment.me.MyActivityFragment;
 import com.golang.management.fragment.payment.MyPanymentListFragment;
-import com.golang.management.fragment.payment.PaymentSuccessFragment;
+import com.golang.management.model.MessageModellml;
 import com.golang.management.utils.MessageEvent;
 import com.golang.management.view.ShareWind;
-
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+
 
 import butterknife.BindView;
 /**
@@ -57,6 +58,7 @@ public class MeFragment extends BaseFragment {
     TextView tv_Order;
     @BindView(R.id.textView_order)
     TextView textView_order;
+
     public static MeFragment newInstance() {
         Bundle args = new Bundle();
         MeFragment fragment = new MeFragment();
@@ -68,11 +70,14 @@ public class MeFragment extends BaseFragment {
     public int onSetLayoutId() {
         return R.layout.fragement_me;
     }
+
     @Override
     public void initView(View view) {
         hideTitle();
+        initApi();
         EventBus.getDefault().register(this);
     }
+
     @Override
     public void bindEvent() {
         UserSharedPreferencesUtils userSharedPreferencesUtils = new UserSharedPreferencesUtils(getContext());
@@ -101,20 +106,14 @@ public class MeFragment extends BaseFragment {
         tvShare.setOnClickListener(new OnClickListenerWrapper() {
             @Override
             protected void onSingleClick(View v) {
-                ShareWind.Sharepartake(getContext(),"","","1","",0);
+                ShareWind.Sharepartake(getContext(), "", "", "1", "", 0);
             }
         });
         textViewExtension.setOnClickListener(new OnClickListenerWrapper() {
             @Override
             protected void onSingleClick(View v) {
-                if ("等级：普通会员".equals(textViewGrade.getText().toString())
-                        ||"普通会员".equals(textViewGrade.getText().toString())
-                        ||"等级：普通用户".equals(textViewGrade.getText().toString())
-                ||"普通用户".equals(textViewGrade.getText().toString())) {
-                    ((MainFragment) getParentFragment()).start(DistributionFragment.newInstance());
-                } else {
-                    ((MainFragment) getParentFragment()).start(DistributionHomepageFragment.newInstance());
-                }
+                initLeanData();
+
             }
         });
         tvSetting.setOnClickListener(new OnClickListenerWrapper() {
@@ -142,15 +141,45 @@ public class MeFragment extends BaseFragment {
             }
         });
     }
+
+    private void initLeanData() {
+        UserSharedPreferencesUtils userSharedPreferencesUtils = new UserSharedPreferencesUtils(getContext());
+        new MessageModellml().find_dislevel(userSharedPreferencesUtils.getUserid())
+                .safeSubscribe(new MyObserve<EideBean>(this) {
+                    @Override
+                    protected void onSuccess(EideBean response) {
+                        UserSharedPreferencesUtils userSharedPreferencesUtil = new UserSharedPreferencesUtils(getContext());
+                        if ("MERCHANT".equals(response.getDisLevel())) {
+                            textViewGrade.setText("等级：" + "运营商");
+                            userSharedPreferencesUtil.setLevelName("运营商");
+                        } else if ("GOLD_MEMBER".equals(response.getDisLevel())) {
+                            textViewGrade.setText("等级：" + "金卡会员");
+                            userSharedPreferencesUtil.setLevelName("金卡会员");
+                        } else {
+                            textViewGrade.setText("等级：" + "普通用户");
+                            userSharedPreferencesUtil.setLevelName("普通用户");
+                        }
+                        userSharedPreferencesUtil.saveSharedPreferences();
+                        if (!response.isInto()){
+                            ((MainFragment) getParentFragment()).start(DistributionHomepageFragment.newInstance());
+                        }else {
+                            ((MainFragment) getParentFragment()).start(DistributionFragment.newInstance());
+                        }
+                    }
+                });
+    }
+
     @Override
     public boolean canSwipeBack() {
         return false;
     }
+
     @Override
     public void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
     }
+
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void EvenData(MessageEvent messageEvent) {
         if ("发生改变".equals(messageEvent.getMessage())) {
@@ -158,7 +187,7 @@ public class MeFragment extends BaseFragment {
             tvName.setText(userSharedPreferencesUtils.getNickname());
             Glide.with(getContext()).load(userSharedPreferencesUtils.getProfileImageUrl())
                     .apply(RequestOptions.bitmapTransform(new CircleCrop())).into(ivHead);
-            textViewGrade.setText(userSharedPreferencesUtils.getLevelName());
+            textViewGrade.setText("等级：" + userSharedPreferencesUtils.getLevelName());
         }
     }
 }

@@ -66,7 +66,6 @@ public class StringHandler {
         }
         return src;
     }
-
     /**
      * 计算src中包含str的个数
      * 可以优化 --> indexOf(a, b)
@@ -83,10 +82,8 @@ public class StringHandler {
         }
         return 0;
     }
-
     /**
      * 去除字符串中的空格、回车、换行符、制表符
-     *
      * @param str
      * @return
      */
@@ -100,7 +97,6 @@ public class StringHandler {
         }
         return dest;
     }
-
     /**
      * 将二进制数据转换为文件
      *
@@ -134,5 +130,9 @@ public class StringHandler {
 
     public static String sensitivePhone(String phone){
         return phone.replaceAll("(\\d{3})\\d{4}(\\d{4})","$1****$2");
+    }
+    public static double distanceFormat(double distance) {
+        double distances=distance/1000d;
+        return distances;
     }
 }

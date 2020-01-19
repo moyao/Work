@@ -1,32 +1,28 @@
 package com.golang.management.fragment.home;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
-
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
 import com.golang.management.R;
 import com.golang.management.activity.CheckPermissionsActivity;
 import com.golang.management.api.MyObserve;
 import com.golang.management.api.ServiceException;
 import com.golang.management.bean.HomeBean;
+import com.golang.management.bean.bannerBean;
 import com.golang.management.common.OnClickListenerWrapper;
 import com.golang.management.config.Constant;
 import com.golang.management.config.HttpConstants;
 import com.golang.management.fragment.MainFragment;
+import com.golang.management.fragment.WebFragment;
 import com.golang.management.fragment.details.DetailsFragment;
 import com.golang.management.fragment.home.adapter.NewHomeAdapter;
 import com.golang.management.model.HomeModellml;
 import com.golang.management.wigdet.recyclerview.EndLessOnScrollListener;
-
 import java.util.List;
-
 import butterknife.BindView;
-
 /**
  * Created by dongyaoyao
  */
@@ -46,10 +42,10 @@ public class NewHomeFragment extends CheckPermissionsActivity implements NewHome
     NewHomeAdapter newHomeAdapter;
     private List<HomeBean> homeBeanList;
     private EndLessOnScrollListener endLessOnScrollListener;
-    private String longitude,latitude;
-
+    private String longitude, latitude;
     int page = 1;
     int tag;
+    List<bannerBean> bannerBeanList;
 
     public static NewHomeFragment newInstance() {
         Bundle args = new Bundle();
@@ -60,10 +56,11 @@ public class NewHomeFragment extends CheckPermissionsActivity implements NewHome
 
     @Override
     protected void locationResult(String longitude, String latitude,
-                                  String address, String city, String province, String district) {
+                                  String address, String city, String province, String district,String poiName) {
         imageBlack.setText(city);
-        this.latitude=latitude;
-        this.longitude=longitude;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        inithomeData(status);
     }
 
     @Override
@@ -79,6 +76,7 @@ public class NewHomeFragment extends CheckPermissionsActivity implements NewHome
         mTitlebar.setBackgroundResource(R.drawable.but_release);
         startLocation();
     }
+
     private void inithomeData(String status) {
         if (status == Constant.VIEW_BLEND) {
             tag = 0;
@@ -88,7 +86,7 @@ public class NewHomeFragment extends CheckPermissionsActivity implements NewHome
             tag = 2;
         }
         page = 1;
-        newHomeAdapter = new NewHomeAdapter(homeBeanList, getContext(), page, tag);
+        newHomeAdapter = new NewHomeAdapter(homeBeanList,getContext(), page, tag);
         rvListMessage.setAdapter(newHomeAdapter);
         ReporteNameData(1, tag);
     }
@@ -102,47 +100,58 @@ public class NewHomeFragment extends CheckPermissionsActivity implements NewHome
             public void onLoadMore(int currentPage) {
                 page = page + 1;
                 ReporteNameData(page, tag);
-
             }
         };
         rvListMessage.addOnScrollListener(endLessOnScrollListener);
         layoutSwipeRefresh.setOnRefreshListener(this);
         setLoadingContentView(layoutSwipeRefresh);
-        inithomeData(status);
+
         imagePreservation.setOnClickListener(new OnClickListenerWrapper() {
             @Override
             protected void onSingleClick(View v) {
                 ((MainFragment) getParentFragment()).start(SweepCodeFragment.newInstance());
             }
         });
+
     }
+
     private void ReporteNameData(int currentPage, int tag) {
+        new HomeModellml().get_banners().safeSubscribe(new MyObserve<List<bannerBean>>(this) {
+            @Override
+            protected void onSuccess(List<bannerBean> bannerBeans) {
+                bannerBeanList=bannerBeans;
+                getHomeData(currentPage, tag);
+            }
+        });
+    }
+    private void getHomeData(int currentPage, int tag) {
         if (1 == currentPage) {
             showLoadingPage();
         }
-        new HomeModellml().queryactivityinfopage(currentPage, tag,latitude,longitude).
+        new HomeModellml().queryactivityinfopage(currentPage, tag, latitude, longitude).
                 subscribe(new MyObserve<List<HomeBean>>(this) {
-            @Override
-            protected void onSuccess(List<HomeBean> homeBeans) {
-                if (1 == currentPage) {
-                    showPage();
-                    endLessOnScrollListener.refresh();
-                    newHomeAdapter.setmList(homeBeans, 1);
-                } else {
-                    newHomeAdapter.addmList(homeBeans, currentPage);
-                }
-                initOnclick();
-            }
-            @Override
-            public void onError(Throwable e) {
-                super.onError(e);
-                if (e instanceof ServiceException && ((ServiceException) e).code.equals(HttpConstants.SUCCESS_CODE)) {
-                    showNoData();
-                } else {
-                    showError(e);
-                }
-            }
-        });
+                    @Override
+                    protected void onSuccess(List<HomeBean> homeBeans) {
+                        if (1 == currentPage) {
+                            showPage();
+                            endLessOnScrollListener.refresh();
+                            newHomeAdapter.setmList(homeBeans,bannerBeanList, 1);
+                        } else {
+                            newHomeAdapter.addmList(homeBeans, currentPage);
+                        }
+                        initOnclick();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        super.onError(e);
+                        if (e instanceof ServiceException && ((ServiceException) e).code.equals(HttpConstants.SUCCESS_CODE)) {
+                            showNoData();
+                        } else {
+                            showError(e);
+                        }
+                    }
+                });
     }
 
     private void initOnclick() {
@@ -162,6 +171,8 @@ public class NewHomeFragment extends CheckPermissionsActivity implements NewHome
         } else if ("0".equals(id)) {
             status = Constant.VIEW_CIRCLE;
             inithomeData(status);
+        } else if ("-2".equals(id)) {
+            ((MainFragment) getParentFragment()).start(WebFragment.newInstance());
         } else {
             if (2 == tag) {
                 ((MainFragment) getParentFragment()).start(DetailsFragment.newInstance(id, Constant.VIEW_CIRCLE));

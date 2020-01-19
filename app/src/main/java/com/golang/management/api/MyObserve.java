@@ -14,16 +14,13 @@ import io.reactivex.disposables.Disposable;
 
 /**
  * Created by dongyaoyao on 2017/8/8.
- *
  */
 
 public abstract class MyObserve<T> implements Observer<T> {
     private WeakReference<BaseInterface> baseInterface;
-
     public MyObserve(BaseInterface baseInterface) {
         this.baseInterface = new WeakReference<BaseInterface>(baseInterface);
     }
-
     @Override
     public void onSubscribe(Disposable d) {
         if (null != baseInterface.get())
@@ -37,7 +34,7 @@ public abstract class MyObserve<T> implements Observer<T> {
     }
     @Override
     public void onError(Throwable e) {
-        if (null != baseInterface.get())
+         if (null != baseInterface.get())
             baseInterface.get().hideLoadingDialog();
         if (e instanceof UnknownHostException || e instanceof ConnectException) {
             baseInterface.get().showToast("无法连接到网络");
@@ -49,16 +46,12 @@ public abstract class MyObserve<T> implements Observer<T> {
             ServiceException serviceException = (ServiceException) e;
             if (serviceException.code.equals(HttpConstants.SESSION_TIMEOUT)) {
                 baseInterface.get().toLogin(serviceException.message);
-            }else if(serviceException.code.equals(HttpConstants.ERROR_SYSTEM)||
-            serviceException.code.equals(HttpConstants.ERROR_NUMBER)||
-            serviceException.code.equals(HttpConstants.NO_DATA)||
-                    serviceException.code.equals(HttpConstants.SUCCESS_CODE)
-                    ||serviceException.code.equals(HttpConstants.BUSSINESS_ACTIVITY)){
+            } else if (ErrorCode.Code(serviceException.code)) {
                 baseInterface.get().showToast(serviceException.message);
-            }else {
+            } else {
                 baseInterface.get().showToast("服务器异常，请稍后再试");
             }
-        }else if (e instanceof APIException) {
+        } else if (e instanceof APIException) {
             baseInterface.get().showToast(e.getMessage());
         } else if (e instanceof HttpException) {
             // 其他各种http错误
@@ -67,9 +60,7 @@ public abstract class MyObserve<T> implements Observer<T> {
     }
     @Override
     public void onComplete() {
-
     }
-
     protected abstract void onSuccess(T t);
 
 }

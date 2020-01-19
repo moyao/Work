@@ -2,6 +2,7 @@ package com.golang.management.model;
 
 import com.golang.management.api.ApiWrapper;
 import com.golang.management.bean.HomeBean;
+import com.golang.management.bean.bannerBean;
 import com.google.gson.reflect.TypeToken;
 import com.lzy.okgo.model.HttpMethod;
 import com.lzy.okgo.model.HttpParams;
@@ -21,6 +22,7 @@ public class HomeModellml {
     public static final String USERIMGANDTEXTSAVE = "/content/queryContentUserImgAndText";
     //
     public static final String IMAGEUPLOADLIST = "/system/imageUploadList";
+    public static final String GET_BANNERS = "/activity/getBanners";
     public  String HTTP_URL;
     public Observable<List<HomeBean>> queryactivityinfopage(int currentPage,int status,String latitude,String longitude ) {
         HttpParams httpParams=new HttpParams();
@@ -41,5 +43,11 @@ public class HomeModellml {
         Type type = new TypeToken<List<HomeBean>>() {
         }.getType();
         return ApiWrapper.request(HttpMethod.GET, HTTP_URL, type,httpParams);
+    }
+    public Observable<List<bannerBean>> get_banners() {
+        HttpParams httpParams=new HttpParams();
+        Type type = new TypeToken<List<bannerBean>>() {
+        }.getType();
+        return ApiWrapper.request(HttpMethod.GET, GET_BANNERS, type,httpParams);
     }
 }

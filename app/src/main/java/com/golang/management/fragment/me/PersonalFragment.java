@@ -20,6 +20,7 @@ import com.golang.management.common.UserSharedPreferencesUtils;
 import com.golang.management.config.Constants;
 import com.golang.management.fragment.home.adapter.ImageHorizontalAdapter;
 import com.golang.management.model.MeModellml;
+import com.golang.management.utils.StringHandler;
 
 import butterknife.BindView;
 
@@ -56,6 +57,7 @@ public class PersonalFragment extends BaseFragment {
     @BindView(R.id.textViewTime)
     TextView textViewTime;
     UserSharedPreferencesUtils userSharedPreferencesUtils;
+    String str;
 
     public static PersonalFragment newInstance(String visitorId) {
         Bundle args = new Bundle();
@@ -83,12 +85,18 @@ public class PersonalFragment extends BaseFragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         recyclerPhoto.setLayoutManager(layoutManager);
+        showLoadingDialog("加载中。。。");
         new MeModellml().user_webpage(userSharedPreferencesUtils.getUserid(),
                 getArguments().getString(Constants.KEY_TITLE)).safeSubscribe(new MyObserve<PersonalBean>(this) {
             @Override
             protected void onSuccess(PersonalBean personalBean) {
+                showPage();
                 Glide.with(getContext()).load(personalBean.getProfileImageUrl()).apply(RequestOptions.bitmapTransform(new CircleCrop())).into(imageViewPhoto);
-                String str="主人寄语：<font color='#6B6B6B'><small>"+ personalBean.getMessage()+"</small></font>";
+                if (StringHandler.hasNull(personalBean.getMessage())){
+                     str="主人寄语：<font color='#6B6B6B'><small>"+ "去编辑编辑资料吧！"+"</small></font>";
+                }else {
+                     str="主人寄语：<font color='#6B6B6B'><small>"+ personalBean.getMessage()+"</small></font>";
+                }
                 textViewMessage.setTextSize(18);
                 textViewMessage.setText(Html.fromHtml(str));
                 if ("Auth_T".equals(personalBean.getAuth())) {

@@ -1,5 +1,6 @@
 package com.golang.management.model;
 
+import com.golang.management.bean.EideBean;
 import com.golang.management.bean.MessageBean;
 import com.google.gson.reflect.TypeToken;
 import com.golang.management.api.ApiWrapper;
@@ -32,6 +33,8 @@ public class MessageModellml {
     public static final String FIND_ACTIVITY_COMMENTS = "/activity/api/queryActivityComments";
     //确认读取消息的接口
     public static final String FIND_ACTIVITY_COMMENTSTATUS = "/activity/api/updateActivityCommentStatus";
+    //查询身份
+    public static final String FIND_DISLEVEL = "/user/findDisLevel";
 
     public Observable<ActivityDtoInfo> find_activity_dtoinfo(String userId, String activityId, String tag,String longitude,String latitude) {
         String HTTPURL;
@@ -61,7 +64,8 @@ public class MessageModellml {
     }
 
     public Observable<String> find_activity_commentsave(String userId, String objectId, String content,
-                                                        String parentId, String targetUserNickname, String tag, String targetUserId) {
+                                                        String parentId, String targetUserNickname,
+                                                        String tag, String targetUserId) {
         String HTTPURL;
         HashMap<String, Object> httpParams = new HashMap<>();
         if (tag.equals(Constant.VIEW_CIRCLE)) {
@@ -86,6 +90,13 @@ public class MessageModellml {
         Type type = new TypeToken<List<MessageBean>>() {
         }.getType();
         return ApiWrapper.request(HttpMethod.GET, FIND_ACTIVITY_COMMENTS, type, httpParams);
+
+    }  public Observable<EideBean> find_dislevel(String userId) {
+        HttpParams httpParams = new HttpParams();
+        httpParams.put("userId", userId);
+        Type type = new TypeToken<EideBean>() {
+        }.getType();
+        return ApiWrapper.request(HttpMethod.GET, FIND_DISLEVEL, type, httpParams);
     }
 
     public Observable<String> find_activity_commentstatus(String userId,String activityId) {

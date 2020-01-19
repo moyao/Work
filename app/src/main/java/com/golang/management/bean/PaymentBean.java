@@ -1,33 +1,35 @@
 package com.golang.management.bean;
 
 
+import java.util.List;
+
 public class PaymentBean {
         /**
-         * explanation : 金卡会员
-         * orderNo : 1213734449533554688
-         * paymentChannel : 支付宝支付
          * paymentFee : 399.00
-         * paymentStatus : 已支付
-         * paymentTime : 2020-01-05 16:10:18
+         * orderNo : 1218742826072412160
          * receivedFee : 0
-         * userId : 1212990656276860928
+         * paymentTime : 2020-01-19 11:51:48
+         * explanation : 金卡会员
+         * userId : 1218741746431692800
+         * paymentStatus : 支付成功
+         * paymentChannel : 支付宝支付
          */
 
-        private String explanation;
-        private String orderNo;
-        private String paymentChannel;
         private String paymentFee;
-        private String paymentStatus;
-        private String paymentTime;
+        private String orderNo;
         private String receivedFee;
+        private String paymentTime;
+        private String explanation;
         private String userId;
+        private String paymentStatus;
+        private String paymentChannel;
 
-        public String getExplanation() {
-            return explanation;
+        public String getPaymentFee() {
+            return paymentFee;
         }
 
-        public void setExplanation(String explanation) {
-            this.explanation = explanation;
+        public void setPaymentFee(String paymentFee) {
+            this.paymentFee = paymentFee;
         }
 
         public String getOrderNo() {
@@ -38,28 +40,12 @@ public class PaymentBean {
             this.orderNo = orderNo;
         }
 
-        public String getPaymentChannel() {
-            return paymentChannel;
+        public String getReceivedFee() {
+            return receivedFee;
         }
 
-        public void setPaymentChannel(String paymentChannel) {
-            this.paymentChannel = paymentChannel;
-        }
-
-        public String getPaymentFee() {
-            return paymentFee;
-        }
-
-        public void setPaymentFee(String paymentFee) {
-            this.paymentFee = paymentFee;
-        }
-
-        public String getPaymentStatus() {
-            return paymentStatus;
-        }
-
-        public void setPaymentStatus(String paymentStatus) {
-            this.paymentStatus = paymentStatus;
+        public void setReceivedFee(String receivedFee) {
+            this.receivedFee = receivedFee;
         }
 
         public String getPaymentTime() {
@@ -70,12 +56,12 @@ public class PaymentBean {
             this.paymentTime = paymentTime;
         }
 
-        public String getReceivedFee() {
-            return receivedFee;
+        public String getExplanation() {
+            return explanation;
         }
 
-        public void setReceivedFee(String receivedFee) {
-            this.receivedFee = receivedFee;
+        public void setExplanation(String explanation) {
+            this.explanation = explanation;
         }
 
         public String getUserId() {
@@ -84,5 +70,21 @@ public class PaymentBean {
 
         public void setUserId(String userId) {
             this.userId = userId;
+        }
+
+        public String getPaymentStatus() {
+            return paymentStatus;
+        }
+
+        public void setPaymentStatus(String paymentStatus) {
+            this.paymentStatus = paymentStatus;
+        }
+
+        public String getPaymentChannel() {
+            return paymentChannel;
+        }
+
+        public void setPaymentChannel(String paymentChannel) {
+            this.paymentChannel = paymentChannel;
         }
 }

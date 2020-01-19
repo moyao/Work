@@ -25,14 +25,4 @@ public class FootModellml {
         }.getType();
         return ApiWrapper.request(HttpMethod.GET, URL_TRACE, type,httpParams);
     }
-    public Observable getPostVerify(String userId,String address,String longitude,String latitude) {
-        HashMap<String,Object> httpParams = new HashMap<>();
-        httpParams.put("userId",userId);
-        httpParams.put("address",address);
-        httpParams.put("longitude",longitude);
-        httpParams.put("latitude",latitude);
-        Type type = new TypeToken<LoginResult>() {
-        }.getType();
-        return ApiWrapper.babyrequest(HttpMethod.POST, URL_TRACE, type,httpParams);
-    }
 }

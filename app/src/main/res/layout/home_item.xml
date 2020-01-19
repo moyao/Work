@@ -18,7 +18,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
-        android:text="雯雯"
+        tools:text="雯雯"
         android:textSize="14dp"
         android:textColor="#000000"
         app:layout_constraintStart_toEndOf="@id/imageViewPhoto"
@@ -32,7 +32,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
         android:layout_marginRight="10dp"
-        android:text="西安"
+        tools:text="西安"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -41,7 +41,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginRight="10dp"
-        android:text="11月30日"
+        tools:text="11月30日"
         app:layout_constraintEnd_toStartOf="@id/textViewAddress"
         app:layout_constraintTop_toTopOf="@id/textViewAddress" />
 
@@ -63,7 +63,7 @@
         android:drawableLeft="@mipmap/male"
         android:drawablePadding="5dp"
         android:paddingRight="10dp"
-        android:text="22岁"
+        tools:text="22岁"
         app:layout_constraintStart_toStartOf="@id/view"
         app:layout_constraintTop_toTopOf="@id/view"
         />
@@ -73,7 +73,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginRight="10dp"
-        android:text="距离：1200km"
+        tools:text="距离：1200km"
         app:layout_constraintBottom_toBottomOf="@id/imageViewPhoto"
         app:layout_constraintRight_toRightOf="parent" />
 
@@ -92,7 +92,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
-        android:text="下一站西安，有一起玩的小伙伴吗？"
+        tools:text="下一站西安，有一起玩的小伙伴吗？"
         android:textColor="@color/black"
         android:textSize="14dp"
         app:layout_constraintStart_toStartOf="@id/imageViewPhoto"
@@ -134,7 +134,7 @@
         android:drawableLeft="@mipmap/comment"
         android:drawablePadding="5dp"
         android:padding="5dp"
-        android:text="3"
+        tools:text="3"
         android:textSize="12dp"
         app:layout_constraintStart_toEndOf="@id/rButWatch"
         app:layout_constraintTop_toBottomOf="@id/view1" />
@@ -148,7 +148,7 @@
         android:drawableLeft="@mipmap/watch"
         android:drawablePadding="5dp"
         android:padding="5dp"
-        android:text="105"
+        tools:text="105"
         android:textSize="12dp"
         app:layout_constraintStart_toEndOf="@id/rButJoin"
         app:layout_constraintTop_toBottomOf="@id/view1" />
@@ -162,7 +162,7 @@
         android:drawableLeft="@mipmap/join"
         android:drawablePadding="5dp"
         android:padding="5dp"
-        android:text="3"
+        tools:text="3"
         android:textSize="12dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/view1" />
@@ -174,12 +174,11 @@
         android:layout_marginRight="10dp"
         android:drawableRight="@mipmap/item_move"
         android:drawablePadding="10dp"
-        android:text="活动成员:对外可见"
+        tools:text="活动成员:对外可见"
         android:textColor="#2352B0"
         android:textSize="13dp"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/view1" />
-
     <View
         android:layout_width="match_parent"
         android:layout_height="10dp"

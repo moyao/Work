@@ -22,11 +22,13 @@ import com.golang.management.R;
 import com.golang.management.bean.ImagesListBean;
 import com.golang.management.bean.MyActivityBean;
 import com.golang.management.fragment.home.adapter.ImageAdapter;
+import com.golang.management.fragment.home.adapter.NewHomeAdapter;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
 /**
  * @date:
  * @author: dongyaoyao
@@ -35,11 +37,22 @@ public class MyActivityAdapter extends RecyclerView.Adapter<MyActivityAdapter.My
     private List<MyActivityBean> myActivityBeans;
     private Context mcontext;
     int tage;
-    public MyActivityAdapter(List<MyActivityBean> myActivityBeans, Context context,int tage) {
+    private ItemClickListener mItemClickListener;
+
+    public interface ItemClickListener {
+        void OnItemClick(String id, int tag);
+    }
+
+    public void setItemClickListener(ItemClickListener mItemClickListener) {
+        this.mItemClickListener = mItemClickListener;
+    }
+
+    public MyActivityAdapter(List<MyActivityBean> myActivityBeans, Context context, int tage) {
         this.myActivityBeans = myActivityBeans;
         this.mcontext = context;
-        this.tage=tage;
+        this.tage = tage;
     }
+
     @NonNull
     @Override
     public MyActivityViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -47,26 +60,11 @@ public class MyActivityAdapter extends RecyclerView.Adapter<MyActivityAdapter.My
         MyActivityViewHolder myViewHolder = new MyActivityViewHolder(view);
         return myViewHolder;
     }
+
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     public void onBindViewHolder(@NonNull MyActivityViewHolder holder, int position) {
         MyActivityBean homeBean = myActivityBeans.get(position);
-        switch (tage) {
-            case 0:
-                break;
-            case 1:
-                break;
-            case 2:
-                (holder).rButJoin.setVisibility(View.GONE);
-                (holder).textViewCondition.setVisibility(View.GONE);
-                ( holder).view1.setVisibility(View.GONE);
-                (holder).textViewSo.setText("来自圈子");
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    (holder).textViewSo.setCompoundDrawablesWithIntrinsicBounds(null, null,
-                            mcontext.getResources().getDrawable(R.mipmap.home_circle, null), null);
-                }
-                break;
-        }
         Glide.with(mcontext).load(homeBean.getProfileImage()).apply(RequestOptions.bitmapTransform(new CircleCrop())).into((holder).imageViewPhoto);
         (holder).textViewName.setText(homeBean.getNickName());
         (holder).textViewTime.setText(homeBean.getStartTime());
@@ -75,11 +73,28 @@ public class MyActivityAdapter extends RecyclerView.Adapter<MyActivityAdapter.My
         (holder).rButWatch.setText(homeBean.getTraficCount() + "");
         (holder).rButJoin.setText(homeBean.getMaxPeopleNumber() + "");
         (holder).textViewDistance.setText("距离：" + Math.round(homeBean.getDistance() / 100d) / 10d + "km");
-        if ("0".equals(homeBean.getVisible()+"")) {
+        if ("0".equals(homeBean.getVisible() + "")) {
             (holder).textViewSo.setText("活动成员:对外不可见");
-        } else if ("1".equals(homeBean.getVisible()+"")) {
+        } else if ("1".equals(homeBean.getVisible() + "")) {
             (holder).textViewSo.setText("活动成员:对外可见");
         }
+        switch (tage) {
+            case 0:
+                break;
+            case 1:
+                break;
+            case 2:
+               holder.rButJoin.setVisibility(View.GONE);
+                holder.textViewCondition.setVisibility(View.GONE);
+                holder.view1.setVisibility(View.GONE);
+                 holder.textViewSo.setText("来自圈子");
+                holder.textViewTime.setVisibility(View.GONE);
+                holder.textViewAddress.setVisibility(View.GONE);
+                 holder.textViewSo.setCompoundDrawablesWithIntrinsicBounds(null, null,
+                        mcontext.getResources().getDrawable(R.mipmap.home_circle, null), null);
+                break;
+        }
+
         if (homeBean.getSignUpCondition() != null) {
             String imglist = homeBean.getSignUpCondition().replace(",,", ",");
             String[] split = imglist.split(",");
@@ -108,6 +123,19 @@ public class MyActivityAdapter extends RecyclerView.Adapter<MyActivityAdapter.My
         (holder).rvPics.setLayoutManager(gridLayoutManager);
         ImageAdapter imageAdapter = new ImageAdapter(img_list, mcontext);
         (holder).rvPics.setAdapter(imageAdapter);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switch (tage) {
+                    case 2:
+                        mItemClickListener.OnItemClick(homeBean.getId() + "", 2);
+                        break;
+                    default:
+                        mItemClickListener.OnItemClick(homeBean.getId() + "", 0);
+                        break;
+                }
+            }
+        });
 
     }
 
@@ -120,8 +148,9 @@ public class MyActivityAdapter extends RecyclerView.Adapter<MyActivityAdapter.My
 
     @Override
     public int getItemCount() {
-         return myActivityBeans != null ? myActivityBeans.size() : 0;
+        return myActivityBeans != null ? myActivityBeans.size() : 0;
     }
+
     class MyActivityViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.imageViewPhoto)
         ImageView imageViewPhoto;
@@ -155,6 +184,7 @@ public class MyActivityAdapter extends RecyclerView.Adapter<MyActivityAdapter.My
         RadioButton rButJoin;
         @BindView(R.id.textViewSo)
         TextView textViewSo;
+
         MyActivityViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);

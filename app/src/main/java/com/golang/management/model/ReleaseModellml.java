@@ -2,9 +2,7 @@ package com.golang.management.model;
 import com.google.gson.reflect.TypeToken;
 import com.golang.management.api.ApiWrapper;
 import com.lzy.okgo.model.HttpMethod;
-
 import org.json.JSONArray;
-import org.json.JSONObject;
 import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;

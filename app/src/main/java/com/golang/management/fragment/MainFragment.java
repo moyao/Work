@@ -81,17 +81,14 @@ public class MainFragment extends BaseFragment {
     private SupportFragment[] mFragments = new SupportFragment[5];
     private BottomBar mNavigation;
     UserSharedPreferencesUtils userSharedPreferencesUtils;
-    private String downUrl;
     private AppUpdateProgressDialog appUpdateProgressDialog;
     boolean fabOpened = false;
-
     public static MainFragment newInstance() {
         Bundle args = new Bundle();
         MainFragment fragment = new MainFragment();
         fragment.setArguments(args);
         return fragment;
     }
-
     @Override
     public int onSetLayoutId() {
         return R.layout.fragement_mian;
@@ -123,7 +120,7 @@ public class MainFragment extends BaseFragment {
     public void initView(View view) {
         initApi();
         hideTitle();
-//        downloadAPP();
+//        initDownloadApk();
         userSharedPreferencesUtils = new UserSharedPreferencesUtils(getContext());
         mNavigation = view.findViewById(R.id.navigation);
         mNavigation
@@ -143,12 +140,8 @@ public class MainFragment extends BaseFragment {
             });
         }
     }
-
     private void initDownloadApk() {
-      /*  HttpParams httpParams = new HttpParams();
-        httpParams.put("version", WisdomMyTool.getVersionCode());*/
-        OkGo.<String>get("http://www.golangkeji.com/apk/download")
-//                .params(httpParams)
+        OkGo.<String>get("http://api.golangkeji.com/apk/version")
                 .execute(new StringCallback() {
                     @Override
                     public void onSuccess(Response<String> response) {
@@ -157,13 +150,9 @@ public class MainFragment extends BaseFragment {
                             JSONObject jsonObject = null;
                             try {
                                 jsonObject = new JSONObject(body);
-                                final String result = jsonObject.getString("result");
-                                if (HttpConstants.SUCCESS_CODE.equals(result)) {
-                                    JSONObject jo = jsonObject.getJSONObject("data");
-                                    downUrl = (String) jo.get("url");
-                                    String newVersionCode = jo.getString("version");
-                                    // int versionCode = WisdomMyTool.getVersionCode();
-                                    if (Integer.parseInt(newVersionCode) > WisdomMyTool.getVersionCode()) {
+                                    String newVersionCode = jsonObject.getString("newVersion");
+                                    if (newVersionCode.equals(WisdomMyTool.getWisdomVersion(getContext()))) {
+                                    }else {
                                         AlertDialog alertDialog2 = new AlertDialog.Builder(getActivity())
                                                 .setMessage("检测到有新版本,您需要下载更新!")
                                                 .setPositiveButton("确定", new DialogInterface.OnClickListener() {//添加"Yes"按钮
@@ -180,9 +169,6 @@ public class MainFragment extends BaseFragment {
                                                 }).create();
                                         alertDialog2.show();
                                     }
-                                } else {
-                                    showToast("网络请求失败,请稍后重试");
-                                }
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
@@ -196,10 +182,7 @@ public class MainFragment extends BaseFragment {
      * @param
      */
     private void downloadAPP() {
-        HttpParams httpParams = new HttpParams();
-        httpParams.put("version", WisdomMyTool.getVersionCode());
-        OkGo.<File>get("http://www.golangkeji.com/apk/download")
-                .params(httpParams)
+        OkGo.<File>get("http://api.golangkeji.com/apk/version")
                 .execute(new FileCallback("golang.apk") {
                     @Override
                     public void onStart(Request<File, ? extends Request> request) {
@@ -207,21 +190,18 @@ public class MainFragment extends BaseFragment {
                         appUpdateProgressDialog = new AppUpdateProgressDialog(getContext());
                         appUpdateProgressDialog.show();
                     }
-
                     @Override
                     public void onSuccess(Response<File> response) {
                         appUpdateProgressDialog.dismiss();
                         File absoluteFile = response.body().getAbsoluteFile();
                         installApk(absoluteFile);
                     }
-
                     @Override
                     public void onError(Response<File> response) {
                         String message = response.message();
                         appUpdateProgressDialog.dismiss();
                         showToast("下载失败,请您稍后再试!");
                     }
-
                     @Override
                     public void downloadProgress(Progress progress) {
                         int currentSize = (int) progress.currentSize;

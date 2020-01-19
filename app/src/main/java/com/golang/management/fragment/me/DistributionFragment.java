@@ -1,4 +1,5 @@
 package com.golang.management.fragment.me;
+
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.os.Bundle;
@@ -15,7 +16,10 @@ import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
+
 import com.alipay.sdk.app.EnvUtils;
 import com.alipay.sdk.app.PayTask;
 import com.golang.management.R;
@@ -33,13 +37,17 @@ import com.google.gson.Gson;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
+
 import org.greenrobot.eventbus.EventBus;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
 
 import butterknife.BindView;
+
 /**
  * @date:
  * @author: dongyaoyao
@@ -48,56 +56,65 @@ public class DistributionFragment extends BaseFragment {
     @BindView(R.id.imageViewTitle)
     ImageView imageViewTitle;
     @BindView(R.id.imageViewGolden)
-    TextView imageViewGolden;
+    RadioButton imageViewGolden;
     @BindView(R.id.imageViewOperator)
-    TextView imageViewOperator;
+    RadioButton imageViewOperator;
     @BindView(R.id.imageViewJoin)
     ImageView imageViewJoin;
-    @BindView(R.id.checkGolden)
-    CheckBox checkGolden;
-    @BindView(R.id.checkOperator)
-    CheckBox checkOperator;
     @BindView(R.id.textViewContext)
     TextView textViewContext;
     @BindView(R.id.textViewActivity)
     TextView textViewActivity;
     UserSharedPreferencesUtils userSharedPreferencesUtils;
     String LevelName;
+    @BindView(R.id.groupGolden)
+    RadioGroup groupGolden;
     private Dialog ExemptionDialog;
     private CheckBox checkbox;
     private Button butDetermine, butCancel;
     private WebView webView;
     String body, amount;
+    private static final int SDK_PAY_FLAG = 1;
+    private int TYpe=1;
+
     public static DistributionFragment newInstance() {
         Bundle args = new Bundle();
         DistributionFragment fragment = new DistributionFragment();
         fragment.setArguments(args);
         return fragment;
     }
+
     @SuppressLint("HandlerLeak")
     private Handler mHandler = new Handler() {
         @SuppressWarnings("unused")
         public void handleMessage(Message msg) {
-            @SuppressWarnings("unchecked")
-            PayResult payResult = new PayResult((Map<String, String>) msg.obj);
-            /**
-             * 对于支付结果，请商户依赖服务端的异步通知结果。同步通知结果，仅作为支付结束的通知。
-             */
-            String resultInfo = payResult.getResult();// 同步返回需要验证的信息
-            String resultStatus = payResult.getResultStatus();
-            // 判断resultStatus 为9000则代表支付成功
-            if (TextUtils.equals(resultStatus, "9000")) {
-                // 该笔订单是否真实支付成功，需要依赖服务端的异步通知。
-                UserSharedPreferencesUtils userSharedPreferencesUtil = new UserSharedPreferencesUtils(getContext());
-                userSharedPreferencesUtil.setLevelName(LevelName);
-                userSharedPreferencesUtil.saveSharedPreferences();
-                EventBus.getDefault().post(new MessageEvent("发生改变",2));
-                Gson gson = new Gson();
-                PayResultBean user = gson.fromJson(resultInfo, PayResultBean.class);
-                startWithPop(PaymentSuccessFragment.newInstance(user.getAlipay_trade_app_pay_response().getOut_trade_no()));
-            } else {
-                // 该笔订单真实的支付结果，需要依赖服务端的异步通知。
-                showToast(getString(R.string.pay_failed) + payResult);
+            switch (msg.what) {
+                case SDK_PAY_FLAG: {
+                    @SuppressWarnings("unchecked")
+                    PayResult payResult = new PayResult((Map<String, String>) msg.obj);
+                    /**
+                     * 对于支付结果，请商户依赖服务端的异步通知结果。同步通知结果，仅作为支付结束的通知。
+                     */
+                    String resultInfo = payResult.getResult();// 同步返回需要验证的信息
+                    String resultStatus = payResult.getResultStatus();
+                    // 判断resultStatus 为9000则代表支付成功
+                    if (TextUtils.equals(resultStatus, "9000")) {
+                        // 该笔订单是否真实支付成功，需要依赖服务端的异步通知。
+                        UserSharedPreferencesUtils userSharedPreferencesUtil = new UserSharedPreferencesUtils(getContext());
+                        userSharedPreferencesUtil.setLevelName(LevelName);
+                        userSharedPreferencesUtil.saveSharedPreferences();
+                        EventBus.getDefault().post(new MessageEvent("发生改变", 2));
+                        Gson gson = new Gson();
+                        PayResultBean user = gson.fromJson(resultInfo, PayResultBean.class);
+                        startWithPop(PaymentSuccessFragment.newInstance(user.getAlipay_trade_app_pay_response().getOut_trade_no()));
+                    } else {
+                        // 该笔订单真实的支付结果，需要依赖服务端的异步通知。
+                        showToast(getString(R.string.pay_failed) + payResult);
+                    }
+                    break;
+                }
+                default:
+                    break;
             }
         }
     };
@@ -115,64 +132,28 @@ public class DistributionFragment extends BaseFragment {
         setTitle("会员充值");
 
     }
+
     @Override
     public void bindEvent() {
         userSharedPreferencesUtils = new UserSharedPreferencesUtils(getContext());
-        checkGolden.isChecked();
-        checkOperator.setChecked(false);
-
-        imageViewGolden.setOnClickListener(new OnClickListenerWrapper() {
-            @Override
-            protected void onSingleClick(View v) {
-                checkData();
-
-            }
-        });
-        imageViewOperator.setOnClickListener(new OnClickListenerWrapper() {
-            @Override
-            protected void onSingleClick(View v) {
-                checkData();
-            }
-        });
-        checkGolden.setOnClickListener(new OnClickListenerWrapper() {
-            @Override
-            protected void onSingleClick(View v) {
-                checkData();
-            }
-        });
-        checkOperator.setOnClickListener(new OnClickListenerWrapper() {
-            @Override
-            protected void onSingleClick(View v) {
-                checkData();
-            }
-        });
+        groupGolden.setOnCheckedChangeListener(ChangeRadioGroup);
+        groupGolden.check(imageViewGolden.getId());
         imageViewJoin.setOnClickListener(new OnClickListenerWrapper() {
             @Override
             protected void onSingleClick(View v) {
-                if (checkGolden.isChecked()) {
+                if (1==TYpe) {
                     body = "GOLD_MEMBER";
                     amount = "399";
-                    LevelName="金卡会员";
-
+                    LevelName = "金卡会员";
                 } else {
                     body = "MERCHANT";
                     amount = "19999";
-                    LevelName="运营商";
+                    LevelName = "运营商";
                 }
                 showDialogExemption();
                 ExemptionDialog.show();
             }
         });
-    }
-    private void checkData() {
-        if (checkGolden.isChecked()){
-            checkOperator.setChecked(true);
-            checkGolden.setChecked(false);
-        }else if (checkOperator.isChecked()){
-            checkGolden.setChecked(true);
-            checkOperator.setChecked(false);
-        }
-
     }
 
     private void getData() {
@@ -227,10 +208,12 @@ public class DistributionFragment extends BaseFragment {
                     }
                 });
     }
+
     @Override
     public boolean canSwipeBack() {
         return false;
     }
+
     private void showDialogExemption() {
         ExemptionDialog = new Dialog(getContext(), R.style.BaseDialogStyle);
         ExemptionDialog.setContentView(R.layout.dialog_login_exemption);
@@ -250,9 +233,9 @@ public class DistributionFragment extends BaseFragment {
         webView.setWebViewClient(new WebViewClient());
         WebSettings webSettings = webView.getSettings();
         webSettings.setLoadWithOverviewMode(true); // 缩放至屏幕的大小
-        if (checkGolden.isChecked()){
+        if (1==TYpe) {
             webView.loadUrl("http://www.golangkeji.com/Golang/page6.html");
-        }else {
+        } else {
             webView.loadUrl("http://www.golangkeji.com/Golang/page7.html");
         }
         butCancel.setOnClickListener(new OnClickListenerWrapper() {
@@ -273,4 +256,14 @@ public class DistributionFragment extends BaseFragment {
             }
         });
     }
+    private RadioGroup.OnCheckedChangeListener ChangeRadioGroup = new RadioGroup.OnCheckedChangeListener() {
+        @Override
+        public void onCheckedChanged(RadioGroup group, int checkedId) {
+            if (R.id.imageViewGolden == checkedId) {
+                TYpe=1;
+            } else if (R.id.imageViewOperator==checkedId) {
+                TYpe=2;
+            }
+        }
+    };
 }

@@ -49,6 +49,7 @@ public class MeModellml {
     public static final String USER_MYBILL = "/pay/myBill";
     //实名认证
     public static final String USER_FACERECOGNITION = "/user/faceRecognition";
+    public static final String COM_FIRMORDER = "/pay/comfirmOrder";
 
     public Observable<orcode> find_activity_byuserid(String userId) {
         HttpParams httpParams = new HttpParams();
@@ -140,10 +141,19 @@ public class MeModellml {
 
     }
 
+    public Observable<List<PaymentBean>> com_firmorder(String userId,String orderNo) {
+        Map<String, Object> httpParams = new HashMap<>();
+        httpParams.put("userId", userId);
+        httpParams.put("orderNo", orderNo);
+        Type type = new TypeToken<List<PaymentBean>>() {
+        }.getType();
+        return ApiWrapper.babyrequest(HttpMethod.POST, COM_FIRMORDER, type, httpParams);
+    }
     public Observable<List<PaymentBean>> user_mybill(String userId,String orderNo) {
         HttpParams httpParams = new HttpParams();
         httpParams.put("userId", userId);
         httpParams.put("orderNo", orderNo);
+        httpParams.put("paystatus", "");
         Type type = new TypeToken<List<PaymentBean>>() {
         }.getType();
         return ApiWrapper.request(HttpMethod.GET, USER_MYBILL, type, httpParams);

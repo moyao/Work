@@ -48,7 +48,7 @@ public class MyActivityBean {
     @SerializedName(value = "startTime", alternate = {"createdAt"})
     private String startTime;
     private String district;
-    private long id;
+    private String id;
     private Object age;
     private Object activityComments;
     @SerializedName(value = "imagesList", alternate = {"images"})
@@ -166,11 +166,11 @@ public class MyActivityBean {
         this.startTime = startTime;
     }
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

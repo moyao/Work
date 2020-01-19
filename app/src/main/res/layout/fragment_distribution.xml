@@ -24,64 +24,49 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="MissingConstraints" />
-
-            <TextView
+            <RadioGroup
+                android:id="@+id/groupGolden"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/imageViewTitle"
+                android:orientation="horizontal">
+            <RadioButton
                 android:id="@+id/imageViewGolden"
-                android:layout_width="0dp"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="100dp"
-                android:layout_marginRight="20dp"
+                android:layout_marginRight="10dp"
                 android:background="@mipmap/btn_golden_nor"
                 android:gravity="center"
                 android:text="金卡会员"
                 android:textColor="@color/white"
                 android:textSize="18dp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toStartOf="@id/imageViewOperator"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/imageViewTitle" />
-
-            <CheckBox
-                android:id="@+id/checkGolden"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:background="@drawable/background_golden"
                 android:button="@null"
-                android:checked="true"
-                app:layout_constraintBottom_toBottomOf="@id/imageViewGolden"
-                app:layout_constraintStart_toStartOf="@id/imageViewGolden"
-                app:layout_constraintTop_toTopOf="@id/imageViewGolden" />
-
-            <TextView
+                android:paddingLeft="20dp"
+                android:layout_weight="1"
+                android:drawableLeft="@drawable/background_golden" />
+            <RadioButton
                 android:id="@+id/imageViewOperator"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="100dp"
                 android:background="@mipmap/btn_operator_nor"
                 android:gravity="center"
                 android:text="运营商"
+                android:layout_weight="1"
                 android:textColor="@color/white"
                 android:textSize="18dp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@id/imageViewGolden"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/imageViewGolden"
-                app:layout_constraintTop_toTopOf="@id/imageViewGolden" />
-
-            <CheckBox
-                android:id="@+id/checkOperator"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:background="@drawable/background_golden"
+                android:drawableLeft="@drawable/background_golden"
                 android:button="@null"
-                app:layout_constraintBottom_toBottomOf="@id/imageViewGolden"
-                app:layout_constraintStart_toStartOf="@id/imageViewOperator"
-                app:layout_constraintTop_toTopOf="@id/imageViewGolden" />
-
+                android:paddingLeft="30dp" />
+            </RadioGroup>
             <View
                 android:id="@+id/view1"
                 android:layout_width="0dp"
@@ -92,7 +77,7 @@
                 android:background="@drawable/top"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/imageViewOperator" />
+                app:layout_constraintTop_toBottomOf="@id/groupGolden" />
 
             <View
                 android:id="@+id/view3"
@@ -111,7 +96,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:paddingLeft="55dp"
-                android:paddingTop="40dp"
+                android:paddingTop="35dp"
                 android:paddingRight="50dp"
                 android:paddingBottom="30dp"
                 android:text="@string/distribution"

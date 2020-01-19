@@ -19,7 +19,7 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="您还没有注册"
+        android:text="您还没有注册/登录"
         android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="@id/view"
         app:layout_constraintEnd_toEndOf="@id/view"
@@ -44,8 +44,10 @@
         app:layout_constraintBottom_toBottomOf="@id/view"
         app:layout_constraintEnd_toStartOf="@id/butRegister"
         android:layout_marginBottom="20dp"
-        android:text="稍后注册"
+        android:text="稍后注册/登录"
         android:textColor="@color/white"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:background="@drawable/but_transparent"
         />
     <Button
@@ -56,7 +58,9 @@
         app:layout_constraintBottom_toBottomOf="@id/view"
         app:layout_constraintEnd_toEndOf="@id/view"
         android:layout_marginBottom="20dp"
-        android:text="立即注册"
+        android:text="立即注册/登录"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:background="@drawable/but_yellow"
         />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,10 +1,7 @@
 package com.golang.management.common;
 
 import android.view.View;
-/**
- *
- * Created by dongyaoyao
- */
+
 public abstract class OnClickListenerWrapper implements View.OnClickListener {
 
     private static long lastClickTime;

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -120,9 +121,10 @@ public class DetailsFragment extends CheckPermissionsActivity implements Comment
     }
     @Override
     protected void locationResult(String longitude, String latitude, String address,
-                                  String city, String province, String district) {
+                                  String city, String province, String district,String poiName) {
         this.latitude=latitude;
         this.longitude=longitude;
+        initDetails();
     }
     @Override
     public int onSetLayoutId() {
@@ -210,13 +212,12 @@ public class DetailsFragment extends CheckPermissionsActivity implements Comment
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void bindEvent() {
-        initDetails();
-        if (status==STATUS_UNVERIFIED){
+        if (status == STATUS_UNVERIFIED) {
             radioGroup.check(radioComment.getId());
-        }else {
-            radioGroup.check(status);
+        } else {
+            radioGroup.check(radioMember.getId());
         }
-
+        showLoadingDialog("加载中...");
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -247,7 +248,7 @@ public class DetailsFragment extends CheckPermissionsActivity implements Comment
                 switch (SEND) {
                     case 0:
                         objectId = getArguments().get(Constants.KEY_TYPE) + "";
-                        targetUserNickname = userSharedPreferencesUtils.getUserid();
+                        targetUserNickname = userSharedPreferencesUtils.getNickname();
                         parentId = activityDtoInfo.getUserId();
                         targetUserId=activityDtoInfo.getUserId();
                         if (!StringHandler.hasNull(editTextContext.getText().toString())) {
@@ -284,7 +285,6 @@ public class DetailsFragment extends CheckPermissionsActivity implements Comment
                     }
                 });
     }
-
     @SuppressLint("NewApi")
     private void initDetails() {
         if (getArguments().getString(Constants.KEY_TITLE).equals(Constant.VIEW_CIRCLE)) {
@@ -297,12 +297,11 @@ public class DetailsFragment extends CheckPermissionsActivity implements Comment
             textViewSo.setCompoundDrawablesWithIntrinsicBounds(null, null,
                     getResources().getDrawable(R.mipmap.home_circle, null), null);
         }
-        showLoadingDialog("加载中...");
+
         new MessageModellml().find_activity_dtoinfo(userSharedPreferencesUtils.getUserid(),
                 getArguments().getString(Constants.KEY_TYPE), getArguments().getString(Constants.KEY_TITLE),longitude,latitude)
                 .safeSubscribe(new MyObserve<ActivityDtoInfo>(this) {
                     protected void onSuccess(ActivityDtoInfo userInfos) {
-                        showPage();
                         activityDtoInfo = userInfos;
                         Glide.with(getContext()).load(userInfos.getProfileImage())
                                 .apply(RequestOptions.bitmapTransform(new CircleCrop())).into(imageViewPhoto);
@@ -318,7 +317,7 @@ public class DetailsFragment extends CheckPermissionsActivity implements Comment
                         rButComment.setText(userInfos.getCommentCount() + "");
                         rButWatch.setText(userInfos.getTraficCount() + "");
                         rButJoin.setText(userInfos.getSignUpPeopleNumber() + "/" + userInfos.getMaxPeopleNumber());
-                        textViewDistance.setText("距离：" + Math.round(userInfos.getDistance() / 100d) / 10d + "km");
+                        textViewDistance.setText("距离：" + userInfos.getDistance() + "km");
                         if (getArguments().getString(Constants.KEY_TITLE).equals(Constant.VIEW_CIRCLE)) {
                             textViewSo.setText("来自圈子");
                             textViewTime.setVisibility(View.GONE);
@@ -331,9 +330,11 @@ public class DetailsFragment extends CheckPermissionsActivity implements Comment
                             }
                             String imlist = userInfos.getSignUpCondition();
                             String[] split = imlist.split(",");
+                            gridLayoutLevel.removeAllViews();
                             for (String spit : split) {
                                 layoutFilterItem(gridLayoutLevel, spit.replace("[", "").replace("]", ""));
                             }
+
                         }
                         if ("MALE".equals(userInfos.getSex())) {
                             Ageview.setBackground(getResources().getDrawable(R.drawable.but_item_distance));
@@ -345,14 +346,19 @@ public class DetailsFragment extends CheckPermissionsActivity implements Comment
                                     null, null, null);
                         }
                         commentsBeans = userInfos.getActivityComments();
-                        getDataComment();
                         signUpsBeans = userInfos.getActivitySignUps();
+                        if (status == STATUS_UNVERIFIED) {
+                            getDataComment();
+                        } else {
+                            getDataSignUpps();
+                        }
                         imageViewPhoto.setOnClickListener(new OnClickListenerWrapper() {
                             @Override
                             protected void onSingleClick(View v) {
                                 start(PersonalFragment.newInstance(userInfos.getUserId() + ""));
                             }
                         });
+                        showPage();
                     }
                 });
     }
@@ -390,7 +396,6 @@ public class DetailsFragment extends CheckPermissionsActivity implements Comment
                     }
                 });
     }
-
     /**
      * 底部控件显示与隐藏
      */
@@ -400,7 +405,6 @@ public class DetailsFragment extends CheckPermissionsActivity implements Comment
         editTextContext.setVisibility(View.VISIBLE);
         textVIewSend.setVisibility(View.VISIBLE);
     }
-
     /**
      * 活动报名
      */
@@ -411,13 +415,12 @@ public class DetailsFragment extends CheckPermissionsActivity implements Comment
                 .safeSubscribe(new MyObserve<String>(this) {
                     @Override
                     protected void onSuccess(String activityDtoInfo) {
-                        showPage();
                         showToast("报名成功");
+                        SEND = 1;
                         initDetails();
                     }
                 });
     }
-
     /**
      * 报名列表
      */
@@ -429,7 +432,6 @@ public class DetailsFragment extends CheckPermissionsActivity implements Comment
                 activityDtoInfo.getUserId(), getContext());
         recycler.setAdapter(signUpsAdapter);
     }
-
     /**
      * 评论列表
      */
@@ -461,5 +463,10 @@ public class DetailsFragment extends CheckPermissionsActivity implements Comment
         targetUserNickname = comments.getTargetNickname();
         targetUserId = comments.getUserId();
         initDataComment();
+    }
+
+    @Override
+    public void onClick(String id) {
+        start(PersonalFragment.newInstance(id));
     }
 }

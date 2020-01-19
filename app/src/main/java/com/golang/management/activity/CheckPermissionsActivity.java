@@ -11,7 +11,7 @@ import com.golang.management.servise.LocationManager;
 public abstract class CheckPermissionsActivity extends BaseFragment {
 
 
-    protected abstract void locationResult(String longitude, String latitude, String address,String city,String province,String district);
+    protected abstract void locationResult(String longitude, String latitude, String address,String city,String province,String district,String poiName);
 
     protected void startLocation() {
         LocationManager.getInstance().start(getContext(), new LocationManager.OnLocationResultListener() {
@@ -20,7 +20,8 @@ public abstract class CheckPermissionsActivity extends BaseFragment {
                 locationResult(String.valueOf(aMapLocation.getLongitude()),
                         String.valueOf(aMapLocation.getLatitude()),
                         aMapLocation.getAddress(),String.valueOf(aMapLocation.getCity())
-                        ,String.valueOf(aMapLocation.getProvince()),String.valueOf(aMapLocation.getDistrict()));
+                        ,String.valueOf(aMapLocation.getProvince()),String.valueOf(aMapLocation.getDistrict())
+                ,String.valueOf(aMapLocation.getPoiName()));
             }
         });
     }

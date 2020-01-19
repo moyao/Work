@@ -13,6 +13,6 @@
 
         android:toYDelta="100%"
 
-        android:duration="1000"/>
+        android:duration="500"/>
 
 </set>

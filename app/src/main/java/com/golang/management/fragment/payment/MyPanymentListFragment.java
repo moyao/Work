@@ -14,14 +14,13 @@ import com.golang.management.api.ServiceException;
 import com.golang.management.base.BaseFragment;
 import com.golang.management.bean.PaymentBean;
 import com.golang.management.common.UserSharedPreferencesUtils;
-import com.golang.management.config.Constants;
 import com.golang.management.config.HttpConstants;
-import com.golang.management.fragment.me.DistributionFragment;
-import com.golang.management.fragment.me.DistributionHomepageFragment;
 import com.golang.management.model.MeModellml;
 import com.golang.management.wigdet.recyclerview.OnItemClickListener;
 import com.golang.management.wigdet.recyclerview.RecyclerItemClickListener;
+
 import java.util.List;
+
 import butterknife.BindView;
 public class MyPanymentListFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener {
     @BindView(R.id.rgStatus)
@@ -74,6 +73,7 @@ public class MyPanymentListFragment extends BaseFragment implements SwipeRefresh
                 .safeSubscribe(new MyObserve<List<PaymentBean>>(this) {
                     @Override
                     protected void onSuccess(List<PaymentBean> paymentBean) {
+                        showPage();
                         if (0 == paymentBean.size()) {
                             showNoData();
                         } else {
@@ -112,7 +112,6 @@ public class MyPanymentListFragment extends BaseFragment implements SwipeRefresh
         @Override
         public void onItemClick(View view, int position) {
             start(PaymentSuccessFragment.newInstance(paymentBeans.get(position).getOrderNo()));
-
         }
 
         @Override

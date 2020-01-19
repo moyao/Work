@@ -93,6 +93,7 @@ public class AdviceFragment extends BaseFragment {
                     @Override
                     protected void onSuccess(String editBean) {
                         showPage();
+                        showToast("您的意见，提交成功！");
                         getActivity().onBackPressed();
                     }
                 });

@@ -13,11 +13,9 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.google.gson.Gson;
 import com.golang.management.R;
 import com.golang.management.activity.CheckPermissionsActivity;
@@ -40,7 +38,6 @@ import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.HttpParams;
 import com.lzy.okgo.model.Response;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 
@@ -83,7 +80,7 @@ public class ReleaseFragment extends CheckPermissionsActivity implements
 
     @Override
     protected void locationResult(String longitude, String latitude,
-                                  String address, String city, String province, String district) {
+                                  String address, String city, String province, String district,String poiName) {
         this.lng = longitude;
         this.lat = latitude;
     }
@@ -189,6 +186,12 @@ public class ReleaseFragment extends CheckPermissionsActivity implements
                         Gson gson = new Gson();
                         FileBean user = gson.fromJson(body, FileBean.class);
                         getDataRelease(user.getData().getImageList());
+                    }
+
+                    @Override
+                    public void onError(Response<String> response) {
+                        super.onError(response);
+                        showToast("后台异常");
                     }
                 });
     }

@@ -41,7 +41,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import butterknife.BindView;
-import static com.mob.tools.utils.DeviceHelper.getApplication;
 
 /**
  * @date:
@@ -143,7 +142,7 @@ public class CertificationIDCardFragment extends BaseFragment {
     // 调用拍摄身份证正面（带本地质量控制）activity
     private void scanFrontWithNativeQuality(int idType) {
         Intent intent = new Intent(getContext(), CameraActivity.class);
-        intent.putExtra(CameraActivity.KEY_OUTPUT_FILE_PATH, FileUtils.getSaveFile(getApplication()).getAbsolutePath());
+        intent.putExtra(CameraActivity.KEY_OUTPUT_FILE_PATH, FileUtils.getSaveFile(getContext()).getAbsolutePath());
         intent.putExtra(CameraActivity.KEY_NATIVE_ENABLE, true);
         // 推荐这样做，可以避免一些activity切换导致的不必要的异常
         //使用本地质量控制能力需要授权

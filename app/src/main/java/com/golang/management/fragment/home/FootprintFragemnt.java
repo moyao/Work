@@ -1,6 +1,7 @@
 package com.golang.management.fragment.home;
 
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -19,13 +20,23 @@ import com.golang.management.activity.CheckPermissionsActivity;
 import com.golang.management.bean.FootBean;
 import com.golang.management.common.OnClickListenerWrapper;
 import com.golang.management.common.UserSharedPreferencesUtils;
+import com.golang.management.config.HttpConstants;
 import com.golang.management.fragment.foot.FootAdapter;
 import com.golang.management.api.MyObserve;
 import com.golang.management.model.FootModellml;
+import com.lzy.okgo.OkGo;
+import com.lzy.okgo.callback.StringCallback;
+import com.lzy.okgo.model.Response;
 
 import org.apache.commons.lang3.StringUtils;
+import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import butterknife.BindView;
 
@@ -58,6 +69,7 @@ public class FootprintFragemnt extends CheckPermissionsActivity {
     private Button mButDetermine;
     String longitude, latitude, city, province, district;
     UserSharedPreferencesUtils userSharedPreferencesUtils;
+    List<FootBean> footBeanList;
 
     public static FootprintFragemnt newInstance() {
         Bundle args = new Bundle();
@@ -68,7 +80,7 @@ public class FootprintFragemnt extends CheckPermissionsActivity {
 
     @Override
     protected void locationResult(String longitude, String latitude, String address,
-                                  String city, String province, String district) {
+                                  String city, String province, String district, String poiName) {
         this.longitude = longitude;
         this.latitude = latitude;
         this.province = province;
@@ -86,6 +98,7 @@ public class FootprintFragemnt extends CheckPermissionsActivity {
     public int onSetLayoutId() {
         return R.layout.fragement_footprint;
     }
+
     @Override
     public void initView(View view) {
         hideTitle();
@@ -93,6 +106,7 @@ public class FootprintFragemnt extends CheckPermissionsActivity {
         initDialog();
 
     }
+
     private void initDialog() {
         dialog = new Dialog(getContext(), R.style.BaseDialogStyle);
         dialog.setContentView(R.layout.dialog_foot_success);
@@ -118,20 +132,42 @@ public class FootprintFragemnt extends CheckPermissionsActivity {
             @Override
             protected void onSingleClick(View v) {
                 initDialogData(mTextViewContext.getText().toString());
-                bindEvent();
                 dialog.dismiss();
             }
         });
     }
 
     private void initDialogData(String address) {
-        showLoadingDialog("上传中……");
-        new FootModellml().getPostVerify(userSharedPreferencesUtils.getUserid(),
-                mTextViewTitle.getText().toString() + "," + address, longitude, latitude)
-                .safeSubscribe(new MyObserve(this) {
+        HashMap<String, Object> httpParams = new HashMap<>();
+        httpParams.put("userId", userSharedPreferencesUtils.getUserid());
+        httpParams.put("address", mTextViewTitle.getText().toString() + "," + address);
+        httpParams.put("longitude", longitude);
+        httpParams.put("latitude", latitude);
+        JSONObject jsonObject = new JSONObject(httpParams);
+        OkGo.<String>post(HttpConstants.BASE_URL + FootModellml.URL_TRACE)
+                .upJson(jsonObject)
+                .execute(new StringCallback() {
                     @Override
-                    protected void onSuccess(Object o) {
-                        showPage();
+                    public void onSuccess(Response<String> response) {
+                        FootBean footBean = new FootBean();
+                        SimpleDateFormat formatter = new SimpleDateFormat("yyyy年MM月dd日   HH:mm:ss");
+                        Date curDate = new Date(System.currentTimeMillis());
+                        footBean.setAddress(mTextViewTitle.getText().toString() + "," + address);
+                        footBean.setUserId(Long.parseLong(userSharedPreferencesUtils.getUserid()));
+                        footBean.setCreatedAt(formatter.format(curDate));
+                        footBean.setLatitude(Double.parseDouble(latitude));
+                        footBean.setLongitude(Double.parseDouble(longitude));
+                        if (footBeanList.size()==0){
+                            footAdapter = new FootAdapter(getContext(), footBeanList);
+                            recyclerFoot.setAdapter(footAdapter);
+                            footAdapter.addData(footBean, 0);
+                            view1.setVisibility(View.GONE);
+                            textView.setVisibility(View.GONE);
+                            BgimageView.setVisibility(View.GONE);
+                            textView1.setVisibility(View.GONE);
+                        }else {
+                            footAdapter.addData(footBean, footBeanList.size());
+                        }
                     }
                 });
     }
@@ -149,32 +185,10 @@ public class FootprintFragemnt extends CheckPermissionsActivity {
                 dialog.show();
             }
         });
-
-        showLoadingDialog("加载中。。。。");
-        new FootModellml().getVerify(userSharedPreferencesUtils.getUserid())
-                .safeSubscribe(new MyObserve<List<FootBean>>(this) {
-                    @Override
-                    protected void onSuccess(List<FootBean> footBean) {
-                        showPage();
-                        if (null != footBean && footBean.size() > 0) {
-                            view1.setVisibility(View.GONE);
-                            textView.setVisibility(View.GONE);
-                            BgimageView.setVisibility(View.GONE);
-                            textView1.setVisibility(View.GONE);
-                            footAdapter = new FootAdapter(getContext(), footBean);
-                            recyclerFoot.setAdapter(footAdapter);
-                        } else {
-                            view1.setVisibility(View.VISIBLE);
-                            textView.setVisibility(View.VISIBLE);
-                            BgimageView.setVisibility(View.VISIBLE);
-                            textView1.setVisibility(View.VISIBLE);
-                        }
-                    }
-                });
         view1.setOnClickListener(new OnClickListenerWrapper() {
             @Override
             protected void onSingleClick(View v) {
-                Log.e("view","点击数据");
+                Log.e("view", "点击数据");
                 startLocation();
                 dialog.show();
             }
@@ -186,7 +200,34 @@ public class FootprintFragemnt extends CheckPermissionsActivity {
                 textViewGps.setText("定位中……");
             }
         });
+        initFootData();
     }
+
+    private void initFootData() {
+        showLoadingDialog("加载中。。。。");
+        new FootModellml().getVerify(userSharedPreferencesUtils.getUserid())
+                .safeSubscribe(new MyObserve<List<FootBean>>(this) {
+                    @Override
+                    protected void onSuccess(List<FootBean> footBean) {
+                        showPage();
+                        footBeanList = footBean;
+                        if (null != footBeanList && footBeanList.size() > 0) {
+                            view1.setVisibility(View.GONE);
+                            textView.setVisibility(View.GONE);
+                            BgimageView.setVisibility(View.GONE);
+                            textView1.setVisibility(View.GONE);
+                            footAdapter = new FootAdapter(getContext(), footBeanList);
+                            recyclerFoot.setAdapter(footAdapter);
+                        } else {
+                            view1.setVisibility(View.VISIBLE);
+                            textView.setVisibility(View.VISIBLE);
+                            BgimageView.setVisibility(View.VISIBLE);
+                            textView1.setVisibility(View.VISIBLE);
+                        }
+                    }
+                });
+    }
+
     @Override
     public boolean canSwipeBack() {
         return false;

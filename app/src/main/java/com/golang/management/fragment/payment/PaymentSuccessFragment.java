@@ -11,6 +11,9 @@ import com.golang.management.bean.PaymentBean;
 import com.golang.management.common.UserSharedPreferencesUtils;
 import com.golang.management.config.Constants;
 import com.golang.management.model.MeModellml;
+import com.golang.management.utils.MessageEvent;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
@@ -50,12 +53,10 @@ public class PaymentSuccessFragment extends BaseFragment {
         fragment.setArguments(args);
         return fragment;
     }
-
     @Override
     public int onSetLayoutId() {
         return R.layout.fragement_payment_success;
     }
-
     @Override
     public void initView(View view) {
         mTitlebar.showStatusBar(true);
@@ -72,7 +73,7 @@ public class PaymentSuccessFragment extends BaseFragment {
             textViewContext.setVisibility(View.VISIBLE);
         }
         showLoadingDialog("加载中。。。");
-        new MeModellml().user_mybill(userSharedPreferencesUtils.getUserid(),
+        new MeModellml().com_firmorder(userSharedPreferencesUtils.getUserid(),
                 getArguments().getString(Constants.KEY_TITLE))
                 .safeSubscribe(new MyObserve<List<PaymentBean>>(this) {
                     @Override
@@ -80,18 +81,13 @@ public class PaymentSuccessFragment extends BaseFragment {
                         showPage();
                         if (null != paymentBean) {
                             PaymentBean paymentBean1 = paymentBean.get(0);
-                            if ("399".equals(paymentBean1.getPaymentFee())) {
-                                textViewTitle.setText("创客资格认证");
-                            }
-                            if ("19999".equals(paymentBean1.getPaymentFee())) {
-                                textViewTitle.setText("运营商资格认证");
-                            }
                             textViewOrderNumber.setText(paymentBean1.getOrderNo());
                             textViewMoney.setText(paymentBean1.getPaymentFee() + "元");
                             textViewType.setText(paymentBean1.getPaymentChannel());
                             textViewTime.setText(paymentBean1.getPaymentTime());
+                        } else {
+                            textViewOrderNumber.setText("订单生成中。。。");
                         }
-
                     }
                 });
     }

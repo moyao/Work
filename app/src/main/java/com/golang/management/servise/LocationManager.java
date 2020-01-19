@@ -41,4 +41,5 @@ public class LocationManager {
     public interface OnLocationResultListener {
         void onLocationResult(AMapLocation aMapLocation);
     }
+
 }

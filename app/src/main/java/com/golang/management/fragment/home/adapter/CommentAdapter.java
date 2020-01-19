@@ -30,6 +30,7 @@ public class CommentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     private ItemClickListener mItemClickListener;
     public interface ItemClickListener {
         void OnItemClick(ActivityCommentsBeanX comments,int tag);
+        void onClick(String id);
     }
 
     public void setItemClickListener(ItemClickListener mItemClickListener) {
@@ -87,7 +88,8 @@ public class CommentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         ActivityCommentsBeanX commentsBean = commentsBeans.get(position);
         if (holder instanceof TopViewHolder) {
             Glide.with(context).load(commentsBean.getProfileImageUrl()+"")
-                    .apply(RequestOptions.bitmapTransform(new CircleCrop())).error(R.mipmap.load_icon).into(((TopViewHolder) holder).textViewPhoto);
+                    .apply(RequestOptions.bitmapTransform(new CircleCrop())).error(R.mipmap.load_icon)
+                    .into(((TopViewHolder) holder).textViewPhoto);
             ((TopViewHolder) holder).textViewName.setText(commentsBean.getNickname() + "");
             ((TopViewHolder) holder).textViewTime.setText(commentsBean.getCreatedAt());
             ((TopViewHolder) holder).textViewContent.setText(commentsBean.getContent());
@@ -95,6 +97,12 @@ public class CommentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 @Override
                 public void onClick(View v) {
                     mItemClickListener.OnItemClick(commentsBean,0);
+                }
+            });
+            ((TopViewHolder) holder).textViewPhoto.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mItemClickListener.onClick(commentsBean.getUserId());
                 }
             });
         } else if (holder instanceof ItemViewHolder) {
@@ -109,6 +117,7 @@ public class CommentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                     mItemClickListener.OnItemClick(commentsBean,1);
                 }
             });
+
         }
     }
     @Override

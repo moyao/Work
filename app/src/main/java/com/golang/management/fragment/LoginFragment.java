@@ -97,7 +97,6 @@ public class LoginFragment extends BaseFragment<AccountPresenter> implements Acc
     }
 
     public void open(Context context) {
-
         // vivo 点击设置图标>加速白名单>我的app
         //      点击软件管理>软件管理权限>软件>我的app>信任该软件
         Intent appIntent = context.getPackageManager().getLaunchIntentForPackage("com.iqoo.secure");
@@ -112,7 +111,6 @@ public class LoginFragment extends BaseFragment<AccountPresenter> implements Acc
             context.startActivity(appIntent);
             return;
         }
-
         Intent intent = new Intent();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             intent.setAction(Settings.ACTION_APP_NOTIFICATION_SETTINGS);
@@ -146,7 +144,6 @@ public class LoginFragment extends BaseFragment<AccountPresenter> implements Acc
         lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
         dialog.onWindowAttributesChanged(lp);
     }
-
     @Override
     public void bindEvent() {
         UserSharedPreferencesUtils userSharedPreferencesUtils = new UserSharedPreferencesUtils(getContext());
@@ -160,11 +157,16 @@ public class LoginFragment extends BaseFragment<AccountPresenter> implements Acc
         buttonCode.setOnClickListener(new OnClickListenerWrapper() {
             @Override
             protected void onSingleClick(View v) {
-                time.start();
-                presenter.getVerify(editTextAccount.getText().toString());
+                if (!PhoneNumberValid.isMobileNO(editTextAccount.getText().toString())) {
+                    Toast.makeText(getContext(), "请输入正确手机号", Toast.LENGTH_SHORT).show();
+                    return;
+                }else {
+                    time.start();
+                    presenter.getVerify(editTextAccount.getText().toString());
+                }
+
             }
         });
-
         btnLogin.setOnClickListener(new OnClickListenerWrapper() {
             @Override
             protected void onSingleClick(View v) {

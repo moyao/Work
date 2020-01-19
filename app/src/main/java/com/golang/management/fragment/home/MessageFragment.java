@@ -168,14 +168,14 @@ public class MessageFragment extends BaseFragment implements SwipeRefreshLayout.
             switch (status) {
                 case 1:
                     getDataCommentstatus(position);
-
                     break;
                 case 2:
                     ChatInfo chatInfo = new ChatInfo();
                     chatInfo.setType(TIMConversationType.C2C);
                     chatInfo.setId(ListmessageBeans.get(position).getMobileNumber() + "");
                     chatInfo.setChatName(ListmessageBeans.get(position).getMobileNumber() + "");
-                    ((MainFragment) getParentFragment()).start(DetailsMessageFragment.newInstance(chatInfo, ListmessageBeans.get(position).getNickname()));
+                    ((MainFragment) getParentFragment()).start(DetailsMessageFragment.newInstance(chatInfo,
+                            ListmessageBeans.get(position).getNickname()));
                     break;
             }
         }
@@ -192,6 +192,8 @@ public class MessageFragment extends BaseFragment implements SwipeRefreshLayout.
             @Override
             protected void onSuccess(String s) {
                 ((MainFragment) getParentFragment()).start(DetailsFragment.newInstance(ListmessageBeans.get(position).getObjectId(), Constant.VIEW_CONSTRAINTS));
+                ListmessageBeans.remove(position);
+                messageAdapter.notifyDataSetChanged();
             }
             @Override
             public void onError(Throwable e) {
@@ -219,7 +221,6 @@ public class MessageFragment extends BaseFragment implements SwipeRefreshLayout.
     protected void retryloading() {
         Data();
     }
-
     @Override
     public void onRefresh() {
         layoutSwipeRefresh.setRefreshing(false);

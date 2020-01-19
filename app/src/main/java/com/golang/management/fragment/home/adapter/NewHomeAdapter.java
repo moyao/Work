@@ -18,12 +18,13 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.bumptech.glide.request.RequestOptions;
 import com.golang.management.R;
 import com.golang.management.bean.HomeBean;
 import com.golang.management.bean.ImagesListBean;
-import com.golang.management.model.bean.HomeBannerBean;
+import com.golang.management.bean.bannerBean;
 import com.golang.management.wigdet.banner.ConvenientBanner;
 import com.golang.management.wigdet.banner.holder.CBViewHolderCreator;
 import com.golang.management.wigdet.banner.holder.Holder;
@@ -33,7 +34,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-
 /**
  * @date:
  * @author: dongyaoyao
@@ -46,7 +46,7 @@ public class NewHomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     private ItemClickListener mItemClickListener;
     private int tag;
     private List<HomeBean> list;
-
+    List<bannerBean> bannerBeanList;
     public interface ItemClickListener {
         void OnItemClick(String id, int tag);
     }
@@ -55,10 +55,9 @@ public class NewHomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         this.mItemClickListener = mItemClickListener;
     }
 
-    public NewHomeAdapter(List<HomeBean> homeBeans, Context context, int page, int tag) {
+    public NewHomeAdapter(List<HomeBean> homeBeans,Context context, int page, int tag) {
         this.mcontext = context;
         this.tag = tag;
-
     }
 
     @Override
@@ -84,17 +83,14 @@ public class NewHomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         HomeBean homeBean = homeBeanList.get(position);
+        List<bannerBean> bannerBeans=bannerBeanList;
         if (holder instanceof MyViewHolder) {
-            ArrayList arrayList = new ArrayList<HomeBannerBean>();
-            arrayList.add(new HomeBannerBean(R.mipmap.banner_1, "《真爱-梁祝》音乐剧场见面会"));
-            arrayList.add(new HomeBannerBean(R.mipmap.banner_2, "《真爱-梁祝》话剧见面会"));
-            arrayList.add(new HomeBannerBean(R.mipmap.banner_3, "肖战，王一博见面会"));
             ((MyViewHolder) holder).banner.setPages(new CBViewHolderCreator<LocalImageHolderView>() {
                 @Override
                 public LocalImageHolderView createHolder() {
                     return new LocalImageHolderView();
                 }
-            }, arrayList)
+            }, bannerBeans)
                     .startTurning(3000)
                     .setCanLoop(true);
         } else if (holder instanceof ItemViewHolder) {
@@ -138,7 +134,7 @@ public class NewHomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             ((ContextViewHolder) holder).rButComment.setText(homeBean.getCommentCount() + "");
             ((ContextViewHolder) holder).rButWatch.setText(homeBean.getTraficCount() + "");
             ((ContextViewHolder) holder).rButJoin.setText(homeBean.getMaxPeopleNumber() + "");
-            ((ContextViewHolder) holder).textViewDistance.setText("距离：" + Math.round(homeBean.getDistance() / 100d) / 10d + "km");
+            ((ContextViewHolder) holder).textViewDistance.setText("距离：" + homeBean.getDistance() + "km");
             if (homeBean.getSignUpCondition() != null) {
                 String imlist = homeBean.getSignUpCondition();
                 String[] split = imlist.split(",");
@@ -204,9 +200,11 @@ public class NewHomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         return homeBeanList != null ? homeBeanList.size() : 0;
     }
 
-    public void setmList(List<HomeBean> homeBeans, int page) {
+    public void setmList(List<HomeBean> homeBeans,List<bannerBean> bannerBeanList,int page) {
         if (homeBeans != null && page == 1) {
+            this.bannerBeanList=bannerBeanList;
             initData(homeBeans);
+
         } else {
         }
         notifyDataSetChanged();
@@ -220,7 +218,6 @@ public class NewHomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         }
         notifyDataSetChanged();
     }
-
 
     private void initData(List<HomeBean> homeBeans) {
         for (int i = 0; i < homeBeans.size() + 2; i++) {
@@ -280,12 +277,10 @@ public class NewHomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             this.homeBeanList.add(homeBean);
         }
     }
-
-    class LocalImageHolderView implements Holder<HomeBannerBean> {
+    class LocalImageHolderView implements Holder<bannerBean> {
         private View view;
         private ImageView textViewBg;
         private TextView textViewTitle;
-
         @Override
         public View createView(Context context) {
             view = LayoutInflater.from(context).inflate(R.layout.home_view_title, null);
@@ -293,11 +288,19 @@ public class NewHomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             textViewTitle = view.findViewById(R.id.textViewTitle);
             return view;
         }
-
         @Override
-        public void UpdateUI(Context context, int position, HomeBannerBean data) {
-            Glide.with(mcontext).load(data.getBackground()).centerCrop().thumbnail(0.1f).into(textViewBg);
-            textViewTitle.setText(data.getTitle());
+        public void UpdateUI(Context context, int position,bannerBean data) {
+            Glide.with(context).load(data.getImgUrl()).skipMemoryCache(true) // 不使用内存缓存
+                    .diskCacheStrategy(DiskCacheStrategy.NONE) .centerCrop().into(textViewBg);
+            textViewTitle.setText(data.getImgTitle());
+            textViewBg.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (position == 1) {
+                        mItemClickListener.OnItemClick("-2", -1);
+                    }
+                }
+            });
         }
     }
 
@@ -310,7 +313,6 @@ public class NewHomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             ButterKnife.bind(this, view);
         }
     }
-
     public class ItemViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.radioNewest)
         RadioButton radioNewest;
@@ -364,7 +366,6 @@ public class NewHomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         TextView textViewSo;
         @BindView(R.id.gridLayoutLevel)
         GridLayout gridLayoutLevel;
-
         public ContextViewHolder(View view) {
             super(view);
 

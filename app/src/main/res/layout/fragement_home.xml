@@ -32,8 +32,8 @@
         android:visibility="visible"
         />
     <ImageView
-        android:layout_width="15dp"
-        android:layout_height="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="@id/imageBlack"
         app:layout_constraintBottom_toBottomOf="@id/imageBlack"
         app:layout_constraintStart_toEndOf="@id/imageBlack"
@@ -54,7 +54,7 @@
     <ImageButton
         android:id="@+id/imagePreservation"
         android:layout_width="wrap_content"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:background="@null"
         android:padding="15dp"
         android:src="@mipmap/cion_scan"

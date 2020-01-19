@@ -21,13 +21,10 @@ import com.tencent.qcloud.tim.uikit.TUIKit;
 import com.tencent.qcloud.tim.uikit.base.IUIKitCallBack;
 
 import butterknife.BindView;
-
 /**
  * Created by dongyaoyao
  */
-
 public class WelcomeFragment extends BaseFragment<WelcomeContract.Presenter>
-
         implements WelcomeContract.WelcomeInterface {
     @BindView(R.id.butNext)
     Button butNext;
@@ -37,9 +34,8 @@ public class WelcomeFragment extends BaseFragment<WelcomeContract.Presenter>
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             time--;
-            butNext.setText(time+"s");
+            butNext.setText("跳过 "+time+"s");
             if (time==0){
-
                 handler.removeMessages(0);
             }
             handler.sendEmptyMessageDelayed(0,1000);
@@ -49,7 +45,6 @@ public class WelcomeFragment extends BaseFragment<WelcomeContract.Presenter>
         WelcomeFragment fragment = new WelcomeFragment();
         return fragment;
     }
-
     @Override
     public int onSetLayoutId() {
         return R.layout.fragement_wecom;
@@ -81,12 +76,11 @@ public class WelcomeFragment extends BaseFragment<WelcomeContract.Presenter>
                     }
                     @Override
                     public void onError(String module, int errCode, String errMsg) {
-                        Log.e("login failed. code: " + errCode ," errmsg: " + errMsg);
+                        Log.e("login failed. code: " , errCode+"");
                     }
                 });
             }
     }
-
     private void EndTime() {
         createPresenter(new WelcomePresenter(this, 0));
     }
@@ -94,16 +88,13 @@ public class WelcomeFragment extends BaseFragment<WelcomeContract.Presenter>
     public boolean canSwipeBack() {
         return false;
     }
-
     @Override
     public void toHome() {
         startWithPop(MainFragment.newInstance());
     }
-
     @Override
     public void toGuide() {
     }
-
     @Override
     public void toLogin(String message) {
             startWithPop(LoginFragment.newInstance("0"));
